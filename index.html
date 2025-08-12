@@ -9,9 +9,9 @@
   <!-- Meta & SEO -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Miss Kim's Dance Class in Chesterfield, MO — ballet, jazz, hip-hop, contemporary, pom-poms, and musical theater for kids, teens, and adults. Free trial, fair pricing, small classes." />
+  <meta name="description" content="Miss Kim's Dance Class in Chesterfield, MO — ballet, jazz, hip-hop, contemporary, pom-poms, musical theater, tumbling, acrobatics, aerial, competition teams. Free trial, fair pricing, small classes since 1994." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <link rel="canonical" href="" />
+  <link rel="canonical" href="https://www.example.com/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -57,7 +57,10 @@
       "postalCode":"63017",
       "addressCountry":"US"
     },
-    "sameAs":["https://www.facebook.com/yourpage","https://www.instagram.com/yourpage"]
+    "sameAs":[
+      "https://www.facebook.com/yourpage",
+      "https://www.instagram.com/yourpage"
+    ]
   }
   </script>
 
@@ -65,17 +68,73 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 
+  <!-- Site Navigation JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SiteNavigationElement",
+    "name":["Home","Other Dance & Movement","Reviews","Summer","Registration","Pricing","Schedule","Instructors","Contact"],
+    "url":[
+      "https://www.example.com/",
+      "https://www.example.com/classes",
+      "https://www.example.com/reviews",
+      "https://www.example.com/summer",
+      "https://www.misskimsdanceclass.com/registration.html",
+      "https://www.misskimsdanceclass.com/pricing.html",
+      "https://www.misskimsdanceclass.com/class_schedule.html",
+      "https://www.misskimsdanceclass.com/instructors.html",
+      "https://www.misskimsdanceclass.com/contact.html"
+    ]
+  }
+  </script>
+
   <title>Miss Kim's Dance Class — Chesterfield, MO | Dance Lessons & Registration</title>
 </head>
 <body id="dmRoot" class="dmRoot dmResponsiveBody">
   <!-- Skip Link -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
+  <!-- Sticky Top Bar -->
+  <div class="topbar" role="navigation" aria-label="Primary">
+    <div class="topbar-inner">
+      <a class="brand-mini" href="/" aria-label="Miss Kim's Dance Class Home">Miss Kim’s</a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">Menu</button>
+
+      <ul id="primary-menu" class="menu" role="menubar">
+        <li role="none"><a role="menuitem" href="/">Home</a></li>
+
+        <!-- Dropdown -->
+        <li role="none" class="has-dropdown">
+          <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Other Dance &amp; Movement</button>
+          <ul class="dropdown" role="menu" aria-label="Other Dance & Movement">
+            <li role="none"><a role="menuitem" href="/pom-poms-classes">Pom-Poms</a></li>
+            <li role="none"><a role="menuitem" href="/contemporary-dance-classes">Contemporary Dance</a></li>
+            <li role="none"><a role="menuitem" href="/hip-hop-dance-classes">Hip-Hop Dance</a></li>
+            <li role="none"><a role="menuitem" href="/musical-theater-classes">Musical Theater</a></li>
+            <li role="none"><a role="menuitem" href="/lyrical-dance-classes">Lyrical Dance</a></li>
+            <li role="none"><a role="menuitem" href="/tumbling-classes">Tumbling</a></li>
+            <li role="none"><a role="menuitem" href="/acrobatics-classes">Acrobatics</a></li>
+            <li role="none"><a role="menuitem" href="/aerial-classes">Aerial</a></li>
+            <li role="none"><a role="menuitem" href="/competition-teams">Competition</a></li>
+          </ul>
+        </li>
+
+        <li role="none"><a role="menuitem" href="#reviews">Reviews</a></li>
+        <li role="none"><a role="menuitem" href="/summer">Summer</a></li>
+
+        <!-- Right-aligned quick actions -->
+        <li role="none" class="menu-right"><a role="menuitem" class="btn btn--primary btn--sm" href="registration-form.docx" download>Registration Form</a></li>
+        <li role="none"><a role="menuitem" class="btn btn--ghost btn--sm" href="tel:+13145420608">Call (314) 542-0608</a></li>
+      </ul>
+    </div>
+  </div>
+
   <!-- Header -->
   <div class="header-outer">
     <header class="site-header" role="banner" aria-label="Main Site Header">
       <div class="header-section" aria-label="Business address and review link">
-        <a class="btn btn--ghost" href="https://g.page/r/YourGoogleReviewLink" rel="noopener">Write a Review</a>
+        <a class="btn btn--ghost" href="#reviews">Read Reviews</a>
         <address>
           <strong>14278 Ladue Road<br>Chesterfield, MO 63017</strong>
         </address>
@@ -109,7 +168,6 @@
         <p class="hero-hours">Hours: <span class="status">Closed</span> · Opens 1:00 PM</p>
       </div>
     </section>
-    </div>
 
     <!-- Breadcrumbs -->
     <nav class="breadcrumbs" aria-label="Breadcrumb">
@@ -143,11 +201,10 @@
       </div>
     </section>
 
-    <!-- Classes grid -->
+    <!-- Classes grid (examples) -->
     <section class="dance-classes" aria-labelledby="classes-title">
       <h2 id="classes-title" class="sr-only">Dance Class Styles</h2>
 
-      <!-- Example (repeat for all classes with correct paths and sizes) -->
       <section id="tap-dance" class="dance-class">
         <div class="dance-image">
           <img src="/images/tap-dance-960.webp"
@@ -158,7 +215,7 @@
                loading="lazy" decoding="async">
         </div>
         <div class="dance-info">
-          <h2>Tap Dance Classes in Chesterfield, MO</h2>
+          <h3>Tap Dance Classes in Chesterfield, MO</h3>
           <p>Learn timing, coordination, and musicality in a fun, supportive environment. We guide you from basic steps to advanced routines.</p>
           <a href="/tap-dance-classes" class="btn-primary" aria-label="View details for Tap Dance Classes in Chesterfield">View Class Details</a>
         </div>
@@ -174,7 +231,7 @@
                loading="lazy" decoding="async">
         </div>
         <div class="dance-info">
-          <h2>Ballet Dance Lessons in Chesterfield, MO</h2>
+          <h3>Ballet Dance Lessons in Chesterfield, MO</h3>
           <p>Build posture, grace, and artistry. From beginner to advanced, small groups ensure personalized attention.</p>
           <a href="/ballet-dance-classes" class="btn-primary">View Class Details</a>
         </div>
@@ -190,7 +247,7 @@
                loading="lazy" decoding="async">
         </div>
         <div class="dance-info">
-          <h2>Jazz Dance Classes in Chesterfield, MO</h2>
+          <h3>Jazz Dance Classes in Chesterfield, MO</h3>
           <p>From Broadway-inspired jazz to contemporary styles, enjoy energetic choreography and supportive coaching.</p>
           <a href="/jazz-dance-classes" class="btn-primary">View Class Details</a>
         </div>
@@ -206,7 +263,7 @@
                loading="lazy" decoding="async">
         </div>
         <div class="dance-info">
-          <h2>Pom-Pom Cheer Dance in Chesterfield, MO</h2>
+          <h3>Pom-Pom Cheer Dance in Chesterfield, MO</h3>
           <p>High-energy classes that combine cheerleading skills with rhythm and teamwork. Great for confidence.</p>
           <a href="/pom-poms-classes" class="btn-primary">View Class Details</a>
         </div>
@@ -222,7 +279,7 @@
                loading="lazy" decoding="async">
         </div>
         <div class="dance-info">
-          <h2>Contemporary Dance Classes in Chesterfield, MO</h2>
+          <h3>Contemporary Dance Classes in Chesterfield, MO</h3>
           <p>Express emotion and storytelling through fluid movement and floorwork. Choreography tailored to your abilities.</p>
           <a href="/contemporary-dance-classes" class="btn-primary">View Class Details</a>
         </div>
@@ -238,7 +295,7 @@
                loading="lazy" decoding="async">
         </div>
         <div class="dance-info">
-          <h2>Hip-Hop Dance Classes in Chesterfield, MO</h2>
+          <h3>Hip-Hop Dance Classes in Chesterfield, MO</h3>
           <p>Learn upbeat hip-hop moves, popping, locking, and freestyle. Build rhythm and confidence at any level.</p>
           <a href="/hip-hop-dance-classes" class="btn-primary">View Class Details</a>
         </div>
@@ -254,7 +311,7 @@
                loading="lazy" decoding="async">
         </div>
         <div class="dance-info">
-          <h2>Musical Theater Dance in Chesterfield, MO</h2>
+          <h3>Musical Theater Dance in Chesterfield, MO</h3>
           <p>Combine singing, acting, and dancing while building stage presence, confidence, and creativity.</p>
           <a href="/musical-theater-classes" class="btn-primary">View Class Details</a>
         </div>
@@ -274,12 +331,19 @@
           <li class="instructor-card"><img src="/images/instructors/mike-buck.webp" alt="Mike Buck, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Mike Buck</h3><p class="instructor-role">Instructor</p></li>
           <li class="instructor-card"><img src="/images/instructors/julia-lucarelli.webp" alt="Julia Lucarelli, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Julia Lucarelli</h3><p class="instructor-role">Instructor</p></li>
           <li class="instructor-card"><img src="/images/instructors/javi-perez.webp" alt="Javi Perez, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Javi Perez</h3><p class="instructor-role">Instructor</p></li>
+
+          <!-- Added per request -->
+          <li class="instructor-card"><img src="/images/instructors/anna-rozenweig.webp" alt="Anna Rozenweig, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Anna Rozenweig</h3><p class="instructor-role">Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/ella-frazer.webp" alt="Ella Frazer, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Ella Frazer</h3><p class="instructor-role">Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/asia-frazer.webp" alt="Asia Frazer, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Asia Frazer</h3><p class="instructor-role">Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/preston.webp" alt="Preston, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Preston</h3><p class="instructor-role">Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/bruner.webp" alt="Bruner, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Bruner</h3><p class="instructor-role">Instructor</p></li>
         </ul>
 
         <p class="cta-inline"><a class="btn btn--primary" href="/instructors">Learn More About Our Instructors</a></p>
       </div>
 
-      <!-- Optional ItemList schema -->
+      <!-- ItemList schema (updated) -->
       <script type="application/ld+json">
       {"@context":"https://schema.org","@type":"ItemList","name":"Miss Kim's Dance Class Instructors","itemListElement":[
         {"@type":"Person","name":"Kim Hevie Barchett","jobTitle":"Founder & Instructor"},
@@ -288,13 +352,18 @@
         {"@type":"Person","name":"Juliette Hilbert","jobTitle":"Instructor"},
         {"@type":"Person","name":"Megan Bolden","jobTitle":"Instructor"},
         {"@type":"Person","name":"Mike Buck","jobTitle":"Instructor"},
-        {"@type":"Person","name":"Kennedy Hayes","jobTitle":"Instructor"},
         {"@type":"Person","name":"Julia Lucarelli","jobTitle":"Instructor"},
-        {"@type":"Person","name":"Javi Perez","jobTitle":"Instructor"}]}
+        {"@type":"Person","name":"Javi Perez","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Anna Rozenweig","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Ella Frazer","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Asia Frazer","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Preston","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Bruner","jobTitle":"Instructor"}
+      ]}
       </script>
     </section>
 
-    <!-- Promos -->
+    <!-- Promos (second card removed) -->
     <section class="promos" aria-labelledby="promos-title">
       <div class="container">
         <h2 id="promos-title" class="sr-only">Special Programs</h2>
@@ -304,19 +373,31 @@
             <p>Try a class on us—see our studio, meet the teachers, and find your fit.</p>
             <a class="btn btn--ghost" href="/free-trial">Visit</a>
           </article>
-          <article class="promo-card alt">
-            <h3>Unlimited Summer Classes</h3>
-            <p>Enjoy unlimited classes with small groups and personal attention.</p>
-            <a class="btn btn--ghost" href="/summer">Visit</a>
-          </article>
         </div>
       </div>
     </section>
 
-    <!-- Reviews -->
-    <section class="reviews" aria-labelledby="reviews-title">
+    <!-- Reviews (auto-embeds) -->
+    <section id="reviews" class="reviews" aria-labelledby="reviews-title">
       <div class="container">
         <h2 id="reviews-title">What Families Are Saying</h2>
+
+        <!-- Live Google reviews embed (keeps itself updated) -->
+        <div class="reviews-embeds">
+          <iframe title="Google Reviews"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src="https://www.google.com/maps/embed/v1/place?q=Miss%20Kim's%20Dance%20Class%2014278%20Ladue%20Road%2063017&key=YOUR_GOOGLE_MAPS_EMBED_API_KEY"
+                  width="560" height="300"></iframe>
+
+          <!-- Facebook Page reviews plugin -->
+          <iframe title="Facebook Reviews"
+                  loading="lazy"
+                  src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fyourpage&tabs=reviews&width=560&height=300&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false"
+                  width="560" height="300" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
+
+        <!-- Hand-picked quotes -->
         <div class="review-list">
           <figure class="review">
             <blockquote>“This isn’t just a dance studio—it’s a family. Our kids gained skill and confidence.”</blockquote>
@@ -331,7 +412,11 @@
             <figcaption><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span class="reviewer">David</span></figcaption>
           </figure>
         </div>
-        <p class="cta-inline"><a class="btn btn--primary" href="/reviews">Read More Reviews</a></p>
+        <p class="cta-inline">
+          <a class="btn btn--primary" href="/reviews">Read More Reviews</a>
+          <a class="btn btn--ghost" href="https://g.page/r/YourGoogleReviewLink" rel="noopener nofollow" target="_blank">Write a Google Review</a>
+          <a class="btn btn--ghost" href="https://www.facebook.com/yourpage/reviews/" rel="noopener nofollow" target="_blank">Write a Facebook Review</a>
+        </p>
       </div>
     </section>
 
@@ -387,7 +472,7 @@
             <li><a href="https://www.misskimsdanceclass.com/policies.html">Policies</a></li>
             <li><a href="https://www.misskimsdanceclass.com/instructors.html">Instructors</a></li>
             <li><a href="https://www.misskimsdanceclass.com/contact.html">Contact</a></li>
-            <li><a href="sitemap.xml">Sitemap</a></li>
+            <li><a href="/sitemap.xml">Sitemap</a></li>
           </ul>
         </nav>
 
@@ -395,8 +480,20 @@
           <h3 class="footer-heading">FAQs</h3>
           <details><summary>Do you offer a free trial dance class?</summary><p>Yes — book a <a href="/free-trial">free trial</a> to try any beginner class.</p></details>
           <details><summary>What ages do you teach?</summary><p>We offer classes for kids, teens, and adults. See <a href="/classes">classes</a> for levels.</p></details>
-          <details><summary>Do class cards expire?</summary><p>No — our class cards never expire.</p></details>
         </section>
+      </div>
+
+      <!-- Ratings strip above BBB seal -->
+      <div class="container ratings-strip" aria-label="Ratings and memberships">
+        <p><strong>Trusted by families since 1994</strong> · ⭐ Rated highly on Google &amp; Facebook</p>
+      </div>
+
+      <!-- BBB Seal at very bottom -->
+      <div class="container bbb-seal">
+        <img src="https://seal-stlouis.bbb.org/seals/blue-seal-293-61-bbb-110210285.png"
+             style="border:0"
+             alt="Miss Kim's Dance Class BBB Business Review"
+             onerror="handleImageLoadError(this)">
       </div>
 
       <div class="container footer-meta">
@@ -407,21 +504,48 @@
       <script type="application/ld+json">
       {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
         {"@type":"Question","name":"Do you offer a free trial dance class?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can book a free trial to try any beginner class."}},
-        {"@type":"Question","name":"What ages do you teach?","acceptedAnswer":{"@type":"Answer","text":"We offer classes for kids, teens, and adults with multiple levels."}},
-        {"@type":"Question","name":"Do class cards expire?","acceptedAnswer":{"@type":"Answer","text":"No, our class cards do not expire."}}
+        {"@type":"Question","name":"What ages do you teach?","acceptedAnswer":{"@type":"Answer","text":"We offer classes for kids, teens, and adults with multiple levels."}}
       ]}
       </script>
     </footer>
   </main>
 
-  <!-- Small helper -->
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <!-- Helpers -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  <!-- Optional free overlay (deferred) -->
+    function handleImageLoadError(img){
+      if(img) img.style.display='none';
+    }
+
+    // Mobile menu
+    const navToggle = document.querySelector('.nav-toggle');
+    const menu = document.getElementById('primary-menu');
+    if(navToggle && menu){
+      navToggle.addEventListener('click', () => {
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!expanded));
+        menu.classList.toggle('open');
+      });
+    }
+
+    // Dropdown open/close (keyboard + mouse)
+    document.querySelectorAll('.has-dropdown').forEach(parent => {
+      const btn = parent.querySelector('.dropdown-toggle');
+      const drop = parent.querySelector('.dropdown');
+
+      btn.addEventListener('click', () => {
+        const state = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!state));
+        drop.classList.toggle('open');
+      });
+
+      parent.addEventListener('mouseenter', () => { drop.classList.add('open'); btn.setAttribute('aria-expanded','true'); });
+      parent.addEventListener('mouseleave', () => { drop.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
+    });
+  </script>
+
+  <!-- Optional accessibility helper -->
   <script src="https://app.embed.im/accessibility.js" defer></script>
 </body>
 </html>
-
-
-
-
