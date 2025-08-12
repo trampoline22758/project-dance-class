@@ -242,6 +242,66 @@
     padding: 2rem 1rem;
   }
 }
+/* General Section Styling */
+.content-section {
+  padding: clamp(2rem, 4vw, 4rem) 1rem;
+  background-color: #fff;
+  color: #333;
+  line-height: 1.6;
+}
+.content-section h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #5f35b0; /* purple accent */
+}
+.content-section p {
+  max-width: 800px;
+  margin: 0 auto 1.2rem;
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+}
+
+/* Highlight Section */
+.content-section.highlight {
+  background: linear-gradient(135deg, #7b4bc7, #9f6ef2);
+  color: #fff;
+}
+.content-section.highlight h2 {
+  color: #fff;
+  position: relative;
+}
+.content-section.highlight h2::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #ffd700;
+  margin: 0.5rem auto 0;
+}
+.content-section.highlight p a {
+  color: #ffd700;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.content-section.highlight p a:hover {
+  text-decoration: none;
+}
+
+/* Container for Centering */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content-section {
+    padding: 2rem 1rem;
+  }
+}
+
 
 
 
