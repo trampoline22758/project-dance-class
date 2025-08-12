@@ -1,242 +1,140 @@
-/* Base resets */
-body.dmResponsiveBody {
-    padding: 0;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Pick your fave */
-    background-color: #fff;
-    color: #222;
-    min-height: 100vh;
-    box-sizing: border-box;
-}
-
-/* Make all elements inherit box-sizing for easier sizing */
-*, *::before, *::after {
-    box-sizing: inherit;
-}
-
-/* Responsive typography: scales between min 14px and max 18px */
-html {
-    font-size: clamp(14px, 1.2vw + 1rem, 18px);
-}
-
-/* Responsive body max width and padding */
-body.dmResponsiveBody {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1rem;
-}
-
-/* Fluid layout for main containers (example) */
-.main-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-/* Tablets and smaller */
-@media (max-width: 900px) {
-    body.dmResponsiveBody {
-        max-width: 100%;
-        padding: 1rem 0.5rem;
-    }
-
-    /* Adjust font smaller for tiny tablets */
-    html {
-        font-size: clamp(13px, 2vw + 0.8rem, 16px);
-    }
-
-    .main-container {
-        padding: 0 0.5rem;
-    }
-}
-
-/* Phones */
-@media (max-width: 600px) {
-    body.dmResponsiveBody {
-        padding: 0.5rem 0.25rem;
-    }
-
-    html {
-        font-size: clamp(12px, 3vw + 0.6rem, 15px);
-    }
-
-    /* Stack everything vertically */
-    .main-container {
-        flex-direction: column;
-        padding: 0 0.25rem;
-    }
-}
-
-/* Custom scrollbar for PC (optional) */
-body.dmResponsiveBody::-webkit-scrollbar {
-    width: 10px;
-}
-
-body.dmResponsiveBody::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 5px;
-}
-/* ===== Modern header ===== */
+/* ===== Modern SEO-Friendly Header ===== */
 :root {
     --header-bg-start: #7b4bc7;
-    --header-bg-end: #b084f6;
+    --header-bg-end: #9f6ef2;
     --header-fg: #ffffff;
     --header-muted: rgba(255,255,255,.85);
     --header-border: rgba(255,255,255,.25);
-    --header-radius: 16px;
-    --header-gap: clamp(16px, 2vw, 28px);
-    --header-pad: clamp(12px, 2vw, 24px);
+    --header-gap: clamp(12px, 2vw, 28px);
+    --header-pad: clamp(10px, 1.8vw, 20px);
     --header-maxw: 1200px;
+    --header-font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --header-font-brand: "Brush Script MT","Segoe Script",cursive;
 }
 
-/* Full-bleed wrapper */
+/* Wrapper */
 .header-outer {
-    position: relative;
-    margin-inline: calc(50% - 50vw);
-    width: 100vw;
-    background: linear-gradient(135deg, var(--header-bg-start), var(--header-bg-end));
+    background: linear-gradient(120deg, var(--header-bg-start), var(--header-bg-end));
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-    .header-outer::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(1200px 400px at 10% -10%, rgba(255,255,255,.12), transparent 60%), radial-gradient(800px 300px at 90% 110%, rgba(0,0,0,.08), transparent 55%);
-        pointer-events: none;
-    }
-
+/* Flexible layout */
 .site-header {
-    color: var(--header-fg);
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: var(--header-gap);
-    padding: var(--header-pad);
+    justify-content: space-between;
     max-width: var(--header-maxw);
     margin: 0 auto;
-    backdrop-filter: saturate(120%) blur(6px);
+    padding: var(--header-pad);
+    color: var(--header-fg);
+    font-family: var(--header-font-main);
 }
 
-/* Left/right column containers */
-.header-section {
-    display: grid;
-    gap: 8px;
+/* Sections */
+.header-section,
+.header-center {
+    flex: 1 1 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-/* Center logo/title */
+/* Center branding */
 .header-center {
     text-align: center;
-    display: grid;
-    gap: 6px;
-    padding-inline: clamp(8px, 2vw, 20px);
+    align-items: center;
+}
+.header-center .brand {
+    font-family: var(--header-font-brand);
+    font-size: clamp(26px, 4vw, 42px);
+    margin: 0;
+    line-height: 1.1;
+}
+.header-center .tagline {
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--header-muted);
+    margin: 0;
 }
 
-    .header-center .brand {
-        font-family: "Brush Script MT","Segoe Script",cursive;
-        font-weight: 400;
-        line-height: 1.05;
-        letter-spacing: .02em;
-        font-size: clamp(28px, 4.5vw, 44px);
-        margin: 0;
-    }
+/* Address and contact info */
+.header-section strong {
+    font-weight: 700;
+    font-size: clamp(0.95rem, 1.05vw, 1.1rem);
+}
+.header-section span {
+    font-weight: 600;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    color: var(--header-muted);
+}
 
-    .header-center .tagline {
-        margin: 0;
-        font-style: italic;
-        font-weight: 500;
-        color: var(--header-muted);
-        font-size: clamp(.9rem, 1.2vw, 1.05rem);
-    }
-
-/* Links and buttons */
+/* Links */
 .header-link {
     color: var(--header-fg);
     text-decoration: none;
     border-bottom: 1px dashed transparent;
+    transition: border-color 0.2s ease;
+}
+.header-link:hover {
+    border-bottom-color: var(--header-fg);
 }
 
-    .header-link:hover {
-        border-bottom-color: var(--header-fg);
-    }
-
+/* Buttons */
 .btn {
     appearance: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: .6rem 1rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 999px;
     font-weight: 700;
+    font-size: clamp(0.85rem, 1vw, 1rem);
     cursor: pointer;
+    white-space: nowrap;
     text-decoration: none;
-    transition: transform .06s ease, box-shadow .25s ease, background-color .2s ease, color .2s ease;
+    transition: all 0.25s ease;
+    will-change: background-color, color, box-shadow, transform;
+}
+.btn:active {
+    transform: scale(0.97);
+}
+.btn:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
 }
 
-    .btn:active {
-        transform: translateY(1px);
-    }
-
-    .btn:focus-visible {
-        outline: 3px solid #fff;
-        outline-offset: 2px;
-        box-shadow: 0 0 0 6px rgba(255,255,255,.35);
-    }
-
+/* Primary button */
 .btn--primary {
     background: #fff;
     color: var(--header-bg-start);
     border: 2px solid #fff;
-    box-shadow: 0 4px 14px rgba(0,0,0,.15);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+}
+.btn--primary:hover {
+    background: #f8f5ff;
 }
 
-    .btn--primary:hover {
-        background: #f7f7ff;
-    }
-
+/* Outline button */
 .btn--ghost {
     background: transparent;
     color: var(--header-fg);
     border: 2px solid var(--header-border);
 }
-
-    .btn--ghost:hover {
-        background: rgba(255,255,255,.12);
-    }
-
-/* Decorative ballerina */
-.ballerina {
-    position: absolute;
-    bottom: -20px;
-    right: -100px;
-    width: clamp(80px, 12vw, 140px);
-    opacity: .22;
-    user-select: none;
-    pointer-events: none;
+.btn--ghost:hover {
+    background: rgba(255,255,255,0.12);
 }
 
-/* Mobile layout */
-@media (max-width: 900px) {
+/* Mobile adjustments */
+@media (max-width: 768px) {
     .site-header {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         text-align: center;
+        gap: 12px;
     }
-
     .header-section {
-        justify-items: center;
-    }
-
-    .ballerina {
-        display: none;
-    }
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --header-bg-start: #5f35b0;
-        --header-bg-end: #9669e7;
-        --header-muted: rgba(255,255,255,.9);
-        --header-border: rgba(255,255,255,.3);
+        align-items: center;
     }
 }
