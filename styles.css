@@ -403,6 +403,104 @@
 .btn-primary:hover {
   background: #4a2a8a;
 }
+/* =============== Bottom sections (Instructors → SEO footer) =============== */
+
+/* utilities */
+:root{
+  --brand:#5f35b0;          /* purple */
+  --brand-2:#8b5cf6;        /* light purple */
+  --ink:#222;
+  --muted:#666;
+  --surface:#fff;
+  --bg-dark:#2b2433;
+  --maroon:#4b0f2a;
+  --gold:#ffd700;
+  --shadow:0 8px 24px rgba(0,0,0,.12);
+}
+.container{max-width:1200px;margin:0 auto;padding:0 1rem}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.65rem 1.15rem;border-radius:999px;font-weight:700;text-decoration:none;transition:transform .06s ease,background .2s ease,color .2s ease;border:2px solid transparent}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:#4a2a8a}
+.btn--ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.85)}
+.btn--ghost:hover{background:rgba(255,255,255,.12)}
+.cta-inline{margin-top:1rem;text-align:center}
+
+/* ---------------- Instructors ---------------- */
+.instructors{padding:clamp(2rem,4vw,4rem) 0;background:var(--surface);color:var(--ink)}
+.instructors h2{text-align:center;color:var(--brand);margin-bottom:1.5rem;font-size:clamp(1.5rem,2.2vw,2rem)}
+.instructor-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:1.25rem;justify-items:center
+}
+.instructor-card{
+  width:100%;max-width:220px;background:#fff;border:1px solid #eee;border-radius:14px;
+  padding:1rem;text-align:center;box-shadow:var(--shadow)
+}
+.instructor-card img{width:100%;height:auto;border-radius:12px;display:block}
+.instructor-name{margin:.6rem 0 .2rem;font-size:1.05rem}
+.instructor-role{margin:0;color:var(--muted);font-size:.9rem}
+
+/* ---------------- Promos (two tiles) ---------------- */
+.promos{background:var(--maroon);padding:clamp(1.6rem,3vw,2.6rem) 0;color:#fff}
+.promo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.promo-card{background:var(--brand-2);color:#fff;border-radius:16px;padding:1.25rem;box-shadow:var(--shadow)}
+.promo-card h3{margin:0 0 .35rem;font-size:1.2rem}
+.promo-card p{margin:0 0 .8rem}
+.promo-card.alt{background:#f28bb8;color:#3a0d22}
+.promo-card .btn{border-color:rgba(255,255,255,.85)}
+.promo-card.alt .btn{border-color:#3a0d22;color:#3a0d22}
+.promo-card.alt .btn:hover{background:#3a0d22;color:#fff}
+
+/* ---------------- Reviews ---------------- */
+.reviews{
+  background:url('/images/reviews-bg.webp') center/cover no-repeat fixed, linear-gradient(#0003,#0003);
+  color:#fff
+}
+.reviews .container{padding:clamp(2rem,4vw,4rem) 1rem}
+.reviews h2{text-align:center;margin-bottom:1rem;font-size:clamp(1.5rem,2.2vw,2rem)}
+.review-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.review{background:rgba(0,0,0,.5);border-radius:12px;padding:1rem}
+.review blockquote{margin:0 0 .6rem}
+.stars{color:var(--gold);margin-right:.3rem}
+.reviewer{font-weight:600}
+
+/* ---------------- About teaser ---------------- */
+.about-teaser{background:var(--brand-2);color:#fff}
+.about-wrap{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:1.25rem;align-items:center;
+  padding:clamp(2rem,4vw,3rem) 0
+}
+.about-copy h2{margin:0 0 .5rem}
+.about-copy p{margin:.5rem 0 0;max-width:60ch}
+.about-media img{width:100%;height:auto;border-radius:16px;display:block;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+@media (max-width: 800px){.about-wrap{grid-template-columns:1fr}}
+
+/* ---------------- SEO Footer ---------------- */
+.seo-footer{background:var(--bg-dark);color:#eae7f4}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1.5fr 1fr 1.5fr;gap:1.25rem;
+  padding:clamp(2rem,4vw,3rem) 0
+}
+.footer-heading{font-size:1.1rem;margin:.2rem 0 .6rem;color:#fff}
+.footer-nap a{color:#fff;text-decoration:none;border-bottom:1px dotted #fff}
+.footer-nap a:hover{border-bottom-style:solid}
+.hours{width:100%;border-collapse:collapse;font-size:.95rem}
+.hours th,.hours td{padding:.25rem .4rem;border-bottom:1px solid #3b3443;text-align:left}
+.footer-links ul{list-style:none;padding:0;margin:0}
+.footer-links a{color:#eae7f4;text-decoration:none}
+.footer-links a:hover{text-decoration:underline}
+.footer-meta{border-top:1px solid #3b3443;padding:.8rem 0;text-align:center;font-size:.9rem}
+
+/* responsiveness tweaks */
+@media (max-width: 900px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width: 560px){
+  .footer-grid{grid-template-columns:1fr}
+}
+
 
 
 
