@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "cleanUrls": false
   "routes": [
     { "src": "/$", "dest": "/index.html" },
 
@@ -14,6 +15,8 @@
     { "src": "/acrobatics-classes/?$", "dest": "/acrobatics-classes.html" },
     { "src": "/aerial-classes/?$", "dest": "/aerial-classes.html" },
     { "src": "/competition-teams/?$", "dest": "/competition-teams.html" },
+    { "src": "/register/?$", "dest": "/register.html" }
+    { "src": "/register/?$", "dest": "/registration.html" }
     { "src": "/summer/?$", "dest": "/summer.html"},
     { "src": "/([A-Za-z0-9-]+)\\.html$", "headers": { "Location": "/$1" }, "status": 308 }
   ]
