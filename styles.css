@@ -174,7 +174,7 @@
 .hero-background {
   position: absolute;
   inset: 0;
-  background: url('/images/hero-dancers.jpg') center/cover no-repeat;
+  background: url('hero-dancers.jpg') center/cover no-repeat;
 }
 .hero::before {
   content: "";
@@ -242,5 +242,6 @@
     padding: 2rem 1rem;
   }
 }
+
 
 
