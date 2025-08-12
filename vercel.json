@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/$", "dest": "/index.html" },
+
+    /* pretty URLs → underlying .html */
+    { "src": "/register/?$", "dest": "/register.html" },
+    { "src": "/about/?$", "dest": "/about.html" },
+    { "src": "/pom-poms-classes/?$", "dest": "/pom-poms-classes.html" },
+    { "src": "/contemporary-dance-classes/?$", "dest": "/contemporary-dance-classes.html" },
+    { "src": "/hip-hop-dance-classes/?$", "dest": "/hip-hop-dance-classes.html" },
+    { "src": "/musical-theater-classes/?$", "dest": "/musical-theater-classes.html" },
+    { "src": "/lyrical-dance-classes/?$", "dest": "/lyrical-dance-classes.html" },
+    { "src": "/tumbling-classes/?$", "dest": "/tumbling-classes.html" },
+    { "src": "/acrobatics-classes/?$", "dest": "/acrobatics-classes.html" },
+    { "src": "/aerial-classes/?$", "dest": "/aerial-classes.html" },
+    { "src": "/competition-teams/?$", "dest": "/competition-teams.html" },
+
+    /* optional: redirect .html → pretty URL for SEO canonicalization */
+    { "src": "/([A-Za-z0-9-]+)\\.html$", "headers": { "Location": "/$1" }, "status": 308 }
+  ]
+}
