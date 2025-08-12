@@ -1,59 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Miss Kim's Dance Class</title>
-	<link rel="stylesheet" href="styles.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Meta Information -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Miss Kim's Dance Class in Chesterfield, MO - inspiring students to expand, explore, believe, and achieve without limits. Register for classes today.">
+  <meta name="keywords" content="Dance Class Chesterfield MO, Miss Kim's Dance, Ballet Classes, Jazz Dance, Kids Dance, Adult Dance Lessons, Dance Registration Missouri">
+  <meta name="author" content="Miss Kim's Dance Class" />
+  
+  <!-- Open Graph for Social Sharing -->
+  <meta property="og:title" content="Miss Kim's Dance Class - Chesterfield, MO" />
+  <meta property="og:description" content="Expand · Explore · Believe · There are no limits. Join our classes and experience the joy of dance." />
+  <meta property="og:image" content="https://www.example.com/images/miss-kims-dance-class.jpg" />
+  <meta property="og:url" content="https://www.example.com" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Miss Kim's Dance Class - Chesterfield, MO" />
+  <meta name="twitter:description" content="Expand · Explore · Believe · There are no limits. Join our classes and experience the joy of dance." />
+  <meta name="twitter:image" content="https://www.example.com/images/miss-kims-dance-class.jpg" />
+
+  <title>Miss Kim's Dance Class - Chesterfield, MO | Dance Lessons & Registration</title>
+  
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Structured Data for Local SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DanceSchool",
+    "name": "Miss Kim's Dance Class",
+    "image": "https://www.example.com/images/miss-kims-dance-class.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "14278 Ladue Road",
+      "addressLocality": "Chesterfield",
+      "addressRegion": "MO",
+      "postalCode": "63017",
+      "addressCountry": "US"
+    },
+    "telephone": "+13145420608",
+    "url": "https://www.example.com"
+  }
+  </script>
+
+  <!-- Accessibility: Ensure JavaScript loads without blocking -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 </head>
-<body
-  id="dmRoot"
-  data-page-alias="home"
-  class="dmRoot dmResponsiveBody"
-  style="padding:0; margin:0;"
-  data-audioeye-lang="en"
-  data-audioeye-device-desktop=""
-  data-audioeye-launcher=""
->
+<body id="dmRoot" class="dmRoot dmResponsiveBody">
+  
+  <!-- Skip Link for Keyboard Navigation -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-	<!-- Modern Header -->
-	<div class="header-outer">
-		<header class="site-header">
-			<!-- Left section -->
-			<div class="header-section">
-				<a class="btn btn--ghost" href="#">Write a Review</a>
-				<div>
-					<strong>14278 Ladue Road<br>Chesterfield, MO 63017</strong>
-				</div>
-			</div>
+  <!-- Header -->
+  <div class="header-outer">
+    <header class="site-header" role="banner" aria-label="Main Site Header">
+      <!-- Left section -->
+      <div class="header-section" aria-label="Business address and review link">
+        <a class="btn btn--ghost" href="https://g.page/r/YourGoogleReviewLink" rel="noopener" aria-label="Write a Review for Miss Kim's Dance Class on Google">Write a Review</a>
+        <address>
+          <strong>14278 Ladue Road<br>Chesterfield, MO 63017</strong>
+        </address>
+      </div>
 
-			<!-- Center logo + tagline -->
-			<div class="header-center">
-				<h1 class="brand">Miss Kim's<br>Dance Class</h1>
-				<p class="tagline">Expand · Explore · Believe · There are no limits</p>
-			</div>
+      <!-- Center branding -->
+      <div class="header-center" aria-label="Miss Kim's Dance Class branding">
+        <h1 class="brand">Miss Kim's<br>Dance Class</h1>
+        <p class="tagline">Expand · Explore · Believe · There are no limits</p>
+      </div>
 
-			<!-- Right section -->
-			<div class="header-section">
-				<a class="btn btn--primary" href="#">Registration Form</a>
-				<div>
-					<span>Call <br><strong><a class="header-link" href="tel:+13145420608">(314) 542-0608</a></strong></span><br>
-					<span>Call or Text <br><strong><a class="header-link" href="tel:+13144358688">(314) 435-8688</a></strong></span>
-				</div>
-			</div>
-		</header>
-	</div>
+      <!-- Right section -->
+      <div class="header-section" aria-label="Contact information and registration">
+        <a class="btn btn--primary" href="/registration" aria-label="Go to Registration Form for Miss Kim's Dance Classes">Registration Form</a>
+        <div>
+          <span>Call <br><strong><a class="header-link" href="tel:+13145420608" aria-label="Call Miss Kim's Dance Class at 314 542 0608">(314) 542-0608</a></strong></span><br>
+          <span>Call or Text <br><strong><a class="header-link" href="tel:+13144358688" aria-label="Call or text Miss Kim's Dance Class at 314 435 8688">(314) 435-8688</a></strong></span>
+        </div>
+      </div>
+    </header>
+  </div>
 
-	<!-- Page content below -->
-	<main class="main-container">
-		<h2>Welcome to Miss Kim's Dance Class</h2>
-		<p>This is a basic HTML page with a modern header at the top.</p>
-		<a href="https://www.example.com" target="_blank">Visit Example.com</a>
-	</main>
+  <!-- Main Content -->
+  <main class="main-container" id="main-content" role="main" aria-label="Main page content">
+    <h2>Welcome to Miss Kim's Dance Class</h2>
+    <p>At Miss Kim's Dance Class in Chesterfield, MO, we inspire students to grow through the art of dance. Whether you're looking for ballet, jazz, or contemporary dance, our experienced instructors provide engaging lessons for all ages.</p>
+    <p>
+      <a href="/classes" aria-label="View the class schedule and details for Miss Kim's Dance Classes">View Class Schedule</a> or 
+      <a href="/registration" aria-label="Register for a dance class at Miss Kim's Dance Class">Register Now</a> to begin your journey.
+    </p>
+  </main>
 
-	<script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
-
