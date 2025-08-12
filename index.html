@@ -1,487 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Font: Inter -->
+  <!-- Preconnects & Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Meta Information -->
+  <!-- Meta & SEO -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Miss Kim's Dance Class in Chesterfield, MO - inspiring students to expand, explore, believe, and achieve without limits. Register for classes today.">
-  <meta name="keywords" content="Dance Class Chesterfield MO, Miss Kim's Dance, Ballet Classes, Jazz Dance, Kids Dance, Adult Dance Lessons, Dance Registration Missouri">
-  <meta name="author" content="Miss Kim's Dance Class" />
-  
-  <!-- Open Graph for Social Sharing -->
-  <meta property="og:title" content="Miss Kim's Dance Class - Chesterfield, MO" />
-  <meta property="og:description" content="Expand · Explore · Believe · There are no limits. Join our classes and experience the joy of dance." />
-  <meta property="og:image" content="https://www.example.com/images/miss-kims-dance-class.jpg" />
-  <meta property="og:url" content="https://www.example.com" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Miss Kim's Dance Class in Chesterfield, MO — ballet, jazz, hip-hop, contemporary, pom-poms, and musical theater for kids, teens, and adults. Free trial, fair pricing, small classes." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://www.example.com/" />
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:title" content="Miss Kim's Dance Class — Chesterfield, MO" />
+  <meta property="og:description" content="Free trial class · Fair pricing · Small classes · Since 1994. Register today." />
+  <meta property="og:url" content="https://www.example.com/" />
+  <meta property="og:image" content="https://www.example.com/images/og/hero.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
-  <!-- Twitter Card -->
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Miss Kim's Dance Class - Chesterfield, MO" />
-  <meta name="twitter:description" content="Expand · Explore · Believe · There are no limits. Join our classes and experience the joy of dance." />
-  <meta name="twitter:image" content="https://www.example.com/images/miss-kims-dance-class.jpg" />
+  <meta name="twitter:title" content="Miss Kim's Dance Class — Chesterfield, MO" />
+  <meta name="twitter:description" content="Free trial class · Fair pricing · Small classes · Since 1994." />
+  <meta name="twitter:image" content="https://www.example.com/images/og/hero.jpg" />
 
-  <!-- Title -->
-  <title>Miss Kim's Dance Class - Chesterfield, MO | Dance Lessons & Registration</title>
-  
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#5f35b0" />
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 
-  <!-- Structured Data for Local SEO -->
+  <!-- CSS -->
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- Preload LCP hero image -->
+  <link rel="preload" as="image" href="/images/hero-dancers-1920.webp"
+        imagesrcset="/images/hero-dancers-960.webp 960w, /images/hero-dancers-1440.webp 1440w, /images/hero-dancers-1920.webp 1920w"
+        imagesizes="100vw" fetchpriority="high">
+
+  <!-- Local Business JSON-LD -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "DanceSchool",
-    "name": "Miss Kim's Dance Class",
-    "image": "https://www.example.com/images/miss-kims-dance-class.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "14278 Ladue Road",
-      "addressLocality": "Chesterfield",
-      "addressRegion": "MO",
-      "postalCode": "63017",
-      "addressCountry": "US"
+    "@context":"https://schema.org",
+    "@type":"DanceSchool",
+    "name":"Miss Kim's Dance Class",
+    "url":"https://www.example.com/",
+    "telephone":"+13145420608",
+    "image":"https://www.example.com/images/og/hero.jpg",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"14278 Ladue Road",
+      "addressLocality":"Chesterfield",
+      "addressRegion":"MO",
+      "postalCode":"63017",
+      "addressCountry":"US"
     },
-    "telephone": "+13145420608",
-    "url": "https://www.example.com"
+    "sameAs":["https://www.facebook.com/yourpage","https://www.instagram.com/yourpage"]
   }
   </script>
 
-  <!-- Performance: Load Scripts Deferred -->
+  <!-- Defer scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-</head>
 
+  <title>Miss Kim's Dance Class — Chesterfield, MO | Dance Lessons & Registration</title>
+</head>
 <body id="dmRoot" class="dmRoot dmResponsiveBody">
-  
-  <!-- Skip Link for Keyboard Navigation -->
+  <!-- Skip Link -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- Header -->
   <div class="header-outer">
     <header class="site-header" role="banner" aria-label="Main Site Header">
-      <!-- Left section -->
       <div class="header-section" aria-label="Business address and review link">
-        <a class="btn btn--ghost" href="https://g.page/r/YourGoogleReviewLink" rel="noopener" aria-label="Write a Review for Miss Kim's Dance Class on Google">Write a Review</a>
+        <a class="btn btn--ghost" href="https://g.page/r/YourGoogleReviewLink" rel="noopener">Write a Review</a>
         <address>
           <strong>14278 Ladue Road<br>Chesterfield, MO 63017</strong>
         </address>
       </div>
 
-      <!-- Center branding -->
-      <div class="header-center" aria-label="Miss Kim's Dance Class branding">
-        <h1 class="brand">Miss Kim's<br>Dance Class</h1>
+      <div class="header-center" aria-label="Branding">
+        <p class="brand" aria-label="Miss Kim's Dance Class">Miss Kim's<br>Dance Class</p>
         <p class="tagline">Expand · Explore · Believe · There are no limits</p>
       </div>
 
-      <!-- Right section -->
-      <div class="header-section" aria-label="Contact information and registration">
-        <a class="btn btn--primary" href="/registration" aria-label="Go to Registration Form for Miss Kim's Dance Classes">Registration Form</a>
+      <div class="header-section" aria-label="Contact and registration">
+        <a class="btn btn--primary" href="/registration">Registration Form</a>
         <div>
-          <span>Call <br><strong><a class="header-link" href="tel:+13145420608" aria-label="Call Miss Kim's Dance Class at 314 542 0608">(314) 542-0608</a></strong></span><br>
-          <span>Call or Text <br><strong><a class="header-link" href="tel:+13144358688" aria-label="Call or text Miss Kim's Dance Class at 314 435 8688">(314) 435-8688</a></strong></span>
+          <span>Call<br><strong><a class="header-link" href="tel:+13145420608">(314) 542-0608</a></strong></span><br>
+          <span>Call or Text<br><strong><a class="header-link" href="tel:+13144358688">(314) 435-8688</a></strong></span>
         </div>
       </div>
     </header>
   </div>
 
-  <!-- Main Content -->
-  <main class="main-container" id="main-content" role="main" aria-label="Main page content">
-   <!-- Hero Section -->
-<section class="hero" aria-labelledby="hero-title">
-  <div class="hero-background" aria-hidden="true"></div>
-  <div class="hero-content">
-    <h1 id="hero-title">Dance Classes &amp; Instruction in Chesterfield, MO</h1>
-    <p class="hero-tagline">Free Trial Class · Fair Prices · Class Cards Never Expire</p>
-    <a href="tel:+13145420608" class="hero-call" aria-label="Call Miss Kim's Dance Class at 314 542 0608">
-      📞 (314) 542-0608
-    </a>
-    <p class="hero-hours">Hours: <span class="status">Closed</span> · Opens 1:00 PM</p>
-  </div>
-</section>
+  <!-- Main -->
+  <main id="main-content" role="main" aria-label="Main page content">
 
-<!-- Announcement Bar -->
-<div class="announcement-bar" role="complementary" aria-label="SMS Updates">
-  <p>📢 Text <strong>START</strong> to <strong>(314) 866-7837</strong> to get updates by text.</p>
-</div>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-background" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1 id="hero-title">Dance Classes &amp; Instruction in Chesterfield, MO</h1>
+        <p class="hero-tagline">Free Trial Class · Fair Prices · Class Cards Never Expire</p>
+        <a href="tel:+13145420608" class="hero-call" aria-label="Call Miss Kim's Dance Class at 314 542 0608">📞 (314) 542-0608</a>
+        <p class="hero-hours">Hours: <span class="status">Closed</span> · Opens 1:00 PM</p>
+      </div>
+    </section>
+
+    <!-- Announcement -->
+    <div class="announcement-bar" role="complementary" aria-label="SMS Updates">
+      <p role="status" aria-live="polite">📢 Text <strong>START</strong> to <strong>(314) 866-7837</strong> to get updates by text.</p>
+    </div>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Dance Classes in Chesterfield, MO</li>
+      </ol>
+    </nav>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},
+      {"@type":"ListItem","position":2,"name":"Dance Classes in Chesterfield, MO","item":"https://www.example.com/"}
+    ]}
+    </script>
+
+    <!-- About section -->
+    <section class="content-section" aria-labelledby="section-about">
+      <div class="container">
+        <h2 id="section-about">Dance Your Heart Out at Miss Kim's Dance Class!</h2>
+        <p>At <strong>Miss Kim's Dance Class</strong> in Chesterfield, MO, we turn passion into performance. Our talented and certified instructors create a nurturing environment where dancers of all ages can thrive. Whether you're a beginner exploring the world of dance or an experienced performer refining your technique, you'll find a welcoming home here.</p>
+        <p>We offer fair pricing, small class sizes, and a conveniently located studio—making now the perfect time to start dancing. From ballet to hip-hop and competitive teams, we provide a wide range of dance styles. Parents can relax in our comfortable viewing area or use our breakroom with a microwave, fridge, and freezer. Since 1994, families have trusted us for flexible scheduling and expert instruction.</p>
+      </div>
+    </section>
+
+    <!-- Why choose -->
+    <section class="content-section highlight" aria-labelledby="section-why">
+      <div class="container">
+        <h2 id="section-why">Why Choose Miss Kim's Dance Class?</h2>
+        <p>Join a community that values creativity, technique, and self-expression. Our experienced instructors bring decades of teaching expertise, ensuring every student receives personalized attention in a positive, supportive environment.</p>
+        <p>We offer transparent pricing, flexible scheduling, and diverse styles to suit every dancer. With our <strong>no-drama code of conduct</strong>, your experience will be positive and enriching. Book a <a href="/free-trial">free trial dance class</a> and see why we’re Chesterfield’s favorite dance school.</p>
+      </div>
+    </section>
+
+    <!-- Classes grid -->
+    <section class="dance-classes" aria-labelledby="classes-title">
+      <h2 id="classes-title" class="sr-only">Dance Class Styles</h2>
+
+      <!-- Example (repeat for all classes with correct paths and sizes) -->
+      <section id="tap-dance" class="dance-class">
+        <div class="dance-image">
+          <img src="/images/tap-dance-960.webp"
+               srcset="/images/tap-dance-640.webp 640w, /images/tap-dance-960.webp 960w, /images/tap-dance-1440.webp 1440w"
+               sizes="(max-width: 900px) 100vw, 560px"
+               width="560" height="360"
+               alt="Tap dance class in Chesterfield, MO for all ages"
+               loading="lazy" decoding="async">
+        </div>
+        <div class="dance-info">
+          <h2>Tap Dance Classes in Chesterfield, MO</h2>
+          <p>Learn timing, coordination, and musicality in a fun, supportive environment. We guide you from basic steps to advanced routines.</p>
+          <a href="/tap-dance-classes" class="btn-primary" aria-label="View details for Tap Dance Classes in Chesterfield">View Class Details</a>
+        </div>
+      </section>
+
+      <section id="ballet-dance" class="dance-class">
+        <div class="dance-image">
+          <img src="/images/ballet-dance-960.webp"
+               srcset="/images/ballet-dance-640.webp 640w, /images/ballet-dance-960.webp 960w, /images/ballet-dance-1440.webp 1440w"
+               sizes="(max-width: 900px) 100vw, 560px"
+               width="560" height="360"
+               alt="Ballet dance lessons in Chesterfield, Missouri"
+               loading="lazy" decoding="async">
+        </div>
+        <div class="dance-info">
+          <h2>Ballet Dance Lessons in Chesterfield, MO</h2>
+          <p>Build posture, grace, and artistry. From beginner to advanced, small groups ensure personalized attention.</p>
+          <a href="/ballet-dance-classes" class="btn-primary">View Class Details</a>
+        </div>
+      </section>
+
+      <section id="jazz-dance" class="dance-class">
+        <div class="dance-image">
+          <img src="/images/jazz-dance-960.webp"
+               srcset="/images/jazz-dance-640.webp 640w, /images/jazz-dance-960.webp 960w, /images/jazz-dance-1440.webp 1440w"
+               sizes="(max-width: 900px) 100vw, 560px"
+               width="560" height="360"
+               alt="Jazz dance classes in Chesterfield, MO including Broadway and contemporary"
+               loading="lazy" decoding="async">
+        </div>
+        <div class="dance-info">
+          <h2>Jazz Dance Classes in Chesterfield, MO</h2>
+          <p>From Broadway-inspired jazz to contemporary styles, enjoy energetic choreography and supportive coaching.</p>
+          <a href="/jazz-dance-classes" class="btn-primary">View Class Details</a>
+        </div>
+      </section>
+
+      <section id="pom-poms" class="dance-class">
+        <div class="dance-image">
+          <img src="/images/pom-poms-960.webp"
+               srcset="/images/pom-poms-640.webp 640w, /images/pom-poms-960.webp 960w, /images/pom-poms-1440.webp 1440w"
+               sizes="(max-width: 900px) 100vw, 560px"
+               width="560" height="360"
+               alt="Pom-pom cheer and dance classes in Chesterfield, MO"
+               loading="lazy" decoding="async">
+        </div>
+        <div class="dance-info">
+          <h2>Pom-Pom Cheer Dance in Chesterfield, MO</h2>
+          <p>High-energy classes that combine cheerleading skills with rhythm and teamwork. Great for confidence.</p>
+          <a href="/pom-poms-classes" class="btn-primary">View Class Details</a>
+        </div>
+      </section>
+
+      <section id="contemporary-dance" class="dance-class">
+        <div class="dance-image">
+          <img src="/images/contemporary-dance-960.webp"
+               srcset="/images/contemporary-dance-640.webp 640w, /images/contemporary-dance-960.webp 960w, /images/contemporary-dance-1440.webp 1440w"
+               sizes="(max-width: 900px) 100vw, 560px"
+               width="560" height="360"
+               alt="Contemporary dance classes in Chesterfield, MO"
+               loading="lazy" decoding="async">
+        </div>
+        <div class="dance-info">
+          <h2>Contemporary Dance Classes in Chesterfield, MO</h2>
+          <p>Express emotion and storytelling through fluid movement and floorwork. Choreography tailored to your abilities.</p>
+          <a href="/contemporary-dance-classes" class="btn-primary">View Class Details</a>
+        </div>
+      </section>
+
+      <section id="hip-hop-dance" class="dance-class">
+        <div class="dance-image">
+          <img src="/images/hip-hop-dance-960.webp"
+               srcset="/images/hip-hop-dance-640.webp 640w, /images/hip-hop-dance-960.webp 960w, /images/hip-hop-dance-1440.webp 1440w"
+               sizes="(max-width: 900px) 100vw, 560px"
+               width="560" height="360"
+               alt="Hip-hop dance lessons in Chesterfield, MO for kids, teens, and adults"
+               loading="lazy" decoding="async">
+        </div>
+        <div class="dance-info">
+          <h2>Hip-Hop Dance Classes in Chesterfield, MO</h2>
+          <p>Learn upbeat hip-hop moves, popping, locking, and freestyle. Build rhythm and confidence at any level.</p>
+          <a href="/hip-hop-dance-classes" class="btn-primary">View Class Details</a>
+        </div>
+      </section>
+
+      <section id="musical-theater" class="dance-class">
+        <div class="dance-image">
+          <img src="/images/musical-theater-960.webp"
+               srcset="/images/musical-theater-640.webp 640w, /images/musical-theater-960.webp 960w, /images/musical-theater-1440.webp 1440w"
+               sizes="(max-width: 900px) 100vw, 560px"
+               width="560" height="360"
+               alt="Musical theater dance and acting classes in Chesterfield, Missouri"
+               loading="lazy" decoding="async">
+        </div>
+        <div class="dance-info">
+          <h2>Musical Theater Dance in Chesterfield, MO</h2>
+          <p>Combine singing, acting, and dancing while building stage presence, confidence, and creativity.</p>
+          <a href="/musical-theater-classes" class="btn-primary">View Class Details</a>
+        </div>
+      </section>
+    </section>
+
+    <!-- Instructors -->
+    <section class="instructors" aria-labelledby="instructors-title">
+      <div class="container">
+        <h2 id="instructors-title">Meet Our Dancing Instructors</h2>
+        <ul class="instructor-grid" role="list">
+          <li class="instructor-card"><img src="/images/instructors/kim-hevie-barchett.webp" alt="Kim Hevie Barchett, founder and instructor at Miss Kim’s Dance Class in Chesterfield, MO" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Kim Hevie Barchett</h3><p class="instructor-role">Founder &amp; Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/devin-renie.webp" alt="Devin Renie, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Devin Renie</h3><p class="instructor-role">Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/dannie-preston.webp" alt="Dannie Preston, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Dannie Preston</h3><p class="instructor-role">Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/juliette-hilbert.webp" alt="Juliette Hilbert, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Juliette Hilbert</h3><p class="instructor-role">Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/megan-bolden.webp" alt="Megan Bolden, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Megan Bolden</h3><p class="instructor-role">Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/mike-buck.webp" alt="Mike Buck, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Mike Buck</h3><p class="instructor-role">Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/kennedy-hayes.webp" alt="Kennedy Hayes, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Kennedy Hayes</h3><p class="instructor-role">Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/julia-lucarelli.webp" alt="Julia Lucarelli, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Julia Lucarelli</h3><p class="instructor-role">Instructor</p></li>
+          <li class="instructor-card"><img src="/images/instructors/javi-perez.webp" alt="Javi Perez, dance instructor" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Javi Perez</h3><p class="instructor-role">Instructor</p></li>
+        </ul>
+
+        <p class="cta-inline"><a class="btn btn--primary" href="/instructors">Learn More About Our Instructors</a></p>
+      </div>
+
+      <!-- Optional ItemList schema -->
+      <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"ItemList","name":"Miss Kim's Dance Class Instructors","itemListElement":[
+        {"@type":"Person","name":"Kim Hevie Barchett","jobTitle":"Founder & Instructor"},
+        {"@type":"Person","name":"Devin Renie","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Dannie Preston","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Juliette Hilbert","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Megan Bolden","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Mike Buck","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Kennedy Hayes","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Julia Lucarelli","jobTitle":"Instructor"},
+        {"@type":"Person","name":"Javi Perez","jobTitle":"Instructor"}]}
+      </script>
+    </section>
+
+    <!-- Promos -->
+    <section class="promos" aria-labelledby="promos-title">
+      <div class="container">
+        <h2 id="promos-title" class="sr-only">Special Programs</h2>
+        <div class="promo-grid">
+          <article class="promo-card">
+            <h3>Free Trial Classes</h3>
+            <p>Try a class on us—see our studio, meet the teachers, and find your fit.</p>
+            <a class="btn btn--ghost" href="/free-trial">Visit</a>
+          </article>
+          <article class="promo-card alt">
+            <h3>Unlimited Summer Classes</h3>
+            <p>Enjoy unlimited classes with small groups and personal attention.</p>
+            <a class="btn btn--ghost" href="/summer">Visit</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews" aria-labelledby="reviews-title">
+      <div class="container">
+        <h2 id="reviews-title">What Families Are Saying</h2>
+        <div class="review-list">
+          <figure class="review">
+            <blockquote>“This isn’t just a dance studio—it’s a family. Our kids gained skill and confidence.”</blockquote>
+            <figcaption><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span class="reviewer">Bethani</span> · <time datetime="2025-05">May 2025</time></figcaption>
+          </figure>
+          <figure class="review">
+            <blockquote>“Teachers are kind and experienced. Small classes mean real attention.”</blockquote>
+            <figcaption><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span class="reviewer">Angela</span></figcaption>
+          </figure>
+          <figure class="review">
+            <blockquote>“Fair pricing, flexible schedule, and a welcoming community. Highly recommend.”</blockquote>
+            <figcaption><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span class="reviewer">David</span></figcaption>
+          </figure>
+        </div>
+        <p class="cta-inline"><a class="btn btn--primary" href="/reviews">Read More Reviews</a></p>
+      </div>
+    </section>
+
+    <!-- About teaser -->
+    <section class="about-teaser" aria-labelledby="about-title">
+      <div class="container about-wrap">
+        <div class="about-copy">
+          <h2 id="about-title">Learn More About Miss Kim’s Dance Class</h2>
+          <p>Located in Chesterfield, MO, we teach ballet, jazz, contemporary, hip-hop, pom-pom, and musical theater for kids, teens, and adults. Since 1994 we’ve focused on small class sizes, fair pricing, and flexible schedules.</p>
+          <p><a class="btn btn--ghost" href="/about">Watch Videos</a></p>
+        </div>
+        <figure class="about-media">
+          <img src="/images/studio-group-960.webp"
+               srcset="/images/studio-group-640.webp 640w, /images/studio-group-960.webp 960w, /images/studio-group-1440.webp 1440w"
+               sizes="(max-width: 900px) 100vw, 520px"
+               width="520" height="300"
+               alt="Students practicing at Miss Kim’s Dance Class in Chesterfield, Missouri"
+               loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <!-- Footer (SEO) -->
+    <footer class="seo-footer" aria-labelledby="footer-title">
+      <div class="container footer-grid">
+        <section class="footer-block">
+          <h2 id="footer-title" class="footer-heading">Miss Kim’s Dance Class</h2>
+          <address class="footer-nap">
+            14278 Ladue Road<br>
+            Chesterfield, MO 63017<br>
+            <a href="tel:+13145420608">(314) 542-0608</a><br>
+            <a href="tel:+13144358688">Call or text: (314) 435-8688</a>
+          </address>
+          <p><a href="https://maps.google.com/?q=Miss+Kim's+Dance+Class+Chesterfield+MO" rel="noopener" target="_blank">View on Google Maps</a></p>
+        </section>
+
+        <section class="footer-block">
+          <h3 class="footer-heading">Studio Hours</h3>
+          <table class="hours" aria-label="Studio Hours"><tbody>
+            <tr><th>Mon–Thu</th><td>1:00 PM – 9:00 PM</td></tr>
+            <tr><th>Fri</th><td>1:00 PM – 6:00 PM</td></tr>
+            <tr><th>Sat</th><td>9:00 AM – 2:00 PM</td></tr>
+            <tr><th>Sun</th><td>Closed</td></tr>
+          </tbody></table>
+        </section>
+
+        <nav class="footer-block footer-links" aria-label="Quick links">
+          <h3 class="footer-heading">Quick Links</h3>
+          <ul>
+            <li><a href="/registration">Registration</a></li>
+            <li><a href="/classes">Class Schedule</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/policies">Policies</a></li>
+            <li><a href="/instructors">Instructors</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/sitemap.xml">Sitemap</a></li>
+          </ul>
+        </nav>
+
+        <section class="footer-block">
+          <h3 class="footer-heading">FAQs</h3>
+          <details><summary>Do you offer a free trial dance class?</summary><p>Yes — book a <a href="/free-trial">free trial</a> to try any beginner class.</p></details>
+          <details><summary>What ages do you teach?</summary><p>We offer classes for kids, teens, and adults. See <a href="/classes">classes</a> for levels.</p></details>
+          <details><summary>Do class cards expire?</summary><p>No — our class cards never expire.</p></details>
+        </section>
+      </div>
+
+      <div class="container footer-meta">
+        <p>&copy; <span id="year"></span> Miss Kim’s Dance Class · Chesterfield, Missouri</p>
+      </div>
+
+      <!-- FAQ JSON-LD -->
+      <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"Do you offer a free trial dance class?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can book a free trial to try any beginner class."}},
+        {"@type":"Question","name":"What ages do you teach?","acceptedAnswer":{"@type":"Answer","text":"We offer classes for kids, teens, and adults with multiple levels."}},
+        {"@type":"Question","name":"Do class cards expire?","acceptedAnswer":{"@type":"Answer","text":"No, our class cards do not expire."}}
+      ]}
+      </script>
+    </footer>
   </main>
 
-  <script src="script.js" defer></script>
-  <section class="content-section" aria-labelledby="section-about">
-  <div class="container">
-    <h2 id="section-about">Dance Your Heart Out at Miss Kim's Dance Class!</h2>
-    <p>
-      At <strong>Miss Kim's Dance Class</strong> in Chesterfield, MO, we turn passion into performance.
-      Our talented and certified instructors create a nurturing environment where dancers of all ages can thrive.
-      Whether you're a beginner exploring the world of dance or an experienced performer refining your technique,
-      you'll find a welcoming home here.
-    </p>
-    <p>
-      We offer fair pricing, small class sizes, and a conveniently located studio—making now the perfect time to start dancing.
-      From ballet to hip-hop, and even competitive teams, we provide a wide range of dance styles for every skill level.
-      Parents can relax in our comfortable viewing area or use our breakroom, complete with a microwave, fridge, and freezer.
-      With flexible scheduling and over 30 years of experience, we’ve been the trusted choice for dancers since 1994.
-    </p>
-  </div>
-</section>
+  <!-- Small helper -->
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
-<section class="content-section highlight" aria-labelledby="section-why">
-  <div class="container">
-    <h2 id="section-why">Why Choose Miss Kim's Dance Class?</h2>
-    <p>
-      Choosing Miss Kim's Dance Class means joining a community that values creativity, technique, and self-expression.
-      Our experienced instructors bring decades of teaching expertise, ensuring every student receives
-      personalized attention in a positive, supportive environment.
-    </p>
-    <p>
-      We offer transparent pricing, flexible scheduling, and diverse styles to suit every dancer’s needs.
-      With our <strong>no-drama code of conduct</strong>, you can trust that your experience will be positive and enriching.
-      Call us today or join a <a href="/free-trial" aria-label="Register for a free trial dance class">free trial dance class</a>
-      to see why we're considered the best dance school in Chesterfield.
-    </p>
-  </div>
-</section>
-  <main class="dance-classes">
-
-  <!-- Tap Dance -->
-  <section id="tap-dance" class="dance-class">
-    <div class="dance-image">
-      <img src="images/tap-dance.webp" 
-           alt="Tap dance class in Chesterfield, MO for all ages" 
-           loading="lazy">
-    </div>
-    <div class="dance-info">
-      <h2>Tap Dance Classes in Chesterfield, MO</h2>
-      <p>Our tap dance lessons are perfect for dancers of all ages. Focusing on timing, coordination, and musicality, our experienced instructors guide you from basic steps to advanced routines in a fun, supportive environment.</p>
-      <a href="/tap-dance-classes" class="btn btn-primary" aria-label="View details for Tap Dance Classes in Chesterfield">View Class Details</a>
-    </div>
-  </section>
-
-  <!-- Ballet Dance -->
-  <section id="ballet-dance" class="dance-class">
-    <div class="dance-image">
-      <img src="images/ballet-dance.webp" 
-           alt="Ballet dance lessons in Chesterfield, MO for beginners to advanced" 
-           loading="lazy">
-    </div>
-    <div class="dance-info">
-      <h2>Ballet Dance Lessons in Chesterfield, MO</h2>
-      <p>Build a strong dance foundation with ballet classes that emphasize posture, grace, and artistry. Whether you’re just starting or refining advanced skills, our small group sizes ensure personalized attention.</p>
-      <a href="/ballet-dance-classes" class="btn btn-primary" aria-label="View details for Ballet Dance Classes in Chesterfield">View Class Details</a>
-    </div>
-  </section>
-
-  <!-- Jazz Dance -->
-  <section id="jazz-dance" class="dance-class">
-    <div class="dance-image">
-      <img src="images/jazz-dance.webp" 
-           alt="Jazz dance classes in Chesterfield, MO including Broadway and contemporary" 
-           loading="lazy">
-    </div>
-    <div class="dance-info">
-      <h2>Jazz Dance Classes in Chesterfield, MO</h2>
-      <p>From Broadway-inspired jazz to modern styles, our jazz classes bring energy, rhythm, and creativity. Enjoy expert instruction in a supportive setting where every dancer’s unique style shines.</p>
-      <a href="/jazz-dance-classes" class="btn btn-primary" aria-label="View details for Jazz Dance Classes in Chesterfield">View Class Details</a>
-    </div>
-  </section>
-
-  <!-- Pom-Poms -->
-  <section id="pom-poms" class="dance-class">
-    <div class="dance-image">
-      <img src="images/pom-poms.webp" 
-           alt="Pom-pom cheer and dance classes in Chesterfield, MO" 
-           loading="lazy">
-    </div>
-    <div class="dance-info">
-      <h2>Pom-Pom Cheer Dance in Chesterfield, MO</h2>
-      <p>Combine the excitement of cheerleading with the rhythm of dance. Our pom-pom classes are perfect for high-energy performers looking to boost confidence, coordination, and teamwork.</p>
-      <a href="/pom-poms-classes" class="btn btn-primary" aria-label="View details for Pom-Pom Dance Classes in Chesterfield">View Class Details</a>
-    </div>
-  </section>
-
-  <!-- Contemporary Dance -->
-  <section id="contemporary-dance" class="dance-class">
-    <div class="dance-image">
-      <img src="images/contemporary-dance.webp" 
-           alt="Contemporary dance classes in Chesterfield, MO for expressive dancers" 
-           loading="lazy">
-    </div>
-    <div class="dance-info">
-      <h2>Contemporary Dance Classes in Chesterfield, MO</h2>
-      <p>Express emotion and storytelling through contemporary dance. Our instructors guide you through fluid movement, floorwork, and unique choreography tailored to your abilities.</p>
-      <a href="/contemporary-dance-classes" class="btn btn-primary" aria-label="View details for Contemporary Dance Classes in Chesterfield">View Class Details</a>
-    </div>
-  </section>
-
-  <!-- Hip-Hop Dance -->
-  <section id="hip-hop-dance" class="dance-class">
-    <div class="dance-image">
-      <img src="images/hip-hop-dance.webp" 
-           alt="Hip-hop dance lessons in Chesterfield, MO for kids, teens, and adults" 
-           loading="lazy">
-    </div>
-    <div class="dance-info">
-      <h2>Hip-Hop Dance Classes in Chesterfield, MO</h2>
-      <p>Learn upbeat hip-hop moves, popping, locking, and freestyling in a friendly environment. Our classes focus on rhythm, confidence, and performance for all ages and skill levels.</p>
-      <a href="/hip-hop-dance-classes" class="btn btn-primary" aria-label="View details for Hip-Hop Dance Classes in Chesterfield">View Class Details</a>
-    </div>
-  </section>
-
-  <!-- Musical Theater -->
-  <section id="musical-theater" class="dance-class">
-    <div class="dance-image">
-      <img src="images/musical-theater.webp" 
-           alt="Musical theater dance and acting classes in Chesterfield, MO" 
-           loading="lazy">
-    </div>
-    <div class="dance-info">
-      <h2>Musical Theater Dance in Chesterfield, MO</h2>
-      <p>Combine singing, acting, and dancing in our musical theater program. Ideal for aspiring performers, this class builds stage presence, confidence, and creativity.</p>
-      <a href="/musical-theater-classes" class="btn btn-primary" aria-label="View details for Musical Theater Dance Classes in Chesterfield">View Class Details</a>
-    </div>
-  </section>
-<!-- ============ Instructors (full) ============ -->
-<section class="instructors" aria-labelledby="instructors-title">
-  <div class="container">
-    <h2 id="instructors-title">Meet Our Dancing Instructors</h2>
-
-    <ul class="instructor-grid" role="list">
-      <li class="instructor-card">
-        <img src="/images/instructors/kim-hevie-barchett.webp" alt="Kim Hevie Barchett, founder and instructor at Miss Kim’s Dance Class in Chesterfield, MO" loading="lazy" decoding="async" width="280" height="320">
-        <h3 class="instructor-name">Kim Hevie Barchett</h3><p class="instructor-role">Founder &amp; Instructor</p>
-      </li>
-      <li class="instructor-card">
-        <img src="/images/instructors/devin-renie.webp" alt="Devin Renie, dance instructor" loading="lazy" decoding="async" width="280" height="320">
-        <h3 class="instructor-name">Devin Renie</h3><p class="instructor-role">Instructor</p>
-      </li>
-      <li class="instructor-card">
-        <img src="/images/instructors/dannie-preston.webp" alt="Dannie Preston, dance instructor" loading="lazy" decoding="async" width="280" height="320">
-        <h3 class="instructor-name">Dannie Preston</h3><p class="instructor-role">Instructor</p>
-      </li>
-      <li class="instructor-card">
-        <img src="/images/instructors/juliette-hilbert.webp" alt="Juliette Hilbert, dance instructor" loading="lazy" decoding="async" width="280" height="320">
-        <h3 class="instructor-name">Juliette Hilbert</h3><p class="instructor-role">Instructor</p>
-      </li>
-      <li class="instructor-card">
-        <img src="/images/instructors/megan-bolden.webp" alt="Megan Bolden, dance instructor" loading="lazy" decoding="async" width="280" height="320">
-        <h3 class="instructor-name">Megan Bolden</h3><p class="instructor-role">Instructor</p>
-      </li>
-      <li class="instructor-card">
-        <img src="/images/instructors/mike-buck.webp" alt="Mike Buck, dance instructor" loading="lazy" decoding="async" width="280" height="320">
-        <h3 class="instructor-name">Mike Buck</h3><p class="instructor-role">Instructor</p>
-      </li>
-      <li class="instructor-card">
-        <img src="/images/instructors/kennedy-hayes.webp" alt="Kennedy Hayes, dance instructor" loading="lazy" decoding="async" width="280" height="320">
-        <h3 class="instructor-name">Kennedy Hayes</h3><p class="instructor-role">Instructor</p>
-      </li>
-      <li class="instructor-card">
-        <img src="/images/instructors/julia-lucarelli.webp" alt="Julia Lucarelli, dance instructor" loading="lazy" decoding="async" width="280" height="320">
-        <h3 class="instructor-name">Julia Lucarelli</h3><p class="instructor-role">Instructor</p>
-      </li>
-      <li class="instructor-card">
-        <img src="/images/instructors/javi-perez.webp" alt="Javi Perez, dance instructor" loading="lazy" decoding="async" width="280" height="320">
-        <h3 class="instructor-name">Javi Perez</h3><p class="instructor-role">Instructor</p>
-      </li>
-    </ul>
-
-    <p class="cta-inline">
-      <a class="btn btn-primary" href="/instructors" aria-label="Learn more about our dance instructors">Learn More About Our Instructors</a>
-    </p>
-  </div>
-
-  <!-- Optional structured data for list of people -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"ItemList",
-    "name":"Miss Kim's Dance Class Instructors",
-    "itemListElement":[
-      {"@type":"Person","name":"Kim Hevie Barchett","jobTitle":"Founder & Instructor"},
-      {"@type":"Person","name":"Devin Renie","jobTitle":"Instructor"},
-      {"@type":"Person","name":"Dannie Preston","jobTitle":"Instructor"},
-      {"@type":"Person","name":"Juliette Hilbert","jobTitle":"Instructor"},
-      {"@type":"Person","name":"Megan Bolden","jobTitle":"Instructor"},
-      {"@type":"Person","name":"Mike Buck","jobTitle":"Instructor"},
-      {"@type":"Person","name":"Kennedy Hayes","jobTitle":"Instructor"},
-      {"@type":"Person","name":"Julia Lucarelli","jobTitle":"Instructor"},
-      {"@type":"Person","name":"Javi Perez","jobTitle":"Instructor"}
-    ]
-  }
-  </script>
-</section>
-
-<!-- ============ Promo tiles ============ -->
-<section class="promos" aria-labelledby="promos-title">
-  <div class="container">
-    <h2 id="promos-title" class="sr-only">Special Programs</h2>
-    <div class="promo-grid">
-      <article class="promo-card">
-        <h3>Free Trial Classes</h3>
-        <p>Try a class on us—see our studio, meet the teachers, and find your fit.</p>
-        <a class="btn btn--ghost" href="/free-trial" aria-label="Book a free trial dance class">Visit</a>
-      </article>
-      <article class="promo-card alt">
-        <h3>Unlimited Summer Classes</h3>
-        <p>Enjoy unlimited classes with small groups and personal attention.</p>
-        <a class="btn btn--ghost" href="/summer" aria-label="See unlimited summer dance classes">Visit</a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ Reviews ============ -->
-<section class="reviews" aria-labelledby="reviews-title">
-  <div class="container">
-    <h2 id="reviews-title">What Families Are Saying</h2>
-    <div class="review-list">
-      <figure class="review">
-        <blockquote>“This isn’t just a dance studio—it’s a family. Our kids gained skill and confidence.”</blockquote>
-        <figcaption><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span class="reviewer">Bethani</span> · <time datetime="2025-05">May 2025</time></figcaption>
-      </figure>
-      <figure class="review">
-        <blockquote>“Teachers are kind and experienced. Small classes mean real attention.”</blockquote>
-        <figcaption><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span class="reviewer">Angela</span></figcaption>
-      </figure>
-      <figure class="review">
-        <blockquote>“Fair pricing, flexible schedule, and a welcoming community. Highly recommend.”</blockquote>
-        <figcaption><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span class="reviewer">David</span></figcaption>
-      </figure>
-    </div>
-    <p class="cta-inline"><a class="btn btn-primary" href="/reviews" aria-label="Read more reviews">Read More Reviews</a></p>
-  </div>
-</section>
-
-<!-- ============ About teaser ============ -->
-<section class="about-teaser" aria-labelledby="about-title">
-  <div class="container about-wrap">
-    <div class="about-copy">
-      <h2 id="about-title">Learn More About Miss Kim’s Dance Class</h2>
-      <p>Located in Chesterfield, MO, we teach ballet, jazz, contemporary, hip-hop, pom-pom, and musical theater for kids, teens, and adults. Since 1994 we’ve focused on small class sizes, fair pricing, and flexible schedules.</p>
-      <p><a class="btn btn--ghost" href="/about" aria-label="Watch videos and learn more about our studio">Watch Videos</a></p>
-    </div>
-    <figure class="about-media">
-      <img src="/images/studio-group.webp" alt="Students practicing at Miss Kim’s Dance Class in Chesterfield, Missouri" loading="lazy" decoding="async" width="520" height="300">
-    </figure>
-  </div>
-</section>
-
-<!-- ============ SEO Footer ============ -->
-<footer class="seo-footer" aria-labelledby="footer-title">
-  <div class="container footer-grid">
-    <section class="footer-block">
-      <h2 id="footer-title" class="footer-heading">Miss Kim’s Dance Class</h2>
-      <address class="footer-nap">
-        14278 Ladue Road<br>
-        Chesterfield, MO 63017<br>
-        <a href="tel:+13145420608">(314) 542-0608</a><br>
-        <a href="tel:+13144358688">Call or text: (314) 435-8688</a>
-      </address>
-      <p><a href="https://maps.google.com/?q=Miss+Kim's+Dance+Class+Chesterfield+MO" rel="noopener" target="_blank">View on Google Maps</a></p>
-    </section>
-
-    <section class="footer-block">
-      <h3 class="footer-heading">Studio Hours</h3>
-      <table class="hours" aria-label="Studio Hours">
-        <tbody>
-          <tr><th>Mon–Thu</th><td>1:00 PM – 9:00 PM</td></tr>
-          <tr><th>Fri</th><td>1:00 PM – 6:00 PM</td></tr>
-          <tr><th>Sat</th><td>9:00 AM – 2:00 PM</td></tr>
-          <tr><th>Sun</th><td>Closed</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <nav class="footer-block footer-links" aria-label="Quick links">
-      <h3 class="footer-heading">Quick Links</h3>
-      <ul>
-        <li><a href="/registration">Registration</a></li>
-        <li><a href="/classes">Class Schedule</a></li>
-        <li><a href="/pricing">Pricing</a></li>
-        <li><a href="/policies">Policies</a></li>
-        <li><a href="/instructors">Instructors</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/sitemap.xml">Sitemap</a></li>
-      </ul>
-    </nav>
-
-    <section class="footer-block">
-      <h3 class="footer-heading">FAQs</h3>
-      <details>
-        <summary>Do you offer a free trial dance class?</summary>
-        <p>Yes—book a <a href="/free-trial">free trial</a> to try any beginner class.</p>
-      </details>
-      <details>
-        <summary>What ages do you teach?</summary>
-        <p>We offer classes for kids, teens, and adults. See <a href="/classes">classes</a> for levels.</p>
-      </details>
-      <details>
-        <summary>Do class cards expire?</summary>
-        <p>No—our class cards never expire.</p>
-      </details>
-    </section>
-  </div>
-
-  <div class="container footer-meta">
-    <p>&copy; <span id="year"></span> Miss Kim’s Dance Class · Chesterfield, Missouri</p>
-  </div>
-
-  <!-- JSON-LD local business -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "DanceSchool",
-    "name": "Miss Kim's Dance Class",
-    "url": "https://www.example.com",
-    "telephone": "+13145420608",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "14278 Ladue Road",
-      "addressLocality": "Chesterfield",
-      "addressRegion": "MO",
-      "postalCode": "63017",
-      "addressCountry": "US"
-    },
-    "sameAs": [
-      "https://www.facebook.com/yourpage",
-      "https://www.instagram.com/yourpage"
-    ],
-    "openingHoursSpecification": [
-      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"13:00","closes":"21:00"},
-      {"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"13:00","closes":"18:00"},
-      {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"14:00"}
-    ],
-    "image": "https://www.example.com/images/og/studio.jpg",
-    "areaServed": "Chesterfield, Missouri"
-  }
-  </script>
-
-  <!-- JSON-LD FAQ -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"Do you offer a free trial dance class?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can book a free trial to try any beginner class."}},
-    {"@type":"Question","name":"What ages do you teach?","acceptedAnswer":{"@type":"Answer","text":"We offer classes for kids, teens, and adults with multiple levels."}},
-    {"@type":"Question","name":"Do class cards expire?","acceptedAnswer":{"@type":"Answer","text":"No, our class cards do not expire."}}
-  ]}
-  </script>
-</footer>
-
-<script>
-  // keep the footer year current without a dependency
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-</main>
-<script src="https://app.embed.im/accessibility.js" defer></script>
+  <!-- Optional free overlay (deferred) -->
+  <script src="https://app.embed.im/accessibility.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
