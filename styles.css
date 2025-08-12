@@ -523,6 +523,37 @@ p {
 @media (max-width: 560px){
   .footer-grid{grid-template-columns:1fr}
 }
+/* White space fix */
+/* ===== Full-bleed helpers (kill side white space) ===== */
+.full-bleed {
+  /* break out of centered wrapper to span the viewport */
+  margin-inline: calc(50% - 50vw);
+  width: 100vw;
+}
+
+/* Apply full-bleed to your bands */
+.promos,
+.reviews,
+.about-teaser,
+.seo-footer {
+  margin: 0; /* remove extra gaps above/below */
+  margin-inline: calc(50% - 50vw);
+  width: 100vw;
+}
+
+/* Optional: tighten vertical rhythm so bands touch cleanly */
+.instructors { margin-bottom: 0; }
+.promos      { padding-top: clamp(1.5rem,3vw,2.5rem); padding-bottom: clamp(1.5rem,3vw,2.5rem); }
+.reviews .container { padding-top: clamp(2rem,4vw,3rem); padding-bottom: clamp(2rem,4vw,3rem); }
+.about-teaser .about-wrap { padding-top: clamp(2rem,4vw,3rem); padding-bottom: clamp(2rem,4vw,3rem); }
+.seo-footer .footer-grid { padding-top: clamp(2rem,4vw,3rem); padding-bottom: clamp(2rem,4vw,3rem); }
+
+/* If your body has global side padding, prevent it from adding gutters at very small widths */
+@media (max-width: 600px){
+  body.dmResponsiveBody { padding-left: 0; padding-right: 0; }
+  .container { padding-left: 1rem; padding-right: 1rem; } /* keep inner breathing room */
+}
+
 
 
 
