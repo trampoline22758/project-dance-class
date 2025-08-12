@@ -140,7 +140,22 @@
     </p>
   </div>
 </section>
+  <!-- Accessibility Trigger Button -->
+<button id="accessibility-btn" aria-label="Open Accessibility Menu">♿</button>
+
+<!-- Accessibility Menu -->
+<div id="accessibility-panel" class="hidden" aria-label="Accessibility Menu">
+  <h3>Accessibility Tools</h3>
+  <button onclick="toggleFocus()">Toggle Focus Outline</button>
+  <button onclick="toggleCursor()">Enlarge Cursor</button>
+  <button onclick="toggleContrast()">High Contrast</button>
+  <button onclick="toggleFont()">Bigger Font</button>
+  <button onclick="toggleSpacing()">Increase Spacing</button>
+  <button onclick="resetAccessibility()">Reset</button>
+</div>
+
 </body>
 </html>
+
 
 
