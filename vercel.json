@@ -15,7 +15,6 @@
     { "src": "/aerial-classes/?$", "dest": "/aerial-classes.html" },
     { "src": "/competition-teams/?$", "dest": "/competition-teams.html" },
     { "src": "/summer/?$", "dest": "/summer.html"},
-    { "src": "/register/?$", "dest": "registration.html"},
     { "src": "/([A-Za-z0-9-]+)\\.html$", "headers": { "Location": "/$1" }, "status": 308 }
   ]
 }
