@@ -349,6 +349,61 @@
 .accessibility-spacing {
   line-height: 2 !important;
 }
+.dance-classes {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.dance-class {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  align-items: center;
+}
+
+.dance-class:nth-child(even) .dance-image {
+  order: 2;
+}
+
+.dance-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.dance-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: #5f35b0;
+}
+
+.dance-info p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: #5f35b0;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #4a2a8a;
+}
+
 
 
 
