@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+       <loc>https://project-dance-class-smoky.vercel.app/summer</loc>
+       <lastmod>2025-08-13T18:37:20+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://project-dance-class-smoky.vercel.app/registration</loc>
+       <lastmod>2025-08-13T18:37:20+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://project-dance-class-smoky.vercel.app/tap-dance-classes</loc>
+       <lastmod>2025-08-13T18:37:20+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://project-dance-class-smoky.vercel.app/ballet-dance-classes</loc>
+       <lastmod>2025-08-13T18:37:20+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://project-dance-class-smoky.vercel.app/jazz-dance-classes</loc>
+       <lastmod>2025-08-13T18:37:20+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://project-dance-class-smoky.vercel.app/registration-form.docx</loc>
+       <lastmod>2025-08-13T18:37:20+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://project-dance-class-smoky.vercel.app/class_schedule</loc>
+       <lastmod>2025-08-13T18:37:20+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.5120</priority>
+  </url>
+  <url>
+       <loc>https://project-dance-class-smoky.vercel.app/pricing</loc>
+       <lastmod>2025-08-13T18:37:20+00:00</lastmod>
+       <changefreq>daily</changefreq>
+       <priority>0.5120</priority>
+  </url>
+</urlset>
