@@ -19,7 +19,7 @@
   <meta property="og:title" content="Miss Kim's Dance Class — Chesterfield, MO" />
   <meta property="og:description" content="Free trial class · Fair pricing · Small classes · Since 1994. Register today." />
   <meta property="og:url" content="https://www.example.com/" />
-  <meta property="og:image" content="https://www.example.com/images/og/hero.jpg" />
+  <meta property="og:image" content="https://www.example.com/og/hero.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
@@ -27,7 +27,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Miss Kim's Dance Class — Chesterfield, MO" />
   <meta name="twitter:description" content="Free trial class · Fair pricing · Small classes · Since 1994." />
-  <meta name="twitter:image" content="https://www.example.com/images/og/hero.jpg" />
+  <meta name="twitter:image" content="https://www.example.com/og/hero.jpg" />
 
   <meta name="theme-color" content="#5f35b0" />
   <link rel="icon" href="/favicon.ico">
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="/styles.css" />
 
   <!-- Preload LCP hero image -->
-  <link rel="preload" as="image" href="/images/hero-dancers-1920.webp"
-        imagesrcset="/images/hero-dancers-960.webp 960w, /images/hero-dancers-1440.webp 1440w, /images/hero-dancers-1920.webp 1920w"
+  <link rel="preload" as="image" href="/hero-dancers.webp"
+        imagesrcset="/hero-dancers.webp , /hero-dancers-1440.webp 1440w, /hero-dancers-1920.webp 1920w"
         imagesizes="100vw" fetchpriority="high">
 
   <!-- Local Business JSON-LD -->
@@ -47,9 +47,9 @@
     "@context":"https://schema.org",
     "@type":"DanceSchool",
     "name":"Miss Kim's Dance Class",
-    "url":"https://www.example.com/",
+    "url":"https://www.misskimsdanceclass.com/",
     "telephone":"+13145420608",
-    "image":"https://www.example.com/images/og/hero.jpg",
+    "image":"https://www.example.com/og/hero.jpg",
     "address":{
       "@type":"PostalAddress",
       "streetAddress":"14278 Ladue Road",
@@ -76,15 +76,15 @@
     "@type":"SiteNavigationElement",
     "name":["Home","Other Dance & Movement","Reviews","Summer","Registration","Pricing","Schedule","Instructors","Contact"],
     "url":[
-      "https://www.example.com/",
-      "https://www.example.com/classes",
-      "https://www.example.com/reviews",
-      "https://www.example.com/summer",
-      "https://www.misskimsdanceclass.com/register",
-      "https://www.misskimsdanceclass.com/pricing.html",
-      "https://www.misskimsdanceclass.com/schedule.webp",
-      "https://www.misskimsdanceclass.com/instructors.html",
-      "https://www.misskimsdanceclass.com/contact.html"
+      "/",
+      "/classes",
+      "/reviews",
+      "/summer",
+      "/register",
+      "/pricing.html",
+      "/schedule.webp",
+      "/instructors.html",
+      "/contact.html"
     ]
   }
   </script>
@@ -219,8 +219,8 @@
 
       <section id="tap-dance" class="dance-class">
         <div class="dance-image">
-          <img src="/images/tap-dance-960.webp"
-               srcset="/images/tap-dance-640.webp 640w, /images/tap-dance-960.webp 960w, /images/tap-dance-1440.webp 1440w"
+          <img src="/tap-dance.webp"
+               srcset="/tap-dance-640.webp 640w, /tap-dance.webp , /tap-dance-1440.webp 1440w"
                sizes="(max-width: 900px) 100vw, 560px"
                width="560" height="360"
                alt="Tap dance class in Chesterfield, MO for all ages"
@@ -235,8 +235,8 @@
 
       <section id="ballet-dance" class="dance-class">
         <div class="dance-image">
-          <img src="/images/ballet-dance-960.webp"
-               srcset="/images/ballet-dance-640.webp 640w, /images/ballet-dance-960.webp 960w, /images/ballet-dance-1440.webp 1440w"
+          <img src="/ballet-dance.webp"
+               srcset="/ballet-dance-640.webp 640w, /ballet-dance.webp , /ballet-dance-1440.webp 1440w"
                sizes="(max-width: 900px) 100vw, 560px"
                width="560" height="360"
                alt="Ballet dance lessons in Chesterfield, Missouri"
@@ -251,8 +251,8 @@
 
       <section id="jazz-dance" class="dance-class">
         <div class="dance-image">
-          <img src="/images/jazz-dance-960.webp"
-               srcset="/images/jazz-dance-640.webp 640w, /images/jazz-dance-960.webp 960w, /images/jazz-dance-1440.webp 1440w"
+          <img src="/jazz-dance.webp"
+               srcset="/jazz-dance-640.webp 640w, /jazz-dance.webp , /jazz-dance-1440.webp 1440w"
                sizes="(max-width: 900px) 100vw, 560px"
                width="560" height="360"
                alt="Jazz dance classes in Chesterfield, MO including Broadway and contemporary"
@@ -267,8 +267,8 @@
 
       <section id="pom-poms" class="dance-class">
         <div class="dance-image">
-          <img src="/images/pom-poms-960.webp"
-               srcset="/images/pom-poms-640.webp 640w, /images/pom-poms-960.webp 960w, /images/pom-poms-1440.webp 1440w"
+          <img src="/pom-poms.webp"
+               srcset="/pom-poms-640.webp 640w, /pom-poms.webp , /pom-poms-1440.webp 1440w"
                sizes="(max-width: 900px) 100vw, 560px"
                width="560" height="360"
                alt="Pom-pom cheer and dance classes in Chesterfield, MO"
@@ -283,8 +283,8 @@
 
       <section id="contemporary-dance" class="dance-class">
         <div class="dance-image">
-          <img src="/images/contemporary-dance-960.webp"
-               srcset="/images/contemporary-dance-640.webp 640w, /images/contemporary-dance-960.webp 960w, /images/contemporary-dance-1440.webp 1440w"
+          <img src="/contemporary-dance.webp"
+               srcset="/contemporary-dance-640.webp 640w, /contemporary-dance.webp , /contemporary-dance-1440.webp 1440w"
                sizes="(max-width: 900px) 100vw, 560px"
                width="560" height="360"
                alt="Contemporary dance classes in Chesterfield, MO"
@@ -299,8 +299,8 @@
 
       <section id="hip-hop-dance" class="dance-class">
         <div class="dance-image">
-          <img src="/images/hip-hop-dance-960.webp"
-               srcset="/images/hip-hop-dance-640.webp 640w, /images/hip-hop-dance-960.webp 960w, /images/hip-hop-dance-1440.webp 1440w"
+          <img src="/hip-hop-dance.webp"
+               srcset="/hip-hop-dance-640.webp 640w, /hip-hop-dance.webp , /hip-hop-dance-1440.webp 1440w"
                sizes="(max-width: 900px) 100vw, 560px"
                width="560" height="360"
                alt="Hip-hop dance lessons in Chesterfield, MO for kids, teens, and adults"
@@ -315,8 +315,8 @@
 
       <section id="musical-theater" class="dance-class">
         <div class="dance-image">
-          <img src="/images/musical-theater-960.webp"
-               srcset="/images/musical-theater-640.webp 640w, /images/musical-theater-960.webp 960w, /images/musical-theater-1440.webp 1440w"
+          <img src="/musical-theater.webp"
+               srcset="/musical-theater-640.webp 640w, /musical-theater.webp , /musical-theater-1440.webp 1440w"
                sizes="(max-width: 900px) 100vw, 560px"
                width="560" height="360"
                alt="Musical theater dance and acting classes in Chesterfield, Missouri"
@@ -449,8 +449,8 @@
           <p>Located in Chesterfield, MO, we teach ballet, jazz, contemporary, hip-hop, pom-pom, and musical theater for kids, teens, and adults. Since 1994 we’ve focused on small class sizes, fair pricing, and flexible schedules.</p>
         </div>
         <figure class="about-media">
-          <img src="/images/studio-group-960.webp"
-               srcset="/images/studio-group-640.webp 640w, /images/studio-group-960.webp 960w, /images/studio-group-1440.webp 1440w"
+          <img src="/studio-group.webp"
+               srcset="/studio-group-640.webp 640w, /studio-group.webp , /studio-group-1440.webp 1440w"
                sizes="(max-width: 900px) 100vw, 520px"
                width="520" height="300"
                alt="Students practicing at Miss Kim’s Dance Class in Chesterfield, Missouri"
@@ -486,12 +486,12 @@
         <nav class="footer-block footer-links" aria-label="Quick links">
           <h3 class="footer-heading">Quick Links</h3>
           <ul>
-            <li><a href="https://www.misskimsdanceclass.com/registration.html">Registration</a></li>
-            <li><a href="https://www.misskimsdanceclass.com/schedule.webp">Class Schedule</a></li>
-            <li><a href="https://www.misskimsdanceclass.com/pricing.html">Pricing</a></li>
-            <li><a href="https://www.misskimsdanceclass.com/policies.html">Policies</a></li>
-            <li><a href="https://www.misskimsdanceclass.com/instructors.html">Instructors</a></li>
-            <li><a href="https://www.misskimsdanceclass.com/contact.html">Contact</a></li>
+            <li><a href="/registration">Registration</a></li>
+            <li><a href="/schedule.webp">Class Schedule</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/policies>Policies</a></li>
+            <li><a href="/instructors">Instructors</a></li>
+            <li><a href="/contact">Contact</a></li>
             <li><a href="/sitemap.xml">Sitemap</a></li>
           </ul>
         </nav>
@@ -566,6 +566,7 @@
   <script src="https://app.embed.im/accessibility.js" defer></script>
 </body>
 </html>
+
 
 
 
