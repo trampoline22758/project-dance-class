@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Registration & Payments | Miss Kim’s Dance Class</title>
-  <meta name="description" content="Register for classes and pay tuition or fees securely via PayPal or Venmo. Youth and Adult tuition schedules with family discounts enforced." />
+  <meta name="description" content="Register for classes and pay securely. Youth tuition with family discounts, adult class cards (4/$90 or 12/$180), and private lessons at $80/hr or $60/hr with class." />
   <link rel="canonical" href="https://www.misskimsdanceclass.com/registration" />
 
   <!-- Social -->
   <meta property="og:title" content="Registration & Payments | Miss Kim’s Dance Class" />
-  <meta property="og:description" content="Register and pay securely. Youth & Adult schedules, family discounts auto-calculated." />
+  <meta property="og:description" content="Youth tuition with family discounts, adult class cards, and private lessons. Pay via PayPal or Venmo." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.misskimsdanceclass.com/registration" />
   <meta property="og:image" content="https://www.misskimsdanceclass.com/og-image.jpg" />
@@ -24,7 +24,7 @@
     :root{--maxw:980px;--radius:12px;--shadow:0 8px 24px rgba(0,0,0,.06)}
     html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#1d1d1f;background:#fff}
     a{color:#0f6fff;text-decoration:none}
-    a:focus-visible,button:focus-visible,select:focus-visible{outline:2px solid #0f6fff;outline-offset:2px}
+    a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #0f6fff;outline-offset:2px}
     header{padding:28px 20px;border-bottom:1px solid #eee}
     .wrap{max-width:var(--maxw);margin:0 auto}
     .brand{display:flex;align-items:center;gap:12px;font-weight:700}
@@ -42,22 +42,24 @@
     .row{display:flex;gap:10px;align-items:start}
     .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:#f4f6ff;color:#2a3a80;font-size:.82rem;font-weight:600}
 
-    /* table-ish grids */
+    /* table-like grids */
     .table{display:grid;border:1px solid #eee;border-radius:12px;overflow:hidden}
     .table .trow{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #eee}
     .table .trow:first-child{border-top:none;background:#fafafa;font-weight:600}
     .cell{padding:10px 12px}
-    .badge{display:inline-block;font-weight:700;padding:2px 8px;border-radius:999px;background:#eef7ff}
 
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;padding:12px 16px;font-weight:600;border:1px solid #dcdcdc;background:#111;color:#fff;transition:transform .06s ease,box-shadow .2s ease}
     .btn:hover{transform:translateY(-1px)}
     .btn--ghost{background:#fff;color:#111}
     .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+
     .field{display:grid;gap:6px}
-    select{padding:11px 12px;border-radius:10px;border:1px solid #ddd;font-size:1rem;background:#fff}
-    .calc{display:grid;gap:12px;margin-top:10px}
-    .total{font-weight:700;font-size:1.15rem}
+    input[type="number"], select{padding:11px 12px;border-radius:10px;border:1px solid #ddd;font-size:1rem;background:#fff}
+    .switch{display:flex;align-items:center;gap:10px}
+    .total{font-weight:700;font-size:1.15rem;margin-top:6px}
+    .break{color:#555}
     .note{background:#fff8e1;border:1px solid #ffe08a;color:#6a5300;padding:10px 12px;border-radius:10px;font-size:.95rem;margin-top:12px}
+
     footer{border-top:1px solid #eee;padding:24px 20px;color:#666}
     .small{font-size:.92rem}
     @media print{header,footer,.btn-row{display:none}.card{box-shadow:none}}
@@ -79,7 +81,7 @@
 <main class="wrap" role="main">
   <section class="hero" aria-labelledby="title">
     <h1 id="title">Registration & Payments</h1>
-    <p class="muted">Youth & Adult tuition schedules below. Family discounts (2nd +50%, 3rd +75%) are automatically applied. Online payment is locked to the correct total.</p>
+    <p class="muted">Youth tuition (with family discounts), Adult class cards, and Private lessons. Payment buttons lock to the correct total.</p>
   </section>
 
   <section class="grid">
@@ -96,81 +98,102 @@
         <li class="row"><span class="tag">Help</span><div>Email <a href="mailto:misskimdances@yahoo.com">misskimdances@yahoo.com</a> or call <a href="tel:+13149246008">(314) 924-6008</a>.</div></li>
       </ul>
 
-      <h3>Tuition Schedule — Youth</h3>
-      <!-- Show the youth base amounts that can be paid -->
+      <h3>Tuition — Youth (Monthly)</h3>
       <div class="table" aria-label="Youth tuition schedule">
-        <div class="trow">
-          <div class="cell">Hours / Week (example)</div>
-          <div class="cell">Monthly Tuition</div>
-        </div>
+        <div class="trow"><div class="cell">Hours / Week (example)</div><div class="cell">Monthly Tuition</div></div>
         <div class="trow"><div class="cell">~1 hr</div><div class="cell">$90</div></div>
         <div class="trow"><div class="cell">~2 hrs</div><div class="cell">$170</div></div>
         <div class="trow"><div class="cell">~2.5–3 hrs</div><div class="cell">$220</div></div>
         <div class="trow"><div class="cell">~3.5–4 hrs</div><div class="cell">$265</div></div>
         <div class="trow"><div class="cell">~4.5+ hrs</div><div class="cell">$300</div></div>
       </div>
-      <p class="muted" style="margin-top:8px">These are the allowed base tuition amounts for youth. Choose one in the calculator to pay online.</p>
 
-      <h3>Tuition Schedule — Adults</h3>
-      <!-- If your adult schedule has different amounts, EDIT the ADULT_BASES list in JS -->
-      <div class="table" aria-label="Adult tuition schedule">
-        <div class="trow">
-          <div class="cell">Adults (18+)</div>
-          <div class="cell">Monthly Tuition</div>
-        </div>
-        <div class="trow"><div class="cell">1 class / week</div><div class="cell">$90</div></div>
-        <div class="trow"><div class="cell">2 classes / week</div><div class="cell">$170</div></div>
-        <div class="trow"><div class="cell">3+ classes / week</div><div class="cell">$220</div></div>
+      <h3>Pricing — Adults</h3>
+      <div class="table" aria-label="Adult class cards">
+        <div class="trow"><div class="cell">Class Cards</div><div class="cell">Price</div></div>
+        <div class="trow"><div class="cell">4-Class Card</div><div class="cell">$90</div></div>
+        <div class="trow"><div class="cell">12-Class Card</div><div class="cell">$180</div></div>
       </div>
-      <p class="muted" style="margin-top:8px">If your adult prices differ, change them in the code (look for <span class="badge">ADULT_BASES</span>).</p>
+      <div class="table" style="margin-top:12px" aria-label="Private lessons">
+        <div class="trow"><div class="cell">Private lessons</div><div class="cell">Rate</div></div>
+        <div class="trow"><div class="cell">Private lessons (standalone)</div><div class="cell">$80 / hour</div></div>
+        <div class="trow"><div class="cell">Private lessons <em>in addition to class</em></div><div class="cell">$60 / hour</div></div>
+      </div>
     </article>
 
-    <!-- RIGHT: Locked Calculator + Pay Buttons -->
+    <!-- RIGHT: Calculator + Pay Buttons -->
     <article class="card" aria-labelledby="payonline">
       <h2 id="payonline">Pay Online (locked to correct total)</h2>
 
-      <div class="calc">
+      <div class="field">
+        <label for="planType" class="muted">Choose a schedule</label>
+        <select id="planType" aria-label="Choose Youth or Adult">
+          <option value="youth">Youth (Monthly)</option>
+          <option value="adult">Adult (Class cards / Private lessons)</option>
+        </select>
+      </div>
+
+      <!-- Youth controls -->
+      <div id="youthControls" class="list" style="margin-top:10px">
         <div class="field">
-          <label for="planType" class="muted">Schedule</label>
-          <select id="planType" aria-label="Choose Youth or Adult">
-            <option value="youth">Youth</option>
-            <option value="adult">Adult</option>
+          <label for="youthBase" class="muted">Youth monthly tuition</label>
+          <select id="youthBase" aria-label="Choose youth base">
+            <option value="90">$90</option>
+            <option value="170">$170</option>
+            <option value="220">$220</option>
+            <option value="265">$265</option>
+            <option value="300">$300</option>
           </select>
         </div>
-
         <div class="field">
-          <label for="base" class="muted">Base monthly tuition</label>
-          <select id="base" aria-label="Choose base tuition amount"></select>
-        </div>
-
-        <div class="field">
-          <label for="students" class="muted">Students in family (same base)</label>
-          <select id="students" aria-label="Number of students">
+          <label for="youthStudents" class="muted">Students in family (same base)</label>
+          <select id="youthStudents" aria-label="Number of students">
             <option value="1">1 student (100%)</option>
             <option value="2">2 students (100% + 50%)</option>
             <option value="3">3 students (100% + 50% + 75%)</option>
           </select>
         </div>
+      </div>
 
-        <div class="total" id="totalLabel">Total: $0.00</div>
-        <div class="muted">Breakdown: <span id="breakdown"></span></div>
-
-        <div class="btn-row" role="group" aria-label="Online payment buttons">
-          <!-- PayPal (email flow, amount enforced) -->
-          <a class="btn" id="paypalBtn" rel="noopener" target="_blank"
-             href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=misskimdances@yahoo.com&item_name=Tuition%20Payment&currency_code=USD">
-            Pay with PayPal
-          </a>
-
-          <!-- Venmo (mobile deep link with desktop fallback) -->
-          <a class="btn btn--ghost" id="venmoBtn" rel="noopener" target="_blank"
-             href="https://venmo.com/u/KIMBERLY-REVIE-1">
-            Pay with Venmo
-          </a>
+      <!-- Adult controls -->
+      <div id="adultControls" class="list" style="display:none; margin-top:10px">
+        <div class="field">
+          <label for="adultCard" class="muted">Adult class card</label>
+          <select id="adultCard" aria-label="Adult class card">
+            <option value="90">4-Class Card — $90</option>
+            <option value="180">12-Class Card — $180</option>
+          </select>
         </div>
 
-        <p class="note">Amounts are locked to the correct total for the base you select and the # of students: 2nd student adds <strong>+50%</strong>, 3rd adds <strong>+75%</strong> of the same base.</p>
+        <div class="field">
+          <label for="privateHours" class="muted">Private lessons hours (optional)</label>
+          <input id="privateHours" type="number" min="0" step="1" value="0" aria-label="Private lesson hours" />
+        </div>
+
+        <div class="switch">
+          <input id="inAddition" type="checkbox" aria-label="Private lessons in addition to a class" />
+          <label for="inAddition">Private lessons are <strong>in addition to</strong> a class (sets $60/hr). Unchecked = $80/hr standalone.</label>
+        </div>
       </div>
+
+      <div class="total" id="totalLabel">Total: $0.00</div>
+      <div class="break" id="breakdown"></div>
+
+      <div class="btn-row" role="group" aria-label="Online payment buttons">
+        <a class="btn" id="paypalBtn" rel="noopener" target="_blank"
+           href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=misskimdances@yahoo.com&item_name=Tuition%20Payment&currency_code=USD">
+          Pay with PayPal
+        </a>
+        <a class="btn btn--ghost" id="venmoBtn" rel="noopener" target="_blank"
+           href="https://venmo.com/u/KIMBERLY-REVIE-1">
+          Pay with Venmo
+        </a>
+      </div>
+
+      <p class="note">
+        <strong>Youth:</strong> 2nd student adds +50% of base; 3rd adds +75%. 
+        <strong>Adults:</strong> pick a class card and optionally add private lessons at $80/hr, or $60/hr when in addition to a class. Buttons open for the exact amount only.
+      </p>
     </article>
   </section>
 </main>
@@ -180,76 +203,87 @@
 </footer>
 
 <script>
-  // ---------- CONFIG: edit these to match your paper ----------
-  const YOUTH_BASES  = [90, 170, 220, 265, 300];         // Youth allowed base tuitions
-  const ADULT_BASES  = [90, 170, 220];                   // Adult allowed bases (edit if different)
-  // -----------------------------------------------------------
+  // Year stamp
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-  const year = document.getElementById('year');
-  year.textContent = new Date().getFullYear();
-
+  // Elements
   const planType = document.getElementById('planType');
-  const baseSel  = document.getElementById('base');
-  const students = document.getElementById('students');
+
+  const youthControls = document.getElementById('youthControls');
+  const youthBase = document.getElementById('youthBase');
+  const youthStudents = document.getElementById('youthStudents');
+
+  const adultControls = document.getElementById('adultControls');
+  const adultCard = document.getElementById('adultCard');
+  const privateHours = document.getElementById('privateHours');
+  const inAddition = document.getElementById('inAddition');
+
   const totalLbl = document.getElementById('totalLabel');
   const breakdownEl = document.getElementById('breakdown');
   const pp = document.getElementById('paypalBtn');
   const vm = document.getElementById('venmoBtn');
 
-  function fillBaseOptions() {
-    baseSel.innerHTML = '';
-    const bases = planType.value === 'youth' ? YOUTH_BASES : ADULT_BASES;
-    bases.forEach(v => {
-      const opt = document.createElement('option');
-      opt.value = String(v);
-      opt.textContent = `$${v}`;
-      baseSel.appendChild(opt);
-    });
-  }
-
   function dollars(n){ return n.toLocaleString(undefined,{style:'currency',currency:'USD'}); }
 
-  function computeTotal() {
-    const base = parseFloat(baseSel.value || '0');
-    const n    = parseInt(students.value || '1', 10);
-
-    // family multipliers: 1st 100%, 2nd +50%, 3rd +75%
+  function computeYouth() {
+    const base = parseFloat(youthBase.value);
+    const n = parseInt(youthStudents.value, 10);
     const parts = [];
-    if (n >= 1) parts.push(base);            // 100%
-    if (n >= 2) parts.push(base * 0.50);     // +50%
-    if (n >= 3) parts.push(base * 0.75);     // +75%
-
+    if (n >= 1) parts.push(base);        // 100%
+    if (n >= 2) parts.push(base * 0.50); // +50%
+    if (n >= 3) parts.push(base * 0.75); // +75%
     const total = parts.reduce((a,b)=>a+b,0);
+    const breakdown = [`1st: ${dollars(base)}`];
+    if (n >= 2) breakdown.push(`2nd: ${dollars(base*0.50)}`);
+    if (n >= 3) breakdown.push(`3rd: ${dollars(base*0.75)}`);
+    return { total, label: 'Youth Tuition', breakdown: breakdown.join(' + ') };
+  }
 
-    // UI
+  function computeAdult() {
+    const card = parseFloat(adultCard.value); // 90 or 180
+    const hrs = Math.max(0, parseInt(privateHours.value || '0', 10));
+    const rate = inAddition.checked ? 60 : 80;
+    const privTotal = hrs * rate;
+    const total = card + privTotal;
+
+    const lines = [`Class card: ${dollars(card)}`];
+    if (hrs > 0) lines.push(`Private lessons: ${hrs} hr × ${dollars(rate)} = ${dollars(privTotal)}`);
+    return { total, label: 'Adult Tuition', breakdown: lines.join(' + ') };
+  }
+
+  function updateUI() {
+    const isYouth = planType.value === 'youth';
+    youthControls.style.display = isYouth ? '' : 'none';
+    adultControls.style.display = isYouth ? 'none' : '';
+
+    const { total, label, breakdown } = isYouth ? computeYouth() : computeAdult();
+
     totalLbl.textContent = `Total: ${dollars(total)}`;
-    const b = [`1st: ${dollars(base)}`];
-    if (n >= 2) b.push(`2nd: ${dollars(base*0.50)}`);
-    if (n >= 3) b.push(`3rd: ${dollars(base*0.75)}`);
-    breakdownEl.textContent = b.join(' + ');
+    breakdownEl.textContent = breakdown;
 
-    // lock buttons to exact amount
     const amt = total.toFixed(2);
+    // PayPal
     pp.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick"
       + "&business=" + encodeURIComponent("misskimdances@yahoo.com")
-      + "&item_name=" + encodeURIComponent(`${planType.value === 'youth' ? 'Youth' : 'Adult'} Tuition`)
+      + "&item_name=" + encodeURIComponent(label)
       + "&amount=" + amt
       + "&currency_code=USD";
 
+    // Venmo (mobile deep link; desktop fallback)
     const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
     vm.href = isMobile
       ? "venmo://paycharge?txn=pay&recipients=" + encodeURIComponent("@KIMBERLY-REVIE-1") + "&amount=" + amt
       : "https://venmo.com/u/KIMBERLY-REVIE-1?txn=pay&amount=" + amt;
   }
 
-  // init
-  fillBaseOptions();
-  computeTotal();
-
-  // events
-  planType.addEventListener('change', () => { fillBaseOptions(); computeTotal(); });
-  baseSel.addEventListener('change', computeTotal);
-  students.addEventListener('change', computeTotal);
+  // init + events
+  updateUI();
+  planType.addEventListener('change', updateUI);
+  youthBase.addEventListener('change', updateUI);
+  youthStudents.addEventListener('change', updateUI);
+  adultCard.addEventListener('change', updateUI);
+  privateHours.addEventListener('input', updateUI);
+  inAddition.addEventListener('change', updateUI);
 </script>
 </body>
 </html>
