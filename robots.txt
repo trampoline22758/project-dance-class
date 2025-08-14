@@ -1,4 +1,8 @@
-User-agent: *
-Disallow:
+# robots.txt for https://www.misskimsdanceclass.com/
 
+User-agent: *
+Disallow: /registration-form.docx   # prevent direct indexing of the raw registration form
+Allow: /
+
+# Sitemaps
 Sitemap: https://www.misskimsdanceclass.com/sitemap.xml
