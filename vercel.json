@@ -1,65 +1,44 @@
 {
   "version": 2,
   "cleanUrls": true,
-  "trailingSlash": false,
-
-  "redirects": [
+  "headers": [
     {
-      "source": "/:path*.html",
-      "destination": "/:path*",
-      "permanent": true
+      "source": "/(.*)\\.(woff2|woff|ttf)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(css|js|png|jpg|jpeg|gif|webp|svg)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000"
+        }
+      ]
     },
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "misskimsdanceclass.com" }],
-      "destination": "https://www.misskimsdanceclass.com/$1",
-      "permanent": true
-    },
-    {
-      "source": "/registration-form",
-      "destination": "/registration-form.docx",
-      "permanent": true
-    }
-  ],
-
-"headers": [
-  {
-    "source": "/(.*)\\.(woff2|woff|ttf)",
-    "headers": [
-      { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-    ]
-  },
-  {
-    "source": "/(.*)\\.(css|js|png|jpg|jpeg|gif|webp|svg)",
-    "headers": [
-      { "key": "Cache-Control", "value": "public, max-age=2592000" }
-    ]
-  }
-]
-
-
-    {
-      "source": "/(.*)\\.(?:woff2|woff|ttf)$",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/(.*)\\.(?:css|js|png|jpg|jpeg|gif|webp|svg)$",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=2592000" }
-      ]
-    },
-    {
-      "source": "/robots.txt",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
-      ]
-    },
-    {
-      "source": "/sitemap.xml",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
       ]
     }
   ]
