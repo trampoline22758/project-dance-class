@@ -1,0 +1,35 @@
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+*.log
+
+# Node / build tools (if you use them later)
+node_modules/
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.*
+
+# Cache
+.cache/
+*.tmp
+
+# Generated assets
+*.map
+
+# Deployment artifacts
+.vercel/
+.netlify/
+output/
+
+# Personal / private docs
+registration-form.docx
+*.rtf
+*.odt
+
+# Backup files
+*~
+*.swp
