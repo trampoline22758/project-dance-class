@@ -1,1 +1,216 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registration & Payments | Miss Kim’s Dance Class</title>
+  <meta name="description" content="Register for classes and pay tuition or fees securely via PayPal or Venmo. Simple, fast enrollment for Miss Kim’s Dance Class in Chesterfield, MO." />
+  <link rel="canonical" href="https://www.misskimsdanceclass.com/registration" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Registration & Payments | Miss Kim’s Dance Class" />
+  <meta property="og:description" content="Register and pay your tuition or fees via PayPal or Venmo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.misskimsdanceclass.com/registration" />
+  <meta property="og:image" content="https://www.misskimsdanceclass.com/og-image.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Registration & Payments | Miss Kim’s Dance Class" />
+  <meta name="twitter:description" content="Register and pay your tuition or fees via PayPal or Venmo." />
+  <meta name="twitter:image" content="https://www.misskimsdanceclass.com/og-image.jpg" />
+
+  <!-- Robots -->
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Minimal, clean CSS -->
+  <style>
+    :root { --maxw: 880px; --radius: 12px; --gap: 16px; --shadow: 0 8px 24px rgba(0,0,0,.06); }
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#1d1d1f;background:#fff}
+    a{color:#0f6fff;text-decoration:none}
+    a:focus-visible,button:focus-visible{outline:2px solid #0f6fff;outline-offset:2px}
+    header{padding:28px 20px;border-bottom:1px solid #eee}
+    .wrap{max-width:var(--maxw);margin:0 auto}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.125rem}
+    main{padding:28px 20px 60px}
+    .hero{display:grid;gap:10px;margin-bottom:28px}
+    .hero h1{font-size:clamp(1.6rem,2.6vw,2.2rem);margin:0}
+    .hero p{margin:0;color:#5a5a5a}
+    .grid{display:grid;gap:22px}
+    @media (min-width:860px){.grid{grid-template-columns:1.1fr .9fr}}
+    .card{border:1px solid #eee;border-radius:var(--radius);padding:22px;background:#fff;box-shadow:var(--shadow)}
+    .card h2{margin:0 0 12px;font-size:1.2rem}
+    .list{display:grid;gap:12px;margin:16px 0 0;padding:0;list-style:none}
+    .row{display:flex;align-items:start;gap:12px}
+    .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:#f4f6ff;color:#2a3a80;font-size:.82rem;font-weight:600}
+    .muted{color:#5a5a5a}
+    .note{background:#fff8e1;border:1px solid #ffe08a;color:#6a5300;padding:10px 12px;border-radius:10px;font-size:.95rem}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;padding:12px 16px;font-weight:600;border:1px solid #dcdcdc;background:#111;color:#fff;transition:transform .06s ease,box-shadow .2s ease,background .2s ease;box-shadow:0 6px 14px rgba(0,0,0,.08)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn--ghost{background:#fff;color:#111}
+    .btn + .btn{margin-left:10px}
+    .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .field{display:grid;gap:8px;margin-top:10px}
+    .field input{padding:12px 12px;border-radius:10px;border:1px solid #ddd;font-size:1rem}
+    footer{border-top:1px solid #eee;padding:26px 20px;color:#666}
+    .small{font-size:.92rem}
+    @media print{header,footer,.btn-row{display:none}.card{box-shadow:none}}
+  </style>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"DanceSchool",
+    "name":"Miss Kim’s Dance Class",
+    "url":"https://www.misskimsdanceclass.com/",
+    "logo":"https://www.misskimsdanceclass.com/logo.webp",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"14781 Ladue Rd",
+      "addressLocality":"Chesterfield",
+      "addressRegion":"MO",
+      "postalCode":"63017",
+      "addressCountry":"US"
+    },
+    "email":"misskimdances@yahoo.com",
+    "paymentAccepted":["Cash","Check","PayPal","Venmo"]
+  }
+  </script>
+</head>
+<body>
+  <header role="banner">
+    <div class="wrap brand" aria-label="Site header">
+      <img src="/logo.webp" alt="" width="32" height="32" decoding="async" />
+      <span>Miss Kim’s Dance Class</span>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" role="main">
+    <section class="hero" aria-labelledby="regpay-title">
+      <h1 id="regpay-title">Registration & Payments</h1>
+      <p class="muted">Enroll in minutes and pay securely. We accept PayPal and Venmo in addition to cash or check.</p>
+    </section>
+
+    <section class="grid" aria-label="Registration and payment">
+      <!-- Registration -->
+      <article class="card" aria-labelledby="registration">
+        <h2 id="registration">Registration</h2>
+        <p>Download the registration form and submit it with your first month’s tuition.</p>
+
+        <div class="btn-row" role="group" aria-label="Registration actions">
+          <a class="btn" href="/registration-form.docx" download aria-label="Download registration form (Word)">
+            Download Form (.docx)
+          </a>
+          <!-- Optional PDF if you add one later -->
+          <!-- <a class="btn btn--ghost" href="/registration-form.pdf" download>Download PDF</a> -->
+        </div>
+
+        <ul class="list">
+          <li class="row">
+            <span class="tag">Fee</span>
+            <div>One-time registration fee: <strong>$50</strong> per family. <span class="muted">(Non-refundable.)</span></div>
+          </li>
+          <li class="row">
+            <span class="tag">Tuition</span>
+            <div>Tuition is due on the <strong>1st of the month</strong>. A <strong>10% late fee</strong> is added after the <strong>6th</strong>. <span class="muted">Ask about 5% discount for 3+ hours/week.</span></div>
+          </li>
+          <li class="row">
+            <span class="tag">Questions</span>
+            <div>Email <a href="mailto:misskimdances@yahoo.com">misskimdances@yahoo.com</a> or call <a href="tel:+13149246008">(314) 924-6008</a>.</div>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Payments -->
+      <article class="card" aria-labelledby="payments">
+        <h2 id="payments">Pay Online</h2>
+
+        <!-- Optional amount field to prefill PayPal/Venmo links -->
+        <form class="field" aria-label="Optional amount">
+          <label for="amount" class="muted">Enter an amount (optional)</label>
+          <input id="amount" name="amount" type="number" min="0" step="0.01" placeholder="e.g., 90.00" inputmode="decimal" />
+        </form>
+
+        <div class="btn-row" role="group" aria-label="Online payment buttons">
+          <!-- PAYPAL (email-based “Buy Now” link). Amount gets appended via JS -->
+          <a class="btn" id="paypalBtn" rel="noopener" target="_blank"
+             href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=misskimdances@yahoo.com&item_name=Tuition%20Payment&currency_code=USD">
+            Pay with PayPal
+          </a>
+
+          <!-- VENMO -->
+          <a class="btn btn--ghost" id="venmoBtn" rel="noopener"
+             href="https://venmo.com/u/KIMBERLY-REVIE-1" target="_blank">
+            Pay with Venmo
+          </a>
+        </div>
+
+        <ul class="list">
+          <li class="row">
+            <span class="tag">Memo</span>
+            <div>Please include the <strong>student name</strong> and <strong>class</strong> in the note/memo.</div>
+          </li>
+          <li class="row">
+            <span class="tag">Cash/Check</span>
+            <div>Cash or check accepted at the studio office. Make checks payable to <strong>Miss Kim’s Dance Class</strong>.</div>
+          </li>
+          <li class="row">
+            <span class="tag">Receipts</span>
+            <div>Need a receipt? Email <a href="mailto:misskimdances@yahoo.com">misskimdances@yahoo.com</a> and we’ll send one.</div>
+          </li>
+        </ul>
+
+        <p class="note" role="note">
+          Tip: Paying on mobile? Venmo opens best in the Venmo app. If the link opens in a browser first, tap “Open in Venmo.”
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="wrap small">
+      © <span id="year"></span> Miss Kim’s Dance Class · 14781 Ladue Rd, Chesterfield, MO 63017 · (314) 924-6008
+    </div>
+  </footer>
+
+  <script>
+    // year stamp
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Prefill amounts in PayPal/Venmo links when user types a value
+    const amt = document.getElementById('amount');
+    const pp = document.getElementById('paypalBtn');
+    const vm = document.getElementById('venmoBtn');
+
+    function updateLinks() {
+      const v = parseFloat(amt.value);
+      const hasAmount = !isNaN(v) && v > 0;
+      // PayPal email-based “Buy Now” link (classic)
+      pp.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick"
+              + "&business=" + encodeURIComponent("misskimdances@yahoo.com")
+              + "&item_name=" + encodeURIComponent("Tuition Payment")
+              + (hasAmount ? "&amount=" + v.toFixed(2) : "")
+              + "&currency_code=USD";
+
+      // Venmo deep-links (mobile) with web fallback
+      const uaIsMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+      if (uaIsMobile) {
+        vm.href = "venmo://paycharge?txn=pay"
+                + "&recipients=" + encodeURIComponent("@KIMBERLY-REVIE-1")
+                + (hasAmount ? "&amount=" + v.toFixed(2) : "");
+      } else {
+        vm.href = "https://venmo.com/u/KIMBERLY-REVIE-1"
+                + (hasAmount ? "?txn=pay&amount=" + v.toFixed(2) : "");
+      }
+    }
+    amt.addEventListener('input', updateLinks);
+  </script>
+</body>
+</html>
