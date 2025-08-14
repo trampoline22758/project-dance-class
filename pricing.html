@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Registration & Payments | Miss Kim’s Dance Class</title>
-  <meta name="description" content="Register for classes and pay securely. Youth tuition with family discounts, adult class cards (4/$90 or 12/$180), and private lessons at $80/hr or $60/hr with class." />
+  <meta name="description" content="Register for classes and pay securely. Youth tuition with family discounts, adult class cards (4/$90 or 12/$180), and private lessons at $80/hr or $60/hr with class. Save 5% when prepaying 3+ months." />
   <link rel="canonical" href="https://www.misskimsdanceclass.com/registration" />
 
   <!-- Social -->
   <meta property="og:title" content="Registration & Payments | Miss Kim’s Dance Class" />
-  <meta property="og:description" content="Youth tuition with family discounts, adult class cards, and private lessons. Pay via PayPal or Venmo." />
+  <meta property="og:description" content="Youth tuition with family discounts, adult class cards, private lessons, and a 5% discount when prepaying 3+ months." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.misskimsdanceclass.com/registration" />
   <meta property="og:image" content="https://www.misskimsdanceclass.com/og-image.jpg" />
@@ -42,7 +42,6 @@
     .row{display:flex;gap:10px;align-items:start}
     .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:#f4f6ff;color:#2a3a80;font-size:.82rem;font-weight:600}
 
-    /* table-like grids */
     .table{display:grid;border:1px solid #eee;border-radius:12px;overflow:hidden}
     .table .trow{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #eee}
     .table .trow:first-child{border-top:none;background:#fafafa;font-weight:600}
@@ -81,7 +80,7 @@
 <main class="wrap" role="main">
   <section class="hero" aria-labelledby="title">
     <h1 id="title">Registration & Payments</h1>
-    <p class="muted">Youth tuition (with family discounts), Adult class cards, and Private lessons. Payment buttons lock to the correct total.</p>
+    <p class="muted">Youth tuition (with family discounts), Adult class cards, and Private lessons. Save 5% when you prepay 3+ months. Payment buttons lock to the correct total.</p>
   </section>
 
   <section class="grid">
@@ -176,6 +175,25 @@
         </div>
       </div>
 
+      <!-- NEW: Prepay months -->
+      <div class="field" style="margin-top:10px">
+        <label for="months" class="muted">Prepay months (5% off at 3+ months)</label>
+        <select id="months" aria-label="Number of months to prepay">
+          <option value="1">1 month</option>
+          <option value="2">2 months</option>
+          <option value="3">3 months (5% off)</option>
+          <option value="4">4 months (5% off)</option>
+          <option value="5">5 months (5% off)</option>
+          <option value="6">6 months (5% off)</option>
+          <option value="7">7 months (5% off)</option>
+          <option value="8">8 months (5% off)</option>
+          <option value="9">9 months (5% off)</option>
+          <option value="10">10 months (5% off)</option>
+          <option value="11">11 months (5% off)</option>
+          <option value="12">12 months (5% off)</option>
+        </select>
+      </div>
+
       <div class="total" id="totalLabel">Total: $0.00</div>
       <div class="break" id="breakdown"></div>
 
@@ -192,7 +210,8 @@
 
       <p class="note">
         <strong>Youth:</strong> 2nd student adds +50% of base; 3rd adds +75%. 
-        <strong>Adults:</strong> pick a class card and optionally add private lessons at $80/hr, or $60/hr when in addition to a class. Buttons open for the exact amount only.
+        <strong>Adults:</strong> pick a class card and optionally add private lessons at $80/hr, or $60/hr when in addition to a class. 
+        <strong>Prepay:</strong> choosing 3+ months applies a 5% discount to the entire total.
       </p>
     </article>
   </section>
@@ -218,6 +237,8 @@
   const privateHours = document.getElementById('privateHours');
   const inAddition = document.getElementById('inAddition');
 
+  const monthsSel = document.getElementById('months');
+
   const totalLbl = document.getElementById('totalLabel');
   const breakdownEl = document.getElementById('breakdown');
   const pp = document.getElementById('paypalBtn');
@@ -225,18 +246,18 @@
 
   function dollars(n){ return n.toLocaleString(undefined,{style:'currency',currency:'USD'}); }
 
-  function computeYouth() {
+  function computeYouthMonthly() {
     const base = parseFloat(youthBase.value);
     const n = parseInt(youthStudents.value, 10);
     const parts = [];
     if (n >= 1) parts.push(base);        // 100%
     if (n >= 2) parts.push(base * 0.50); // +50%
     if (n >= 3) parts.push(base * 0.75); // +75%
-    const total = parts.reduce((a,b)=>a+b,0);
+    const subtotal = parts.reduce((a,b)=>a+b,0);
     const breakdown = [`1st: ${dollars(base)}`];
     if (n >= 2) breakdown.push(`2nd: ${dollars(base*0.50)}`);
     if (n >= 3) breakdown.push(`3rd: ${dollars(base*0.75)}`);
-    return { total, label: 'Youth Tuition', breakdown: breakdown.join(' + ') };
+    return { subtotal, breakdown: breakdown.join(' + ') };
   }
 
   function computeAdult() {
@@ -244,32 +265,44 @@
     const hrs = Math.max(0, parseInt(privateHours.value || '0', 10));
     const rate = inAddition.checked ? 60 : 80;
     const privTotal = hrs * rate;
-    const total = card + privTotal;
+    const subtotal = card + privTotal;
 
     const lines = [`Class card: ${dollars(card)}`];
     if (hrs > 0) lines.push(`Private lessons: ${hrs} hr × ${dollars(rate)} = ${dollars(privTotal)}`);
-    return { total, label: 'Adult Tuition', breakdown: lines.join(' + ') };
+    return { subtotal, breakdown: lines.join(' + ') };
   }
 
-  function updateUI() {
+  function computeAll() {
     const isYouth = planType.value === 'youth';
     youthControls.style.display = isYouth ? '' : 'none';
     adultControls.style.display = isYouth ? 'none' : '';
 
-    const { total, label, breakdown } = isYouth ? computeYouth() : computeAdult();
+    const months = parseInt(monthsSel.value, 10);
+    const baseCalc = isYouth ? computeYouthMonthly() : computeAdult();
 
+    // Apply months multiplier
+    const preDiscountTotal = baseCalc.subtotal * months;
+
+    // 5% discount when months >= 3
+    const discountRate = months >= 3 ? 0.05 : 0;
+    const discount = preDiscountTotal * discountRate;
+    const total = preDiscountTotal - discount;
+
+    // UI
+    const label = isYouth ? 'Youth Tuition' : 'Adult Tuition';
+    const monthText = months === 1 ? '1 month' : `${months} months`;
+    const discountText = discountRate ? ` − 5% prepay discount (${dollars(discount)})` : '';
     totalLbl.textContent = `Total: ${dollars(total)}`;
-    breakdownEl.textContent = breakdown;
+    breakdownEl.textContent = `${baseCalc.breakdown} × ${monthText}${discountText}`;
 
+    // Lock PayPal & Venmo
     const amt = total.toFixed(2);
-    // PayPal
     pp.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick"
       + "&business=" + encodeURIComponent("misskimdances@yahoo.com")
-      + "&item_name=" + encodeURIComponent(label)
+      + "&item_name=" + encodeURIComponent(`${label} (${monthText}${discountRate ? ' with 5% prepay discount' : ''})`)
       + "&amount=" + amt
       + "&currency_code=USD";
 
-    // Venmo (mobile deep link; desktop fallback)
     const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
     vm.href = isMobile
       ? "venmo://paycharge?txn=pay&recipients=" + encodeURIComponent("@KIMBERLY-REVIE-1") + "&amount=" + amt
@@ -277,13 +310,14 @@
   }
 
   // init + events
-  updateUI();
-  planType.addEventListener('change', updateUI);
-  youthBase.addEventListener('change', updateUI);
-  youthStudents.addEventListener('change', updateUI);
-  adultCard.addEventListener('change', updateUI);
-  privateHours.addEventListener('input', updateUI);
-  inAddition.addEventListener('change', updateUI);
+  computeAll();
+  planType.addEventListener('change', computeAll);
+  youthBase.addEventListener('change', computeAll);
+  youthStudents.addEventListener('change', computeAll);
+  adultCard.addEventListener('change', computeAll);
+  privateHours.addEventListener('input', computeAll);
+  inAddition.addEventListener('change', computeAll);
+  monthsSel.addEventListener('change', computeAll);
 </script>
 </body>
 </html>
