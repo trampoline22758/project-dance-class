@@ -72,7 +72,7 @@
 <body>
 <header role="banner">
   <div class="wrap brand">
-    <img src="/logo.webp" alt="">
+    <img src="/logo.webp" alt="Miss Kim’s Dance Class logo">
     <span>Miss Kim’s Dance Class</span>
   </div>
 </header>
@@ -124,7 +124,17 @@
     <article class="card" aria-labelledby="payonline">
       <h2 id="payonline">Pay Online (locked to correct total)</h2>
 
+      <!-- Purpose selector -->
       <div class="field">
+        <label for="payFor" class="muted">What are you paying for?</label>
+        <select id="payFor" aria-label="What are you paying for?">
+          <option value="tuition">Monthly Tuition</option>
+          <option value="regOnly">Registration Fee Only ($50)</option>
+          <option value="both">Tuition + Registration Fee</option>
+        </select>
+      </div>
+
+      <div class="field" id="planField">
         <label for="planType" class="muted">Choose a schedule</label>
         <select id="planType" aria-label="Choose Youth or Adult">
           <option value="youth">Youth (Monthly)</option>
@@ -152,6 +162,16 @@
             <option value="3">3 students (100% + 50% + 75%)</option>
           </select>
         </div>
+
+        <!-- NEW: Youth private lessons -->
+        <div class="field">
+          <label for="youthPrivateHours" class="muted">Youth private lesson hours (optional)</label>
+          <input id="youthPrivateHours" type="number" min="0" step="1" value="0" aria-label="Youth private lesson hours" />
+        </div>
+        <div class="switch">
+          <input id="youthInAddition" type="checkbox" aria-label="Youth private lessons in addition to class" />
+          <label for="youthInAddition">Youth private lessons are <strong>in addition to</strong> a class (sets $60/hr). Unchecked = $80/hr standalone.</label>
+        </div>
       </div>
 
       <!-- Adult controls -->
@@ -175,8 +195,8 @@
         </div>
       </div>
 
-      <!-- NEW: Prepay months -->
-      <div class="field" style="margin-top:10px">
+      <!-- Prepay months -->
+      <div class="field" id="monthsField" style="margin-top:10px">
         <label for="months" class="muted">Prepay months (5% off at 3+ months)</label>
         <select id="months" aria-label="Number of months to prepay">
           <option value="1">1 month</option>
@@ -203,15 +223,15 @@
           Pay with PayPal
         </a>
         <a class="btn btn--ghost" id="venmoBtn" rel="noopener" target="_blank"
-           href="https://venmo.com/u/KIMBERLY-REVIE-1">
+           href="https://venmo.com/u/Kimberly-Revie-1">
           Pay with Venmo
         </a>
       </div>
 
       <p class="note">
-        <strong>Youth:</strong> 2nd student adds +50% of base; 3rd adds +75%. 
+        <strong>Youth:</strong> 2nd student adds +50% of base; 3rd adds +75%. Optional youth private lessons: $80/hr or $60/hr with class. 
         <strong>Adults:</strong> pick a class card and optionally add private lessons at $80/hr, or $60/hr when in addition to a class. 
-        <strong>Prepay:</strong> choosing 3+ months applies a 5% discount to the entire total.
+        <strong>Prepay:</strong> choosing 3+ months applies a 5% discount to tuition (registration fee is not discounted).
       </p>
     </article>
   </section>
@@ -226,17 +246,22 @@
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Elements
+  const payForSel = document.getElementById('payFor');
+  const planField = document.getElementById('planField');
   const planType = document.getElementById('planType');
 
   const youthControls = document.getElementById('youthControls');
   const youthBase = document.getElementById('youthBase');
   const youthStudents = document.getElementById('youthStudents');
+  const youthPrivateHours = document.getElementById('youthPrivateHours');
+  const youthInAddition = document.getElementById('youthInAddition');
 
   const adultControls = document.getElementById('adultControls');
   const adultCard = document.getElementById('adultCard');
   const privateHours = document.getElementById('privateHours');
   const inAddition = document.getElementById('inAddition');
 
+  const monthsField = document.getElementById('monthsField');
   const monthsSel = document.getElementById('months');
 
   const totalLbl = document.getElementById('totalLabel');
@@ -249,14 +274,26 @@
   function computeYouthMonthly() {
     const base = parseFloat(youthBase.value);
     const n = parseInt(youthStudents.value, 10);
+
+    // base tuition by student count
     const parts = [];
     if (n >= 1) parts.push(base);        // 100%
     if (n >= 2) parts.push(base * 0.50); // +50%
     if (n >= 3) parts.push(base * 0.75); // +75%
-    const subtotal = parts.reduce((a,b)=>a+b,0);
+    const tuitionOnly = parts.reduce((a,b)=>a+b,0);
+
+    // youth private lessons
+    const hrs = Math.max(0, parseInt(youthPrivateHours.value || '0', 10));
+    const rate = youthInAddition.checked ? 60 : 80;
+    const privTotal = hrs * rate;
+
+    const subtotal = tuitionOnly + privTotal;
+
     const breakdown = [`1st: ${dollars(base)}`];
     if (n >= 2) breakdown.push(`2nd: ${dollars(base*0.50)}`);
     if (n >= 3) breakdown.push(`3rd: ${dollars(base*0.75)}`);
+    if (hrs > 0) breakdown.push(`Youth private: ${hrs} hr × ${dollars(rate)} = ${dollars(privTotal)}`);
+
     return { subtotal, breakdown: breakdown.join(' + ') };
   }
 
@@ -273,47 +310,95 @@
   }
 
   function computeAll() {
+    const payFor = payForSel.value; // tuition | regOnly | both
+    const tuitionEnabled = payFor !== 'regOnly';
+    const includeReg = payFor === 'regOnly' || payFor === 'both';
+
+    // Toggle tuition controls
+    planField.style.display = tuitionEnabled ? '' : 'none';
+    youthControls.style.display = tuitionEnabled && planType.value === 'youth' ? '' : 'none';
+    adultControls.style.display = tuitionEnabled && planType.value === 'adult' ? '' : 'none';
+    monthsField.style.display = tuitionEnabled ? '' : 'none';
+
+    // Base calc
+    let tuitionSubtotal = 0;
+    let tuitionBreakdown = '';
+
+    if (tuitionEnabled) {
+      const baseCalc = planType.value === 'youth' ? computeYouthMonthly() : computeAdult();
+      tuitionSubtotal = baseCalc.subtotal;
+      tuitionBreakdown = baseCalc.breakdown;
+    }
+
+    const months = tuitionEnabled ? parseInt(monthsSel.value, 10) : 1;
+
+    // Apply months multiplier to tuition only
+    const preDiscountTuition = tuitionSubtotal * months;
+
+    // 5% discount on tuition when months >= 3 (registration fee never discounted)
+    const discountRate = tuitionEnabled && months >= 3 ? 0.05 : 0;
+    const discount = preDiscountTuition * discountRate;
+    const tuitionAfterDiscount = preDiscountTuition - discount;
+
+    // Registration fee (not multiplied or discounted)
+    const regFee = includeReg ? 50 : 0;
+
+    const total = tuitionAfterDiscount + regFee;
+
+    // UI text
     const isYouth = planType.value === 'youth';
-    youthControls.style.display = isYouth ? '' : 'none';
-    adultControls.style.display = isYouth ? 'none' : '';
-
-    const months = parseInt(monthsSel.value, 10);
-    const baseCalc = isYouth ? computeYouthMonthly() : computeAdult();
-
-    // Apply months multiplier
-    const preDiscountTotal = baseCalc.subtotal * months;
-
-    // 5% discount when months >= 3
-    const discountRate = months >= 3 ? 0.05 : 0;
-    const discount = preDiscountTotal * discountRate;
-    const total = preDiscountTotal - discount;
-
-    // UI
-    const label = isYouth ? 'Youth Tuition' : 'Adult Tuition';
+    const tuitionLabel = isYouth ? 'Youth Tuition' : 'Adult Tuition';
     const monthText = months === 1 ? '1 month' : `${months} months`;
     const discountText = discountRate ? ` − 5% prepay discount (${dollars(discount)})` : '';
+
+    // Breakdown line
+    let breakdown = '';
+    if (tuitionEnabled) {
+      breakdown = `${tuitionBreakdown} × ${monthText}${discountText}`;
+    }
+    if (includeReg && tuitionEnabled) {
+      breakdown += (breakdown ? ' + ' : '') + `Registration fee: ${dollars(regFee)}`;
+    } else if (includeReg && !tuitionEnabled) {
+      breakdown = `Registration fee: ${dollars(regFee)}`;
+    }
+
     totalLbl.textContent = `Total: ${dollars(total)}`;
-    breakdownEl.textContent = `${baseCalc.breakdown} × ${monthText}${discountText}`;
+    breakdownEl.textContent = breakdown;
 
     // Lock PayPal & Venmo
     const amt = total.toFixed(2);
+
+    let itemName = '';
+    if (includeReg && !tuitionEnabled) {
+      itemName = 'Registration Fee';
+    } else if (!includeReg && tuitionEnabled) {
+      itemName = `${tuitionLabel} (${monthText}${discountRate ? ' with 5% prepay discount' : ''})`;
+    } else if (includeReg && tuitionEnabled) {
+      itemName = `Registration Fee + ${tuitionLabel} (${monthText}${discountRate ? ' with 5% prepay discount' : ''})`;
+    }
+
     pp.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick"
       + "&business=" + encodeURIComponent("misskimdances@yahoo.com")
-      + "&item_name=" + encodeURIComponent(`${label} (${monthText}${discountRate ? ' with 5% prepay discount' : ''})`)
+      + "&item_name=" + encodeURIComponent(itemName)
       + "&amount=" + amt
       + "&currency_code=USD";
 
     const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-    vm.href = isMobile
-      ? "venmo://paycharge?txn=pay&recipients=" + encodeURIComponent("@KIMBERLY-REVIE-1") + "&amount=" + amt
-      : "https://venmo.com/u/KIMBERLY-REVIE-1?txn=pay&amount=" + amt;
+    const venmoBase = isMobile
+      ? "venmo://paycharge?txn=pay&recipients=" + encodeURIComponent("@Kimberly-Revie-1")
+      : "https://venmo.com/u/Kimberly-Revie-1?txn=pay";
+
+    vm.href = venmoBase + "&amount=" + amt;
   }
 
   // init + events
   computeAll();
+  payForSel.addEventListener('change', computeAll);
   planType.addEventListener('change', computeAll);
   youthBase.addEventListener('change', computeAll);
   youthStudents.addEventListener('change', computeAll);
+  if (youthPrivateHours) youthPrivateHours.addEventListener('input', computeAll);
+  if (youthInAddition) youthInAddition.addEventListener('change', computeAll);
   adultCard.addEventListener('change', computeAll);
   privateHours.addEventListener('input', computeAll);
   inAddition.addEventListener('change', computeAll);
