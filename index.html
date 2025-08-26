@@ -38,13 +38,10 @@
   <!-- CSS -->
   <link rel="stylesheet" href="/styles.css" />
 
-  <!-- Preload LCP hero image -->
- <img src="/herobanner.JPG"
-     alt="Tap dance class in Chesterfield, MO"
-     width="560" height="360"
-     loading="lazy" decoding="async">
+  <!-- Preload hero image -->
+  <link rel="preload" as="image" href="/herobanner.JPG" fetchpriority="high">
 
-  <!-- Local Business JSON-LD (clean + consistent NAP) -->
+  <!-- Local Business JSON-LD -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -78,43 +75,50 @@
   }
   </script>
 
-  <!-- Site Navigation JSON-LD (fixed URLs) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SiteNavigationElement",
-    "name":[
-      "Home",
-      "Other Dance & Movement",
-      "Reviews",
-      "Summer",
-      "Registration",
-      "Pricing",
-      "Schedule",
-      "Instructors",
-      "Contact"
-    ],
-    "url":[
-      "/",
-      "/classes",
-      "/reviews",
-      "/summer",
-      "/registration",
-      "/pricing",
-      "/schedule",
-      "/instructors",
-      "/contact"
-    ]
-  }
-  </script>
-
   <title>Miss Kim's Dance Class — Chesterfield, MO | Dance Lessons & Registration</title>
 
- <!-- Defer scripts -->
+  <!-- Defer scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 </head>
 <body id="dmRoot" class="dmRoot dmResponsiveBody">
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Sticky Top Bar / Nav -->
+  <div class="topbar" role="navigation" aria-label="Primary">
+    <div class="topbar-inner">
+      <a class="brand-mini" href="/" aria-label="Miss Kim's Dance Class Home">Miss Kim’s</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">Menu</button>
+      <ul id="primary-menu" class="menu" role="menubar">
+        <li role="none"><a role="menuitem" href="/">Home</a></li>
+        <li role="none" class="has-dropdown">
+          <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Other Dance &amp; Movement</button>
+          <ul class="dropdown" role="menu" aria-label="Other Dance & Movement">
+            <li role="none"><a role="menuitem" href="/pom-poms-classes">Pom-Poms</a></li>
+            <li role="none"><a role="menuitem" href="/contemporary-dance-classes">Contemporary Dance</a></li>
+            <li role="none"><a role="menuitem" href="/hip-hop-dance-classes">Hip-Hop Dance</a></li>
+            <li role="none"><a role="menuitem" href="/musical-theater-classes">Musical Theater</a></li>
+            <li role="none"><a role="menuitem" href="/lyrical-dance-classes">Lyrical Dance</a></li>
+            <li role="none"><a role="menuitem" href="/tumbling-classes">Tumbling</a></li>
+            <li role="none"><a role="menuitem" href="/acrobatics-classes">Acrobatics</a></li>
+            <li role="none"><a role="menuitem" href="/aerial-classes">Aerial</a></li>
+            <li role="none"><a role="menuitem" href="/competition-teams">Competition</a></li>
+          </ul>
+        </li>
+        <li role="none"><a role="menuitem" href="#reviews">Reviews</a></li>
+        <li role="none"><a role="menuitem" href="/summer">Summer</a></li>
+        <li role="none"><a role="menuitem" href="/pricing">Pricing</a></li>
+        <li role="none"><a role="menuitem" href="/schedule">Schedule</a></li>
+        <li role="none" class="menu-right">
+          <a role="menuitem" class="btn btn--primary" href="/registration">Registration Form</a>
+        </li>
+        <li role="none">
+          <a role="menuitem" class="btn btn--ghost btn--sm" href="tel:+13145420608">Call (314) 542-0608</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Hero -->
   <section class="hero" aria-labelledby="hero-title">
@@ -134,10 +138,7 @@
     <!-- Tap -->
     <section id="tap-dance" class="dance-class">
       <div class="dance-image">
-        <img src="/tap1.JPG"
-             width="560" height="360"
-             alt="Tap dance class in Chesterfield, MO for all ages"
-             loading="lazy" decoding="async">
+        <img src="/tap1.JPG" width="560" height="360" alt="Tap dance class in Chesterfield, MO for all ages" loading="lazy" decoding="async">
       </div>
       <div class="dance-info">
         <h3>Tap Dance Classes in Chesterfield, MO</h3>
@@ -149,10 +150,7 @@
     <!-- Ballet -->
     <section id="ballet-dance" class="dance-class">
       <div class="dance-image">
-        <img src="/tap9.JPG"
-             width="560" height="360"
-             alt="Ballet dance lessons in Chesterfield, Missouri"
-             loading="lazy" decoding="async">
+        <img src="/tap9.JPG" width="560" height="360" alt="Ballet dance lessons in Chesterfield, Missouri" loading="lazy" decoding="async">
       </div>
       <div class="dance-info">
         <h3>Ballet Dance Lessons in Chesterfield, MO</h3>
@@ -164,10 +162,7 @@
     <!-- Jazz -->
     <section id="jazz-dance" class="dance-class">
       <div class="dance-image">
-        <img src="/jazz1.JPG"
-             width="560" height="360"
-             alt="Jazz dance classes in Chesterfield, MO including Broadway and contemporary"
-             loading="lazy" decoding="async">
+        <img src="/jazz1.JPG" width="560" height="360" alt="Jazz dance classes in Chesterfield, MO including Broadway and contemporary" loading="lazy" decoding="async">
       </div>
       <div class="dance-info">
         <h3>Jazz Dance Classes in Chesterfield, MO</h3>
@@ -179,10 +174,7 @@
     <!-- Pom-Poms -->
     <section id="pom-poms" class="dance-class">
       <div class="dance-image">
-        <img src="/pompom.JPG"
-             width="560" height="360"
-             alt="Pom-pom cheer and dance classes in Chesterfield, MO"
-             loading="lazy" decoding="async">
+        <img src="/pompom.JPG" width="560" height="360" alt="Pom-pom cheer and dance classes in Chesterfield, MO" loading="lazy" decoding="async">
       </div>
       <div class="dance-info">
         <h3>Pom-Pom Cheer Dance in Chesterfield, MO</h3>
@@ -194,10 +186,7 @@
     <!-- Contemporary -->
     <section id="contemporary-dance" class="dance-class">
       <div class="dance-image">
-        <img src="/contemporary1.JPG"
-             width="560" height="360"
-             alt="Contemporary dance classes in Chesterfield, MO"
-             loading="lazy" decoding="async">
+        <img src="/contemporary1.JPG" width="560" height="360" alt="Contemporary dance classes in Chesterfield, MO" loading="lazy" decoding="async">
       </div>
       <div class="dance-info">
         <h3>Contemporary Dance Classes in Chesterfield, MO</h3>
@@ -209,10 +198,7 @@
     <!-- Hip-Hop -->
     <section id="hip-hop-dance" class="dance-class">
       <div class="dance-image">
-        <img src="/hiphop1.JPG"
-             width="560" height="360"
-             alt="Hip-hop dance lessons in Chesterfield, MO for kids, teens, and adults"
-             loading="lazy" decoding="async">
+        <img src="/hiphop1.JPG" width="560" height="360" alt="Hip-hop dance lessons in Chesterfield, MO for kids, teens, and adults" loading="lazy" decoding="async">
       </div>
       <div class="dance-info">
         <h3>Hip-Hop Dance Classes in Chesterfield, MO</h3>
@@ -224,10 +210,7 @@
     <!-- Musical Theater -->
     <section id="musical-theater" class="dance-class">
       <div class="dance-image">
-        <img src="/musicaltheater.JPG"
-             width="560" height="360"
-             alt="Musical theater dance and acting classes in Chesterfield, Missouri"
-             loading="lazy" decoding="async">
+        <img src="/musicaltheater.JPG" width="560" height="360" alt="Musical theater dance and acting classes in Chesterfield, Missouri" loading="lazy" decoding="async">
       </div>
       <div class="dance-info">
         <h3>Musical Theater Dance in Chesterfield, MO</h3>
@@ -237,73 +220,22 @@
     </section>
   </section>
 
-    <!-- Instructors -->
-    <section class="instructors" aria-labelledby="instructors-title">
-      <div class="container">
-        <h2 id="instructors-title">Meet Our Dancing Instructors</h2>
-        <ul class="instructor-grid" role="list">
-          <li class="instructor-card">
-            <img src="/kim-revie-buchheit.webp" alt="Kim Revie Buchheit, founder and owner of Miss Kim’s Dance Class in Chesterfield, MO" width="280" height="320" loading="lazy" decoding="async">
-            <h3 class="instructor-name">Kim Revie Buchheit</h3>
-            <p class="instructor-role">Founder &amp; Owner</p>
-          </li>
-          <li class="instructor-card">
-            <img src="/devin-revie.webp" alt="Devin Revie, dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async">
-            <h3 class="instructor-name">Devin Revie</h3>
-            <p class="instructor-role">Instructor</p>
-          </li>
-          <li class="instructor-card">
-            <img src="/danine-preston.webp" alt="Danine Preston, musical theater and dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async">
-            <h3 class="instructor-name">Danine Preston</h3>
-            <p class="instructor-role">Instructor</p>
-          </li>
-          <li class="instructor-card">
-            <img src="/juliette-hilbert.webp" alt="Juliette Hilbert, tap and aerial silks instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async">
-            <h3 class="instructor-name">Juliette Hilbert</h3>
-            <p class="instructor-role">Instructor</p>
-          </li>
-          <li class="instructor-card">
-            <img src="/megan-bolden.webp" alt="Megan Bolden, ballet, jazz, and contemporary dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async">
-            <h3 class="instructor-name">Megan Bolden</h3>
-            <p class="instructor-role">Instructor</p>
-          </li>
-          <li class="instructor-card">
-            <img src="/mike-buck.webp" alt="Mike Buck, tap dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async">
-            <h3 class="instructor-name">Mike Buck (Mr. Mike)</h3>
-            <p class="instructor-role">Instructor</p>
-          </li>
-          <li class="instructor-card">
-            <img src="/julia-lucarelli.webp" alt="Julia Lucarelli, ballet and contemporary dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async">
-            <h3 class="instructor-name">Julia Lucarelli</h3>
-            <p class="instructor-role">Instructor</p>
-          </li>
-          <li class="instructor-card">
-            <img src="/javi-perez.webp" alt="Javi Perez, hip-hop and jazz funk dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async">
-            <h3 class="instructor-name">Javi Perez</h3>
-            <p class="instructor-role">Instructor</p>
-          </li>
-        </ul>
-      </div>
-
-      <!-- ItemList schema (names aligned to cards) -->
-      <script type="application/ld+json">
-      {
-        "@context":"https://schema.org",
-        "@type":"ItemList",
-        "name":"Miss Kim's Dance Class Instructors",
-        "itemListElement":[
-          {"@type":"Person","name":"Kim Revie Buchheit","jobTitle":"Founder & Owner"},
-          {"@type":"Person","name":"Devin Revie","jobTitle":"Instructor"},
-          {"@type":"Person","name":"Danine Preston","jobTitle":"Instructor"},
-          {"@type":"Person","name":"Juliette Hilbert","jobTitle":"Instructor"},
-          {"@type":"Person","name":"Megan Bolden","jobTitle":"Instructor"},
-          {"@type":"Person","name":"Mike Buck","jobTitle":"Instructor"},
-          {"@type":"Person","name":"Julia Lucarelli","jobTitle":"Instructor"},
-          {"@type":"Person","name":"Javi Perez","jobTitle":"Instructor"}
-        ]
-      }
-      </script>
-    </section>
+  <!-- Instructors -->
+  <section class="instructors" aria-labelledby="instructors-title">
+    <div class="container">
+      <h2 id="instructors-title">Meet Our Dancing Instructors</h2>
+      <ul class="instructor-grid" role="list">
+        <li class="instructor-card"><img src="/kim-revie-buchheit.webp" alt="Kim Revie Buchheit, founder and owner of Miss Kim’s Dance Class in Chesterfield, MO" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Kim Revie Buchheit</h3><p class="instructor-role">Founder &amp; Owner</p></li>
+        <li class="instructor-card"><img src="/devin-revie.webp" alt="Devin Revie, dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Devin Revie</h3><p class="instructor-role">Instructor</p></li>
+        <li class="instructor-card"><img src="/danine-preston.webp" alt="Danine Preston, musical theater and dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Danine Preston</h3><p class="instructor-role">Instructor</p></li>
+        <li class="instructor-card"><img src="/juliette-hilbert.webp" alt="Juliette Hilbert, tap and aerial silks instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Juliette Hilbert</h3><p class="instructor-role">Instructor</p></li>
+        <li class="instructor-card"><img src="/megan-bolden.webp" alt="Megan Bolden, ballet, jazz, and contemporary dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Megan Bolden</h3><p class="instructor-role">Instructor</p></li>
+        <li class="instructor-card"><img src="/mike-buck.webp" alt="Mike Buck, tap dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Mike Buck (Mr. Mike)</h3><p class="instructor-role">Instructor</p></li>
+        <li class="instructor-card"><img src="/julia-lucarelli.webp" alt="Julia Lucarelli, ballet and contemporary dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Julia Lucarelli</h3><p class="instructor-role">Instructor</p></li>
+        <li class="instructor-card"><img src="/javi-perez.webp" alt="Javi Perez, hip-hop and jazz funk dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Javi Perez</h3><p class="instructor-role">Instructor</p></li>
+      </ul>
+    </div>
+  </section>
 
     <!-- Reviews (hand-picked quotes) -->
     <section id="reviews" class="reviews" aria-labelledby="reviews-title">
@@ -443,6 +375,7 @@
   <script src="https://app.embed.im/accessibility.js" defer></script>
 </body>
 </html>
+
 
 
 
