@@ -124,7 +124,7 @@ p { margin:0 0 1.25rem; color:#444; }
 .hero-background {
   position:absolute;
   inset:0;
-  background:url('/herobanner.JPG') center/cover no-repeat;
+  background:url('/herobanner.jpg') center/cover no-repeat;
 }
 
 .hero::before {
@@ -274,6 +274,7 @@ p { margin:0 0 1.25rem; color:#444; }
 /* Footer responsiveness */
 @media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.footer-grid{grid-template-columns:1fr}}
+
 
 
 
