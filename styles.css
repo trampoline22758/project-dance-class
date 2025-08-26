@@ -109,17 +109,84 @@ p { margin:0 0 1.25rem; color:#444; }
 }
 
 /* ===================== Hero ===================== */
-.hero{position:relative;width:100%;min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden}
-.hero-background{position:absolute;inset:0;background:url('/herobanner.jpg') center/cover no-repeat}
-.hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.45)}
-.hero-content{position:relative;z-index:1;padding:1rem;max-width:800px}
-.hero h1{font-size:clamp(1.9rem,4vw,3rem);font-weight:700;line-height:1.2;color:#fff}
-.hero-tagline{margin-top:.5rem;font-size:clamp(1rem,1.6vw,1.25rem);color:rgba(255,255,255,.92)}
-.hero-call{display:inline-block;margin-top:1rem;background:var(--brand);color:#fff;padding:.6rem 1.2rem;border-radius:999px;font-weight:700;text-decoration:none;transition:background .2s}
-.hero-call:hover{background:#7a5ae6}
-.hero-hours{margin-top:.5rem;font-size:.95rem}
-.hero-hours .status{color:#ff6961;font-weight:700}
-@media (max-width:768px){.hero{min-height:50vh;padding:2rem 1rem}}
+.hero {
+  position:relative;
+  width:100%;
+  min-height:60vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#000; /* all text black */
+  overflow:hidden;
+}
+
+.hero-background {
+  position:absolute;
+  inset:0;
+  background:url('/herobanner.JPG') center/cover no-repeat;
+}
+
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.35); /* light overlay so black text is readable */
+}
+
+.hero-content {
+  position:relative;
+  z-index:1;
+  padding:1rem;
+  max-width:800px;
+}
+
+.hero h1 {
+  font-size:clamp(1.9rem,4vw,3rem);
+  font-weight:700;
+  line-height:1.2;
+  color:#000; /* black heading */
+}
+
+.hero-tagline {
+  margin-top:.5rem;
+  font-size:clamp(1rem,1.6vw,1.25rem);
+  color:#111; /* dark gray tagline */
+}
+
+.hero-call {
+  display:inline-block;
+  margin-top:1rem;
+  background:var(--brand);
+  color:#fff; /* keep button text white for contrast */
+  padding:.6rem 1.2rem;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  transition:background .2s;
+}
+
+.hero-call:hover {
+  background:#7a5ae6;
+}
+
+.hero-hours {
+  margin-top:.5rem;
+  font-size:.95rem;
+  color:#000; /* black */
+}
+
+.hero-hours .status {
+  color:#ff6961; /* keep "Closed" red */
+}
+
+@media (max-width:768px) {
+  .hero {
+    min-height:50vh;
+    padding:2rem 1rem;
+  }
+}
+
 
 /* Announcement Bar */
 .announcement-bar{background:var(--brand);color:#fff;padding:.6rem;font-size:.95rem;text-align:center}
@@ -207,5 +274,6 @@ p { margin:0 0 1.25rem; color:#444; }
 /* Footer responsiveness */
 @media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.footer-grid{grid-template-columns:1fr}}
+
 
 
