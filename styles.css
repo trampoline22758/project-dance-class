@@ -110,7 +110,7 @@ p { margin:0 0 1.25rem; color:#444; }
 
 /* ===================== Hero ===================== */
 .hero{position:relative;width:100%;min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden}
-.hero-background{position:absolute;inset:0;background:url('/images/hero-dancers-1920.webp') center/cover no-repeat}
+.hero-background{position:absolute;inset:0;background:url('/herobanner.JPG') center/cover no-repeat}
 .hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.45)}
 .hero-content{position:relative;z-index:1;padding:1rem;max-width:800px}
 .hero h1{font-size:clamp(1.9rem,4vw,3rem);font-weight:700;line-height:1.2;color:#fff}
@@ -207,3 +207,4 @@ p { margin:0 0 1.25rem; color:#444; }
 /* Footer responsiveness */
 @media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.footer-grid{grid-template-columns:1fr}}
+
