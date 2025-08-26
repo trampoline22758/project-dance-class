@@ -33,3 +33,15 @@ registration-form.docx
 # Backup files
 *~
 *.swp
+#vs
+.vscode/
+.vs/
+*.code-workspace
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.pidb
+*.booproj
+
