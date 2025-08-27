@@ -1,43 +1,25 @@
-# OS / Editor junk
+####################################
+# OS / Editor Junk
+####################################
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Icon?
 *.log
-
-# Node / build tools (if you use them later)
-node_modules/
-dist/
-build/
-
-# Environment files
-.env
-.env.local
-.env.*
-
-# Cache
-.cache/
 *.tmp
-
-# Generated assets
-*.map
-
-# Deployment artifacts
-.vercel/
-.netlify/
-output/
-
-# Personal / private docs
-registration-form.docx
-*.rtf
-*.odt
-
-# Backup files
-*~
 *.swp
-#vs
+*~
+.nfs*
+
+####################################
+# IDE / Editor Settings
+####################################
+# VS Code
 .vscode/
-.vs/
 *.code-workspace
-.idea/
+
+# Visual Studio
+.vs/
 *.suo
 *.user
 *.userosscache
@@ -45,3 +27,105 @@ registration-form.docx
 *.pidb
 *.booproj
 
+# JetBrains IDEs (WebStorm, IntelliJ, etc.)
+.idea/
+*.iml
+
+# Other editors
+*.kate-swp
+*~lock.*
+*.bak
+
+####################################
+# Node / JS Build Tools
+####################################
+node_modules/
+dist/
+build/
+.cache/
+.next/
+out/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp.*
+.pnp.js
+
+####################################
+# Python (if used later)
+####################################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.egg-info/
+.eggs/
+.venv/
+env/
+venv/
+
+####################################
+# Java / C# (if used later)
+####################################
+*.class
+*.jar
+*.war
+*.ear
+target/
+bin/
+obj/
+*.dll
+*.exe
+
+####################################
+# Environment / Secrets
+####################################
+.env
+.env.local
+.env.development
+.env.production
+.env.*.local
+*.key
+*.pem
+
+####################################
+# Deployment / Hosting
+####################################
+.vercel/
+.netlify/
+output/
+firebase-debug.log
+functions/node_modules/
+functions/dist/
+
+####################################
+# Misc. Generated Assets
+####################################
+*.map
+*.gz
+*.zip
+*.tar
+*.tgz
+
+####################################
+# Personal / Private Docs
+####################################
+*.docx
+*.rtf
+*.odt
+*.pdf
+*.numbers
+*.pages
+*.key
+
+####################################
+# Backups
+####################################
+*.bak
+*.tmp
+*.swp
+*~
+*.orig
+*.rej
