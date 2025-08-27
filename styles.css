@@ -870,31 +870,7 @@ p {
 .hero-background.tap {
     background: url('/images/tap1.JPG') center/cover no-repeat;
 }
-/* ===================== Dropdown UX Fix ===================== */
-
-/* Show dropdown on hover (desktop) */
-.has-dropdown:hover > .dropdown,
-.has-dropdown.open > .dropdown {
-    display: block;
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* Smooth fade-in */
-.dropdown {
-    display: none;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-}
-
-    /* Keep it open while hovering inside */
-    .dropdown:hover {
-        display: block;
-        opacity: 1;
-        pointer-events: auto;
-    }
-/* Dropdown defaults */
+/* ===================== Dropdown ===================== */
 .has-dropdown .dropdown {
     display: none;
     opacity: 0;
@@ -902,14 +878,14 @@ p {
     transition: opacity 0.2s ease;
 }
 
-/* Show dropdown on hover (desktop) */
+/* Desktop hover */
 .has-dropdown:hover > .dropdown {
     display: block;
     opacity: 1;
     pointer-events: auto;
 }
 
-/* Show dropdown when JS adds .open (mobile/tablet) */
+/* Mobile open state (set by JS) */
 .has-dropdown.open > .dropdown {
     display: block;
     opacity: 1;
