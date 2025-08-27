@@ -355,5 +355,33 @@
 
     <!-- Accessibility helper -->
     <script src="https://app.embed.im/accessibility.js" defer></script>
+    <script>
+        document.querySelectorAll(".has-dropdown > a").forEach(link => {
+            let parent = link.parentElement;
+
+            link.addEventListener("touchstart", function (e) {
+                if (!parent.classList.contains("open")) {
+                    e.preventDefault(); // stop link from firing
+                    // Close other open dropdowns
+                    document.querySelectorAll(".has-dropdown.open")
+                        .forEach(el => el.classList.remove("open"));
+                    // Open this one
+                    parent.classList.add("open");
+                } else {
+                    // Second tap = follow link
+                    parent.classList.remove("open");
+                }
+            });
+        });
+
+        // Close dropdown if you tap outside
+        document.addEventListener("touchstart", function (e) {
+            if (!e.target.closest(".has-dropdown")) {
+                document.querySelectorAll(".has-dropdown.open")
+                    .forEach(el => el.classList.remove("open"));
+            }
+        });
+    </script>
+
 </body>
 </html>
