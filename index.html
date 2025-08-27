@@ -325,401 +325,1051 @@
             </script>
         </footer>
     </main>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Update year in footer
-            const yearEl = document.getElementById("year");
-            if (yearEl) yearEl.textContent = new Date().getFullYear();
+        <!-- Meta & SEO -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Miss Kim's Dance Class in Chesterfield, MO — ballet, jazz, hip-hop, contemporary, pom-poms, musical theater, tumbling, acrobatics, aerial, competition teams. Free trial, fair pricing, small classes since 1994." />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href="https://www.misskimsdanceclass.com/" />
 
-            // Mobile nav toggle
-            const navToggle = document.querySelector(".nav-toggle");
-            const menu = document.getElementById("primary-menu");
-            if (navToggle && menu) {
-                navToggle.addEventListener("click", () => {
-                    const expanded = navToggle.getAttribute("aria-expanded") === "true";
-                    navToggle.setAttribute("aria-expanded", String(!expanded));
-                    menu.classList.toggle("open");
-                });
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Miss Kim's Dance Class — Chesterfield, MO" />
+        <meta property="og:description" content="Free trial class · Fair pricing · Small classes · Since 1994. Register today." />
+        <meta property="og:url" content="https://www.misskimsdanceclass.com/" />
+        <meta property="og:image" content="https://www.misskimsdanceclass.com/og/hero.JPG" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Miss Kim's Dance Class — Chesterfield, MO" />
+        <meta name="twitter:description" content="Free trial class · Fair pricing · Small classes · Since 1994." />
+        <meta name="twitter:image" content="https://www.misskimsdanceclass.com/og/hero.JPG" />
+
+        <!-- Favicons -->
+        <meta name="theme-color" content="#5f35b0" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="/styles.css" />
+
+        <!-- Preload hero image (critical for LCP) -->
+        <link rel="preload" as="image" href="/photos/herobanner.JPG" fetchpriority="high" />
+
+        <!-- Local Business JSON-LD -->
+        <script type="application/ld+json">
+            {
+              "@context":"https://schema.org",
+              "@type":"DanceSchool",
+              "@id":"https://www.misskimsdanceclass.com/#org",
+              "name":"Miss Kim's Dance Class",
+              "url":"https://www.misskimsdanceclass.com/",
+              "telephone":"+1-314-542-0608",
+              "email":"misskimdances@yahoo.com",
+              "image":"https://www.misskimsdanceclass.com/og/hero.JPG",
+              "logo":"https://www.misskimsdanceclass.com/logo.webp",
+              "address":{
+                "@type":"PostalAddress",
+                "streetAddress":"14278 Ladue Rd",
+                "addressLocality":"Chesterfield",
+                "addressRegion":"MO",
+                "postalCode":"63017",
+                "addressCountry":"US"
+              },
+              "openingHoursSpecification":[
+                {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"13:00","closes":"21:00"},
+                {"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"13:00","closes":"18:00"},
+                {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"14:00"}
+              ],
+              "paymentAccepted":["Cash","Check","PayPal","Venmo"],
+              "priceRange":"$$",
+              "sameAs":[
+                "https://www.facebook.com/yourpage",
+                "https://www.instagram.com/yourpage"
+              ]
             }
+        </script>
 
-            // Dropdowns
-            const dropdownParents = document.querySelectorAll(".has-dropdown");
+        <title>Miss Kim's Dance Class — Chesterfield, MO | Dance Lessons & Registration</title>
 
-            dropdownParents.forEach(parent => {
-                const toggleBtn = parent.querySelector(".dropdown-toggle");
+        <!-- Defer scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+        <script defer src="https://speed-insights.vercel.com/script.js"></script>
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="IwChUXMq+7JlXJl9hXKZKg" async></script>
+        <script defer src="https://vercel.com/analytics/script.js"></script>
+    </head>
+    <body id="dmRoot" class="dmRoot dmResponsiveBody">
+        <!-- Skip Link -->
+        <a href="#main-content" class="skip-link">Skip to main content</a>
 
-                if (!toggleBtn) return;
+        <!-- Sticky Top Bar / Nav -->
+        <div class="topbar" role="navigation" aria-label="Primary">
+            <div class="topbar-inner">
+                <a class="brand-mini" href="/" aria-label="Miss Kim's Dance Class Home">Miss Kim’s</a>
+                <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">Menu</button>
+                <ul id="primary-menu" class="menu" role="menubar">
+                    <li role="none"><a role="menuitem" href="/">Home</a></li>
+                    <li role="none" class="has-dropdown">
+                        <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Other Dance &amp; Movement</button>
+                        <ul class="dropdown" role="menu" aria-label="Other Dance & Movement">
+                            <li role="none"><a role="menuitem" href="/pom-poms-classes">Pom-Poms</a></li>
+                            <li role="none"><a role="menuitem" href="/contemporary-dance-classes">Contemporary Dance</a></li>
+                            <li role="none"><a role="menuitem" href="/hip-hop-dance-classes">Hip-Hop Dance</a></li>
+                            <li role="none"><a role="menuitem" href="/musical-theater-classes">Musical Theater</a></li>
+                            <li role="none"><a role="menuitem" href="/lyrical-dance-classes">Lyrical Dance</a></li>
+                            <li role="none"><a role="menuitem" href="/tumbling-classes">Tumbling</a></li>
+                            <li role="none"><a role="menuitem" href="/acrobatics-classes">Acrobatics</a></li>
+                            <li role="none"><a role="menuitem" href="/aerial-classes">Aerial</a></li>
+                            <li role="none"><a role="menuitem" href="/competition-teams">Competition</a></li>
+                        </ul>
+                    </li>
+                    <li role="none"><a role="menuitem" href="#reviews">Reviews</a></li>
+                    <li role="none"><a role="menuitem" href="/summer">Summer</a></li>
+                    <li role="none"><a role="menuitem" href="/pricing">Pricing</a></li>
+                    <li role="none"><a role="menuitem" href="/schedule">Schedule</a></li>
+                    <li role="none" class="menu-right">
+                        <a role="menuitem" class="btn btn--primary" href="/registration">Registration Form</a>
+                    </li>
+                    <li role="none">
+                        <a role="menuitem" class="btn btn--ghost btn--sm" href="tel:+13145420608">Call (314) 542-0608</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-                // Desktop hover
-                parent.addEventListener("mouseenter", () => {
-                    if (window.innerWidth > 920) {
-                        parent.classList.add("open");
-                        toggleBtn.setAttribute("aria-expanded", "true");
+        <!-- Hero -->
+        <main id="main-content">
+            <section class="hero" aria-labelledby="hero-title">
+                <div class="hero-background" aria-hidden="true"></div>
+                <div class="hero-content">
+                    <h1 id="hero-title">Dance Classes &amp; Instruction in Chesterfield, MO</h1>
+                    <p class="hero-tagline">Free Trial Class · Fair Prices · Class Cards Never Expire</p>
+                    <a href="tel:+13145420608" class="hero-call" aria-label="Call Miss Kim's Dance Class at 314 542 0608">📞 (314) 542-0608</a>
+                    <p class="hero-hours">Hours: <span class="status">Closed</span> · Opens 1:00 PM</p>
+                </div>
+            </section>
+
+            <!-- Classes grid -->
+            <section class="dance-classes" aria-labelledby="classes-title">
+                <h2 id="classes-title" class="sr-only">Dance Class Styles</h2>
+
+                <!-- Tap -->
+                <section id="tap-dance" class="dance-class">
+                    <div class="dance-image">
+                        <img src="/photos/tap1.JPG" width="560" height="360" alt="Tap dance class in Chesterfield, MO for all ages" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dance-info">
+                        <h3>Tap Dance Classes in Chesterfield, MO</h3>
+                        <p>Learn timing, coordination, and musicality in a fun, supportive environment. We guide you from basic steps to advanced routines.</p>
+                        <a href="/tap-dance-classes" class="btn-primary">View Class Details</a>
+                    </div>
+                </section>
+
+                <!-- Ballet -->
+                <section id="ballet-dance" class="dance-class">
+                    <div class="dance-image">
+                        <img src="/photos/tap9.JPG" width="560" height="360" alt="Ballet dance lessons in Chesterfield, Missouri" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dance-info">
+                        <h3>Ballet Dance Lessons in Chesterfield, MO</h3>
+                        <p>Build posture, grace, and artistry. From beginner to advanced, small groups ensure personalized attention.</p>
+                        <a href="/ballet-dance-classes" class="btn-primary">View Class Details</a>
+                    </div>
+                </section>
+
+                <!-- Jazz -->
+                <section id="jazz-dance" class="dance-class">
+                    <div class="dance-image">
+                        <img src="/photos/jazz1.JPG" width="560" height="360" alt="Jazz dance classes in Chesterfield, MO including Broadway and contemporary" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dance-info">
+                        <h3>Jazz Dance Classes in Chesterfield, MO</h3>
+                        <p>From Broadway-inspired jazz to contemporary styles, enjoy energetic choreography and supportive coaching.</p>
+                        <a href="/jazz-dance-classes" class="btn-primary">View Class Details</a>
+                    </div>
+                </section>
+
+                <!-- Pom-Poms -->
+                <section id="pom-poms" class="dance-class">
+                    <div class="dance-image">
+                        <img src="/photos/pompom.jpg" width="560" height="360" alt="Pom-pom cheer and dance classes in Chesterfield, MO" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dance-info">
+                        <h3>Pom-Pom Cheer Dance in Chesterfield, MO</h3>
+                        <p>High-energy classes that combine cheerleading skills with rhythm and teamwork. Great for confidence.</p>
+                        <a href="/pom-poms-classes" class="btn-primary">View Class Details</a>
+                    </div>
+                </section>
+
+                <!-- Contemporary -->
+                <section id="contemporary-dance" class="dance-class">
+                    <div class="dance-image">
+                        <img src="/photos/contemporary1.JPG" width="560" height="360" alt="Contemporary dance classes in Chesterfield, MO" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dance-info">
+                        <h3>Contemporary Dance Classes in Chesterfield, MO</h3>
+                        <p>Express emotion and storytelling through fluid movement and floorwork. Choreography tailored to your abilities.</p>
+                        <a href="/contemporary-dance-classes" class="btn-primary">View Class Details</a>
+                    </div>
+                </section>
+
+                <!-- Hip-Hop -->
+                <section id="hip-hop-dance" class="dance-class">
+                    <div class="dance-image">
+                        <img src="/photos/Hiphop1.JPG" width="560" height="360" alt="Hip-hop dance lessons in Chesterfield, MO for kids, teens, and adults" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dance-info">
+                        <h3>Hip-Hop Dance Classes in Chesterfield, MO</h3>
+                        <p>Learn upbeat hip-hop moves, popping, locking, and freestyle. Build rhythm and confidence at any level.</p>
+                        <a href="/hip-hop-dance-classes" class="btn-primary">View Class Details</a>
+                    </div>
+                </section>
+
+                <!-- Musical Theater -->
+                <section id="musical-theater" class="dance-class">
+                    <div class="dance-image">
+                        <img src="/photos/musicaltheatre.JPG" width="560" height="360" alt="Musical theater dance and acting classes in Chesterfield, Missouri" loading="lazy" decoding="async">
+                    </div>
+                    <div class="dance-info">
+                        <h3>Musical Theater Dance in Chesterfield, MO</h3>
+                        <p>Combine singing, acting, and dancing while building stage presence, confidence, and creativity.</p>
+                        <a href="/musical-theater-classes" class="btn-primary">View Class Details</a>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Instructors -->
+            <section class="instructors" aria-labelledby="instructors-title">
+                <div class="container">
+                    <h2 id="instructors-title">Meet Our Dancing Instructors</h2>
+                    <ul class="instructor-grid" role="list">
+                        <li class="instructor-card"><img src="/kim-revie-buchheit.webp" alt="Kim Revie Buchheit, founder and owner of Miss Kim’s Dance Class in Chesterfield, MO" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Kim Revie Buchheit</h3><p class="instructor-role">Founder &amp; Owner</p></li>
+                        <li class="instructor-card"><img src="/devin-revie.webp" alt="Devin Revie, dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Devin Revie</h3><p class="instructor-role">Instructor</p></li>
+                        <li class="instructor-card"><img src="/danine-preston.webp" alt="Danine Preston, musical theater and dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Danine Preston</h3><p class="instructor-role">Instructor</p></li>
+                        <li class="instructor-card"><img src="/juliette-hilbert.webp" alt="Juliette Hilbert, tap and aerial silks instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Juliette Hilbert</h3><p class="instructor-role">Instructor</p></li>
+                        <li class="instructor-card"><img src="/megan-bolden.webp" alt="Megan Bolden, ballet, jazz, and contemporary dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Megan Bolden</h3><p class="instructor-role">Instructor</p></li>
+                        <li class="instructor-card"><img src="/mike-buck.webp" alt="Mike Buck, tap dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Mike Buck (Mr. Mike)</h3><p class="instructor-role">Instructor</p></li>
+                        <li class="instructor-card"><img src="/julia-lucarelli.webp" alt="Julia Lucarelli, ballet and contemporary dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Julia Lucarelli</h3><p class="instructor-role">Instructor</p></li>
+                        <li class="instructor-card"><img src="/javi-perez.webp" alt="Javi Perez, hip-hop and jazz funk dance instructor at Miss Kim’s Dance Class" width="280" height="320" loading="lazy" decoding="async"><h3 class="instructor-name">Javi Perez</h3><p class="instructor-role">Instructor</p></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Reviews -->
+            <section id="reviews" class="reviews" aria-labelledby="reviews-title">
+                <div class="container">
+                    <h2 id="reviews-title">What Families Are Saying</h2>
+                    <div class="review-list">
+                        <figure class="review"><blockquote>“This isn’t just a dance studio—it’s a family. Our kids gained skill and confidence.”</blockquote><figcaption><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span class="reviewer">Bethani</span></figcaption></figure>
+                        <figure class="review"><blockquote>“Teachers are kind and experienced. Small classes mean real attention.”</blockquote><figcaption><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span class="reviewer">Angela</span></figcaption></figure>
+                        <figure class="review"><blockquote>“Fair pricing, flexible schedule, and a welcoming community. Highly recommend.”</blockquote><figcaption><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span class="reviewer">David</span></figcaption></figure>
+                    </div>
+                    <p class="cta-inline">
+                        <a class="btn btn--primary" href="/reviews">Read More Reviews</a>
+                        <a class="btn btn--ghost" href="https://g.page/r/YourGoogleReviewLink" rel="noopener nofollow" target="_blank">Write a Google Review</a>
+                        <a class="btn btn--ghost" href="https://www.facebook.com/yourpage/reviews/" rel="noopener nofollow" target="_blank">Write a Facebook Review</a>
+                    </p>
+                </div>
+            </section>
+
+            <!-- About -->
+            <section class="about-teaser" aria-labelledby="about-title">
+                <div class="container about-wrap">
+                    <div class="about-copy">
+                        <h2 id="about-title">Learn More About Miss Kim’s Dance Class</h2>
+                        <p>Located in Chesterfield, MO, we teach ballet, jazz, contemporary, hip-hop, pom-pom, and musical theater for kids, teens, and adults. Since 1994 we’ve focused on small class sizes, fair pricing, and flexible schedules.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="seo-footer" aria-labelledby="footer-title">
+                <div class="container footer-grid">
+                    <section class="footer-block">
+                        <h2 id="footer-title" class="footer-heading">Miss Kim’s Dance Class</h2>
+                        <address class="footer-nap">
+                            14278 Ladue Rd<br />
+                            Chesterfield, MO 63017<br />
+                            <a href="tel:+13145420608">(314) 542-0608</a><br />
+                            <a href="tel:+13144358688">Call or text: (314) 435-8688</a>
+                        </address>
+                        <p><a href="https://maps.google.com/?q=Miss+Kim's+Dance+Class+Chesterfield+MO" rel="noopener" target="_blank">View on Google Maps</a></p>
+                    </section>
+                    <section class="footer-block">
+                        <h3 class="footer-heading">Studio Hours</h3>
+                        <table class="hours" aria-label="Studio Hours">
+                            <tbody>
+                                <tr><th>Mon–Thu</th><td>1:00 PM – 9:00 PM</td></tr>
+                                <tr><th>Fri</th><td>1:00 PM – 6:00 PM</td></tr>
+                                <tr><th>Sat</th><td>9:00 AM – 2:00 PM</td></tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    <nav class="footer-block footer-links" aria-label="Quick links">
+                        <h3 class="footer-heading">Quick Links</h3>
+                        <ul>
+                            <li><a href="/registration">Registration</a></li>
+                            <li><a href="/schedule">Class Schedule</a></li>
+                            <li><a href="/sitemap.xml">Sitemap</a></li>
+                        </ul>
+                    </nav>
+                    <section class="footer-block">
+                        <h3 class="footer-heading">FAQs</h3>
+                        <details><summary>Do you offer a free trial dance class?</summary><p>Yes — book a <a href="/free-trial">free trial</a> to try any beginner class.</p></details>
+                        <details><summary>What ages do you teach?</summary><p>We offer classes for kids, teens, and adults. See <a href="/classes">classes</a> for levels.</p></details>
+                    </section>
+                </div>
+                <div class="container ratings-strip" aria-label="Ratings and memberships">
+                    <p><strong>Trusted by families since 1994</strong> · ⭐ Rated highly on Google &amp; Facebook</p>
+                </div>
+                <a class="bbb-badge" href="https://www.bbb.org/us/mo/chesterfield/profile/dance-instruction/miss-kims-dance-class-0734-110210285/#sealclick" target="_blank" rel="nofollow noopener" aria-label="BBB Business Review for Miss Kim's Dance Class (opens in a new tab)">
+                    <img src="https://seal-stlouis.bbb.org/seals/blue-seal-293-61-bbb-110210285.png" alt="BBB Business Review: Miss Kim's Dance Class" loading="lazy" decoding="async" />
+                </a>
+                <div class="container footer-meta">
+                    <p>&copy; <span id="year"></span> Miss Kim’s Dance Class · Chesterfield, Missouri</p>
+                </div>
+                <!-- FAQ JSON-LD -->
+                <script type="application/ld+json">
+                    {
+                      "@context":"https://schema.org",
+                      "@type":"FAQPage",
+                      "mainEntity":[
+                        {"@type":"Question","name":"Do you offer a free trial dance class?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can book a free trial to try any beginner class."}},
+                        {"@type":"Question","name":"What ages do you teach?","acceptedAnswer":{"@type":"Answer","text":"We offer classes for kids, teens, and adults with multiple levels."}}
+                      ]
                     }
-                });
-                parent.addEventListener("mouseleave", () => {
-                    if (window.innerWidth > 920) {
-                        parent.classList.remove("open");
-                        toggleBtn.setAttribute("aria-expanded", "false");
-                    }
-                });
+                </script>
+            </footer>
+        </main>
 
-                // Mobile / tablet click
-                toggleBtn.addEventListener("click", e => {
-                    if (window.innerWidth <= 920) {
-                        e.preventDefault();
-                        const isOpen = parent.classList.contains("open");
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                // Update year in footer
+                const yearEl = document.getElementById("year");
+                if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-                        // close others
-                        dropdownParents.forEach(p => {
-                            p.classList.remove("open");
-                            const btn = p.querySelector(".dropdown-toggle");
-                            if (btn) btn.setAttribute("aria-expanded", "false");
-                        });
+                // Mobile nav toggle
+                const navToggle = document.querySelector(".nav-toggle");
+                const menu = document.getElementById("primary-menu");
+                if (navToggle && menu) {
+                    navToggle.addEventListener("click", () => {
+                        const expanded = navToggle.getAttribute("aria-expanded") === "true";
+                        navToggle.setAttribute("aria-expanded", String(!expanded));
+                        menu.classList.toggle("open");
+                    });
+                }
 
-                        // toggle this
-                        if (!isOpen) {
+                // Dropdowns
+                const dropdownParents = document.querySelectorAll(".has-dropdown");
+
+                dropdownParents.forEach(parent => {
+                    const toggleBtn = parent.querySelector(".dropdown-toggle");
+
+                    if (!toggleBtn) return;
+
+                    // Desktop hover
+                    parent.addEventListener("mouseenter", () => {
+                        if (window.innerWidth > 920) {
                             parent.classList.add("open");
                             toggleBtn.setAttribute("aria-expanded", "true");
                         }
-                    }
-                });
-            });
-
-            // Close all dropdowns if click/tap outside
-            document.addEventListener("click", e => {
-                if (!e.target.closest(".has-dropdown")) {
-                    dropdownParents.forEach(parent => {
-                        parent.classList.remove("open");
-                        const btn = parent.querySelector(".dropdown-toggle");
-                        if (btn) btn.setAttribute("aria-expanded", "false");
                     });
-                }
-            });
-        });
-    </script>
-
-
-    <!-- Accessibility helper -->
-    <script src="https://app.embed.im/accessibility.js" defer></script>
-    <script>
-        // Year auto-update
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
-    <!-- Vercel Speed Insights init -->
-    <script>
-        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) };
-        si('pageview');
-    </script>
-    <!-- ====================== PERFORMANCE & SEO SUPERPACK ====================== -->
-    <!-- 1. Lazy-load images & iframes -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll("img, iframe").forEach(el => {
-                if (!el.hasAttribute("loading")) el.setAttribute("loading", "lazy");
-                if (!el.hasAttribute("decoding")) el.setAttribute("decoding", "async");
-            });
-        });
-    </script>
-
-    <!-- 2. WebP / AVIF fallback checker -->
-    <script>
-        (function () {
-            const img = new Image();
-            img.onload = img.onerror = function () {
-                document.documentElement.classList.add((img.height === 2) ? 'avif' : 'no-avif');
-            };
-            img.src = "data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjFhdmlmAA...";
-        })();
-    </script>
-
-    <!-- 3. Add canonical link if missing -->
-    <script>
-        if (!document.querySelector("link[rel='canonical']")) {
-            const canonical = document.createElement("link");
-            canonical.rel = "canonical";
-            canonical.href = window.location.href.split("?")[0];
-            document.head.appendChild(canonical);
-        }
-    </script>
-
-    <!-- 4. Prefetch internal links (instant navigation like Next.js) -->
-    <script>
-        if ("IntersectionObserver" in window) {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const href = entry.target.getAttribute("href");
-                        if (href && href.startsWith("/") && !href.includes("#")) {
-                            const prefetch = document.createElement("link");
-                            prefetch.rel = "prefetch";
-                            prefetch.href = href;
-                            document.head.appendChild(prefetch);
-                            observer.unobserve(entry.target);
+                    parent.addEventListener("mouseleave", () => {
+                        if (window.innerWidth > 920) {
+                            parent.classList.remove("open");
+                            toggleBtn.setAttribute("aria-expanded", "false");
                         }
+                    });
+
+                    // Mobile / tablet click
+                    toggleBtn.addEventListener("click", e => {
+                        if (window.innerWidth <= 920) {
+                            e.preventDefault();
+                            const isOpen = parent.classList.contains("open");
+
+                            // close others
+                            dropdownParents.forEach(p => {
+                                p.classList.remove("open");
+                                const btn = p.querySelector(".dropdown-toggle");
+                                if (btn) btn.setAttribute("aria-expanded", "false");
+                            });
+
+                            // toggle this
+                            if (!isOpen) {
+                                parent.classList.add("open");
+                                toggleBtn.setAttribute("aria-expanded", "true");
+                            }
+                        }
+                    });
+                });
+
+                // Close all dropdowns if click/tap outside
+                document.addEventListener("click", e => {
+                    if (!e.target.closest(".has-dropdown")) {
+                        dropdownParents.forEach(parent => {
+                            parent.classList.remove("open");
+                            const btn = parent.querySelector(".dropdown-toggle");
+                            if (btn) btn.setAttribute("aria-expanded", "false");
+                        });
                     }
                 });
             });
-            document.querySelectorAll("a[href]").forEach(a => observer.observe(a));
-        }
-    </script>
+        </script>
 
-    <!-- 5. Smooth scrolling for anchors -->
-    <script>
-        document.addEventListener("click", e => {
-            const a = e.target.closest("a[href^='#']");
-            if (a) {
-                const target = document.querySelector(a.getAttribute("href"));
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: "smooth" });
-                }
-            }
-        });
-    </script>
 
-    <!-- 6. Schema markup for site search -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "url": "https://www.misskimsdanceclass.com/",
-          "name": "Miss Kim's Dance Class",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://www.misskimsdanceclass.com/?s={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        }
-    </script>
-
-    <!-- 7. Scroll-to-top button -->
-    <script>
-        const scrollBtn = document.createElement("button");
-        scrollBtn.textContent = "⬆";
-        scrollBtn.id = "scrollTop";
-        Object.assign(scrollBtn.style, {
-            position: "fixed", bottom: "20px", right: "20px",
-            display: "none", padding: "10px", borderRadius: "50%",
-            fontSize: "20px", zIndex: 1000, cursor: "pointer"
-        });
-        document.body.appendChild(scrollBtn);
-        window.addEventListener("scroll", () => {
-            scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
-        });
-        scrollBtn.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-    </script>
-
-    <!-- 8. Auto external link rel="noopener nofollow" -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll("a[href^='http']").forEach(a => {
-                if (!a.href.includes(location.hostname)) {
-                    a.setAttribute("rel", "noopener nofollow external");
-                    a.setAttribute("target", "_blank");
-                }
-            });
-        });
-    </script>
-
-    <!-- 9. Preconnect to speed up external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://analytics.google.com" crossorigin>
-
-    <!-- 10. Structured data for Local Business -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "name": "Miss Kim's Dance Class",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "14278 Ladue Rd",
-            "addressLocality": "Chesterfield",
-            "addressRegion": "MO",
-            "postalCode": "63017",
-            "addressCountry": "US"
-          },
-          "telephone": "+1-314-542-0608",
-          "url": "https://www.misskimsdanceclass.com/"
-        }
-    </script>
-
-    <!-- 11. CLS fix: reserve space for images -->
-    <script>
-        document.querySelectorAll("img:not([width])").forEach(img => {
-            if (img.naturalWidth && img.naturalHeight) {
-                img.setAttribute("width", img.naturalWidth);
-                img.setAttribute("height", img.naturalHeight);
-            }
-        });
-    </script>
-
-    <!-- 12. Track Core Web Vitals (for SEO ranking signals) -->
-    <script src="https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js"></script>
-    <script>
-        webVitals.getCLS(console.log);
-        webVitals.getFID(console.log);
-        webVitals.getLCP(console.log);
-    </script>
-
-    <!-- 13. Add “last updated” structured data -->
-    <script type="application/ld+json">
-        {
-          "@context":"https://schema.org",
-          "@type":"WebPage",
-          "dateModified":"<?= new Date().toISOString().split('T')[0] ?>"
-        }
-    </script>
-
-    <!-- 14. Accessibility: keyboard focus outline helper -->
-    <script>
-        document.body.addEventListener('keyup', function (e) {
-            if (e.key === "Tab") document.body.classList.add("user-is-tabbing");
-        });
-    </script>
-
-    <!-- 15. Detect adblockers (optional analytics) -->
-    <script>
-        setTimeout(() => {
-            const ad = document.createElement("div");
-            ad.innerHTML = "&nbsp;";
-            ad.className = "adsbox";
-            ad.style.position = "absolute";
-            ad.style.left = "-9999px";
-            document.body.appendChild(ad);
-            if (ad.offsetHeight === 0) console.log("Adblocker detected");
-            document.body.removeChild(ad);
-        }, 200);
-    </script>
-
-    <!-- 16. Service Worker (for caching / PWA) -->
-    <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("/sw.js").catch(console.error);
-        }
-    </script>
-
-    <!-- 17. Preload hero image (LCP boost) -->
-    <link rel="preload" as="image" href="/photos/herobanner.JPG" fetchpriority="high">
-
-    <!-- 18. Add noindex to search pages -->
-    <script>
-        if (window.location.search.includes("s=")) {
-            const noindex = document.createElement("meta");
-            noindex.name = "robots";
-            noindex.content = "noindex, follow";
-            document.head.appendChild(noindex);
-        }
-    </script>
-
-    <!-- 19. Console message (branding) -->
-    <script>
-        console.log("%c Miss Kim's Dance Class ", "background: #5f35b0; color: #fff; padding:5px 10px; border-radius:5px;");
-    </script>
-    <script>
-        /* ========== 1. Fade-in + Slide-in on scroll (JS only) ========== */
-        const animateOnScroll = (els, opts = {}) => {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-                        el.style.opacity = "1";
-                        el.style.transform = "translateY(0)";
-                        observer.unobserve(el);
-                    }
+        <!-- Accessibility helper -->
+        <script src="https://app.embed.im/accessibility.js" defer></script>
+        <script>
+            // Year auto-update
+            document.getElementById('year').textContent = new Date().getFullYear();
+        </script>
+        <!-- Vercel Speed Insights init -->
+        <script>
+            window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) };
+            si('pageview');
+        </script>
+        <!-- ====================== PERFORMANCE & SEO SUPERPACK ====================== -->
+        <!-- 1. Lazy-load images & iframes -->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelectorAll("img, iframe").forEach(el => {
+                    if (!el.hasAttribute("loading")) el.setAttribute("loading", "lazy");
+                    if (!el.hasAttribute("decoding")) el.setAttribute("decoding", "async");
                 });
-            }, { threshold: 0.2, ...opts });
-
-            els.forEach(el => {
-                el.style.opacity = "0";
-                el.style.transform = "translateY(20px)";
-                observer.observe(el);
             });
-        };
+        </script>
 
-        // Apply to sections, images, cards
-        document.addEventListener("DOMContentLoaded", () => {
-            animateOnScroll(document.querySelectorAll("section, .dance-class, .instructor-card, img"));
-        });
-
-
-        /* ========== 2. Button micro-bounce ========== */
-        document.querySelectorAll(".btn, .btn-primary, .hero-call").forEach(btn => {
-            btn.addEventListener("mouseenter", () => {
-                btn.animate([{ transform: "scale(1)" }, { transform: "scale(1.05)" }], { duration: 150, fill: "forwards" });
-            });
-            btn.addEventListener("mouseleave", () => {
-                btn.animate([{ transform: "scale(1.05)" }, { transform: "scale(1)" }], { duration: 150, fill: "forwards" });
-            });
-            btn.addEventListener("mousedown", () => {
-                btn.animate([{ transform: "scale(1)" }, { transform: "scale(0.95)" }], { duration: 100, fill: "forwards" });
-            });
-            btn.addEventListener("mouseup", () => {
-                btn.animate([{ transform: "scale(0.95)" }, { transform: "scale(1)" }], { duration: 100, fill: "forwards" });
-            });
-        });
-
-
-        /* ========== 3. Smooth scroll for anchor links ========== */
-        document.addEventListener("click", e => {
-            const link = e.target.closest("a[href^='#']");
-            if (link) {
-                const target = document.querySelector(link.getAttribute("href"));
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: "smooth" });
-                }
-            }
-        });
-
-
-        /* ========== 4. Hero text entrance on load ========== */
-        window.addEventListener("load", () => {
-            const heroEls = document.querySelectorAll(".hero-content h1, .hero-content p, .hero-call");
-            heroEls.forEach((el, i) => {
-                el.style.opacity = "0";
-                el.style.transform = "translateY(40px)";
-                setTimeout(() => {
-                    el.animate([
-                        { opacity: 0, transform: "translateY(40px)" },
-                        { opacity: 1, transform: "translateY(0)" }
-                    ], { duration: 700, easing: "ease-out", fill: "forwards" });
-                }, i * 250);
-            });
-        });
-
-
-        /* ========== 5. Scroll-to-top fade button ========== */
-        const scrollBtn = document.createElement("button");
-        scrollBtn.textContent = "⬆";
-        Object.assign(scrollBtn.style, {
-            position: "fixed", bottom: "20px", right: "20px",
-            display: "none", padding: "10px", borderRadius: "50%",
-            fontSize: "20px", zIndex: 1000, cursor: "pointer", opacity: "0"
-        });
-        document.body.appendChild(scrollBtn);
-
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 300 && scrollBtn.style.display === "none") {
-                scrollBtn.style.display = "block";
-                scrollBtn.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: "forwards" });
-            } else if (window.scrollY <= 300 && scrollBtn.style.display === "block") {
-                scrollBtn.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: "forwards" }).onfinish = () => {
-                    scrollBtn.style.display = "none";
+        <!-- 2. WebP / AVIF fallback checker -->
+        <script>
+            (function () {
+                const img = new Image();
+                img.onload = img.onerror = function () {
+                    document.documentElement.classList.add((img.height === 2) ? 'avif' : 'no-avif');
                 };
+                img.src = "data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjFhdmlmAA...";
+            })();
+        </script>
+
+        <!-- 3. Add canonical link if missing -->
+        <script>
+            if (!document.querySelector("link[rel='canonical']")) {
+                const canonical = document.createElement("link");
+                canonical.rel = "canonical";
+                canonical.href = window.location.href.split("?")[0];
+                document.head.appendChild(canonical);
+            }
+        </script>
+
+        <!-- 4. Prefetch internal links (instant navigation like Next.js) -->
+        <script>
+            if ("IntersectionObserver" in window) {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const href = entry.target.getAttribute("href");
+                            if (href && href.startsWith("/") && !href.includes("#")) {
+                                const prefetch = document.createElement("link");
+                                prefetch.rel = "prefetch";
+                                prefetch.href = href;
+                                document.head.appendChild(prefetch);
+                                observer.unobserve(entry.target);
+                            }
+                        }
+                    });
+                });
+                document.querySelectorAll("a[href]").forEach(a => observer.observe(a));
+            }
+        </script>
+
+        <!-- 5. Smooth scrolling for anchors -->
+        <script>
+            document.addEventListener("click", e => {
+                const a = e.target.closest("a[href^='#']");
+                if (a) {
+                    const target = document.querySelector(a.getAttribute("href"));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: "smooth" });
+                    }
+                }
+            });
+        </script>
+
+        <!-- 6. Schema markup for site search -->
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "url": "https://www.misskimsdanceclass.com/",
+              "name": "Miss Kim's Dance Class",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://www.misskimsdanceclass.com/?s={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }
+        </script>
+
+        <!-- 7. Scroll-to-top button -->
+        <script>
+            const scrollBtn = document.createElement("button");
+            scrollBtn.textContent = "⬆";
+            scrollBtn.id = "scrollTop";
+            Object.assign(scrollBtn.style, {
+                position: "fixed", bottom: "20px", right: "20px",
+                display: "none", padding: "10px", borderRadius: "50%",
+                fontSize: "20px", zIndex: 1000, cursor: "pointer"
+            });
+            document.body.appendChild(scrollBtn);
+            window.addEventListener("scroll", () => {
+                scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
+            });
+            scrollBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        </script>
+
+        <!-- 8. Auto external link rel="noopener nofollow" -->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelectorAll("a[href^='http']").forEach(a => {
+                    if (!a.href.includes(location.hostname)) {
+                        a.setAttribute("rel", "noopener nofollow external");
+                        a.setAttribute("target", "_blank");
+                    }
+                });
+            });
+        </script>
+
+        <!-- 9. Preconnect to speed up external domains -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+        <link rel="preconnect" href="https://analytics.google.com" crossorigin>
+
+        <!-- 10. Structured data for Local Business -->
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Miss Kim's Dance Class",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "14278 Ladue Rd",
+                "addressLocality": "Chesterfield",
+                "addressRegion": "MO",
+                "postalCode": "63017",
+                "addressCountry": "US"
+              },
+              "telephone": "+1-314-542-0608",
+              "url": "https://www.misskimsdanceclass.com/"
+            }
+        </script>
+
+        <!-- 11. CLS fix: reserve space for images -->
+        <script>
+            document.querySelectorAll("img:not([width])").forEach(img => {
+                if (img.naturalWidth && img.naturalHeight) {
+                    img.setAttribute("width", img.naturalWidth);
+                    img.setAttribute("height", img.naturalHeight);
+                }
+            });
+        </script>
+
+        <!-- 12. Track Core Web Vitals (for SEO ranking signals) -->
+        <script src="https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js"></script>
+        <script>
+            webVitals.getCLS(console.log);
+            webVitals.getFID(console.log);
+            webVitals.getLCP(console.log);
+        </script>
+
+        <!-- 13. Add “last updated” structured data -->
+        <script type="application/ld+json">
+            {
+              "@context":"https://schema.org",
+              "@type":"WebPage",
+              "dateModified":"<?= new Date().toISOString().split('T')[0] ?>"
+            }
+        </script>
+
+        <!-- 14. Accessibility: keyboard focus outline helper -->
+        <script>
+            document.body.addEventListener('keyup', function (e) {
+                if (e.key === "Tab") document.body.classList.add("user-is-tabbing");
+            });
+        </script>
+
+        <!-- 15. Detect adblockers (optional analytics) -->
+        <script>
+            setTimeout(() => {
+                const ad = document.createElement("div");
+                ad.innerHTML = "&nbsp;";
+                ad.className = "adsbox";
+                ad.style.position = "absolute";
+                ad.style.left = "-9999px";
+                document.body.appendChild(ad);
+                if (ad.offsetHeight === 0) console.log("Adblocker detected");
+                document.body.removeChild(ad);
+            }, 200);
+        </script>
+
+        <!-- 16. Service Worker (for caching / PWA) -->
+        <script>
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("/sw.js").catch(console.error);
+            }
+        </script>
+
+        <!-- 17. Preload hero image (LCP boost) -->
+        <link rel="preload" as="image" href="/photos/herobanner.JPG" fetchpriority="high">
+
+        <!-- 18. Add noindex to search pages -->
+        <script>
+            if (window.location.search.includes("s=")) {
+                const noindex = document.createElement("meta");
+                noindex.name = "robots";
+                noindex.content = "noindex, follow";
+                document.head.appendChild(noindex);
+            }
+        </script>
+
+        <!-- 19. Console message (branding) -->
+        <script>
+            console.log("%c Miss Kim's Dance Class ", "background: #5f35b0; color: #fff; padding:5px 10px; border-radius:5px;");
+        </script>
+        <script>
+            /* ========== 1. Fade-in + Slide-in on scroll (JS only) ========== */
+            const animateOnScroll = (els, opts = {}) => {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const el = entry.target;
+                            el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+                            el.style.opacity = "1";
+                            el.style.transform = "translateY(0)";
+                            observer.unobserve(el);
+                        }
+                    });
+                }, { threshold: 0.2, ...opts });
+
+                els.forEach(el => {
+                    el.style.opacity = "0";
+                    el.style.transform = "translateY(20px)";
+                    observer.observe(el);
+                });
+            };
+
+            // Apply to sections, images, cards
+            document.addEventListener("DOMContentLoaded", () => {
+                animateOnScroll(document.querySelectorAll("section, .dance-class, .instructor-card, img"));
+            });
+
+
+            /* ========== 2. Button micro-bounce ========== */
+            document.querySelectorAll(".btn, .btn-primary, .hero-call").forEach(btn => {
+                btn.addEventListener("mouseenter", () => {
+                    btn.animate([{ transform: "scale(1)" }, { transform: "scale(1.05)" }], { duration: 150, fill: "forwards" });
+                });
+                btn.addEventListener("mouseleave", () => {
+                    btn.animate([{ transform: "scale(1.05)" }, { transform: "scale(1)" }], { duration: 150, fill: "forwards" });
+                });
+                btn.addEventListener("mousedown", () => {
+                    btn.animate([{ transform: "scale(1)" }, { transform: "scale(0.95)" }], { duration: 100, fill: "forwards" });
+                });
+                btn.addEventListener("mouseup", () => {
+                    btn.animate([{ transform: "scale(0.95)" }, { transform: "scale(1)" }], { duration: 100, fill: "forwards" });
+                });
+            });
+
+
+            /* ========== 3. Smooth scroll for anchor links ========== */
+            document.addEventListener("click", e => {
+                const link = e.target.closest("a[href^='#']");
+                if (link) {
+                    const target = document.querySelector(link.getAttribute("href"));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: "smooth" });
+                    }
+                }
+            });
+
+
+            /* ========== 4. Hero text entrance on load ========== */
+            window.addEventListener("load", () => {
+                const heroEls = document.querySelectorAll(".hero-content h1, .hero-content p, .hero-call");
+                heroEls.forEach((el, i) => {
+                    el.style.opacity = "0";
+                    el.style.transform = "translateY(40px)";
+                    setTimeout(() => {
+                        el.animate([
+                            { opacity: 0, transform: "translateY(40px)" },
+                            { opacity: 1, transform: "translateY(0)" }
+                        ], { duration: 700, easing: "ease-out", fill: "forwards" });
+                    }, i * 250);
+                });
+            });
+
+
+            /* ========== 5. Scroll-to-top fade button ========== */
+            const scrollBtn = document.createElement("button");
+            scrollBtn.textContent = "⬆";
+            Object.assign(scrollBtn.style, {
+                position: "fixed", bottom: "20px", right: "20px",
+                display: "none", padding: "10px", borderRadius: "50%",
+                fontSize: "20px", zIndex: 1000, cursor: "pointer", opacity: "0"
+            });
+            document.body.appendChild(scrollBtn);
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 300 && scrollBtn.style.display === "none") {
+                    scrollBtn.style.display = "block";
+                    scrollBtn.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: "forwards" });
+                } else if (window.scrollY <= 300 && scrollBtn.style.display === "block") {
+                    scrollBtn.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: "forwards" }).onfinish = () => {
+                        scrollBtn.style.display = "none";
+                    };
+                }
+            });
+            scrollBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        </script>
+
+
+    </body>
+</html>
+
+
+
+<!-- Accessibility helper -->
+<script src="https://app.embed.im/accessibility.js" defer></script>
+<script>
+    // Year auto-update
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<!-- Vercel Speed Insights init -->
+<script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) };
+    si('pageview');
+</script>
+<!-- ====================== PERFORMANCE & SEO SUPERPACK ====================== -->
+<!-- 1. Lazy-load images & iframes -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("img, iframe").forEach(el => {
+            if (!el.hasAttribute("loading")) el.setAttribute("loading", "lazy");
+            if (!el.hasAttribute("decoding")) el.setAttribute("decoding", "async");
+        });
+    });
+</script>
+
+<!-- 2. WebP / AVIF fallback checker -->
+<script>
+    (function () {
+        const img = new Image();
+        img.onload = img.onerror = function () {
+            document.documentElement.classList.add((img.height === 2) ? 'avif' : 'no-avif');
+        };
+        img.src = "data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjFhdmlmAA...";
+    })();
+</script>
+
+<!-- 3. Add canonical link if missing -->
+<script>
+    if (!document.querySelector("link[rel='canonical']")) {
+        const canonical = document.createElement("link");
+        canonical.rel = "canonical";
+        canonical.href = window.location.href.split("?")[0];
+        document.head.appendChild(canonical);
+    }
+</script>
+
+<!-- 4. Prefetch internal links (instant navigation like Next.js) -->
+<script>
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const href = entry.target.getAttribute("href");
+                    if (href && href.startsWith("/") && !href.includes("#")) {
+                        const prefetch = document.createElement("link");
+                        prefetch.rel = "prefetch";
+                        prefetch.href = href;
+                        document.head.appendChild(prefetch);
+                        observer.unobserve(entry.target);
+                    }
+                }
+            });
+        });
+        document.querySelectorAll("a[href]").forEach(a => observer.observe(a));
+    }
+</script>
+
+<!-- 5. Smooth scrolling for anchors -->
+<script>
+    document.addEventListener("click", e => {
+        const a = e.target.closest("a[href^='#']");
+        if (a) {
+            const target = document.querySelector(a.getAttribute("href"));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    });
+</script>
+
+<!-- 6. Schema markup for site search -->
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://www.misskimsdanceclass.com/",
+      "name": "Miss Kim's Dance Class",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.misskimsdanceclass.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+</script>
+
+<!-- 7. Scroll-to-top button -->
+<script>
+    const scrollBtn = document.createElement("button");
+    scrollBtn.textContent = "⬆";
+    scrollBtn.id = "scrollTop";
+    Object.assign(scrollBtn.style, {
+        position: "fixed", bottom: "20px", right: "20px",
+        display: "none", padding: "10px", borderRadius: "50%",
+        fontSize: "20px", zIndex: 1000, cursor: "pointer"
+    });
+    document.body.appendChild(scrollBtn);
+    window.addEventListener("scroll", () => {
+        scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
+    });
+    scrollBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+</script>
+
+<!-- 8. Auto external link rel="noopener nofollow" -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("a[href^='http']").forEach(a => {
+            if (!a.href.includes(location.hostname)) {
+                a.setAttribute("rel", "noopener nofollow external");
+                a.setAttribute("target", "_blank");
             }
         });
-        scrollBtn.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+</script>
+
+<!-- 9. Preconnect to speed up external domains -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://analytics.google.com" crossorigin>
+
+<!-- 10. Structured data for Local Business -->
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Miss Kim's Dance Class",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "14278 Ladue Rd",
+        "addressLocality": "Chesterfield",
+        "addressRegion": "MO",
+        "postalCode": "63017",
+        "addressCountry": "US"
+      },
+      "telephone": "+1-314-542-0608",
+      "url": "https://www.misskimsdanceclass.com/"
+    }
+</script>
+
+<!-- 11. CLS fix: reserve space for images -->
+<script>
+    document.querySelectorAll("img:not([width])").forEach(img => {
+        if (img.naturalWidth && img.naturalHeight) {
+            img.setAttribute("width", img.naturalWidth);
+            img.setAttribute("height", img.naturalHeight);
+        }
+    });
+</script>
+
+<!-- 12. Track Core Web Vitals (for SEO ranking signals) -->
+<script src="https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js"></script>
+<script>
+    webVitals.getCLS(console.log);
+    webVitals.getFID(console.log);
+    webVitals.getLCP(console.log);
+</script>
+
+<!-- 13. Add “last updated” structured data -->
+<script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"WebPage",
+      "dateModified":"<?= new Date().toISOString().split('T')[0] ?>"
+    }
+</script>
+
+<!-- 14. Accessibility: keyboard focus outline helper -->
+<script>
+    document.body.addEventListener('keyup', function (e) {
+        if (e.key === "Tab") document.body.classList.add("user-is-tabbing");
+    });
+</script>
+
+<!-- 15. Detect adblockers (optional analytics) -->
+<script>
+    setTimeout(() => {
+        const ad = document.createElement("div");
+        ad.innerHTML = "&nbsp;";
+        ad.className = "adsbox";
+        ad.style.position = "absolute";
+        ad.style.left = "-9999px";
+        document.body.appendChild(ad);
+        if (ad.offsetHeight === 0) console.log("Adblocker detected");
+        document.body.removeChild(ad);
+    }, 200);
+</script>
+
+<!-- 16. Service Worker (for caching / PWA) -->
+<script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js").catch(console.error);
+    }
+</script>
+
+<!-- 17. Preload hero image (LCP boost) -->
+<link rel="preload" as="image" href="/photos/herobanner.JPG" fetchpriority="high">
+
+<!-- 18. Add noindex to search pages -->
+<script>
+    if (window.location.search.includes("s=")) {
+        const noindex = document.createElement("meta");
+        noindex.name = "robots";
+        noindex.content = "noindex, follow";
+        document.head.appendChild(noindex);
+    }
+</script>
+
+<!-- 19. Console message (branding) -->
+<script>
+    console.log("%c Miss Kim's Dance Class ", "background: #5f35b0; color: #fff; padding:5px 10px; border-radius:5px;");
+</script>
+<script>
+    /* ========== 1. Fade-in + Slide-in on scroll (JS only) ========== */
+    const animateOnScroll = (els, opts = {}) => {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.2, ...opts });
+
+        els.forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            observer.observe(el);
         });
-    </script>
+    };
+
+    // Apply to sections, images, cards
+    document.addEventListener("DOMContentLoaded", () => {
+        animateOnScroll(document.querySelectorAll("section, .dance-class, .instructor-card, img"));
+    });
+
+
+    /* ========== 2. Button micro-bounce ========== */
+    document.querySelectorAll(".btn, .btn-primary, .hero-call").forEach(btn => {
+        btn.addEventListener("mouseenter", () => {
+            btn.animate([{ transform: "scale(1)" }, { transform: "scale(1.05)" }], { duration: 150, fill: "forwards" });
+        });
+        btn.addEventListener("mouseleave", () => {
+            btn.animate([{ transform: "scale(1.05)" }, { transform: "scale(1)" }], { duration: 150, fill: "forwards" });
+        });
+        btn.addEventListener("mousedown", () => {
+            btn.animate([{ transform: "scale(1)" }, { transform: "scale(0.95)" }], { duration: 100, fill: "forwards" });
+        });
+        btn.addEventListener("mouseup", () => {
+            btn.animate([{ transform: "scale(0.95)" }, { transform: "scale(1)" }], { duration: 100, fill: "forwards" });
+        });
+    });
+
+
+    /* ========== 3. Smooth scroll for anchor links ========== */
+    document.addEventListener("click", e => {
+        const link = e.target.closest("a[href^='#']");
+        if (link) {
+            const target = document.querySelector(link.getAttribute("href"));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    });
+
+
+    /* ========== 4. Hero text entrance on load ========== */
+    window.addEventListener("load", () => {
+        const heroEls = document.querySelectorAll(".hero-content h1, .hero-content p, .hero-call");
+        heroEls.forEach((el, i) => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(40px)";
+            setTimeout(() => {
+                el.animate([
+                    { opacity: 0, transform: "translateY(40px)" },
+                    { opacity: 1, transform: "translateY(0)" }
+                ], { duration: 700, easing: "ease-out", fill: "forwards" });
+            }, i * 250);
+        });
+    });
+
+
+    /* ========== 5. Scroll-to-top fade button ========== */
+    const scrollBtn = document.createElement("button");
+    scrollBtn.textContent = "⬆";
+    Object.assign(scrollBtn.style, {
+        position: "fixed", bottom: "20px", right: "20px",
+        display: "none", padding: "10px", borderRadius: "50%",
+        fontSize: "20px", zIndex: 1000, cursor: "pointer", opacity: "0"
+    });
+    document.body.appendChild(scrollBtn);
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300 && scrollBtn.style.display === "none") {
+            scrollBtn.style.display = "block";
+            scrollBtn.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: "forwards" });
+        } else if (window.scrollY <= 300 && scrollBtn.style.display === "block") {
+            scrollBtn.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: "forwards" }).onfinish = () => {
+                scrollBtn.style.display = "none";
+            };
+        }
+    });
+    scrollBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+</script>
 
 
 </body>
