@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Ahrefs Analytics -->
-    <script src="https://analytics.ahrefs.com/analytics.js" data-key="IwChUXMq+7JlXJl9hXKZKg" async></script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -81,6 +78,9 @@
     <!-- Defer scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script defer src="https://speed-insights.vercel.com/script.js"></script>
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="IwChUXMq+7JlXJl9hXKZKg" async></script>
+    <script defer src="https://vercel.com/analytics/script.js"></script>
 </head>
 <body id="dmRoot" class="dmRoot dmResponsiveBody">
     <!-- Skip Link -->
@@ -382,6 +382,15 @@
             }
         });
     </script>
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) };
+        si('pageview');
+    </script>
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) };
+        si('pageview');
+    </script>
+</body>
 
 </body>
 </html>
