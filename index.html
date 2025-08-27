@@ -326,71 +326,86 @@
         </footer>
     </main>
 
-    <!-- Helpers -->
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-        // Mobile menu
-        const navToggle = document.querySelector('.nav-toggle');
-        const menu = document.getElementById('primary-menu');
-        if (navToggle && menu) {
-            navToggle.addEventListener('click', () => {
-                const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-                navToggle.setAttribute('aria-expanded', String(!expanded));
-                menu.classList.toggle('open');
+        document.addEventListener("DOMContentLoaded", () => {
+            // Update year in footer
+            const yearEl = document.getElementById("year");
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+            // Mobile nav toggle
+            const navToggle = document.querySelector(".nav-toggle");
+            const menu = document.getElementById("primary-menu");
+            if (navToggle && menu) {
+                navToggle.addEventListener("click", () => {
+                    const expanded = navToggle.getAttribute("aria-expanded") === "true";
+                    navToggle.setAttribute("aria-expanded", String(!expanded));
+                    menu.classList.toggle("open");
+                });
+            }
+
+            // Dropdowns
+            const dropdownParents = document.querySelectorAll(".has-dropdown");
+
+            dropdownParents.forEach(parent => {
+                const toggleBtn = parent.querySelector(".dropdown-toggle");
+
+                if (!toggleBtn) return;
+
+                // Desktop hover
+                parent.addEventListener("mouseenter", () => {
+                    if (window.innerWidth > 920) {
+                        parent.classList.add("open");
+                        toggleBtn.setAttribute("aria-expanded", "true");
+                    }
+                });
+                parent.addEventListener("mouseleave", () => {
+                    if (window.innerWidth > 920) {
+                        parent.classList.remove("open");
+                        toggleBtn.setAttribute("aria-expanded", "false");
+                    }
+                });
+
+                // Mobile / tablet click
+                toggleBtn.addEventListener("click", e => {
+                    if (window.innerWidth <= 920) {
+                        e.preventDefault();
+                        const isOpen = parent.classList.contains("open");
+
+                        // close others
+                        dropdownParents.forEach(p => {
+                            p.classList.remove("open");
+                            const btn = p.querySelector(".dropdown-toggle");
+                            if (btn) btn.setAttribute("aria-expanded", "false");
+                        });
+
+                        // toggle this
+                        if (!isOpen) {
+                            parent.classList.add("open");
+                            toggleBtn.setAttribute("aria-expanded", "true");
+                        }
+                    }
+                });
             });
-        }
-        // Dropdown accessibility
-        document.querySelectorAll('.has-dropdown').forEach(parent => {
-            const btn = parent.querySelector('.dropdown-toggle');
-            const drop = parent.querySelector('.dropdown');
-            btn.addEventListener('click', () => {
-                const state = btn.getAttribute('aria-expanded') === 'true';
-                btn.setAttribute('aria-expanded', String(!state));
-                drop.classList.toggle('open');
+
+            // Close all dropdowns if click/tap outside
+            document.addEventListener("click", e => {
+                if (!e.target.closest(".has-dropdown")) {
+                    dropdownParents.forEach(parent => {
+                        parent.classList.remove("open");
+                        const btn = parent.querySelector(".dropdown-toggle");
+                        if (btn) btn.setAttribute("aria-expanded", "false");
+                    });
+                }
             });
-            parent.addEventListener('mouseenter', () => { drop.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); });
-            parent.addEventListener('mouseleave', () => { drop.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); });
         });
     </script>
+
 
     <!-- Accessibility helper -->
     <script src="https://app.embed.im/accessibility.js" defer></script>
     <script>
         // Year auto-update
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Mobile menu toggle
-        const navToggle = document.querySelector('.nav-toggle');
-        const menu = document.getElementById('primary-menu');
-        if (navToggle && menu) {
-            navToggle.addEventListener('click', () => {
-                const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-                navToggle.setAttribute('aria-expanded', String(!expanded));
-                menu.classList.toggle('open');
-            });
-        }
-
-        // Dropdown toggle (desktop hover works via CSS; this handles mobile/touch)
-        document.querySelectorAll('.has-dropdown .dropdown-toggle').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.preventDefault(); // stop jump
-                const parent = btn.closest('.has-dropdown');
-                const isOpen = parent.classList.contains('open');
-
-                // Close all dropdowns first
-                document.querySelectorAll('.has-dropdown').forEach(el => el.classList.remove('open'));
-
-                // Toggle current
-                if (!isOpen) parent.classList.add('open');
-            });
-        });
-
-        // Close dropdown if click/tap outside
-        document.addEventListener('click', e => {
-            if (!e.target.closest('.has-dropdown')) {
-                document.querySelectorAll('.has-dropdown').forEach(el => el.classList.remove('open'));
-            }
-        });
     </script>
     <!-- Vercel Speed Insights init -->
     <script>
