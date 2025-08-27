@@ -389,7 +389,60 @@
     <script>
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) };
         si('pageview');
+    </script><!-- Helpers -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const menu = document.getElementById('primary-menu');
+        if (navToggle && menu) {
+            navToggle.addEventListener('click', () => {
+                const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', String(!expanded));
+                menu.classList.toggle('open');
+            });
+        }
+
+        // Dropdown (desktop hover + mobile click/tap)
+        document.querySelectorAll('.has-dropdown').forEach(parent => {
+            const btn = parent.querySelector('.dropdown-toggle');
+            const drop = parent.querySelector('.dropdown');
+
+            // Desktop hover
+            parent.addEventListener('mouseenter', () => {
+                drop.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+            });
+            parent.addEventListener('mouseleave', () => {
+                drop.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
+            });
+
+            // Mobile tap
+            btn.addEventListener('click', e => {
+                e.preventDefault();
+                const state = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!state));
+                drop.classList.toggle('open');
+            });
+        });
+
+        // Close dropdown if tap/click outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.has-dropdown')) {
+                document.querySelectorAll('.has-dropdown .dropdown.open')
+                    .forEach(el => el.classList.remove('open'));
+                document.querySelectorAll('.has-dropdown .dropdown-toggle')
+                    .forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+            }
+        });
     </script>
-</body>
+
+    <!-- Vercel Speed Insights init -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) };
+        si('pageview');
+    </script>
 </body>
 </html>
