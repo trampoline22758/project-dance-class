@@ -162,18 +162,6 @@ p {
     position: relative
 }
 
-.dropdown {
-    position: absolute;
-    left: 0;
-    top: calc(100% + .4rem);
-    min-width: 250px;
-    background: #231c2e;
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: .75rem;
-    box-shadow: 0 18px 40px rgba(0,0,0,.35);
-    padding: .5rem;
-    display: none
-}
 
 
     .dropdown a {
