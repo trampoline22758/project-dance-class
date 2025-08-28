@@ -175,9 +175,6 @@ p {
     display: none
 }
 
-    .dropdown.open {
-        display: block
-    }
 
     .dropdown a {
         display: block;
@@ -364,7 +361,7 @@ p {
 .hero-background {
     position: absolute;
     inset: 0;
-    background: url('/herobanner.jpg') center/cover no-repeat;
+    background: url('/photos/herobanner.jpg') center/cover no-repeat;
 }
 
 .hero::before {
@@ -870,32 +867,47 @@ p {
 .hero-background.tap {
     background: url('/images/tap1.JPG') center/cover no-repeat;
 }
-/* ===================== Dropdown ===================== */
+/* Dropdown: smooth open/close and no hover gap */
 .has-dropdown {
     position: relative;
 }
 
-    .has-dropdown .dropdown {
+    .has-dropdown > .dropdown {
         position: absolute;
         left: 0;
-        top: calc(100% + .4rem);
+        top: 100%; /* sit flush under button */
+        margin-top: .4rem; /* visual spacing, not a real gap */
         min-width: 250px;
         background: #231c2e;
         border: 1px solid rgba(255,255,255,.1);
         border-radius: .75rem;
         box-shadow: 0 18px 40px rgba(0,0,0,.35);
         padding: .5rem;
-        display: none;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease;
         z-index: 1000;
+        /* transition-friendly hide/show */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(4px);
+        pointer-events: none;
+        transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
     }
 
+        /* Hover bridge to prevent "gap" when moving pointer down */
+        .has-dropdown > .dropdown::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -10px;
+            height: 10px; /* invisible buffer */
+        }
+
     .has-dropdown.open > .dropdown {
-        display: block;
         opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
         pointer-events: auto;
+        transition-delay: 0s; /* show immediately */
     }
 
     .has-dropdown .dropdown a {
@@ -911,19 +923,33 @@ p {
             background: rgba(255,255,255,.08);
         }
 
-/* Mobile dropdown reset */
+/* Mobile: make panel inline and visible when parent .open */
 @media (max-width: 920px) {
-    .has-dropdown .dropdown {
+    .menu {
+        display: none;
+    }
+
+        .menu.open {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+    .has-dropdown > .dropdown {
         position: static;
+        margin-top: 0;
         background: transparent;
         border: 0;
         box-shadow: none;
-        padding: 0;
-        opacity: 1; /* always visible when open */
+        opacity: 1;
+        visibility: visible;
+        transform: none;
         pointer-events: auto;
+        padding: 0;
     }
 
-        .has-dropdown .dropdown a {
-            padding: .45rem 0;
-        }
+    .has-dropdown .dropdown a {
+        padding: .45rem 0;
+    }
 }

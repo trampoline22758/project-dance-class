@@ -326,153 +326,165 @@
         </footer>
     </main>
     <script>
-                        document.addEventListener("DOMContentLoaded", () => {
-                            // Update year in footer
-                            const yearEl = document.getElementById("year");
-                            if (yearEl) yearEl.textContent = new Date().getFullYear();
+        (() => {
+            // Mobile menu toggle
+            const navToggle = document.querySelector(".nav-toggle");
+            const menu = document.getElementById("primary-menu");
+            if (navToggle && menu) {
+                navToggle.addEventListener("click", () => {
+                    const open = menu.classList.toggle("open");
+                    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+                });
+            }
 
-                
-            document.addEventListener("DOMContentLoaded", () => {
-            // Update year in footer
-            const yearEl = document.getElementById("year");
-            if (yearEl) yearEl.textContent = new Date().getFullYear();
+            const isDesktop = () => window.matchMedia("(min-width: 921px)").matches;
 
             // Dropdowns
-            const dropdownParents = document.querySelectorAll(".has-dropdown");
+            const parents = document.querySelectorAll(".has-dropdown");
+            parents.forEach(parent => {
+                const btn = parent.querySelector(".dropdown-toggle");
+                const panel = parent.querySelector(".dropdown");
+                if (!btn || !panel) return;
 
-            dropdownParents.forEach(parent => {
-                const toggleBtn = parent.querySelector(".dropdown-toggle");
-                const dropdownMenu = parent.querySelector(".dropdown");
-                if (!toggleBtn || !dropdownMenu) return;
+                let hideTimer;
 
-                let closeTimeout;
-
-                // open on hover
-                const openMenu = () => {
-                    clearTimeout(closeTimeout);
+                const open = () => {
+                    clearTimeout(hideTimer);
                     parent.classList.add("open");
-                    toggleBtn.setAttribute("aria-expanded", "true");
+                    btn.setAttribute("aria-expanded", "true");
                 };
 
-                // close with delay
-                const closeMenu = () => {
-                    closeTimeout = setTimeout(() => {
+                const close = (immediate = false) => {
+                    const doClose = () => {
                         parent.classList.remove("open");
-                        toggleBtn.setAttribute("aria-expanded", "false");
-                    }, 1000); // 1 second delay
+                        btn.setAttribute("aria-expanded", "false");
+                    };
+                    clearTimeout(hideTimer);
+                    immediate ? doClose() : hideTimer = setTimeout(doClose, 300);
                 };
 
-                // Desktop hover
-                parent.addEventListener("mouseenter", () => {
-                    if (window.innerWidth > 920) openMenu();
-                });
-                parent.addEventListener("mouseleave", () => {
-                    if (window.innerWidth > 920) closeMenu();
-                });
+                // Hover (desktop)
+                parent.addEventListener("pointerenter", () => { if (isDesktop()) open(); });
+                parent.addEventListener("pointerleave", () => { if (isDesktop()) close(); });
+                panel.addEventListener("pointerenter", () => { if (isDesktop()) open(); });
+                panel.addEventListener("pointerleave", () => { if (isDesktop()) close(); });
 
-                // Keep open when hovering inside
-                dropdownMenu.addEventListener("mouseenter", openMenu);
-                dropdownMenu.addEventListener("mouseleave", closeMenu);
+                // Click (mobile + allow click on desktop too)
+                btn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const openNow = parent.classList.contains("open");
 
-                // Mobile / tablet click
-                toggleBtn.addEventListener("click", e => {
-                    if (window.innerWidth <= 920) {
-                        e.preventDefault();
-                        const isOpen = parent.classList.contains("open");
-
-                        // close others
-                        dropdownParents.forEach(p => {
-                            p.classList.remove("open");
-                            const btn = p.querySelector(".dropdown-toggle");
-                            if (btn) btn.setAttribute("aria-expanded", "false");
-                        });
-
-                        if (!isOpen) {
-                            parent.classList.add("open");
-                            toggleBtn.setAttribute("aria-expanded", "true");
+                    // Close siblings
+                    parent.parentElement?.querySelectorAll(".has-dropdown.open").forEach(sib => {
+                        if (sib !== parent) {
+                            sib.classList.remove("open");
+                            const b = sib.querySelector(".dropdown-toggle");
+                            b?.setAttribute("aria-expanded", "false");
                         }
-                    }
+                    });
+
+                    openNow ? close(true) : open();
+                });
+
+                // Keyboard: close on Escape; close when focus leaves group
+                parent.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape") { close(true); btn.focus(); }
+                });
+                parent.addEventListener("focusout", (e) => {
+                    if (!parent.contains(e.relatedTarget)) close();
                 });
             });
-});
+
+            // Footer year (safe even if element missing)
+            const yearEl = document.getElementById("year");
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+        })();
+        document.addEventListener('click', (e) => {
+            parents.forEach(parent => {
+                if (!parent.contains(e.target)) {
+                    parent.classList.remove('open');
+                    parent.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
     </script>
 
     <!-- Accessibility helper -->
     <script src="https://app.embed.im/accessibility.js" defer></script>
     <script>
-                        // Year auto-update
-                        document.getElementById('year').textContent = new Date().getFullYear();
+        // Year auto-update
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
     <!-- Vercel Speed Insights init -->
     <script>
-                        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) };
-                        si('pageview');
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) };
+        si('pageview');
     </script>
     <!-- ====================== PERFORMANCE & SEO SUPERPACK ====================== -->
     <!-- 1. Lazy-load images & iframes -->
     <script>
-                        document.addEventListener("DOMContentLoaded", () => {
-                            document.querySelectorAll("img, iframe").forEach(el => {
-                                if (!el.hasAttribute("loading")) el.setAttribute("loading", "lazy");
-                                if (!el.hasAttribute("decoding")) el.setAttribute("decoding", "async");
-                            });
-                        });
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("img, iframe").forEach(el => {
+                if (!el.hasAttribute("loading")) el.setAttribute("loading", "lazy");
+                if (!el.hasAttribute("decoding")) el.setAttribute("decoding", "async");
+            });
+        });
     </script>
 
     <!-- 2. WebP / AVIF fallback checker -->
     <script>
-                        (function () {
-                            const img = new Image();
-                            img.onload = img.onerror = function () {
-                                document.documentElement.classList.add((img.height === 2) ? 'avif' : 'no-avif');
-                            };
-                            img.src = "data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjFhdmlmAA...";
-                        })();
+        (function () {
+            const img = new Image();
+            img.onload = img.onerror = function () {
+                document.documentElement.classList.add((img.height === 2) ? 'avif' : 'no-avif');
+            };
+            img.src = "data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjFhdmlmAA...";
+        })();
     </script>
 
     <!-- 3. Add canonical link if missing -->
     <script>
-                        if (!document.querySelector("link[rel='canonical']")) {
-                            const canonical = document.createElement("link");
-                            canonical.rel = "canonical";
-                            canonical.href = window.location.href.split("?")[0];
-                            document.head.appendChild(canonical);
-                        }
+        if (!document.querySelector("link[rel='canonical']")) {
+            const canonical = document.createElement("link");
+            canonical.rel = "canonical";
+            canonical.href = window.location.href.split("?")[0];
+            document.head.appendChild(canonical);
+        }
     </script>
 
     <!-- 4. Prefetch internal links (instant navigation like Next.js) -->
     <script>
-                        if ("IntersectionObserver" in window) {
-                            const observer = new IntersectionObserver(entries => {
-                                entries.forEach(entry => {
-                                    if (entry.isIntersecting) {
-                                        const href = entry.target.getAttribute("href");
-                                        if (href && href.startsWith("/") && !href.includes("#")) {
-                                            const prefetch = document.createElement("link");
-                                            prefetch.rel = "prefetch";
-                                            prefetch.href = href;
-                                            document.head.appendChild(prefetch);
-                                            observer.unobserve(entry.target);
-                                        }
-                                    }
-                                });
-                            });
-                            document.querySelectorAll("a[href]").forEach(a => observer.observe(a));
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const href = entry.target.getAttribute("href");
+                        if (href && href.startsWith("/") && !href.includes("#")) {
+                            const prefetch = document.createElement("link");
+                            prefetch.rel = "prefetch";
+                            prefetch.href = href;
+                            document.head.appendChild(prefetch);
+                            observer.unobserve(entry.target);
                         }
+                    }
+                });
+            });
+            document.querySelectorAll("a[href]").forEach(a => observer.observe(a));
+        }
     </script>
 
     <!-- 5. Smooth scrolling for anchors -->
     <script>
-                        document.addEventListener("click", e => {
-                            const a = e.target.closest("a[href^='#']");
-                            if (a) {
-                                const target = document.querySelector(a.getAttribute("href"));
-                                if (target) {
-                                    e.preventDefault();
-                                    target.scrollIntoView({ behavior: "smooth" });
-                                }
-                            }
-                        });
+        document.addEventListener("click", e => {
+            const a = e.target.closest("a[href^='#']");
+            if (a) {
+                const target = document.querySelector(a.getAttribute("href"));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+        });
     </script>
 
     <!-- 6. Schema markup for site search -->
@@ -492,33 +504,33 @@
 
     <!-- 7. Scroll-to-top button -->
     <script>
-                        const scrollBtn = document.createElement("button");
-                        scrollBtn.textContent = "⬆";
-                        scrollBtn.id = "scrollTop";
-                        Object.assign(scrollBtn.style, {
-                            position: "fixed", bottom: "20px", right: "20px",
-                            display: "none", padding: "10px", borderRadius: "50%",
-                            fontSize: "20px", zIndex: 1000, cursor: "pointer"
-                        });
-                        document.body.appendChild(scrollBtn);
-                        window.addEventListener("scroll", () => {
-                            scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
-                        });
-                        scrollBtn.addEventListener("click", () => {
-                            window.scrollTo({ top: 0, behavior: "smooth" });
-                        });
+        const scrollBtn = document.createElement("button");
+        scrollBtn.textContent = "⬆";
+        scrollBtn.id = "scrollTop";
+        Object.assign(scrollBtn.style, {
+            position: "fixed", bottom: "20px", right: "20px",
+            display: "none", padding: "10px", borderRadius: "50%",
+            fontSize: "20px", zIndex: 1000, cursor: "pointer"
+        });
+        document.body.appendChild(scrollBtn);
+        window.addEventListener("scroll", () => {
+            scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
+        });
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
     </script>
 
     <!-- 8. Auto external link rel="noopener nofollow" -->
     <script>
-                        document.addEventListener("DOMContentLoaded", () => {
-                            document.querySelectorAll("a[href^='http']").forEach(a => {
-                                if (!a.href.includes(location.hostname)) {
-                                    a.setAttribute("rel", "noopener nofollow external");
-                                    a.setAttribute("target", "_blank");
-                                }
-                            });
-                        });
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("a[href^='http']").forEach(a => {
+                if (!a.href.includes(location.hostname)) {
+                    a.setAttribute("rel", "noopener nofollow external");
+                    a.setAttribute("target", "_blank");
+                }
+            });
+        });
     </script>
 
     <!-- 9. Preconnect to speed up external domains -->
@@ -548,20 +560,20 @@
 
     <!-- 11. CLS fix: reserve space for images -->
     <script>
-                        document.querySelectorAll("img:not([width])").forEach(img => {
-                            if (img.naturalWidth && img.naturalHeight) {
-                                img.setAttribute("width", img.naturalWidth);
-                                img.setAttribute("height", img.naturalHeight);
-                            }
-                        });
+        document.querySelectorAll("img:not([width])").forEach(img => {
+            if (img.naturalWidth && img.naturalHeight) {
+                img.setAttribute("width", img.naturalWidth);
+                img.setAttribute("height", img.naturalHeight);
+            }
+        });
     </script>
 
     <!-- 12. Track Core Web Vitals (for SEO ranking signals) -->
     <script src="https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js"></script>
     <script>
-                        webVitals.getCLS(console.log);
-                        webVitals.getFID(console.log);
-                        webVitals.getLCP(console.log);
+        webVitals.getCLS(console.log);
+        webVitals.getFID(console.log);
+        webVitals.getLCP(console.log);
     </script>
 
     <!-- 13. Add “last updated” structured data -->
@@ -575,30 +587,30 @@
 
     <!-- 14. Accessibility: keyboard focus outline helper -->
     <script>
-                        document.body.addEventListener('keyup', function (e) {
-                            if (e.key === "Tab") document.body.classList.add("user-is-tabbing");
-                        });
+        document.body.addEventListener('keyup', function (e) {
+            if (e.key === "Tab") document.body.classList.add("user-is-tabbing");
+        });
     </script>
 
     <!-- 15. Detect adblockers (optional analytics) -->
     <script>
-                        setTimeout(() => {
-                            const ad = document.createElement("div");
-                            ad.innerHTML = "&nbsp;";
-                            ad.className = "adsbox";
-                            ad.style.position = "absolute";
-                            ad.style.left = "-9999px";
-                            document.body.appendChild(ad);
-                            if (ad.offsetHeight === 0) console.log("Adblocker detected");
-                            document.body.removeChild(ad);
-                        }, 200);
+        setTimeout(() => {
+            const ad = document.createElement("div");
+            ad.innerHTML = "&nbsp;";
+            ad.className = "adsbox";
+            ad.style.position = "absolute";
+            ad.style.left = "-9999px";
+            document.body.appendChild(ad);
+            if (ad.offsetHeight === 0) console.log("Adblocker detected");
+            document.body.removeChild(ad);
+        }, 200);
     </script>
 
     <!-- 16. Service Worker (for caching / PWA) -->
     <script>
-                        if ("serviceWorker" in navigator) {
-                            navigator.serviceWorker.register("/sw.js").catch(console.error);
-                        }
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/sw.js").catch(console.error);
+        }
     </script>
 
     <!-- 17. Preload hero image (LCP boost) -->
@@ -606,115 +618,115 @@
 
     <!-- 18. Add noindex to search pages -->
     <script>
-                        if (window.location.search.includes("s=")) {
-                            const noindex = document.createElement("meta");
-                            noindex.name = "robots";
-                            noindex.content = "noindex, follow";
-                            document.head.appendChild(noindex);
-                        }
+        if (window.location.search.includes("s=")) {
+            const noindex = document.createElement("meta");
+            noindex.name = "robots";
+            noindex.content = "noindex, follow";
+            document.head.appendChild(noindex);
+        }
     </script>
 
     <!-- 19. Console message (branding) -->
     <script>
-                        console.log("%c Miss Kim's Dance Class ", "background: #5f35b0; color: #fff; padding:5px 10px; border-radius:5px;");
+        console.log("%c Miss Kim's Dance Class ", "background: #5f35b0; color: #fff; padding:5px 10px; border-radius:5px;");
     </script>
     <script>
-                        /* ========== 1. Fade-in + Slide-in on scroll (JS only) ========== */
-                        const animateOnScroll = (els, opts = {}) => {
-                            const observer = new IntersectionObserver(entries => {
-                                entries.forEach(entry => {
-                                    if (entry.isIntersecting) {
-                                        const el = entry.target;
-                                        el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-                                        el.style.opacity = "1";
-                                        el.style.transform = "translateY(0)";
-                                        observer.unobserve(el);
-                                    }
-                                });
-                            }, { threshold: 0.2, ...opts });
+        /* ========== 1. Fade-in + Slide-in on scroll (JS only) ========== */
+        const animateOnScroll = (els, opts = {}) => {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+                        el.style.opacity = "1";
+                        el.style.transform = "translateY(0)";
+                        observer.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.2, ...opts });
 
-                            els.forEach(el => {
-                                el.style.opacity = "0";
-                                el.style.transform = "translateY(20px)";
-                                observer.observe(el);
-                            });
-                        };
+            els.forEach(el => {
+                el.style.opacity = "0";
+                el.style.transform = "translateY(20px)";
+                observer.observe(el);
+            });
+        };
 
-                        // Apply to sections, images, cards
-                        document.addEventListener("DOMContentLoaded", () => {
-                            animateOnScroll(document.querySelectorAll("section, .dance-class, .instructor-card, img"));
-                        });
-
-
-                        /* ========== 2. Button micro-bounce ========== */
-                        document.querySelectorAll(".btn, .btn-primary, .hero-call").forEach(btn => {
-                            btn.addEventListener("mouseenter", () => {
-                                btn.animate([{ transform: "scale(1)" }, { transform: "scale(1.05)" }], { duration: 150, fill: "forwards" });
-                            });
-                            btn.addEventListener("mouseleave", () => {
-                                btn.animate([{ transform: "scale(1.05)" }, { transform: "scale(1)" }], { duration: 150, fill: "forwards" });
-                            });
-                            btn.addEventListener("mousedown", () => {
-                                btn.animate([{ transform: "scale(1)" }, { transform: "scale(0.95)" }], { duration: 100, fill: "forwards" });
-                            });
-                            btn.addEventListener("mouseup", () => {
-                                btn.animate([{ transform: "scale(0.95)" }, { transform: "scale(1)" }], { duration: 100, fill: "forwards" });
-                            });
-                        });
+        // Apply to sections, images, cards
+        document.addEventListener("DOMContentLoaded", () => {
+            animateOnScroll(document.querySelectorAll("section, .dance-class, .instructor-card, img"));
+        });
 
 
-                        /* ========== 3. Smooth scroll for anchor links ========== */
-                        document.addEventListener("click", e => {
-                            const link = e.target.closest("a[href^='#']");
-                            if (link) {
-                                const target = document.querySelector(link.getAttribute("href"));
-                                if (target) {
-                                    e.preventDefault();
-                                    target.scrollIntoView({ behavior: "smooth" });
-                                }
-                            }
-                        });
+        /* ========== 2. Button micro-bounce ========== */
+        document.querySelectorAll(".btn, .btn-primary, .hero-call").forEach(btn => {
+            btn.addEventListener("mouseenter", () => {
+                btn.animate([{ transform: "scale(1)" }, { transform: "scale(1.05)" }], { duration: 150, fill: "forwards" });
+            });
+            btn.addEventListener("mouseleave", () => {
+                btn.animate([{ transform: "scale(1.05)" }, { transform: "scale(1)" }], { duration: 150, fill: "forwards" });
+            });
+            btn.addEventListener("mousedown", () => {
+                btn.animate([{ transform: "scale(1)" }, { transform: "scale(0.95)" }], { duration: 100, fill: "forwards" });
+            });
+            btn.addEventListener("mouseup", () => {
+                btn.animate([{ transform: "scale(0.95)" }, { transform: "scale(1)" }], { duration: 100, fill: "forwards" });
+            });
+        });
 
 
-                        /* ========== 4. Hero text entrance on load ========== */
-                        window.addEventListener("load", () => {
-                            const heroEls = document.querySelectorAll(".hero-content h1, .hero-content p, .hero-call");
-                            heroEls.forEach((el, i) => {
-                                el.style.opacity = "0";
-                                el.style.transform = "translateY(40px)";
-                                setTimeout(() => {
-                                    el.animate([
-                                        { opacity: 0, transform: "translateY(40px)" },
-                                        { opacity: 1, transform: "translateY(0)" }
-                                    ], { duration: 700, easing: "ease-out", fill: "forwards" });
-                                }, i * 250);
-                            });
-                        });
+        /* ========== 3. Smooth scroll for anchor links ========== */
+        document.addEventListener("click", e => {
+            const link = e.target.closest("a[href^='#']");
+            if (link) {
+                const target = document.querySelector(link.getAttribute("href"));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+        });
 
 
-                        /* ========== 5. Scroll-to-top fade button ========== */
-                        const scrollBtn = document.createElement("button");
-                        scrollBtn.textContent = "⬆";
-                        Object.assign(scrollBtn.style, {
-                            position: "fixed", bottom: "20px", right: "20px",
-                            display: "none", padding: "10px", borderRadius: "50%",
-                            fontSize: "20px", zIndex: 1000, cursor: "pointer", opacity: "0"
-                        });
-                        document.body.appendChild(scrollBtn);
+        /* ========== 4. Hero text entrance on load ========== */
+        window.addEventListener("load", () => {
+            const heroEls = document.querySelectorAll(".hero-content h1, .hero-content p, .hero-call");
+            heroEls.forEach((el, i) => {
+                el.style.opacity = "0";
+                el.style.transform = "translateY(40px)";
+                setTimeout(() => {
+                    el.animate([
+                        { opacity: 0, transform: "translateY(40px)" },
+                        { opacity: 1, transform: "translateY(0)" }
+                    ], { duration: 700, easing: "ease-out", fill: "forwards" });
+                }, i * 250);
+            });
+        });
 
-                        window.addEventListener("scroll", () => {
-                            if (window.scrollY > 300 && scrollBtn.style.display === "none") {
-                                scrollBtn.style.display = "block";
-                                scrollBtn.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: "forwards" });
-                            } else if (window.scrollY <= 300 && scrollBtn.style.display === "block") {
-                                scrollBtn.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: "forwards" }).onfinish = () => {
-                                    scrollBtn.style.display = "none";
-                                };
-                            }
-                        });
-                        scrollBtn.addEventListener("click", () => {
-                            window.scrollTo({ top: 0, behavior: "smooth" });
-                        });
+
+        /* ========== 5. Scroll-to-top fade button ========== */
+        const scrollBtn = document.createElement("button");
+        scrollBtn.textContent = "⬆";
+        Object.assign(scrollBtn.style, {
+            position: "fixed", bottom: "20px", right: "20px",
+            display: "none", padding: "10px", borderRadius: "50%",
+            fontSize: "20px", zIndex: 1000, cursor: "pointer", opacity: "0"
+        });
+        document.body.appendChild(scrollBtn);
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300 && scrollBtn.style.display === "none") {
+                scrollBtn.style.display = "block";
+                scrollBtn.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: "forwards" });
+            } else if (window.scrollY <= 300 && scrollBtn.style.display === "block") {
+                scrollBtn.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: "forwards" }).onfinish = () => {
+                    scrollBtn.style.display = "none";
+                };
+            }
+        });
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
     </script>
 
 
