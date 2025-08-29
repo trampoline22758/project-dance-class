@@ -1,44 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Competition Team | Miss Kim’s Dance Class — Chesterfield, MO</title>
-  <meta name="description" content="Join Miss Kim’s Competition Team in Chesterfield, MO. Please message, email, or talk to Miss Kim for info. Family-friendly schedule.">
-  <link rel="canonical" href="/competition-teams">
-  <link rel="stylesheet" href="/styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Meta & SEO -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Competition Team | Miss Kim’s Dance Class — Chesterfield, MO</title>
+    <meta name="description" content="Join Miss Kim’s Competition Team in Chesterfield, MO. Please message, email, or talk to Miss Kim for info. Family-friendly schedule." />
+    <link rel="canonical" href="https://www.misskimsdanceclass.com/competition-teams" />
+    <meta name="theme-color" content="#5f35b0" />
+
+    <!-- OG -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Competition Team — Miss Kim’s Dance Class" />
+    <meta property="og:description" content="Growth · Teamwork · Performance. Family-friendly competition dance teams in Chesterfield, MO." />
+    <meta property="og:url" content="https://www.misskimsdanceclass.com/competition-teams" />
+    <meta property="og:image" content="https://www.misskimsdanceclass.com/photos/Competition3.JPG" />
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="/styles.css" />
+
+    <!-- Page Styles -->
+    <style>
+        :root {
+            --brand: #5f35b0;
+            --brand-2: #8b5cf6;
+            --ink: #222;
+            --muted: #666;
+            --surface: #fff;
+            --shadow: 0 8px 24px rgba(0,0,0,.12);
+            --radius: 16px;
+            --container: 1100px;
+        }
+
+        body {
+            font-family: Inter,sans-serif;
+            margin: 0;
+            color: var(--ink);
+        }
+
+        .container {
+            max-width: var(--container);
+            margin: auto;
+            padding: clamp(16px,3vw,28px);
+        }
+
+        .hero {
+            position: relative;
+            isolation: isolate;
+            background: linear-gradient(135deg,var(--brand),var(--brand-2));
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.55);
+            z-index: -1;
+        }
+
+        .hero-content {
+            padding: clamp(60px,8vw,100px) 20px;
+        }
+
+        .hero h1 {
+            margin: 0 0 .5rem;
+            font-size: clamp(1.8rem,4vw,2.5rem);
+        }
+
+        .hero-tagline {
+            font-size: 1.125rem;
+            opacity: .9;
+            margin: 0 0 1.5rem;
+        }
+
+        .hero-call {
+            display: inline-block;
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.3);
+            padding: .5rem 1.2rem;
+            border-radius: 999px;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        section h2 {
+            color: var(--brand);
+            margin-top: 0;
+        }
+
+        .highlight {
+            background: linear-gradient(180deg,#f9f8ff,#fff);
+            padding: clamp(20px,3vw,40px) 0;
+        }
+
+        .cta-inline {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .btn {
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: .75rem 1.25rem;
+            display: inline-block;
+        }
+
+        .btn--primary {
+            background: var(--brand);
+            color: #fff;
+            box-shadow: var(--shadow);
+        }
+
+        .btn--ghost {
+            background: #fff;
+            border: 1px solid rgba(0,0,0,.1);
+            color: var(--ink);
+        }
+
+        .btn--primary:hover {
+            filter: brightness(1.05);
+        }
+
+        .btn--ghost:hover {
+            background: #fafafa;
+        }
+
+        footer.simple {
+            text-align: center;
+            background: var(--brand);
+            color: #fff;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to main</a>
+    <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- include your .topbar and .header-outer here -->
+    <main id="main" role="main">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol>
+                <li><a href="/">Home</a></li>
+                <li aria-current="page">Competition Team</li>
+            </ol>
+        </nav>
 
-  <main id="main" role="main">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><ol>
-      <li><a href="/">Home</a></li>
-      <li aria-current="page">Competition Team</li>
-    </ol></nav>
+        <!-- Hero -->
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-background" style="background-image:url('/photos/Competition3.JPG')"></div>
+            <div class="hero-content">
+                <h1 id="hero-title">Competition Team (Chesterfield, MO)</h1>
+                <p class="hero-tagline">Growth · Teamwork · Performance</p>
+                <a class="hero-call" href="tel:+13145420608">📞 (314) 542-0608</a>
+            </div>
+        </section>
 
-    <section class="hero" aria-labelledby="h1">
-      <div class="hero-background" style="background-image:url('/photos/Competition3.JPG')"></div>
-      <div class="hero-content">
-        <h1 id="h1">Competition Team (Chesterfield, MO)</h1>
-        <p class="hero-tagline">Growth · Teamwork · Performance</p>
-        <a class="hero-call" href="tel:+13145420608">Call (314) 542-0608</a>
-      </div>
-    </section>
+        <!-- Info -->
+        <section class="highlight" aria-labelledby="info-title">
+            <div class="container">
+                <h2 id="info-title">Competition Team Info</h2>
+                <p style="font-size:1.05rem;"><strong>Please message, email, or talk to Miss Kim for details.</strong></p>
+                <p class="cta-inline">
+                    <a class="btn btn--primary" href="/contact">Message Us</a>
+                    <a class="btn btn--ghost" href="tel:+13145420608">Call (314) 542-0608</a>
+                </p>
+            </div>
+        </section>
+    </main>
 
-    <section class="content-section highlight" aria-labelledby="info-title">
-      <div class="container">
-        <h2 id="info-title">Competition Team Info</h2>
-        <p style="font-size:1.05rem;"><strong>Please message, email, or talk to Miss Kim for info.</strong></p>
-        <p class="cta-inline" style="margin-top:.6rem;">
-          <a class="btn btn--primary" href="/contact.html">Message Us</a>
-          <a class="btn btn--ghost" href="tel:+13145420608">Call (314) 542-0608</a>
-        </p>
-      </div>
-    </section>
-  <script>
-    // (reuse your existing JS for menu & dropdowns if needed)
-  </script>
+    <footer class="simple">
+        &copy; <span id="year"></span> Miss Kim’s Dance Class • Chesterfield, MO
+    </footer>
+
+    <script>
+        const y = document.getElementById("year");
+        if (y) y.textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

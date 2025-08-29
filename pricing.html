@@ -1,401 +1,334 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Registration & Payments | Miss Kim’s Dance Class</title>
-  <meta name="description" content="Register for classes and pay securely. Youth tuition with family discounts, adult class cards (4/$90 or 12/$180), and private lessons at $80/hr or $60/hr with class. Save 5% when prepaying 3+ months." />
-  <link rel="canonical" href="https://www.misskimsdanceclass.com/registration" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registration & Payments | Miss Kim’s Dance Class</title>
+    <meta name="description" content="Register for classes and pay online. Youth monthly tuition, adult class cards, private lessons. Pay by PayPal, Venmo, cash, or check. Save 5% when prepaying 3+ months." />
+    <link rel="canonical" href="https://www.misskimsdanceclass.com/registration" />
 
-  <!-- Social -->
-  <meta property="og:title" content="Registration & Payments | Miss Kim’s Dance Class" />
-  <meta property="og:description" content="Youth tuition with family discounts, adult class cards, private lessons, and a 5% discount when prepaying 3+ months." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.misskimsdanceclass.com/registration" />
-  <meta property="og:image" content="https://www.misskimsdanceclass.com/og-image.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
+    <!-- Social -->
+    <meta property="og:title" content="Registration & Payments | Miss Kim’s Dance Class" />
+    <meta property="og:description" content="Youth tuition, adult class cards, private lessons. Pay by PayPal, Venmo, cash, or check." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.misskimsdanceclass.com/registration" />
+    <meta property="og:image" content="https://www.misskimsdanceclass.com/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Fonts & style -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root{--maxw:980px;--radius:12px;--shadow:0 8px 24px rgba(0,0,0,.06)}
-    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#1d1d1f;background:#fff}
-    a{color:#0f6fff;text-decoration:none}
-    a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #0f6fff;outline-offset:2px}
-    header{padding:28px 20px;border-bottom:1px solid #eee}
-    .wrap{max-width:var(--maxw);margin:0 auto}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:700}
-    .brand img{width:32px;height:32px}
-    main{padding:28px 20px 64px}
-    .hero{display:grid;gap:8px;margin:0 0 24px}
-    .hero h1{margin:0;font-size:clamp(1.6rem,2.6vw,2.2rem)}
-    .muted{color:#555}
-    .grid{display:grid;gap:22px}
-    @media (min-width:900px){.grid{grid-template-columns:1.1fr .9fr}}
-    .card{border:1px solid #eee;border-radius:var(--radius);padding:22px;background:#fff;box-shadow:var(--shadow)}
-    .card h2{margin:0 0 10px}
-    .card h3{margin:18px 0 8px;font-size:1.05rem}
-    .list{display:grid;gap:12px;margin:16px 0 0;padding:0;list-style:none}
-    .row{display:flex;gap:10px;align-items:start}
-    .tag{display:inline-block;padding:4px 10px;border-radius:999px;background:#f4f6ff;color:#2a3a80;font-size:.82rem;font-weight:600}
+    <style>
+        :root {
+            --maxw: 980px;
+            --radius: 12px;
+            --shadow: 0 8px 24px rgba(0,0,0,.06);
+            --ink: #1d1d1f;
+            --muted: #555;
+            --brand: #5f35b0
+        }
 
-    .table{display:grid;border:1px solid #eee;border-radius:12px;overflow:hidden}
-    .table .trow{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #eee}
-    .table .trow:first-child{border-top:none;background:#fafafa;font-weight:600}
-    .cell{padding:10px 12px}
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+            color: var(--ink);
+            background: #fff
+        }
 
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;padding:12px 16px;font-weight:600;border:1px solid #dcdcdc;background:#111;color:#fff;transition:transform .06s ease,box-shadow .2s ease}
-    .btn:hover{transform:translateY(-1px)}
-    .btn--ghost{background:#fff;color:#111}
-    .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+        a {
+            color: #0f6fff;
+            text-decoration: none
+        }
 
-    .field{display:grid;gap:6px}
-    input[type="number"], select{padding:11px 12px;border-radius:10px;border:1px solid #ddd;font-size:1rem;background:#fff}
-    .switch{display:flex;align-items:center;gap:10px}
-    .total{font-weight:700;font-size:1.15rem;margin-top:6px}
-    .break{color:#555}
-    .note{background:#fff8e1;border:1px solid #ffe08a;color:#6a5300;padding:10px 12px;border-radius:10px;font-size:.95rem;margin-top:12px}
+            a:focus-visible, button:focus-visible {
+                outline: 2px solid #0f6fff;
+                outline-offset: 2px
+            }
 
-    footer{border-top:1px solid #eee;padding:24px 20px;color:#666}
-    .small{font-size:.92rem}
-    @media print{header,footer,.btn-row{display:none}.card{box-shadow:none}}
-  </style>
+        header {
+            padding: 28px 20px;
+            border-bottom: 1px solid #eee
+        }
 
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"DanceSchool","name":"Miss Kim’s Dance Class","url":"https://www.misskimsdanceclass.com/","logo":"https://www.misskimsdanceclass.com/logo.webp","address":{"@type":"PostalAddress","streetAddress":"14781 Ladue Rd","addressLocality":"Chesterfield","addressRegion":"MO","postalCode":"63017","addressCountry":"US"},"email":"misskimdances@yahoo.com","paymentAccepted":["Cash","Check","PayPal","Venmo"]}
-  </script>
+        .wrap {
+            max-width: var(--maxw);
+            margin: 0 auto
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700
+        }
+
+            .brand img {
+                width: 32px;
+                height: 32px
+            }
+
+        main {
+            padding: 28px 20px 64px
+        }
+
+        .hero {
+            display: grid;
+            gap: 8px;
+            margin: 0 0 24px
+        }
+
+            .hero h1 {
+                margin: 0;
+                font-size: clamp(1.6rem,2.6vw,2.2rem)
+            }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .grid {
+            display: grid;
+            gap: 22px
+        }
+
+        @media (min-width:900px) {
+            .grid {
+                grid-template-columns: 1.1fr .9fr
+            }
+        }
+
+        .card {
+            border: 1px solid #eee;
+            border-radius: var(--radius);
+            padding: 22px;
+            background: #fff;
+            box-shadow: var(--shadow)
+        }
+
+            .card h2 {
+                margin: 0 0 10px
+            }
+
+            .card h3 {
+                margin: 18px 0 8px;
+                font-size: 1.05rem
+            }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #f4f6ff;
+            color: #2a3a80;
+            font-size: .82rem;
+            font-weight: 600
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden
+        }
+
+        caption {
+            caption-side: top;
+            text-align: left;
+            font-weight: 700;
+            padding: 10px 12px
+        }
+
+        thead th {
+            background: #fafafa;
+            font-weight: 700
+        }
+
+        th, td {
+            padding: 10px 12px;
+            border-top: 1px solid #eee;
+            text-align: left
+        }
+
+        thead th {
+            border-top: none
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-weight: 600;
+            border: 1px solid #dcdcdc;
+            background: #111;
+            color: #fff;
+            transition: transform .06s ease
+        }
+
+            .btn:hover {
+                transform: translateY(-1px)
+            }
+
+        .btn--ghost {
+            background: #fff;
+            color: #111
+        }
+
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px
+        }
+
+        .note {
+            background: #fff8e1;
+            border: 1px solid #ffe08a;
+            color: #6a5300;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: .95rem;
+            margin-top: 12px
+        }
+
+        footer {
+            border-top: 1px solid #eee;
+            padding: 24px 20px;
+            color: #666
+        }
+
+        .small {
+            font-size: .92rem
+        }
+
+        @media print {
+            header, footer, .btn-row {
+                display: none
+            }
+
+            .card {
+                box-shadow: none
+            }
+        }
+    </style>
+
+    <!-- JSON-LD (kept; matches this page's contact) -->
+    <script type="application/ld+json">
+        {"@context":"https://schema.org","@type":"DanceSchool","name":"Miss Kim’s Dance Class","url":"https://www.misskimsdanceclass.com/","logo":"https://www.misskimsdanceclass.com/logo.webp","address":{"@type":"PostalAddress","streetAddress":"14781 Ladue Rd","addressLocality":"Chesterfield","addressRegion":"MO","postalCode":"63017","addressCountry":"US"},"email":"misskimdances@yahoo.com","paymentAccepted":["Cash","Check","PayPal","Venmo"]}
+    </script>
 </head>
 <body>
-<header role="banner">
-  <div class="wrap brand">
-    <img src="/logo.webp" alt="Miss Kim’s Dance Class logo">
-    <span>Miss Kim’s Dance Class</span>
-  </div>
-</header>
-
-<main class="wrap" role="main">
-  <section class="hero" aria-labelledby="title">
-    <h1 id="title">Registration & Payments</h1>
-  </section>
-
-  <section class="grid">
-    <!-- LEFT: Registration + Schedules -->
-    <article class="card" aria-labelledby="registration">
-      <h2 id="registration">Registration</h2>
-      <div class="btn-row" role="group" aria-label="Registration actions">
-        <a class="btn" href="/registration-form.docx" download>Download Registration (.docx)</a>
-      </div>
-
-      <ul class="list">
-        <li class="row"><span class="tag">Fee</span><div>One-time registration fee: <strong>$50</strong> per family. <span class="muted">(Non-refundable)</span></div></li>
-        <li class="row"><span class="tag">Tuition</span><div>Due on the <strong>1st</strong>. <strong>10% late fee</strong> after the <strong>6th</strong>.</div></li>
-        <li class="row"><span class="tag">Help</span><div>Email <a href="mailto:misskimdances@yahoo.com">misskimdances@yahoo.com</a> or call <a href="tel:+13149246008">(314) 924-6008</a>.</div></li>
-      </ul>
-
-      <h3>Tuition — Youth (Monthly)</h3>
-      <div class="table" aria-label="Youth tuition schedule">
-        <div class="trow"><div class="cell">Hours / Week (example)</div><div class="cell">Monthly Tuition</div></div>
-        <div class="trow"><div class="cell">~1 hr</div><div class="cell">$90</div></div>
-        <div class="trow"><div class="cell">~2 hrs</div><div class="cell">$170</div></div>
-        <div class="trow"><div class="cell">~2.5–3 hrs</div><div class="cell">$220</div></div>
-        <div class="trow"><div class="cell">~3.5–4 hrs</div><div class="cell">$265</div></div>
-        <div class="trow"><div class="cell">~4.5+ hrs</div><div class="cell">$300</div></div>
-      </div>
-
-      <h3>Pricing — Adults</h3>
-      <div class="table" aria-label="Adult class cards">
-        <div class="trow"><div class="cell">Class Cards</div><div class="cell">Price</div></div>
-        <div class="trow"><div class="cell">4-Class Card</div><div class="cell">$90</div></div>
-        <div class="trow"><div class="cell">12-Class Card</div><div class="cell">$180</div></div>
-      </div>
-      <div class="table" style="margin-top:12px" aria-label="Private lessons">
-        <div class="trow"><div class="cell">Private lessons</div><div class="cell">Rate</div></div>
-        <div class="trow"><div class="cell">Private lessons (standalone)</div><div class="cell">$80 / hour</div></div>
-        <div class="trow"><div class="cell">Private lessons <em>in addition to class</em></div><div class="cell">$60 / hour</div></div>
-      </div>
-    </article>
-
-    <!-- RIGHT: Calculator + Pay Buttons -->
-    <article class="card" aria-labelledby="payonline">
-      <h2 id="payonline">Pay Online (locked to correct total)</h2>
-
-      <!-- Purpose selector -->
-      <div class="field">
-        <label for="payFor" class="muted">What are you paying for?</label>
-        <select id="payFor" aria-label="What are you paying for?">
-          <option value="tuition">Monthly Tuition</option>
-          <option value="regOnly">Registration Fee Only ($50)</option>
-          <option value="both">Tuition + Registration Fee</option>
-        </select>
-      </div>
-
-      <div class="field" id="planField">
-        <label for="planType" class="muted">Choose a schedule</label>
-        <select id="planType" aria-label="Choose Youth or Adult">
-          <option value="youth">Youth (Monthly)</option>
-          <option value="adult">Adult (Class cards / Private lessons)</option>
-        </select>
-      </div>
-
-      <!-- Youth controls -->
-      <div id="youthControls" class="list" style="margin-top:10px">
-        <div class="field">
-          <label for="youthBase" class="muted">Youth monthly tuition</label>
-          <select id="youthBase" aria-label="Choose youth base">
-            <option value="90">$90</option>
-            <option value="170">$170</option>
-            <option value="220">$220</option>
-            <option value="265">$265</option>
-            <option value="300">$300</option>
-          </select>
+    <header role="banner">
+        <div class="wrap brand">
+            <span>Miss Kim’s Dance Class</span>
         </div>
-        <div class="field">
-          <label for="youthStudents" class="muted">Students in family (same base)</label>
-          <select id="youthStudents" aria-label="Number of students">
-            <option value="1">1 student (100%)</option>
-            <option value="2">2 students (100% + 50%)</option>
-            <option value="3">3 students (100% + 50% + 75%)</option>
-          </select>
-        </div>
+    </header>
 
-        <!-- NEW: Youth private lessons -->
-        <div class="field">
-          <label for="youthPrivateHours" class="muted">Youth private lesson hours (optional)</label>
-          <input id="youthPrivateHours" type="number" min="0" step="1" value="0" aria-label="Youth private lesson hours" />
-        </div>
-        <div class="switch">
-          <input id="youthInAddition" type="checkbox" aria-label="Youth private lessons in addition to class" />
-          <label for="youthInAddition">Youth private lessons are <strong>in addition to</strong> a class (sets $60/hr). Unchecked = $80/hr standalone.</label>
-        </div>
-      </div>
+    <main class="wrap" role="main">
+        <section class="hero" aria-labelledby="title">
+            <h1 id="title">Registration & Payments</h1>
+            <p class="muted">Simple ways to pay: PayPal, Venmo, cash, or check. Please include the student’s name in the payment note.</p>
+        </section>
 
-      <!-- Adult controls -->
-      <div id="adultControls" class="list" style="display:none; margin-top:10px">
-        <div class="field">
-          <label for="adultCard" class="muted">Adult class card</label>
-          <select id="adultCard" aria-label="Adult class card">
-            <option value="90">4-Class Card — $90</option>
-            <option value="180">12-Class Card — $180</option>
-          </select>
-        </div>
+        <section class="grid">
+            <!-- LEFT: Registration + Pricing tables -->
+            <article class="card" aria-labelledby="registration">
+                <h2 id="registration">Registration</h2>
+                <p><span class="tag">Fee</span> One-time registration fee: <strong>$50</strong> per family. <span class="muted">(Non-refundable)</span></p>
+                <p><span class="tag">Tuition</span> Due on the <strong>1st</strong>. <strong>10% late fee</strong> after the <strong>6th</strong>.</p>
+                <p><span class="tag">Help</span> Email <a href="mailto:misskimdances@yahoo.com">misskimdances@yahoo.com</a> or call <a href="tel:+13149246008">(314) 924-6008</a>.</p>
 
-        <div class="field">
-          <label for="privateHours" class="muted">Private lessons hours (optional)</label>
-          <input id="privateHours" type="number" min="0" step="1" value="0" aria-label="Private lesson hours" />
-        </div>
+                <div class="table-wrap" style="margin-top:14px">
+                    <table aria-label="Youth tuition schedule">
+                        <caption>Youth Tuition — Monthly</caption>
+                        <thead>
+                            <tr><th scope="col">Hours / Week (example)</th><th scope="col">Monthly Tuition</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>~1 hr</td><td>$90</td></tr>
+                            <tr><td>~2 hrs</td><td>$170</td></tr>
+                            <tr><td>~2.5–3 hrs</td><td>$220</td></tr>
+                            <tr><td>~3.5–4 hrs</td><td>$265</td></tr>
+                            <tr><td>~4.5+ hrs</td><td>$300</td></tr>
+                        </tbody>
+                    </table>
+                </div>
 
-        <div class="switch">
-          <input id="inAddition" type="checkbox" aria-label="Private lessons in addition to a class" />
-          <label for="inAddition">Private lessons are <strong>in addition to</strong> a class (sets $60/hr). Unchecked = $80/hr standalone.</label>
-        </div>
-      </div>
+                <div class="table-wrap" style="margin-top:14px">
+                    <table aria-label="Adult pricing">
+                        <caption>Adults — Class Cards</caption>
+                        <thead>
+                            <tr><th scope="col">Class Cards</th><th scope="col">Price</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>4‑Class Card</td><td>$90</td></tr>
+                            <tr><td>12‑Class Card</td><td>$180</td></tr>
+                        </tbody>
+                    </table>
+                </div>
 
-      <!-- Prepay months -->
-      <div class="field" id="monthsField" style="margin-top:10px">
-        <label for="months" class="muted">Prepay months (5% off at 3+ months)</label>
-        <select id="months" aria-label="Number of months to prepay">
-          <option value="1">1 month</option>
-          <option value="2">2 months</option>
-          <option value="3">3 months (5% off)</option>
-          <option value="4">4 months (5% off)</option>
-          <option value="5">5 months (5% off)</option>
-          <option value="6">6 months (5% off)</option>
-          <option value="7">7 months (5% off)</option>
-          <option value="8">8 months (5% off)</option>
-          <option value="9">9 months (5% off)</option>
-          <option value="10">10 months (5% off)</option>
-          <option value="11">11 months (5% off)</option>
-          <option value="12">12 months (5% off)</option>
-        </select>
-      </div>
+                <div class="table-wrap" style="margin-top:14px">
+                    <table aria-label="Private lessons">
+                        <caption>Private Lessons</caption>
+                        <thead>
+                            <tr><th scope="col">Type</th><th scope="col">Rate</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Standalone</td><td>$80 / hour</td></tr>
+                            <tr><td>In addition to a class</td><td>$60 / hour</td></tr>
+                        </tbody>
+                    </table>
+                </div>
 
-      <div class="total" id="totalLabel">Total: $0.00</div>
-      <div class="break" id="breakdown"></div>
+                <p class="note">Save <strong>5%</strong> when prepaying <strong>3+ months</strong> of tuition. (Discount applies to tuition only.)</p>
+            </article>
 
-      <div class="btn-row" role="group" aria-label="Online payment buttons">
-        <a class="btn" id="paypalBtn" rel="noopener" target="_blank"
-           href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=misskimdances@yahoo.com&item_name=Tuition%20Payment&currency_code=USD">
-          Pay with PayPal
-        </a>
-        <a class="btn btn--ghost" id="venmoBtn" rel="noopener" target="_blank"
-           href="https://venmo.com/u/Kimberly-Revie-1">
-          Pay with Venmo
-        </a>
-      </div>
-    </article>
-  </section>
-</main>
+            <!-- RIGHT: Simple payment options (no locking) -->
+            <article class="card" aria-labelledby="payonline">
+                <h2 id="payonline">Pay Online</h2>
+                <p class="muted">Choose a method below and enter your total. Add a note with the <strong>student name</strong> and what you’re paying for (e.g., “September tuition + registration”).</p>
 
-<footer role="contentinfo">
-  <div class="wrap small">© <span id="year"></span> Miss Kim’s Dance Class · 14781 Ladue Rd, Chesterfield, MO 63017 · (314) 924-6008</div>
-</footer>
+                <div class="btn-row" role="group" aria-label="Online payment buttons">
+                    <!-- PayPal: pre-fills business + item name, no amount -->
+                    <a class="btn" rel="noopener" target="_blank"
+                       href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=misskimdances@yahoo.com&item_name=Tuition%20or%20Fees&currency_code=USD">
+                        Pay with PayPal
+                    </a>
+                    <!-- Venmo: profile page (web); mobile app will handle amount entry -->
+                    <a class="btn btn--ghost" rel="noopener" target="_blank" href="https://venmo.com/u/Kimberly-Revie-1">
+                        Pay with Venmo
+                    </a>
+                </div>
 
-<script>
-  // Year stamp
-  document.getElementById('year').textContent = new Date().getFullYear();
+                <h3 style="margin-top:18px">Other Ways to Pay</h3>
+                <ul>
+                    <li><strong>Cash or Check</strong> — Drop off at the studio front desk. Make checks payable to <em>Miss Kim’s Dance Class</em>.</li>
+                    <li><strong>By Phone</strong> — Call <a href="tel:+13149246008">(314) 924-6008</a> with questions about totals.</li>
+                    <li><strong>Receipts</strong> — Email <a href="mailto:misskimdances@yahoo.com">misskimdances@yahoo.com</a> for a receipt or statement.</li>
+                </ul>
+            </article>
+        </section>
+    </main>
 
-  // Elements
-  const payForSel = document.getElementById('payFor');
-  const planField = document.getElementById('planField');
-  const planType = document.getElementById('planType');
+    <footer role="contentinfo">
+        <div class="wrap small">© <span id="year"></span> Miss Kim’s Dance Class · 14781 Ladue Rd, Chesterfield, MO 63017 · (314) 924-6008</div>
+    </footer>
 
-  const youthControls = document.getElementById('youthControls');
-  const youthBase = document.getElementById('youthBase');
-  const youthStudents = document.getElementById('youthStudents');
-  const youthPrivateHours = document.getElementById('youthPrivateHours');
-  const youthInAddition = document.getElementById('youthInAddition');
-
-  const adultControls = document.getElementById('adultControls');
-  const adultCard = document.getElementById('adultCard');
-  const privateHours = document.getElementById('privateHours');
-  const inAddition = document.getElementById('inAddition');
-
-  const monthsField = document.getElementById('monthsField');
-  const monthsSel = document.getElementById('months');
-
-  const totalLbl = document.getElementById('totalLabel');
-  const breakdownEl = document.getElementById('breakdown');
-  const pp = document.getElementById('paypalBtn');
-  const vm = document.getElementById('venmoBtn');
-
-  function dollars(n){ return n.toLocaleString(undefined,{style:'currency',currency:'USD'}); }
-
-  function computeYouthMonthly() {
-    const base = parseFloat(youthBase.value);
-    const n = parseInt(youthStudents.value, 10);
-
-    // base tuition by student count
-    const parts = [];
-    if (n >= 1) parts.push(base);        // 100%
-    if (n >= 2) parts.push(base * 0.50); // +50%
-    if (n >= 3) parts.push(base * 0.75); // +75%
-    const tuitionOnly = parts.reduce((a,b)=>a+b,0);
-
-    // youth private lessons
-    const hrs = Math.max(0, parseInt(youthPrivateHours.value || '0', 10));
-    const rate = youthInAddition.checked ? 60 : 80;
-    const privTotal = hrs * rate;
-
-    const subtotal = tuitionOnly + privTotal;
-
-    const breakdown = [`1st: ${dollars(base)}`];
-    if (n >= 2) breakdown.push(`2nd: ${dollars(base*0.50)}`);
-    if (n >= 3) breakdown.push(`3rd: ${dollars(base*0.75)}`);
-    if (hrs > 0) breakdown.push(`Youth private: ${hrs} hr × ${dollars(rate)} = ${dollars(privTotal)}`);
-
-    return { subtotal, breakdown: breakdown.join(' + ') };
-  }
-
-  function computeAdult() {
-    const card = parseFloat(adultCard.value); // 90 or 180
-    const hrs = Math.max(0, parseInt(privateHours.value || '0', 10));
-    const rate = inAddition.checked ? 60 : 80;
-    const privTotal = hrs * rate;
-    const subtotal = card + privTotal;
-
-    const lines = [`Class card: ${dollars(card)}`];
-    if (hrs > 0) lines.push(`Private lessons: ${hrs} hr × ${dollars(rate)} = ${dollars(privTotal)}`);
-    return { subtotal, breakdown: lines.join(' + ') };
-  }
-
-  function computeAll() {
-    const payFor = payForSel.value; // tuition | regOnly | both
-    const tuitionEnabled = payFor !== 'regOnly';
-    const includeReg = payFor === 'regOnly' || payFor === 'both';
-
-    // Toggle tuition controls
-    planField.style.display = tuitionEnabled ? '' : 'none';
-    youthControls.style.display = tuitionEnabled && planType.value === 'youth' ? '' : 'none';
-    adultControls.style.display = tuitionEnabled && planType.value === 'adult' ? '' : 'none';
-    monthsField.style.display = tuitionEnabled ? '' : 'none';
-
-    // Base calc
-    let tuitionSubtotal = 0;
-    let tuitionBreakdown = '';
-
-    if (tuitionEnabled) {
-      const baseCalc = planType.value === 'youth' ? computeYouthMonthly() : computeAdult();
-      tuitionSubtotal = baseCalc.subtotal;
-      tuitionBreakdown = baseCalc.breakdown;
-    }
-
-    const months = tuitionEnabled ? parseInt(monthsSel.value, 10) : 1;
-
-    // Apply months multiplier to tuition only
-    const preDiscountTuition = tuitionSubtotal * months;
-
-    // 5% discount on tuition when months >= 3 (registration fee never discounted)
-    const discountRate = tuitionEnabled && months >= 3 ? 0.05 : 0;
-    const discount = preDiscountTuition * discountRate;
-    const tuitionAfterDiscount = preDiscountTuition - discount;
-
-    // Registration fee (not multiplied or discounted)
-    const regFee = includeReg ? 50 : 0;
-
-    const total = tuitionAfterDiscount + regFee;
-
-    // UI text
-    const isYouth = planType.value === 'youth';
-    const tuitionLabel = isYouth ? 'Youth Tuition' : 'Adult Tuition';
-    const monthText = months === 1 ? '1 month' : `${months} months`;
-    const discountText = discountRate ? ` − 5% prepay discount (${dollars(discount)})` : '';
-
-    // Breakdown line
-    let breakdown = '';
-    if (tuitionEnabled) {
-      breakdown = `${tuitionBreakdown} × ${monthText}${discountText}`;
-    }
-    if (includeReg && tuitionEnabled) {
-      breakdown += (breakdown ? ' + ' : '') + `Registration fee: ${dollars(regFee)}`;
-    } else if (includeReg && !tuitionEnabled) {
-      breakdown = `Registration fee: ${dollars(regFee)}`;
-    }
-
-    totalLbl.textContent = `Total: ${dollars(total)}`;
-    breakdownEl.textContent = breakdown;
-
-    // Lock PayPal & Venmo
-    const amt = total.toFixed(2);
-
-    let itemName = '';
-    if (includeReg && !tuitionEnabled) {
-      itemName = 'Registration Fee';
-    } else if (!includeReg && tuitionEnabled) {
-      itemName = `${tuitionLabel} (${monthText}${discountRate ? ' with 5% prepay discount' : ''})`;
-    } else if (includeReg && tuitionEnabled) {
-      itemName = `Registration Fee + ${tuitionLabel} (${monthText}${discountRate ? ' with 5% prepay discount' : ''})`;
-    }
-
-    pp.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick"
-      + "&business=" + encodeURIComponent("misskimdances@yahoo.com")
-      + "&item_name=" + encodeURIComponent(itemName)
-      + "&amount=" + amt
-      + "&currency_code=USD";
-
-    const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-    const venmoBase = isMobile
-      ? "venmo://paycharge?txn=pay&recipients=" + encodeURIComponent("@Kimberly-Revie-1")
-      : "https://venmo.com/u/Kimberly-Revie-1?txn=pay";
-
-    vm.href = venmoBase + "&amount=" + amt;
-  }
-
-  // init + events
-  computeAll();
-  payForSel.addEventListener('change', computeAll);
-  planType.addEventListener('change', computeAll);
-  youthBase.addEventListener('change', computeAll);
-  youthStudents.addEventListener('change', computeAll);
-  if (youthPrivateHours) youthPrivateHours.addEventListener('input', computeAll);
-  if (youthInAddition) youthInAddition.addEventListener('change', computeAll);
-  adultCard.addEventListener('change', computeAll);
-  privateHours.addEventListener('input', computeAll);
-  inAddition.addEventListener('change', computeAll);
-  monthsSel.addEventListener('change', computeAll);
-</script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

@@ -1,0 +1,24 @@
+# robots.txt for https://www.misskimsdanceclass.com/
+
+User-agent: *
+# ===============================
+# Block sensitive/private content
+# ===============================
+Disallow: /registration-form.docx   # Registration form (sensitive personal info)
+Disallow: /private/                 # Private internal content
+Disallow: /drafts/                  # Draft or unpublished content
+Disallow: /tmp/                     # Temporary files
+Disallow: /*.pdf$                   # Blocks direct PDF indexing (e.g., recital flyers, forms)
+Disallow: /*.docx$                  # Blocks Word documents
+Disallow: /*.rtf$                   # Blocks Rich Text docs
+Disallow: /*.odt$                   # Blocks OpenOffice docs
+
+# ===============================
+# Allow normal crawlable content
+# ===============================
+Allow: /                            # All regular pages (HTML)
+
+# ===============================
+# Sitemap (important for SEO)
+# ===============================
+Sitemap: https://www.misskimsdanceclass.com/sitemap.xml

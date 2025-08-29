@@ -1,43 +1,21 @@
 <!DOCTYPE html>
-<a href="/registration-form.docx" 
-   download="registration-form.docx" 
-   class="download-btn" 
-   aria-label="Download the Registration Form as a Word document">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14" />
-  </svg>
-  Download Registration Form
-  <small>(.docx)</small>
-</a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Opening PDF�</title>
 
-<style>
-.download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: #5f35b0;
-  color: #fff;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(95,53,176,0.25);
-  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.05s ease;
-}
-.download-btn:hover {
-  background: #4c2890;
-  box-shadow: 0 6px 16px rgba(95,53,176,0.35);
-}
-.download-btn:active {
-  transform: translateY(1px);
-}
-.download-btn small {
-  font-size: 0.8rem;
-  opacity: 0.85;
-}
-.download-btn:focus-visible {
-  outline: 3px solid #1a73e8;
-  outline-offset: 3px;
-}
-</style>
+    <!-- 1) Instant JS redirect (most reliable) -->
+    <script>
+    // Change this to your PDF path or URL:
+        const pdfUrl = "/essentials/registration-form.pdf";
+    // Replace current page so it doesn't stay in back/forward history:
+    window.location.replace(pdfUrl);
+    </script>
+
+    <!-- 2) Meta refresh fallback (works if JS is blocked) -->
+    <meta http-equiv="refresh" content="0; url=/essentials/registration-form.pdf" />
+</head>
+<body>
+    <p>Opening your PDF� If nothing happens, <a href="/essentials/registration-form.pdf">click here</a>.</p>
+</body>
+</html>

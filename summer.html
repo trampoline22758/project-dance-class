@@ -1,143 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Summer Dance Camp 2025 | Miss Kim's Dance Class</title>
-<style>
-  :root {
-    --brand: #ff8c42; /* Summer orange */
-    --brand-light: #ffd29d;
-    --accent: #4b8bf4; /* Sky blue */
-    --bg: #fffbea;
-    --text: #333;
-    --shadow: 0 8px 20px rgba(0,0,0,0.08);
-  }
-  body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-  }
-  header {
-    background: linear-gradient(120deg, var(--brand), var(--brand-light));
-    padding: 1.5rem;
-    text-align: center;
-    color: white;
-    box-shadow: var(--shadow);
-  }
-  header h1 {
-    margin: 0;
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-  }
-  header p {
-    margin: .5rem 0 0;
-    font-size: 1.1rem;
-    font-weight: 500;
-  }
-  main {
-    max-width: 900px;
-    margin: auto;
-    padding: 2rem 1rem;
-  }
-  .highlight {
-    background: var(--accent);
-    color: white;
-    padding: .25rem .5rem;
-    border-radius: 4px;
-  }
-  h2 {
-    color: var(--brand);
-    margin-top: 2rem;
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  ul li {
-    background: white;
-    padding: .75rem 1rem;
-    border-radius: 6px;
-    box-shadow: var(--shadow);
-    margin-bottom: .5rem;
-  }
-  .cost-box {
-    background: var(--brand-light);
-    padding: 1rem;
-    border-left: 6px solid var(--brand);
-    border-radius: 6px;
-    margin: 1.5rem 0;
-  }
-  .btn {
-    display: inline-block;
-    background: var(--brand);
-    color: white;
-    padding: .7rem 1.5rem;
-    border-radius: 999px;
-    font-weight: 700;
-    text-decoration: none;
-    box-shadow: var(--shadow);
-    transition: background .2s;
-  }
-  .btn:hover {
-    background: #ff7a21;
-  }
-  footer {
-    background: var(--brand);
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin-top: 2rem;
-    font-size: .9rem;
-  }
-</style>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Meta & SEO -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Summer Dance Camp 2025 | Miss Kim's Dance Class</title>
+    <meta name="description" content="Join Miss Kim’s Summer Dance Camp, June 23–27, 2025. Small classes, creative movement, ballet, tap, tumbling, crafts. $130 first student, $65 sibling." />
+    <link rel="canonical" href="https://www.misskimsdanceclass.com/summer" />
+    <meta name="theme-color" content="#5f35b0" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Summer Dance Camp 2025 — Miss Kim's Dance Class" />
+    <meta property="og:description" content="June 23–27, 2025 • Small classes • Creative movement, ballet & tap, tumbling, crafts." />
+    <meta property="og:url" content="https://www.misskimsdanceclass.com/summer" />
+    <meta property="og:image" content="https://www.misskimsdanceclass.com/og/hero.JPG" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Site Theme -->
+    <link rel="stylesheet" href="/styles.css" />
+
+    <!-- Optional: Preload a hero image (keeps LCP fast if you use one) -->
+    <link rel="preload" as="image" href="/photos/herobanner.JPG" fetchpriority="high" />
+
+    <!-- Page-scoped styles (minimal, uses theme colors/spacing) -->
+    <style>
+        :root {
+            --brand: #5f35b0; /* theme primary purple */
+            --brand-2: #8b5cf6; /* theme lighter purple */
+            --ink: #222;
+            --muted: #666;
+            --surface: #fff;
+            --shadow: 0 8px 24px rgba(0,0,0,.12);
+            --radius: 16px;
+            --gap: clamp(12px,2vw,20px);
+            --container: 1100px;
+        }
+
+        body {
+            font-family: Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+            color: var(--ink);
+            margin: 0
+        }
+
+        .container {
+            max-width: var(--container);
+            margin: auto;
+            padding: clamp(16px,3vw,28px)
+        }
+
+        .hero--camp {
+            position: relative;
+            isolation: isolate;
+            background: linear-gradient(135deg, var(--brand), var(--brand-2));
+            color: #fff;
+            padding: clamp(36px,6vw,72px) 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+            .hero--camp h1 {
+                margin: 0 0 .5rem;
+                font-size: clamp(1.8rem,4vw,2.6rem);
+                line-height: 1.15
+            }
+
+            .hero--camp p {
+                margin: .3rem 0;
+                font-size: clamp(1rem,2.2vw,1.125rem);
+                opacity: .95
+            }
+
+            .hero--camp .badge {
+                display: inline-block;
+                background: rgba(255,255,255,.15);
+                border: 1px solid rgba(255,255,255,.35);
+                padding: .35rem .75rem;
+                border-radius: 999px;
+                font-weight: 600;
+                margin-top: .5rem
+            }
+
+        .camp-grid {
+            display: grid;
+            gap: var(--gap);
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 860px) {
+            .camp-grid {
+                grid-template-columns: 1.2fr .8fr
+            }
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: clamp(16px,2.5vw,24px)
+        }
+
+            .card h2 {
+                margin: .2rem 0 1rem;
+                color: var(--brand);
+                font-size: clamp(1.25rem,2.2vw,1.5rem)
+            }
+
+        ul.clean {
+            list-style: none;
+            padding: 0;
+            margin: 0
+        }
+
+            ul.clean li {
+                padding: .65rem .75rem;
+                border: 1px solid rgba(0,0,0,.06);
+                border-radius: 10px;
+                margin-bottom: .5rem;
+                background: #fff
+            }
+
+        .price {
+            background: linear-gradient(180deg, #f7f4ff, #ffffff);
+            border-left: 6px solid var(--brand);
+            border-radius: 12px;
+            padding: 1rem 1rem;
+            margin: 1rem 0;
+            font-weight: 600
+        }
+
+        .note {
+            color: var(--muted);
+            font-size: .95rem
+        }
+
+        .cta {
+            display: flex;
+            gap: .75rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            margin-top: clamp(16px,2vw,24px)
+        }
+
+        .btn {
+            display: inline-block;
+            border-radius: 999px;
+            font-weight: 700;
+            text-decoration: none;
+            padding: .8rem 1.2rem
+        }
+
+        .btn--primary {
+            background: var(--brand);
+            color: #fff;
+            box-shadow: var(--shadow)
+        }
+
+        .btn--ghost {
+            background: #fff;
+            border: 1px solid rgba(0,0,0,.1);
+            color: var(--ink)
+        }
+
+        .btn--primary:hover {
+            filter: brightness(1.05)
+        }
+
+        .btn--ghost:hover {
+            background: #fafafa
+        }
+
+        .section {
+            margin-top: clamp(20px,4vw,40px)
+        }
+
+        .mini {
+            font-size: .9rem;
+            color: var(--muted)
+        }
+
+        footer.simple {
+            padding: 24px 0;
+            text-align: center;
+            color: #fff;
+            background: var(--brand);
+            margin-top: 40px
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>Summer Registration</h1>
-  <p>Miss Kim's Dance Class • Summer Dance Camp</p>
-  <p class="highlight">June 23–27, 2025</p>
-</header>
+    <!-- Simple hero (theme colors/typography) -->
+    <header class="hero--camp">
+        <div class="container">
+            <h1>Summer Dance Camp 2025</h1>
+            <p>Miss Kim’s Dance Class • Chesterfield, MO</p>
+            <p class="badge" aria-label="Camp dates">June 23–27, 2025</p>
+            <div class="cta" style="margin-top:16px">
+                <a class="btn btn--primary" href="/registration">Register Now</a>
+                <a class="btn btn--ghost" href="tel:+13145420608">Call (314) 542-0608</a>
+            </div>
+        </div>
+    </header>
 
-<main>
-  <h2>Schedule</h2>
-  <ul>
-    <li>10:00 AM – 12:00 PM | Ages 3–5</li>
-    <li>1:00 PM – 3:00 PM | Ages 6–8</li>
-  </ul>
+    <main class="container" id="main-content" role="main">
+        <div class="camp-grid">
+            <!-- Left column -->
+            <section class="card" aria-labelledby="schedule-title">
+                <h2 id="schedule-title">Schedule</h2>
+                <ul class="clean" aria-label="Class times">
+                    <li>10:00 AM – 12:00 PM · Ages 3–5</li>
+                    <li>1:00 PM – 3:00 PM · Ages 6–8</li>
+                </ul>
 
-  <h2>What’s Included</h2>
-  <ul>
-    <li>✨ Creative Movement</li>
-    <li>🩰 Ballet & Tap</li>
-    <li>🎶 Intro to Dance</li>
-    <li>🤸 Tumble Time</li>
-    <li>🎨 Daily Crafts</li>
-  </ul>
+                <div class="section">
+                    <h2 id="included-title">What’s Included</h2>
+                    <ul class="clean" aria-labelledby="included-title">
+                        <li>✨ Creative Movement</li>
+                        <li>🩰 Ballet & Tap</li>
+                        <li>🎶 Intro to Dance</li>
+                        <li>🤸 Tumble Time</li>
+                        <li>🎨 Daily Crafts</li>
+                    </ul>
+                </div>
+            </section>
 
-  <h2>Cost</h2>
-  <div class="cost-box">
-    $130 for the first student<br>
-    $65 for each additional family member
-  </div>
+            <!-- Right column -->
+            <aside class="card" aria-labelledby="cost-title">
+                <h2 id="cost-title">Cost</h2>
+                <div class="price">
+                    $130 for the first student<br />
+                    $65 for each additional family member
+                </div>
+                <p class="note">Payment due at registration to hold your spot.</p>
 
-  <h2>Details</h2>
-  <ul>
-    <li>Class sizes are limited to 10 students per session.</li>
-    <li>A minimum of 5 students is required for each session to be held.</li>
-    <li>Age ranges are general guidelines—flexibility is welcome!</li>
-  </ul>
+                <div class="section" aria-labelledby="details-title">
+                    <h2 id="details-title">Details</h2>
+                    <ul class="clean">
+                        <li>Class sizes limited to 10 students per session.</li>
+                        <li>Minimum of 5 students required to run a session.</li>
+                        <li>Age ranges are guidelines—flexibility is welcome.</li>
+                    </ul>
+                </div>
 
-  <p style="text-align:center; margin-top:2rem;">
-    <a href="registration.html" class="btn">Register Now</a>
-  </p>
-</main>
+                <div class="cta">
+                    <a class="btn btn--primary" href="/registration">Save My Spot</a>
+                </div>
+            </aside>
+        </div>
 
-<footer>
-  &copy; 2025 Miss Kim's Dance Class • All Rights Reserved
-</footer>
+        <p class="mini section">Questions? <a href="mailto:misskimdances@yahoo.com">Email us</a> or call <a href="tel:+13145420608">(314) 542-0608</a>.</p>
+    </main>
 
+    <footer class="simple" aria-label="Footer">
+        &copy; <span id="year"></span> Miss Kim’s Dance Class • All Rights Reserved
+    </footer>
+
+    <!-- Tiny helpers -->
+    <script>
+    // Footer year (safe even if element missing)
+    const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+    </script>
+
+    <!-- Event structured data (SEO) -->
+    <script type="application/ld+json">
+        {
+          "@context":"https://schema.org",
+          "@type":"Event",
+          "name":"Summer Dance Camp 2025",
+          "startDate":"2025-06-23",
+          "endDate":"2025-06-27",
+          "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus":"https://schema.org/EventScheduled",
+          "location":{
+            "@type":"Place",
+            "name":"Miss Kim's Dance Class",
+            "address":{
+              "@type":"PostalAddress",
+              "streetAddress":"14278 Ladue Rd",
+              "addressLocality":"Chesterfield",
+              "addressRegion":"MO",
+              "postalCode":"63017",
+              "addressCountry":"US"
+            }
+          },
+          "organizer":{
+            "@type":"Organization",
+            "name":"Miss Kim's Dance Class",
+            "url":"https://www.misskimsdanceclass.com/"
+          }
+        }
+    </script>
 </body>
 </html>

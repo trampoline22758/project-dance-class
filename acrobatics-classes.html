@@ -1,31 +1,192 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Acrobatics Classes | Chesterfield, MO</title>
-<meta name="description" content="Acro training that mixes dance choreography with balance, agility, and flexibility. Supportive, small-group instruction.">
-<link rel="canonical" href="/acrobatics-classes"><link rel="stylesheet" href="/styles.css">
-</head><body>
-<a class="skip-link" href="#main">Skip to main</a>
-<main id="main">
-  <nav class="breadcrumbs" aria-label="Breadcrumb"><ol>
-    <li><a href="/">Home</a></li><li aria-current="page">Acrobatics</li>
-  </ol></nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <section class="hero"><div class="hero-background" style="background-image:url('/photos/tumbling.jpg')"></div>
-    <div class="hero-content"><h1>Acrobatics at Miss Kim’s</h1>
-    <p class="hero-tagline">Balance · Agility · Flexibility</p>
-    <a class="hero-call" href="tel:+13145420608">Call (314) 542-0608</a></div>
-  </section>
+    <!-- Meta & SEO -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Acrobatics Classes | Miss Kim’s Dance Class — Chesterfield, MO</title>
+    <meta name="description" content="Acrobatics training that blends dance choreography with balance, agility, and flexibility. Supportive, small-group instruction." />
+    <link rel="canonical" href="https://www.misskimsdanceclass.com/acrobatics-classes" />
+    <meta name="theme-color" content="#5f35b0" />
 
-  <section class="content-section"><div class="container">
-    <h2>About the Program</h2>
-    <p>Build acrobatic skills that integrate seamlessly with choreography—develop control, confidence, and safe technique with experienced instructors.</p>
-    <ul>
-      <li>Strength & flexibility conditioning</li>
-      <li>Progressions for balances, limbers, and tumbling elements</li>
-      <li>Acro transitions inside dance combos</li>
-    </ul>
-    <p class="cta-inline"><a class="btn btn--primary" href="/schedule.webp">See Schedule</a>
-    <a class="btn btn--ghost" href="/pricing.html">Pricing</a> <a class="btn btn--ghost" href="/free-trial">Free Trial</a></p>
-  </div></section>
-</main>
-</body></html>
+    <!-- OG Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Acrobatics Classes — Miss Kim’s Dance Class" />
+    <meta property="og:description" content="Balance · Agility · Flexibility. Small group acrobatics instruction with experienced teachers." />
+    <meta property="og:url" content="https://www.misskimsdanceclass.com/acrobatics-classes" />
+    <meta property="og:image" content="https://www.misskimsdanceclass.com/photos/tumbling.jpg" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles.css" />
+
+    <!-- Page-specific styles -->
+    <style>
+        :root {
+            --brand: #5f35b0;
+            --brand-2: #8b5cf6;
+            --ink: #222;
+            --muted: #666;
+            --surface: #fff;
+            --shadow: 0 8px 24px rgba(0,0,0,.12);
+            --radius: 16px;
+            --container: 1100px;
+        }
+
+        body {
+            font-family: Inter, sans-serif;
+            margin: 0;
+            color: var(--ink);
+        }
+
+        .container {
+            max-width: var(--container);
+            margin: auto;
+            padding: clamp(16px,3vw,28px);
+        }
+
+        .hero {
+            position: relative;
+            isolation: isolate;
+            background: linear-gradient(135deg,var(--brand),var(--brand-2));
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.5);
+            z-index: -1;
+        }
+
+        .hero-content {
+            padding: clamp(60px,8vw,100px) 20px;
+        }
+
+        .hero h1 {
+            margin: 0 0 .5rem;
+            font-size: clamp(1.8rem,4vw,2.5rem);
+        }
+
+        .hero-tagline {
+            font-size: 1.125rem;
+            opacity: .9;
+            margin: 0 0 1rem;
+        }
+
+        .hero-call {
+            display: inline-block;
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.3);
+            padding: .5rem 1.2rem;
+            border-radius: 999px;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .content-section h2 {
+            color: var(--brand);
+            margin-top: 0;
+        }
+
+        ul.clean {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            ul.clean li {
+                background: #fff;
+                padding: .75rem 1rem;
+                border-radius: 10px;
+                box-shadow: var(--shadow);
+                margin-bottom: .5rem;
+            }
+
+        .cta-inline {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .btn {
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: .7rem 1.2rem;
+        }
+
+        .btn--primary {
+            background: var(--brand);
+            color: #fff;
+            box-shadow: var(--shadow);
+        }
+
+        .btn--ghost {
+            background: #fff;
+            border: 1px solid rgba(0,0,0,.1);
+            color: var(--ink);
+        }
+
+        .btn--primary:hover {
+            filter: brightness(1.05);
+        }
+
+        .btn--ghost:hover {
+            background: #fafafa;
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <main id="main">
+        <!-- Hero -->
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-background" style="background-image:url('/photos/tumbling.jpg')"></div>
+            <div class="hero-content">
+                <h1 id="hero-title">Acrobatics at Miss Kim’s</h1>
+                <p class="hero-tagline">Balance · Agility · Flexibility</p>
+                <a class="hero-call" href="tel:+13145420608">📞 (314) 542-0608</a>
+            </div>
+        </section>
+
+        <!-- Content -->
+        <section class="content-section">
+            <div class="container">
+                <h2>About the Program</h2>
+                <p>Build acrobatic skills that integrate seamlessly with choreography—develop control, confidence, and safe technique with experienced instructors.</p>
+                <ul class="clean">
+                    <li>Strength & flexibility conditioning</li>
+                    <li>Progressions for balances, limbers, and tumbling elements</li>
+                    <li>Acro transitions inside dance combos</li>
+                </ul>
+
+                <p class="cta-inline">
+                    <a class="btn btn--primary" href="/schedule">See Schedule</a>
+                    <a class="btn btn--ghost" href="/pricing">Pricing</a>
+                    <a class="btn btn--ghost" href="/free-trial">Free Trial</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="simple" style="text-align:center; background:var(--brand); color:#fff; padding:1rem; margin-top:2rem;">
+        &copy; <span id="year"></span> Miss Kim’s Dance Class • Chesterfield, MO
+    </footer>
+
+    <script>
+    const y=document.getElementById("year"); if(y) y.textContent=new Date().getFullYear();
+    </script>
+</body>
+</html>
