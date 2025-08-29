@@ -1,16 +1,10 @@
 {
-  // Core Vercel config version
   "version": 2,
+  "cleanUrls": true, // "/about" instead of "/about.html"
+  "trailingSlash": false, // keep "/tap", not "/tap/"
 
-  // Serve "/about" instead of "/about.html" (nice, clean URLs)
-  "cleanUrls": true,
-
-  // Do not append trailing slashes ("/about" not "/about/")
-  "trailingSlash": false,
-
-  // ---------- Response headers ----------
   "headers": [
-    // Long-cache immutable fonts (fingerprinted files are safe to cache for a year)
+    // Fonts: cache hard for 1 year (immutable)
     {
       "source": "/(.*)\\.(woff2|woff|ttf|eot|otf)$",
       "headers": [
@@ -21,7 +15,7 @@
       ]
     },
 
-    // Long-cache immutable CSS/JS (works best if your build produces hashed filenames)
+    // CSS/JS: cache hard for 1 year (works well with hashed filenames)
     {
       "source": "/(.*)\\.(css|js)$",
       "headers": [
@@ -32,18 +26,18 @@
       ]
     },
 
-    // Static images (30 days). If you use hashed images, you may switch to 1 year + immutable.
+    // Images: 30 days (bump to 1y+immutable if you fingerprint)
     {
       "source": "/(.*)\\.(png|jpg|jpeg|gif|webp|svg|ico|avif)$",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=2592000"
-        } // 30 days
+        }
       ]
     },
 
-    // HTML: always revalidate (so changes deploy instantly for visitors)
+    // HTML: always revalidate so deploys show instantly
     {
       "source": "/(.*)\\.(html)$",
       "headers": [
@@ -54,7 +48,7 @@
       ]
     },
 
-    // PWA/manifest & service worker: never cache aggressively
+    // PWA bits: do NOT cache aggressively
     {
       "source": "/(manifest\\.webmanifest|site\\.webmanifest)",
       "headers": [
@@ -74,52 +68,41 @@
       ]
     },
 
-    // SEO files (robots/sitemap): reasonable short cache
+    // SEO helpers
     {
       "source": "/(robots\\.txt|sitemap\\.xml)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=86400"
-        } // 1 day
+        }
       ]
     },
 
-    // Security headers applied to all routes
+    // Security headers (CSP tuned for your stack: Google Fonts, cdnjs, unpkg, embed.im)
     {
       "source": "/(.*)",
       "headers": [
-        // Prevent the site from being framed (clickjacking protection)
         {
           "key": "X-Frame-Options",
           "value": "DENY"
         },
-
-        // Block MIME sniffing
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
         },
-
-        // Sensible referrer policy
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
         },
-
-        // Lock down powerful APIs you don’t use
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=()"
         },
-
-        // HSTS for 2 years + preload (enable only if you serve HTTPS on apex + subdomains)
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
         },
-
-        // Cross-origin protections (safe defaults)
         {
           "key": "Cross-Origin-Opener-Policy",
           "value": "same-origin"
@@ -129,11 +112,8 @@
           "value": "same-site"
         },
 
-        // Content Security Policy:
-        // NOTE: This version removes 'unsafe-eval' and keeps 'unsafe-inline' because your pages use inline styles/scripts.
-        // If you later move inline <script> to external files or use nonces/hashes, you can drop 'unsafe-inline' too.
-        // The sources below are tailored to assets you’ve shown (fonts.googleapis, gstatic, cdnjs, unpkg, embed.im).
-        // If something gets blocked, check your browser console and add the needed host.
+        // Keep 'unsafe-inline' because your pages include inline scripts/styles.
+        // We removed 'unsafe-eval' (safer). Add other hosts here if your console shows CSP blocks.
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; frame-ancestors 'none'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://app.embed.im; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com"
@@ -142,9 +122,61 @@
     }
   ],
 
-  // ---------- Redirects ----------
+  // --- Rewrites: keep SHORT URLs in the browser, serve LONG paths under the hood ---
+  // Example: visiting /tap serves the content from /tap-dance-classes, but the URL stays /tap
+  "rewrites": [
+    {
+      "source": "/tap",
+      "destination": "/tap-dance-classes"
+    },
+    {
+      "source": "/ballet",
+      "destination": "/ballet-dance-classes"
+    },
+    {
+      "source": "/jazz",
+      "destination": "/jazz-dance-classes"
+    },
+    {
+      "source": "/hip-hop",
+      "destination": "/hip-hop-dance-classes"
+    },
+    {
+      "source": "/lyrical",
+      "destination": "/lyrical-dance-classes"
+    },
+    {
+      "source": "/contemporary",
+      "destination": "/contemporary-dance-classes"
+    },
+    {
+      "source": "/pom-poms",
+      "destination": "/pom-poms-classes"
+    },
+    {
+      "source": "/tumbling",
+      "destination": "/tumbling-classes"
+    },
+    {
+      "source": "/acrobatics",
+      "destination": "/acrobatics-classes"
+    },
+    {
+      "source": "/aerial",
+      "destination": "/aerial-classes"
+    },
+    {
+      "source": "/competition",
+      "destination": "/competition-teams"
+    },
+    {
+      "source": "/summer",
+      "destination": "/summer"
+    } // keep if your route is already /summer
+  ],
+
+  // --- Redirects: old LONG URLs 301 to SHORT canonical URLs (SEO-friendly) ---
   "redirects": [
-    // Canonicalize “home” and “index.html” to root
     {
       "source": "/home",
       "destination": "/",
@@ -155,15 +187,67 @@
       "destination": "/",
       "permanent": true
     },
-
-    // Canonicalize any ".html" to clean URL (works well with `cleanUrls: true`)
     {
       "source": "/:path*.html",
       "destination": "/:path*",
       "permanent": true
-    }
+    },
 
-    // If you accidentally linked to an image for schedule, send users to the page
-    // { "source": "/schedule.webp", "destination": "/schedule", "permanent": true }
+    // canonicalize long slugs to short
+    {
+      "source": "/tap-dance-classes",
+      "destination": "/tap",
+      "permanent": true
+    },
+    {
+      "source": "/ballet-dance-classes",
+      "destination": "/ballet",
+      "permanent": true
+    },
+    {
+      "source": "/jazz-dance-classes",
+      "destination": "/jazz",
+      "permanent": true
+    },
+    {
+      "source": "/hip-hop-dance-classes",
+      "destination": "/hip-hop",
+      "permanent": true
+    },
+    {
+      "source": "/lyrical-dance-classes",
+      "destination": "/lyrical",
+      "permanent": true
+    },
+    {
+      "source": "/contemporary-dance-classes",
+      "destination": "/contemporary",
+      "permanent": true
+    },
+    {
+      "source": "/pom-poms-classes",
+      "destination": "/pom-poms",
+      "permanent": true
+    },
+    {
+      "source": "/tumbling-classes",
+      "destination": "/tumbling",
+      "permanent": true
+    },
+    {
+      "source": "/acrobatics-classes",
+      "destination": "/acrobatics",
+      "permanent": true
+    },
+    {
+      "source": "/aerial-classes",
+      "destination": "/aerial",
+      "permanent": true
+    },
+    {
+      "source": "/competition-teams",
+      "destination": "/competition",
+      "permanent": true
+    }
   ]
 }
