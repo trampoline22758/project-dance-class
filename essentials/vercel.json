@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "cleanUrls": true, // "/about" instead of "/about.html"
-  "trailingSlash": false, // keep "/tap", not "/tap/"
+  "cleanUrls": true,
+  "trailingSlash": false,
 
   "headers": [
-    // Fonts: cache hard for 1 year (immutable)
     {
       "source": "/(.*)\\.(woff2|woff|ttf|eot|otf)$",
       "headers": [
@@ -14,8 +13,6 @@
         }
       ]
     },
-
-    // CSS/JS: cache hard for 1 year (works well with hashed filenames)
     {
       "source": "/(.*)\\.(css|js)$",
       "headers": [
@@ -25,8 +22,6 @@
         }
       ]
     },
-
-    // Images: 30 days (bump to 1y+immutable if you fingerprint)
     {
       "source": "/(.*)\\.(png|jpg|jpeg|gif|webp|svg|ico|avif)$",
       "headers": [
@@ -36,8 +31,6 @@
         }
       ]
     },
-
-    // HTML: always revalidate so deploys show instantly
     {
       "source": "/(.*)\\.(html)$",
       "headers": [
@@ -47,8 +40,6 @@
         }
       ]
     },
-
-    // PWA bits: do NOT cache aggressively
     {
       "source": "/(manifest\\.webmanifest|site\\.webmanifest)",
       "headers": [
@@ -67,8 +58,6 @@
         }
       ]
     },
-
-    // SEO helpers
     {
       "source": "/(robots\\.txt|sitemap\\.xml)",
       "headers": [
@@ -78,8 +67,6 @@
         }
       ]
     },
-
-    // Security headers (CSP tuned for your stack: Google Fonts, cdnjs, unpkg, embed.im)
     {
       "source": "/(.*)",
       "headers": [
@@ -111,9 +98,6 @@
           "key": "Cross-Origin-Resource-Policy",
           "value": "same-site"
         },
-
-        // Keep 'unsafe-inline' because your pages include inline scripts/styles.
-        // We removed 'unsafe-eval' (safer). Add other hosts here if your console shows CSP blocks.
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; frame-ancestors 'none'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://app.embed.im; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com"
@@ -122,8 +106,6 @@
     }
   ],
 
-  // --- Rewrites: keep SHORT URLs in the browser, serve LONG paths under the hood ---
-  // Example: visiting /tap serves the content from /tap-dance-classes, but the URL stays /tap
   "rewrites": [
     {
       "source": "/tap",
@@ -169,13 +151,26 @@
       "source": "/competition",
       "destination": "/competition-teams"
     },
+
+    /* map essentials/ assets to root paths so your links keep working */
     {
-      "source": "/summer",
-      "destination": "/summer"
-    } // keep if your route is already /summer
+      "source": "/robots.txt",
+      "destination": "/essentials/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/essentials/sitemap.xml"
+    },
+    {
+      "source": "/registration-form.pdf",
+      "destination": "/essentials/registration-form.pdf"
+    },
+    {
+      "source": "/schedule.pdf",
+      "destination": "/essentials/schedule.pdf"
+    }
   ],
 
-  // --- Redirects: old LONG URLs 301 to SHORT canonical URLs (SEO-friendly) ---
   "redirects": [
     {
       "source": "/home",
@@ -193,7 +188,6 @@
       "permanent": true
     },
 
-    // canonicalize long slugs to short
     {
       "source": "/tap-dance-classes",
       "destination": "/tap",
