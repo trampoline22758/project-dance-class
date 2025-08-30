@@ -566,7 +566,7 @@
         }
     </script>
     <script const animateOnScroll=(els, opts={}) =>
-    {
+        {
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -638,6 +638,384 @@
         });
 
     </script>
+    <script>
+        (() => {
+            // ====== CONFIG (tweak if needed) ======
+            const MAX_PRELOADS = 80;           // raise for even more "nuclear"
+            const PRELOAD_BG_STYLES = true;    // also preload CSS background images
+            const FORCE_EAGER_IFRAMES = true;  // force iframes to load immediately
+            // ======================================
+
+            const head = document.head || document.getElementsByTagName('head')[0];
+
+            // Helper: add <link rel="preload" as="image" href="...">
+            const preloadSet = new Set();
+            const addPreload = (url) => {
+                if (!url || preloadSet.has(url) || preloadSet.size >= MAX_PRELOADS) return;
+                const l = document.createElement('link');
+                l.rel = 'preload';
+                l.as = 'image';
+                l.href = url;
+                // add crossorigin if cross-origin
+                try {
+                    const u = new URL(url, location.href);
+                    if (u.origin !== location.origin) l.crossOrigin = 'anonymous';
+                } catch (_) { }
+                head.appendChild(l);
+                preloadSet.add(url);
+            };
+
+            // Helper: add <link rel="preconnect" href="origin">
+            const preconnectSet = new Set();
+            const addPreconnect = (origin) => {
+                if (!origin || preconnectSet.has(origin)) return;
+                const l = document.createElement('link');
+                l.rel = 'preconnect';
+                l.href = origin;
+                l.crossOrigin = 'anonymous';
+                head.appendChild(l);
+                preconnectSet.add(origin);
+            };
+
+            // Resolve the "current" URL a browser would fetch for an <img>
+            const resolveImgUrl = (img) => {
+                // Prefer currentSrc (respects srcset/sizes), fallback to src
+                const url = img.currentSrc || img.src || img.getAttribute('src') || '';
+                return url;
+            };
+
+            // 1) De-lazy all images + force high priority + preload them
+            const imgs = Array.from(document.images || document.querySelectorAll('img'));
+            imgs.forEach((img) => {
+                // Un-lazy common patterns (data-src / data-srcset)
+                if (!img.getAttribute('src') && img.dataset && img.dataset.src) {
+                    img.setAttribute('src', img.dataset.src);
+                }
+                if (!img.getAttribute('srcset') && img.dataset && img.dataset.srcset) {
+                    img.setAttribute('srcset', img.dataset.srcset);
+                }
+                img.classList.remove('lazy', 'lazyload', 'lazyloading');
+
+                // Force eager/priority
+                img.setAttribute('loading', 'eager');
+                img.setAttribute('decoding', 'async');
+                img.setAttribute('fetchpriority', 'high');
+                img.setAttribute('importance', 'high'); // chrome hint; harmless elsewhere
+
+                // Preload the actual URL the browser will fetch
+                const url = resolveImgUrl(img);
+                if (url) addPreload(url);
+
+                // Preconnect to external origins
+                try {
+                    const u = new URL(url, location.href);
+                    if (u.origin !== location.origin) addPreconnect(u.origin);
+                } catch (_) { }
+
+                // Kick decoding ASAP to reduce jank
+                if ('decode' in img) {
+                    img.decode().catch(() => { /* ignore */ });
+                }
+            });
+
+            // 2) Preload background images (e.g., hero), optional
+            if (PRELOAD_BG_STYLES) {
+                const collectBgUrl = (bg) => {
+                    if (!bg || !bg.includes('url(')) return null;
+                    const m = bg.match(/url\((['"]?)(.*?)\1\)/);
+                    return m && m[2] ? m[2] : null;
+                };
+
+                // Common hero/background containers first (fast path)
+                document.querySelectorAll('.hero, .hero-background, [data-preload-bg]').forEach(el => {
+                    const url = collectBgUrl(getComputedStyle(el).backgroundImage);
+                    if (url) {
+                        addPreload(url);
+                        try {
+                            const u = new URL(url, location.href);
+                            if (u.origin !== location.origin) addPreconnect(u.origin);
+                        } catch (_) { }
+                    }
+                });
+
+                // If you want to aggressively scan all elements (heavier), uncomment:
+                /*
+                document.querySelectorAll('*').forEach(el => {
+                  const url = collectBgUrl(getComputedStyle(el).backgroundImage);
+                  if (url) {
+                    addPreload(url);
+                    try {
+                      const u = new URL(url, location.href);
+                      if (u.origin !== location.origin) addPreconnect(u.origin);
+                    } catch(_) {}
+                  }
+                });
+                */
+            }
+
+            // 3) Force iframes to load immediately (also un-lazy data-src)
+            if (FORCE_EAGER_IFRAMES) {
+                document.querySelectorAll('iframe').forEach(f => {
+                    if (!f.getAttribute('src') && (f.dataset?.src || f.getAttribute('data-src'))) {
+                        f.src = f.dataset.src || f.getAttribute('data-src');
+                    }
+                    f.setAttribute('loading', 'eager');
+                    f.removeAttribute('lazy');
+                });
+            }
+
+            // 4) Give all images a high hint via priorityHints API if supported (no-op elsewhere)
+            try {
+                imgs.forEach(img => { img.importance = 'high'; });
+            } catch (_) { }
+
+            // 5) As a last nudge, queue a microtask to re-evaluate currentSrc and preload any that changed after layout
+            queueMicrotask(() => {
+                imgs.forEach((img) => {
+                    const url = resolveImgUrl(img);
+                    if (url) addPreload(url);
+                });
+            });
+        })();
+    </script>
+    <script>
+        (() => {
+            const conn = navigator.connection || navigator.webkitConnection || {};
+            const saveData = !!conn.saveData;
+            const slowNet = /2g/.test(conn.effectiveType || '');
+
+            /* 1) Image hygiene: loading/decoding/fetchpriority + aspect-ratio */
+            const imgList = Array.from(document.querySelectorAll('img'));
+            imgList.forEach((img, i) => {
+                // decoding + loading
+                if (!img.hasAttribute('decoding')) img.decoding = 'async';
+                if (!img.hasAttribute('loading')) img.loading = i < 1 || img.closest('.hero') ? 'eager' : 'lazy';
+
+                // fetchpriority
+                if (!img.hasAttribute('fetchpriority')) {
+                    if (img.closest('.hero')) img.setAttribute('fetchpriority', 'high');
+                    else img.setAttribute('fetchpriority', 'low');
+                }
+
+                // aspect-ratio to avoid CLS if width/height present
+                const w = parseInt(img.getAttribute('width'), 10);
+                const h = parseInt(img.getAttribute('height'), 10);
+                if (w && h && !img.style.aspectRatio) img.style.aspectRatio = `${w}/${h}`;
+            });
+
+            /* 2) Near-viewport: upgrade first lazy images to eager for faster paint */
+            if ('IntersectionObserver' in window) {
+                const ioEager = new IntersectionObserver(entries => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) {
+                            const img = e.target;
+                            img.loading = 'eager';
+                            img.setAttribute('fetchpriority', 'high');
+                            ioEager.unobserve(img);
+                        }
+                    });
+                }, { rootMargin: '200px 0px' });
+                document.querySelectorAll('img[loading="lazy"]').forEach(img => ioEager.observe(img));
+            }
+
+            /* 3) Auto-upgrade JPG/PNG → AVIF/WebP if available on your server */
+            const canUse = (type) => {
+                const c = document.createElement('canvas');
+                try {
+                    if (type === 'image/avif') return c.toDataURL('image/avif').startsWith('data:image/avif');
+                    if (type === 'image/webp') return c.toDataURL('image/webp').startsWith('data:image/webp');
+                } catch (e) { }
+                return false;
+            };
+            const preferAvif = canUse('image/avif');
+            const preferWebp = !preferAvif && canUse('image/webp');
+
+            const tryAlt = (url, ext) => {
+                const next = url.replace(/\.(jpe?g|png)$/i, `.${ext}`);
+                if (next === url) return Promise.resolve(null);
+                return fetch(next, { method: 'HEAD', credentials: 'same-origin' })
+                    .then(r => r.ok ? next : null)
+                    .catch(() => null);
+            };
+
+            const upgradeOne = (img) => {
+                const src = img.getAttribute('src');
+                if (!src || !/\.(jpe?g|png)$/i.test(src)) return;
+
+                const wrap = (altUrl, type) => {
+                    const picture = document.createElement('picture');
+                    const source = document.createElement('source');
+                    source.type = type;
+                    source.srcset = altUrl;
+                    picture.appendChild(source);
+                    picture.appendChild(img.cloneNode(true));
+                    img.replaceWith(picture);
+                };
+
+                if (preferAvif) {
+                    tryAlt(src, 'avif').then(u => {
+                        if (u) wrap(u, 'image/avif');
+                        else if (preferWebp) tryAlt(src, 'webp').then(w => w && wrap(w, 'image/webp'));
+                    });
+                } else if (preferWebp) {
+                    tryAlt(src, 'webp').then(w => w && wrap(w, 'image/webp'));
+                }
+            };
+
+            if (!saveData && !slowNet) {
+                const runUpgrade = () => imgList.forEach(upgradeOne);
+                if ('requestIdleCallback' in window) requestIdleCallback(runUpgrade, { timeout: 1500 });
+                else setTimeout(runUpgrade, 800);
+            }
+
+            /* 4) Optional blur-up (enable per <img data-blur>): smooths in big photos */
+            const blurCSS =
+                '.blur-up{filter:blur(12px);transform:scale(1.02);transition:filter .4s ease,transform .4s ease}' +
+                '.blur-up.loaded{filter:blur(0);transform:scale(1)}';
+            const style = document.createElement('style');
+            style.textContent = blurCSS; document.head.appendChild(style);
+            document.querySelectorAll('img[data-blur]').forEach(img => {
+                img.classList.add('blur-up');
+                (img.complete ? Promise.resolve() : new Promise(res => img.addEventListener('load', res, { passive: true, once: true })))
+                    .then(() => img.classList.add('loaded'));
+            });
+
+            /* 5) Defer iframes till visible (use data-src to delay network entirely) */
+            document.querySelectorAll('iframe').forEach(f => {
+                if (f.loading == null) f.loading = 'lazy';
+                if ('IntersectionObserver' in window && !f.src && (f.dataset.src || f.getAttribute('data-src'))) {
+                    const io = new IntersectionObserver(es => {
+                        es.forEach(e => {
+                            if (e.isIntersecting) {
+                                f.src = f.dataset.src || f.getAttribute('data-src');
+                                io.unobserve(f);
+                            }
+                        });
+                    }, { rootMargin: '300px 0px' });
+                    io.observe(f);
+                }
+            });
+
+            /* 6) Smart prefetch (hover + near viewport), but skip on slow/data-saver */
+            const prefetch = (href) => {
+                const l = document.createElement('link');
+                l.rel = 'prefetch'; l.href = href; document.head.appendChild(l);
+            };
+            if (!saveData && !slowNet) {
+                // intent (hover/touch)
+                const onIntent = (a) => {
+                    const href = a.getAttribute('href');
+                    if (!href || !href.startsWith('/') || href.includes('#')) return;
+                    const h = () => { prefetch(href); a.removeEventListener('pointerover', h); a.removeEventListener('touchstart', h); };
+                    a.addEventListener('pointerover', h, { passive: true });
+                    a.addEventListener('touchstart', h, { passive: true });
+                };
+                document.querySelectorAll('a[href]').forEach(onIntent);
+
+                // near viewport
+                if ('IntersectionObserver' in window) {
+                    const io = new IntersectionObserver(es => {
+                        es.forEach(e => {
+                            if (e.isIntersecting) {
+                                const href = e.target.getAttribute('href');
+                                if (href && href.startsWith('/') && !href.includes('#')) prefetch(href);
+                                io.unobserve(e.target);
+                            }
+                        });
+                    }, { rootMargin: '400px 0px' });
+                    document.querySelectorAll('a[href]').forEach(a => io.observe(a));
+                }
+            }
+
+            /* 7) Render less up front: content-visibility for heavy sections */
+            ['.dance-classes', '.instructors', '.reviews', '.about-teaser', '.seo-footer'].forEach(sel => {
+                document.querySelectorAll(sel).forEach(el => {
+                    el.style.containIntrinsicSize = '1px 1200px';
+                    el.style.contentVisibility = 'auto';
+                });
+            });
+
+            /* 8) JSON-LD: WebPage (dateModified), Breadcrumbs, LocalBusiness hours */
+            // WebPage
+            (() => {
+                const s = document.createElement('script');
+                s.type = 'application/ld+json';
+                s.textContent = JSON.stringify({
+                    '@context': 'https://schema.org',
+                    '@type': 'WebPage',
+                    name: document.title,
+                    url: location.href.split('#')[0],
+                    dateModified: new Date().toISOString().split('T')[0]
+                });
+                document.head.appendChild(s);
+            })();
+
+            // BreadcrumbList (from topbar links)
+            (() => {
+                const links = Array.from(document.querySelectorAll('.topbar a[href^="/"]'))
+                    .filter(a => a.textContent.trim().length)
+                    .slice(0, 6);
+                if (links.length >= 2) {
+                    const items = links.map((a, i) => ({
+                        '@type': 'ListItem',
+                        position: i + 1,
+                        name: a.textContent.trim(),
+                        item: new URL(a.getAttribute('href'), location.origin).href
+                    }));
+                    const s = document.createElement('script');
+                    s.type = 'application/ld+json';
+                    s.textContent = JSON.stringify({
+                        '@context': 'https://schema.org',
+                        '@type': 'BreadcrumbList',
+                        itemListElement: items
+                    });
+                    document.head.appendChild(s);
+                }
+            })();
+
+            // LocalBusiness hours from the table (keeps schema in sync with UI)
+            (() => {
+                const rows = document.querySelectorAll('table.hours tr');
+                if (!rows.length) return;
+                const map = {
+                    'Mon–Thu': ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+                    'Mon-Thu': ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+                    'Mon': ['Monday'], 'Tue': ['Tuesday'], 'Wed': ['Wednesday'], 'Thu': ['Thursday'],
+                    'Fri': ['Friday'], 'Sat': ['Saturday'], 'Sun': ['Sunday']
+                };
+                const specs = [];
+                rows.forEach(tr => {
+                    const day = tr.querySelector('th')?.textContent.trim();
+                    const times = tr.querySelector('td')?.textContent.trim();
+                    if (!day || !times) return;
+                    const [opens, closes] = times.split('–').map(s => s.trim());
+                    (map[day] || [day]).forEach(d => {
+                        specs.push({ '@type': 'OpeningHoursSpecification', dayOfWeek: d, opens: opens, closes: closes });
+                    });
+                });
+                if (specs.length) {
+                    const s = document.createElement('script');
+                    s.type = 'application/ld+json';
+                    s.textContent = JSON.stringify({
+                        '@context': 'https://schema.org',
+                        '@type': 'LocalBusiness',
+                        name: "Miss Kim's Dance Class",
+                        url: location.origin + '/',
+                        telephone: '+1-314-542-0608',
+                        address: { '@type': 'PostalAddress', 'streetAddress': '14278 Ladue Rd', 'addressLocality': 'Chesterfield', 'addressRegion': 'MO', 'postalCode': '63017', 'addressCountry': 'US' },
+                        openingHoursSpecification: specs
+                    });
+                    document.head.appendChild(s);
+                }
+            })();
+
+            /* 9) Passive listeners for super smooth scroll */
+            const passive = (type, sel, fn) => document.querySelectorAll(sel).forEach(el => el.addEventListener(type, fn, { passive: true }));
+            passive('touchstart', 'a,button', () => { });
+            passive('touchmove', 'body', () => { });
+        })();
+    </script>
+
 </body>
 </html>
 
