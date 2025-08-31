@@ -1063,3 +1063,62 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
 @media (prefers-reduced-motion:reduce){
   *{animation:none !important;transition:none !important}
 }
+/* Authoritative dropdown styles (last wins) */
+@media (min-width: 921px) {
+    .topbar .has-dropdown {
+        position: relative;
+    }
+
+        .topbar .has-dropdown > .dropdown {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            margin-top: .4rem;
+            min-width: 250px;
+            background: #231c2e;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: .75rem;
+            box-shadow: 0 18px 40px rgba(0,0,0,.35);
+            padding: .5rem;
+            z-index: 2000;
+            /* animated show/hide */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(4px);
+            pointer-events: none;
+            transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
+        }
+
+        .topbar .has-dropdown.open > .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+            transition-delay: 0s;
+        }
+
+        .topbar .has-dropdown > .dropdown a {
+            color: #fff;
+        }
+
+            .topbar .has-dropdown > .dropdown a:hover {
+                background: rgba(255,255,255,.08);
+            }
+}
+
+/* Mobile: inline list when parent .open (keep light look) */
+@media (max-width: 920px) {
+    .topbar .has-dropdown > .dropdown {
+        position: static;
+        margin: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: auto;
+        padding: 0;
+    }
+}
+

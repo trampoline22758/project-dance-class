@@ -271,26 +271,34 @@
             </script>
         </footer>
     </main>
+    <!-- ======================= CORE NAV + DROPDOWN ======================= -->
     <script>
         (() => {
+            const $ = (sel, root = document) => root.querySelector(sel);
+            const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
             // Mobile menu toggle
-            const navToggle = document.querySelector(".nav-toggle");
-            const menu = document.getElementById("primary-menu");
+            const navToggle = $(".nav-toggle");
+            const menu = $("#primary-menu");
             if (navToggle && menu) {
                 navToggle.addEventListener("click", () => {
                     const open = menu.classList.toggle("open");
-                    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
-                });
+                    navToggle.setAttribute("aria-expanded", String(open));
+                }, { passive: true });
             }
 
-            const isDesktop = () => window.matchMedia("(min-width: 921px)").matches;
+            const isDesktop = () => matchMedia("(min-width: 921px)").matches;
 
             // Dropdowns
-            const parents = document.querySelectorAll(".has-dropdown");
+            const parents = $$(".has-dropdown");
             parents.forEach(parent => {
-                const btn = parent.querySelector(".dropdown-toggle");
-                const panel = parent.querySelector(".dropdown");
+                const btn = $(".dropdown-toggle", parent);
+                const panel = $(".dropdown", parent);
                 if (!btn || !panel) return;
+                // give each panel an id and point the button at it
+                const uid = (() => { let i = 0; return () => `dd-${++i}`; })();
+                const id = panel.id || (panel.id = uid());
+                btn.setAttribute('aria-controls', id);
 
                 let hideTimer;
 
@@ -306,33 +314,27 @@
                         btn.setAttribute("aria-expanded", "false");
                     };
                     clearTimeout(hideTimer);
-                    immediate ? doClose() : hideTimer = setTimeout(doClose, 300);
+                    immediate ? doClose() : (hideTimer = setTimeout(doClose, 200));
                 };
 
                 // Hover (desktop)
                 parent.addEventListener("pointerenter", () => { if (isDesktop()) open(); });
                 parent.addEventListener("pointerleave", () => { if (isDesktop()) close(); });
-                panel.addEventListener("pointerenter", () => { if (isDesktop()) open(); });
-                panel.addEventListener("pointerleave", () => { if (isDesktop()) close(); });
 
-                // Click (mobile + allow click on desktop too)
+                // Click (mobile/desktop)
                 btn.addEventListener("click", (e) => {
                     e.preventDefault();
-                    const openNow = parent.classList.contains("open");
-
-                    // Close siblings
+                    const isOpen = parent.classList.contains("open");
                     parent.parentElement?.querySelectorAll(".has-dropdown.open").forEach(sib => {
                         if (sib !== parent) {
                             sib.classList.remove("open");
-                            const b = sib.querySelector(".dropdown-toggle");
-                            b?.setAttribute("aria-expanded", "false");
+                            sib.querySelector(".dropdown-toggle")?.setAttribute("aria-expanded", "false");
                         }
                     });
-
-                    openNow ? close(true) : open();
+                    isOpen ? close(true) : open();
                 });
 
-                // Keyboard: close on Escape; close when focus leaves group
+                // Keyboard + focus management
                 parent.addEventListener("keydown", (e) => {
                     if (e.key === "Escape") { close(true); btn.focus(); }
                 });
@@ -341,593 +343,168 @@
                 });
             });
 
-            // Footer year (safe even if element missing)
+            // Click outside to close (fixed scope)
+            document.addEventListener("click", (e) => {
+                parents.forEach(parent => {
+                    if (!parent.contains(e.target)) {
+                        parent.classList.remove("open");
+                        parent.querySelector(".dropdown-toggle")?.setAttribute("aria-expanded", "false");
+                    }
+                });
+            }, { passive: true });
+
+            // Smooth anchor scrolling (single listener)
+            document.addEventListener("click", (e) => {
+                const a = e.target.closest('a[href^="#"]');
+                if (!a) return;
+                const target = document.querySelector(a.getAttribute("href"));
+                if (!target) return;
+                e.preventDefault();
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+
+            // Footer year
             const yearEl = document.getElementById("year");
             if (yearEl) yearEl.textContent = new Date().getFullYear();
-        })();
-        document.addEventListener('click', (e) => {
-            parents.forEach(parent => {
-                if (!parent.contains(e.target)) {
-                    parent.classList.remove('open');
-                    parent.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
-                }
-            });
-        });
-    </script>
 
-    <!-- Accessibility helper -->
-    <script src="https://app.embed.im/accessibility.js" defer></script>
-    <script>
-        // Year auto-update
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script><!-- ====================== PERFORMANCE & SEO SUPERPACK ====================== -->
-    <!-- 1. Lazy-load images & iframes -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll("img, iframe").forEach(el => {
-                if (!el.hasAttribute("loading")) el.setAttribute("loading", "lazy");
-                if (!el.hasAttribute("decoding")) el.setAttribute("decoding", "async");
-            });
-        });
-    </script>
-
-    <!-- 2. WebP / AVIF fallback checker -->
-    <script>
-        (function () {
-            const img = new Image();
-            img.onload = img.onerror = function () {
-                document.documentElement.classList.add((img.height === 2) ? 'avif' : 'no-avif');
-            };
-            img.src = "data:image/avif;base64,AAAAFGZ0eXBhdmlmAAAAAG1pZjFhdmlmAA...";
+            // Focus outline helper
+            document.body.addEventListener("keyup", (e) => {
+                if (e.key === "Tab") document.body.classList.add("user-is-tabbing");
+            }, { passive: true });
         })();
     </script>
 
-    <!-- 3. Add canonical link if missing -->
-    <script>
-        if (!document.querySelector("link[rel='canonical']")) {
-            const canonical = document.createElement("link");
-            canonical.rel = "canonical";
-            canonical.href = window.location.href.split("?")[0];
-            document.head.appendChild(canonical);
-        }
-    </script>
-
-    <!-- 4. Prefetch internal links (instant navigation like Next.js) -->
-    <script>
-        if ("IntersectionObserver" in window) {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const href = entry.target.getAttribute("href");
-                        if (href && href.startsWith("/") && !href.includes("#")) {
-                            const prefetch = document.createElement("link");
-                            prefetch.rel = "prefetch";
-                            prefetch.href = href;
-                            document.head.appendChild(prefetch);
-                            observer.unobserve(entry.target);
-                        }
-                    }
-                });
-            });
-            document.querySelectorAll("a[href]").forEach(a => observer.observe(a));
-        }
-    </script>
-
-    <!-- 5. Smooth scrolling for anchors -->
-    <script>
-        document.addEventListener("click", e => {
-            const a = e.target.closest("a[href^='#']");
-            if (a) {
-                const target = document.querySelector(a.getAttribute("href"));
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: "smooth" });
-                }
-            }
-        });
-    </script>
-
-    <!-- 6. Schema markup for site search -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "url": "https://www.misskimsdanceclass.com/",
-          "name": "Miss Kim's Dance Class",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://www.misskimsdanceclass.com/?s={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        }
-    </script>
-
-    <!-- 7. Scroll-to-top button -->
-    <script>
-        const scrollBtn = document.createElement("button");
-        scrollBtn.textContent = "⬆";
-        scrollBtn.id = "scrollTop";
-        Object.assign(scrollBtn.style, {
-            position: "fixed", bottom: "20px", right: "20px",
-            display: "none", padding: "10px", borderRadius: "50%",
-            fontSize: "20px", zIndex: 1000, cursor: "pointer"
-        });
-        document.body.appendChild(scrollBtn);
-        window.addEventListener("scroll", () => {
-            scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
-        });
-        scrollBtn.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-    </script>
-
-    <!-- 8. Auto external link rel="noopener nofollow" -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll("a[href^='http']").forEach(a => {
-                if (!a.href.includes(location.hostname)) {
-                    a.setAttribute("rel", "noopener nofollow external");
-                    a.setAttribute("target", "_blank");
-                }
-            });
-        });
-    </script>
-
-    <!-- 9. Preconnect to speed up external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://analytics.google.com" crossorigin>
-
-    <!-- 10. Structured data for Local Business -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "name": "Miss Kim's Dance Class",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "14278 Ladue Rd",
-            "addressLocality": "Chesterfield",
-            "addressRegion": "MO",
-            "postalCode": "63017",
-            "addressCountry": "US"
-          },
-          "telephone": "+1-314-542-0608",
-          "url": "https://www.misskimsdanceclass.com/"
-        }
-    </script>
-
-    <!-- 11. CLS fix: reserve space for images -->
-    <script>
-        document.querySelectorAll("img:not([width])").forEach(img => {
-            if (img.naturalWidth && img.naturalHeight) {
-                img.setAttribute("width", img.naturalWidth);
-                img.setAttribute("height", img.naturalHeight);
-            }
-        });
-    </script>
-
-    <!-- 12. Track Core Web Vitals (for SEO ranking signals) -->
-    <script src="https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js"></script>
-    <script>
-        webVitals.getCLS(console.log);
-        webVitals.getFID(console.log);
-        webVitals.getLCP(console.log);
-    </script>
-
-    <!-- 13. Add “last updated” structured data -->
-    <script type="application/ld+json">
-        {
-          "@context":"https://schema.org",
-          "@type":"WebPage",
-          "dateModified":"<?= new Date().toISOString().split('T')[0] ?>"
-        }
-    </script>
-
-    <!-- 14. Accessibility: keyboard focus outline helper -->
-    <script>
-        document.body.addEventListener('keyup', function (e) {
-            if (e.key === "Tab") document.body.classList.add("user-is-tabbing");
-        });
-    </script>
-
-    <!-- 15. Detect adblockers (optional analytics) -->
-    <script>
-        setTimeout(() => {
-            const ad = document.createElement("div");
-            ad.innerHTML = "&nbsp;";
-            ad.className = "adsbox";
-            ad.style.position = "absolute";
-            ad.style.left = "-9999px";
-            document.body.appendChild(ad);
-            if (ad.offsetHeight === 0) console.log("Adblocker detected");
-            document.body.removeChild(ad);
-        }, 200);
-    </script>
-
-    <!-- 16. Service Worker (for caching / PWA) -->
-    <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("/sw.js").catch(console.error);
-        }
-    </script>
-
-    <!-- 17. Preload hero image (LCP boost) -->
-    <link rel="preload" as="image" href="/photos/herobanner.JPG" fetchpriority="high">
-
-    <!-- 18. Add noindex to search pages -->
-    <script>
-        if (window.location.search.includes("s=")) {
-            const noindex = document.createElement("meta");
-            noindex.name = "robots";
-            noindex.content = "noindex, follow";
-            document.head.appendChild(noindex);
-        }
-    </script>
-    <script const animateOnScroll=(els, opts={}) =>
-        {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-                        el.style.opacity = "1";
-                        el.style.transform = "translateY(0)";
-                        observer.unobserve(el);
-                    }
-                });
-            }, { threshold: 0.2, ...opts });
-
-            els.forEach(el => {
-                el.style.opacity = "0";
-                el.style.transform = "translateY(20px)";
-                observer.observe(el);
-            });
-        };
-
-        // Apply to sections, images, cards
-        document.addEventListener("DOMContentLoaded", () => {
-            animateOnScroll(document.querySelectorAll("section, .dance-class, .instructor-card, img"));
-        });
-
-
-        /* ========== 2. Button micro-bounce ========== */
-        document.querySelectorAll(".btn, .btn-primary, .hero-call").forEach(btn => {
-            btn.addEventListener("mouseenter", () => {
-                btn.animate([{ transform: "scale(1)" }, { transform: "scale(1.05)" }], { duration: 150, fill: "forwards" });
-            });
-            btn.addEventListener("mouseleave", () => {
-                btn.animate([{ transform: "scale(1.05)" }, { transform: "scale(1)" }], { duration: 150, fill: "forwards" });
-            });
-            btn.addEventListener("mousedown", () => {
-                btn.animate([{ transform: "scale(1)" }, { transform: "scale(0.95)" }], { duration: 100, fill: "forwards" });
-            });
-            btn.addEventListener("mouseup", () => {
-                btn.animate([{ transform: "scale(0.95)" }, { transform: "scale(1)" }], { duration: 100, fill: "forwards" });
-            });
-        });
-
-
-        /* ========== 3. Smooth scroll for anchor links ========== */
-        document.addEventListener("click", e => {
-            const link = e.target.closest("a[href^='#']");
-            if (link) {
-                const target = document.querySelector(link.getAttribute("href"));
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: "smooth" });
-                }
-            }
-        });
-
-
-        /* ========== 4. Hero text entrance on load ========== */
-        window.addEventListener("load", () => {
-            const heroEls = document.querySelectorAll(".hero-content h1, .hero-content p, .hero-call");
-            heroEls.forEach((el, i) => {
-                el.style.opacity = "0";
-                el.style.transform = "translateY(40px)";
-                setTimeout(() => {
-                    el.animate([
-                        { opacity: 0, transform: "translateY(40px)" },
-                        { opacity: 1, transform: "translateY(0)" }
-                    ], { duration: 700, easing: "ease-out", fill: "forwards" });
-                }, i * 250);
-            });
-        });
-
-    </script>
+    <!-- ======================= PERFORMANCE & SEO PACK ======================= -->
     <script>
         (() => {
-            // ====== CONFIG (tweak if needed) ======
-            const MAX_PRELOADS = 80;           // raise for even more "nuclear"
-            const PRELOAD_BG_STYLES = true;    // also preload CSS background images
-            const FORCE_EAGER_IFRAMES = true;  // force iframes to load immediately
-            // ======================================
+            // ---------- Config ----------
+            const AGGRESSIVE_IMAGES = true;     // force eager + preload images
+            const MAX_PRELOADS = 80;            // cap number of <link rel="preload">
+            const PRELOAD_BG_STYLES = true;     // preload background images in hero/etc.
+            const RESPECT_SAVE_DATA = true;     // skip aggressive path if Data Saver
+            // ----------------------------
 
-            const head = document.head || document.getElementsByTagName('head')[0];
-
-            // Helper: add <link rel="preload" as="image" href="...">
-            const preloadSet = new Set();
-            const addPreload = (url) => {
-                if (!url || preloadSet.has(url) || preloadSet.size >= MAX_PRELOADS) return;
-                const l = document.createElement('link');
-                l.rel = 'preload';
-                l.as = 'image';
-                l.href = url;
-                // add crossorigin if cross-origin
-                try {
-                    const u = new URL(url, location.href);
-                    if (u.origin !== location.origin) l.crossOrigin = 'anonymous';
-                } catch (_) { }
-                head.appendChild(l);
-                preloadSet.add(url);
-            };
-
-            // Helper: add <link rel="preconnect" href="origin">
-            const preconnectSet = new Set();
-            const addPreconnect = (origin) => {
-                if (!origin || preconnectSet.has(origin)) return;
-                const l = document.createElement('link');
-                l.rel = 'preconnect';
-                l.href = origin;
-                l.crossOrigin = 'anonymous';
-                head.appendChild(l);
-                preconnectSet.add(origin);
-            };
-
-            // Resolve the "current" URL a browser would fetch for an <img>
-            const resolveImgUrl = (img) => {
-                // Prefer currentSrc (respects srcset/sizes), fallback to src
-                const url = img.currentSrc || img.src || img.getAttribute('src') || '';
-                return url;
-            };
-
-            // 1) De-lazy all images + force high priority + preload them
-            const imgs = Array.from(document.images || document.querySelectorAll('img'));
-            imgs.forEach((img) => {
-                // Un-lazy common patterns (data-src / data-srcset)
-                if (!img.getAttribute('src') && img.dataset && img.dataset.src) {
-                    img.setAttribute('src', img.dataset.src);
-                }
-                if (!img.getAttribute('srcset') && img.dataset && img.dataset.srcset) {
-                    img.setAttribute('srcset', img.dataset.srcset);
-                }
-                img.classList.remove('lazy', 'lazyload', 'lazyloading');
-
-                // Force eager/priority
-                img.setAttribute('loading', 'eager');
-                img.setAttribute('decoding', 'async');
-                img.setAttribute('fetchpriority', 'high');
-                img.setAttribute('importance', 'high'); // chrome hint; harmless elsewhere
-
-                // Preload the actual URL the browser will fetch
-                const url = resolveImgUrl(img);
-                if (url) addPreload(url);
-
-                // Preconnect to external origins
-                try {
-                    const u = new URL(url, location.href);
-                    if (u.origin !== location.origin) addPreconnect(u.origin);
-                } catch (_) { }
-
-                // Kick decoding ASAP to reduce jank
-                if ('decode' in img) {
-                    img.decode().catch(() => { /* ignore */ });
-                }
-            });
-
-            // 2) Preload background images (e.g., hero), optional
-            if (PRELOAD_BG_STYLES) {
-                const collectBgUrl = (bg) => {
-                    if (!bg || !bg.includes('url(')) return null;
-                    const m = bg.match(/url\((['"]?)(.*?)\1\)/);
-                    return m && m[2] ? m[2] : null;
-                };
-
-                // Common hero/background containers first (fast path)
-                document.querySelectorAll('.hero, .hero-background, [data-preload-bg]').forEach(el => {
-                    const url = collectBgUrl(getComputedStyle(el).backgroundImage);
-                    if (url) {
-                        addPreload(url);
-                        try {
-                            const u = new URL(url, location.href);
-                            if (u.origin !== location.origin) addPreconnect(u.origin);
-                        } catch (_) { }
-                    }
-                });
-
-                // If you want to aggressively scan all elements (heavier), uncomment:
-                /*
-                document.querySelectorAll('*').forEach(el => {
-                  const url = collectBgUrl(getComputedStyle(el).backgroundImage);
-                  if (url) {
-                    addPreload(url);
-                    try {
-                      const u = new URL(url, location.href);
-                      if (u.origin !== location.origin) addPreconnect(u.origin);
-                    } catch(_) {}
-                  }
-                });
-                */
-            }
-
-            // 3) Force iframes to load immediately (also un-lazy data-src)
-            if (FORCE_EAGER_IFRAMES) {
-                document.querySelectorAll('iframe').forEach(f => {
-                    if (!f.getAttribute('src') && (f.dataset?.src || f.getAttribute('data-src'))) {
-                        f.src = f.dataset.src || f.getAttribute('data-src');
-                    }
-                    f.setAttribute('loading', 'eager');
-                    f.removeAttribute('lazy');
-                });
-            }
-
-            // 4) Give all images a high hint via priorityHints API if supported (no-op elsewhere)
-            try {
-                imgs.forEach(img => { img.importance = 'high'; });
-            } catch (_) { }
-
-            // 5) As a last nudge, queue a microtask to re-evaluate currentSrc and preload any that changed after layout
-            queueMicrotask(() => {
-                imgs.forEach((img) => {
-                    const url = resolveImgUrl(img);
-                    if (url) addPreload(url);
-                });
-            });
-        })();
-    </script>
-    <script>
-        (() => {
             const conn = navigator.connection || navigator.webkitConnection || {};
-            const saveData = !!conn.saveData;
-            const slowNet = /2g/.test(conn.effectiveType || '');
+            const onSlowOrSaver = !!conn.saveData || /2g/.test(conn.effectiveType || '');
 
-            /* 1) Image hygiene: loading/decoding/fetchpriority + aspect-ratio */
-            const imgList = Array.from(document.querySelectorAll('img'));
-            imgList.forEach((img, i) => {
-                // decoding + loading
-                if (!img.hasAttribute('decoding')) img.decoding = 'async';
-                if (!img.hasAttribute('loading')) img.loading = i < 1 || img.closest('.hero') ? 'eager' : 'lazy';
+            // 1) Default hygiene: lazy/async on remaining media
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelectorAll("img, iframe").forEach(el => {
+                    if (!el.hasAttribute("loading")) el.setAttribute("loading", "lazy");
+                    if (!el.hasAttribute("decoding")) el.setAttribute("decoding", "async");
+                });
+            }, { once: true });
 
-                // fetchpriority
-                if (!img.hasAttribute('fetchpriority')) {
-                    if (img.closest('.hero')) img.setAttribute('fetchpriority', 'high');
-                    else img.setAttribute('fetchpriority', 'low');
+            // 2) Add canonical if missing
+            if (!document.querySelector("link[rel='canonical']")) {
+                const canonical = document.createElement("link");
+                canonical.rel = "canonical";
+                canonical.href = location.href.split("?")[0];
+                document.head.appendChild(canonical);
+            }
+
+            // 3) Prefetch internal links (on intent + near viewport)
+            const prefetch = (href) => {
+                const l = document.createElement("link");
+                l.rel = "prefetch"; l.href = href; document.head.appendChild(l);
+            };
+            const prefetchable = (a) => {
+                const href = a.getAttribute("href");
+                return href && href.startsWith("/") && !href.includes("#");
+            };
+            if (!onSlowOrSaver) {
+                document.querySelectorAll("a[href]").forEach(a => {
+                    if (!prefetchable(a)) return;
+                    const h = () => { prefetch(a.getAttribute("href")); a.removeEventListener("pointerover", h); a.removeEventListener("touchstart", h); };
+                    a.addEventListener("pointerover", h, { passive: true });
+                    a.addEventListener("touchstart", h, { passive: true });
+                });
+
+                if ("IntersectionObserver" in window) {
+                    const io = new IntersectionObserver(es => {
+                        es.forEach(e => {
+                            if (e.isIntersecting && prefetchable(e.target)) {
+                                prefetch(e.target.getAttribute("href")); io.unobserve(e.target);
+                            }
+                        });
+                    }, { rootMargin: "400px 0px" });
+                    document.querySelectorAll("a[href]").forEach(a => io.observe(a));
                 }
+            }
 
-                // aspect-ratio to avoid CLS if width/height present
-                const w = parseInt(img.getAttribute('width'), 10);
-                const h = parseInt(img.getAttribute('height'), 10);
-                if (w && h && !img.style.aspectRatio) img.style.aspectRatio = `${w}/${h}`;
-            });
+            // 4) External links: noopener/nofollow
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelectorAll("a[href^='http']").forEach(a => {
+                    try {
+                        if (new URL(a.href).hostname !== location.hostname) {
+                            a.setAttribute("rel", "noopener nofollow external");
+                            a.setAttribute("target", "_blank");
+                        }
+                    } catch { }
+                });
+            }, { once: true });
 
-            /* 2) Near-viewport: upgrade first lazy images to eager for faster paint */
-            if ('IntersectionObserver' in window) {
-                const ioEager = new IntersectionObserver(entries => {
-                    entries.forEach(e => {
-                        if (e.isIntersecting) {
-                            const img = e.target;
-                            img.loading = 'eager';
-                            img.setAttribute('fetchpriority', 'high');
-                            ioEager.unobserve(img);
+            // 5) Scroll-to-top button
+            (() => {
+                const btn = document.createElement("button");
+                btn.id = "scrollTop";
+                btn.textContent = "⬆";
+                Object.assign(btn.style, {
+                    position: "fixed", bottom: "20px", right: "20px", display: "none",
+                    padding: "10px", borderRadius: "50%", fontSize: "20px", zIndex: 1000, cursor: "pointer"
+                });
+                document.addEventListener("DOMContentLoaded", () => document.body.appendChild(btn), { once: true });
+                window.addEventListener("scroll", () => { btn.style.display = scrollY > 300 ? "block" : "none"; }, { passive: true });
+                btn.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+            })();
+
+            // 6) Add noindex on search result pages
+            if (location.search.includes("s=")) {
+                const m = document.createElement("meta");
+                m.name = "robots"; m.content = "noindex, follow"; document.head.appendChild(m);
+            }
+
+            // 7) Reserve space for images to reduce CLS
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelectorAll("img:not([width])").forEach(img => {
+                    if (img.naturalWidth && img.naturalHeight) {
+                        img.setAttribute("width", img.naturalWidth);
+                        img.setAttribute("height", img.naturalHeight);
+                    }
+                });
+            }, { once: true });
+
+            // 8) Animate on scroll + hero entrance
+            const animateOnScroll = (els, opts = {}) => {
+                const io = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const el = entry.target;
+                            el.style.transition = "opacity .6s ease, transform .6s ease";
+                            el.style.opacity = "1"; el.style.transform = "translateY(0)";
+                            io.unobserve(el);
                         }
                     });
-                }, { rootMargin: '200px 0px' });
-                document.querySelectorAll('img[loading="lazy"]').forEach(img => ioEager.observe(img));
-            }
-
-            /* 3) Auto-upgrade JPG/PNG → AVIF/WebP if available on your server */
-            const canUse = (type) => {
-                const c = document.createElement('canvas');
-                try {
-                    if (type === 'image/avif') return c.toDataURL('image/avif').startsWith('data:image/avif');
-                    if (type === 'image/webp') return c.toDataURL('image/webp').startsWith('data:image/webp');
-                } catch (e) { }
-                return false;
+                }, { threshold: 0.2, ...opts });
+                els.forEach(el => { el.style.opacity = "0"; el.style.transform = "translateY(20px)"; io.observe(el); });
             };
-            const preferAvif = canUse('image/avif');
-            const preferWebp = !preferAvif && canUse('image/webp');
+            document.addEventListener("DOMContentLoaded", () => {
+                animateOnScroll(document.querySelectorAll("section, .dance-class, .instructor-card, img"));
+            }, { once: true });
 
-            const tryAlt = (url, ext) => {
-                const next = url.replace(/\.(jpe?g|png)$/i, `.${ext}`);
-                if (next === url) return Promise.resolve(null);
-                return fetch(next, { method: 'HEAD', credentials: 'same-origin' })
-                    .then(r => r.ok ? next : null)
-                    .catch(() => null);
-            };
-
-            const upgradeOne = (img) => {
-                const src = img.getAttribute('src');
-                if (!src || !/\.(jpe?g|png)$/i.test(src)) return;
-
-                const wrap = (altUrl, type) => {
-                    const picture = document.createElement('picture');
-                    const source = document.createElement('source');
-                    source.type = type;
-                    source.srcset = altUrl;
-                    picture.appendChild(source);
-                    picture.appendChild(img.cloneNode(true));
-                    img.replaceWith(picture);
-                };
-
-                if (preferAvif) {
-                    tryAlt(src, 'avif').then(u => {
-                        if (u) wrap(u, 'image/avif');
-                        else if (preferWebp) tryAlt(src, 'webp').then(w => w && wrap(w, 'image/webp'));
-                    });
-                } else if (preferWebp) {
-                    tryAlt(src, 'webp').then(w => w && wrap(w, 'image/webp'));
-                }
-            };
-
-            if (!saveData && !slowNet) {
-                const runUpgrade = () => imgList.forEach(upgradeOne);
-                if ('requestIdleCallback' in window) requestIdleCallback(runUpgrade, { timeout: 1500 });
-                else setTimeout(runUpgrade, 800);
-            }
-
-            /* 4) Optional blur-up (enable per <img data-blur>): smooths in big photos */
-            const blurCSS =
-                '.blur-up{filter:blur(12px);transform:scale(1.02);transition:filter .4s ease,transform .4s ease}' +
-                '.blur-up.loaded{filter:blur(0);transform:scale(1)}';
-            const style = document.createElement('style');
-            style.textContent = blurCSS; document.head.appendChild(style);
-            document.querySelectorAll('img[data-blur]').forEach(img => {
-                img.classList.add('blur-up');
-                (img.complete ? Promise.resolve() : new Promise(res => img.addEventListener('load', res, { passive: true, once: true })))
-                    .then(() => img.classList.add('loaded'));
+            window.addEventListener("load", () => {
+                document.querySelectorAll(".hero-content h1, .hero-content p, .hero-call").forEach((el, i) => {
+                    el.style.opacity = "0"; el.style.transform = "translateY(40px)";
+                    setTimeout(() => {
+                        el.animate([
+                            { opacity: 0, transform: "translateY(40px)" },
+                            { opacity: 1, transform: "translateY(0)" }
+                        ], { duration: 700, easing: "ease-out", fill: "forwards" });
+                    }, i * 250);
+                });
             });
 
-            /* 5) Defer iframes till visible (use data-src to delay network entirely) */
-            document.querySelectorAll('iframe').forEach(f => {
-                if (f.loading == null) f.loading = 'lazy';
-                if ('IntersectionObserver' in window && !f.src && (f.dataset.src || f.getAttribute('data-src'))) {
-                    const io = new IntersectionObserver(es => {
-                        es.forEach(e => {
-                            if (e.isIntersecting) {
-                                f.src = f.dataset.src || f.getAttribute('data-src');
-                                io.unobserve(f);
-                            }
-                        });
-                    }, { rootMargin: '300px 0px' });
-                    io.observe(f);
-                }
-            });
-
-            /* 6) Smart prefetch (hover + near viewport), but skip on slow/data-saver */
-            const prefetch = (href) => {
-                const l = document.createElement('link');
-                l.rel = 'prefetch'; l.href = href; document.head.appendChild(l);
-            };
-            if (!saveData && !slowNet) {
-                // intent (hover/touch)
-                const onIntent = (a) => {
-                    const href = a.getAttribute('href');
-                    if (!href || !href.startsWith('/') || href.includes('#')) return;
-                    const h = () => { prefetch(href); a.removeEventListener('pointerover', h); a.removeEventListener('touchstart', h); };
-                    a.addEventListener('pointerover', h, { passive: true });
-                    a.addEventListener('touchstart', h, { passive: true });
-                };
-                document.querySelectorAll('a[href]').forEach(onIntent);
-
-                // near viewport
-                if ('IntersectionObserver' in window) {
-                    const io = new IntersectionObserver(es => {
-                        es.forEach(e => {
-                            if (e.isIntersecting) {
-                                const href = e.target.getAttribute('href');
-                                if (href && href.startsWith('/') && !href.includes('#')) prefetch(href);
-                                io.unobserve(e.target);
-                            }
-                        });
-                    }, { rootMargin: '400px 0px' });
-                    document.querySelectorAll('a[href]').forEach(a => io.observe(a));
-                }
-            }
-
-            /* 7) Render less up front: content-visibility for heavy sections */
+            // 9) Content-visibility for heavy sections
             ['.dance-classes', '.instructors', '.reviews', '.about-teaser', '.seo-footer'].forEach(sel => {
                 document.querySelectorAll(sel).forEach(el => {
                     el.style.containIntrinsicSize = '1px 1200px';
@@ -935,53 +512,38 @@
                 });
             });
 
-            /* 8) JSON-LD: WebPage (dateModified), Breadcrumbs, LocalBusiness hours */
-            // WebPage
+            // 10) Structured data: WebPage(dateModified) + Breadcrumbs + Hours
             (() => {
-                const s = document.createElement('script');
-                s.type = 'application/ld+json';
-                s.textContent = JSON.stringify({
+                const wp = document.createElement('script');
+                wp.type = 'application/ld+json';
+                wp.textContent = JSON.stringify({
                     '@context': 'https://schema.org',
                     '@type': 'WebPage',
                     name: document.title,
                     url: location.href.split('#')[0],
                     dateModified: new Date().toISOString().split('T')[0]
                 });
+                document.head.appendChild(wp);
+            })();
+
+            (() => {
+                const links = Array.from(document.querySelectorAll('.topbar a[href^="/"]')).filter(a => a.textContent.trim()).slice(0, 6);
+                if (links.length < 2) return;
+                const items = links.map((a, i) => ({
+                    '@type': 'ListItem', position: i + 1, name: a.textContent.trim(),
+                    item: new URL(a.getAttribute('href'), location.origin).href
+                }));
+                const s = document.createElement('script');
+                s.type = 'application/ld+json';
+                s.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': items });
                 document.head.appendChild(s);
             })();
 
-            // BreadcrumbList (from topbar links)
             (() => {
-                const links = Array.from(document.querySelectorAll('.topbar a[href^="/"]'))
-                    .filter(a => a.textContent.trim().length)
-                    .slice(0, 6);
-                if (links.length >= 2) {
-                    const items = links.map((a, i) => ({
-                        '@type': 'ListItem',
-                        position: i + 1,
-                        name: a.textContent.trim(),
-                        item: new URL(a.getAttribute('href'), location.origin).href
-                    }));
-                    const s = document.createElement('script');
-                    s.type = 'application/ld+json';
-                    s.textContent = JSON.stringify({
-                        '@context': 'https://schema.org',
-                        '@type': 'BreadcrumbList',
-                        itemListElement: items
-                    });
-                    document.head.appendChild(s);
-                }
-            })();
-
-            // LocalBusiness hours from the table (keeps schema in sync with UI)
-            (() => {
-                const rows = document.querySelectorAll('table.hours tr');
-                if (!rows.length) return;
+                const rows = document.querySelectorAll('table.hours tr'); if (!rows.length) return;
                 const map = {
-                    'Mon–Thu': ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
-                    'Mon-Thu': ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
-                    'Mon': ['Monday'], 'Tue': ['Tuesday'], 'Wed': ['Wednesday'], 'Thu': ['Thursday'],
-                    'Fri': ['Friday'], 'Sat': ['Saturday'], 'Sun': ['Sunday']
+                    'Mon–Thu': ['Monday', 'Tuesday', 'Wednesday', 'Thursday'], 'Mon-Thu': ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+                    'Mon': ['Monday'], 'Tue': ['Tuesday'], 'Wed': ['Wednesday'], 'Thu': ['Thursday'], 'Fri': ['Friday'], 'Sat': ['Saturday'], 'Sun': ['Sunday']
                 };
                 const specs = [];
                 rows.forEach(tr => {
@@ -989,19 +551,14 @@
                     const times = tr.querySelector('td')?.textContent.trim();
                     if (!day || !times) return;
                     const [opens, closes] = times.split('–').map(s => s.trim());
-                    (map[day] || [day]).forEach(d => {
-                        specs.push({ '@type': 'OpeningHoursSpecification', dayOfWeek: d, opens: opens, closes: closes });
-                    });
+                    (map[day] || [day]).forEach(d => specs.push({ '@type': 'OpeningHoursSpecification', dayOfWeek: d, opens, closes }));
                 });
                 if (specs.length) {
                     const s = document.createElement('script');
                     s.type = 'application/ld+json';
                     s.textContent = JSON.stringify({
-                        '@context': 'https://schema.org',
-                        '@type': 'LocalBusiness',
-                        name: "Miss Kim's Dance Class",
-                        url: location.origin + '/',
-                        telephone: '+1-314-542-0608',
+                        '@context': 'https://schema.org', '@type': 'LocalBusiness',
+                        name: "Miss Kim's Dance Class", url: location.origin + '/', telephone: '+1-314-542-0608',
                         address: { '@type': 'PostalAddress', 'streetAddress': '14278 Ladue Rd', 'addressLocality': 'Chesterfield', 'addressRegion': 'MO', 'postalCode': '63017', 'addressCountry': 'US' },
                         openingHoursSpecification: specs
                     });
@@ -1009,128 +566,198 @@
                 }
             })();
 
-            /* 9) Passive listeners for super smooth scroll */
-            const passive = (type, sel, fn) => document.querySelectorAll(sel).forEach(el => el.addEventListener(type, fn, { passive: true }));
-            passive('touchstart', 'a,button', () => { });
-            passive('touchmove', 'body', () => { });
+            // 11) Service worker
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("/sw.js").catch(console.error);
+            }
+
+            // 12) Aggressive image loading / preloading (optional)
+            const head = document.head;
+            const preloadSet = new Set();
+            const preconnectSet = new Set();
+            const addPreload = (url) => {
+                if (!url || preloadSet.has(url) || preloadSet.size >= MAX_PRELOADS) return;
+                const l = document.createElement('link'); l.rel = 'preload'; l.as = 'image'; l.href = url;
+                try { const u = new URL(url, location.href); if (u.origin !== location.origin) l.crossOrigin = 'anonymous'; } catch { }
+                head.appendChild(l); preloadSet.add(url);
+            };
+            const addPreconnect = (origin) => {
+                if (!origin || preconnectSet.has(origin)) return;
+                const l = document.createElement('link'); l.rel = 'preconnect'; l.href = origin; l.crossOrigin = 'anonymous';
+                head.appendChild(l); preconnectSet.add(origin);
+            };
+            const resolveImgUrl = (img) => img.currentSrc || img.src || img.getAttribute('src') || '';
+
+            const runAggressive = () => {
+                const imgs = Array.from(document.images || document.querySelectorAll('img'));
+                imgs.forEach(img => {
+                    if (!img.getAttribute('src') && img.dataset?.src) img.setAttribute('src', img.dataset.src);
+                    if (!img.getAttribute('srcset') && img.dataset?.srcset) img.setAttribute('srcset', img.dataset.srcset);
+                    img.classList.remove('lazy', 'lazyload', 'lazyloading');
+                    img.setAttribute('loading', 'eager');
+                    img.setAttribute('decoding', 'async');
+                    img.setAttribute('fetchpriority', 'high');
+                    img.importance = 'high';
+                    const url = resolveImgUrl(img);
+                    if (url) {
+                        addPreload(url);
+                        try { const u = new URL(url, location.href); if (u.origin !== location.origin) addPreconnect(u.origin); } catch { }
+                    }
+                    if ('decode' in img) img.decode().catch(() => { });
+                });
+
+                if (PRELOAD_BG_STYLES) {
+                    const pick = (bg) => {
+                        if (!bg || !bg.includes('url(')) return null;
+                        const m = bg.match(/url\((['"]?)(.*?)\1\)/); return m && m[2] ? m[2] : null;
+                    };
+                    document.querySelectorAll('.hero, .hero-background, [data-preload-bg]').forEach(el => {
+                        const url = pick(getComputedStyle(el).backgroundImage);
+                        if (!url) return;
+                        addPreload(url);
+                        try { const u = new URL(url, location.href); if (u.origin !== location.origin) addPreconnect(u.origin); } catch { }
+                    });
+                }
+
+                queueMicrotask(() => {
+                    (document.images || []).forEach(img => {
+                        const url = resolveImgUrl(img); if (url) addPreload(url);
+                    });
+                });
+            };
+
+            if (AGGRESSIVE_IMAGES && !(RESPECT_SAVE_DATA && onSlowOrSaver)) {
+                runAggressive();
+            } else {
+                // Light-touch: upgrade near-viewport lazies
+                if ("IntersectionObserver" in window) {
+                    const io = new IntersectionObserver(entries => {
+                        entries.forEach(e => {
+                            if (e.isIntersecting) {
+                                const img = e.target;
+                                img.loading = 'eager';
+                                img.setAttribute('fetchpriority', 'high');
+                                io.unobserve(img);
+                            }
+                        });
+                    }, { rootMargin: '200px 0px' });
+                    document.querySelectorAll('img[loading="lazy"]').forEach(img => io.observe(img));
+                }
+            }
         })();
     </script>
+
+    <!-- Web Vitals (optional logging) -->
+    <script src="https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js"></script>
     <script>
-(() => {
-  const isTouch =
-    window.matchMedia('(pointer: coarse)').matches ||
-    'ontouchstart' in window ||
-    navigator.maxTouchPoints > 0;
-
-  if (!isTouch) return; // desktop/laptop: skip
-
-  document.documentElement.classList.add('is-touch');
-  document.body.classList.add('tnv-pad-bottom');
-
-  const el = (tag, cls, attrs={}) => {
-    const n = document.createElement(tag);
-    if (cls) n.className = cls;
-    for (const [k,v] of Object.entries(attrs)) n.setAttribute(k, v);
-    return n;
-  };
-
-  // Build bottom bar
-  const nav = el('nav', 'tnv tnv-hide', { role: 'navigation', 'aria-label': 'Touch navigation' });
-  nav.innerHTML = `
-    <a class="tnv__btn" href="/" aria-label="Home"><span class="tnv__icon">🏠</span><span class="tnv__label">Home</span></a>
-    <button class="tnv__btn" type="button" data-sheet="classes" aria-haspopup="dialog" aria-expanded="false">
-      <span class="tnv__icon">🎭</span><span class="tnv__label">Classes</span>
-    </button>
-    <a class="tnv__btn" href="/schedule" aria-label="Schedule"><span class="tnv__icon">🗓️</span><span class="tnv__label">Schedule</span></a>
-    <a class="tnv__btn" href="/pricing" aria-label="Pricing"><span class="tnv__icon">💲</span><span class="tnv__label">Pricing</span></a>
-    <a class="tnv__btn tnv__btn--primary" href="/registration" aria-label="Register"><span class="tnv__icon">📝</span><span class="tnv__label">Register</span></a>
-  `;
-
-  // Build sheet (dropdown panel)
-  const sheet = el('div', 'tnv-sheet tnv-hide', { 'aria-hidden': 'true' });
-  sheet.innerHTML = `
-    <div class="tnv-sheet__scrim" data-close></div>
-    <div class="tnv-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="tnv-sheet-title">
-      <div class="tnv-sheet__header">
-        <div class="tnv-sheet__title" id="tnv-sheet-title">Browse Classes</div>
-        <button class="tnv-sheet__close" type="button" data-close aria-label="Close">Close</button>
-      </div>
-      <nav><ul class="tnv-list" id="tnv-class-list"></ul></nav>
-    </div>
-  `;
-
-  // Mount after <main> (fallback to body)
-  const main = document.querySelector('main') || document.body;
-  main.insertAdjacentElement('afterend', sheet);
-  main.insertAdjacentElement('afterend', nav);
-
-  // Clone your existing dropdown links
-  const srcLinks = document.querySelectorAll('.has-dropdown .dropdown a[href]');
-  const list = sheet.querySelector('#tnv-class-list');
-
-  if (srcLinks.length) {
-    srcLinks.forEach(a => {
-      const li = document.createElement('li');
-      const c = document.createElement('a');
-      c.href = a.getAttribute('href');
-      c.textContent = a.textContent.trim();
-      li.appendChild(c); list.appendChild(li);
-    });
-  } else {
-    // Fallback if markup changes
-    [
-      ['/pom-poms-classes','Pom-Poms'], ['/contemporary-dance-classes','Contemporary'],
-      ['/hip-hop-dance-classes','Hip-Hop'], ['/musical-theater-classes','Musical Theater'],
-      ['/lyrical-dance-classes','Lyrical'], ['/tumbling-classes','Tumbling'],
-      ['/acrobatics-classes','Acrobatics'], ['/aerial-classes','Aerial'],
-      ['/competition-teams','Competition'], ['/ballet-dance-classes','Ballet'],
-      ['/jazz-dance-classes','Jazz'], ['/tap-dance-classes','Tap'],
-    ].forEach(([href, label]) => {
-      const li = document.createElement('li'); const c = document.createElement('a');
-      c.href = href; c.textContent = label; li.appendChild(c); list.appendChild(li);
-    });
-  }
-
-  // Open/close sheet
-  const classesBtn = nav.querySelector('[data-sheet="classes"]');
-  const openSheet = () => { sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); classesBtn.setAttribute('aria-expanded','true'); };
-  const closeSheet = () => { sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); classesBtn.setAttribute('aria-expanded','false'); };
-  sheet.addEventListener('click', (e) => { if (e.target.hasAttribute('data-close')) closeSheet(); });
-  classesBtn.addEventListener('click', () => sheet.classList.contains('open') ? closeSheet() : openSheet());
-  sheet.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
-
-  // Switch to sidebar for touch landscape >= 900px
-  const sideQuery = window.matchMedia('(orientation: landscape) and (min-width: 900px)');
-  const applyMode = () => {
-    const isSide = sideQuery.matches;
-    nav.classList.toggle('is-side', isSide);
-    document.documentElement.classList.toggle('touch-side', isSide);
-  };
-  applyMode();
-  sideQuery.addEventListener('change', applyMode);
-  window.addEventListener('orientationchange', applyMode);
-
-  // Close sheet if your top menu opens (avoid UI overlap)
-  const topMenu = document.getElementById('primary-menu');
-  if (topMenu) {
-    const obs = new MutationObserver(() => { if (sheet.classList.contains('open')) closeSheet(); });
-    obs.observe(topMenu, { attributes: true, attributeFilter: ['class'] });
-  }
-
-  // Reveal
-  nav.classList.remove('tnv-hide');
-  sheet.classList.remove('tnv-hide');
-
-  // Tiny bounce on tap
-  nav.querySelectorAll('.tnv__btn').forEach(btn => {
-    btn.addEventListener('pointerdown', () => btn.animate([{transform:'scale(1)'},{transform:'scale(.97)'}],{duration:90,fill:'forwards'}), {passive:true});
-    btn.addEventListener('pointerup', () => btn.animate([{transform:'scale(.97)'},{transform:'scale(1)'}],{duration:90,fill:'forwards'}), {passive:true});
-  });
-})();
+        webVitals.getCLS(console.log);
+        webVitals.getFID(console.log);
+        webVitals.getLCP(console.log);
     </script>
 
-</body>
+    <!-- ======================= TOUCH-ONLY NAV (BOTTOM / SIDEBAR) ======================= -->
+    <script>
+        (() => {
+            const isTouch =
+                matchMedia('(pointer: coarse)').matches ||
+                'ontouchstart' in window ||
+                navigator.maxTouchPoints > 0;
+
+            if (!isTouch) return;
+
+            document.documentElement.classList.add('is-touch');
+            document.body.classList.add('tnv-pad-bottom');
+
+            const el = (tag, cls, attrs = {}) => {
+                const n = document.createElement(tag);
+                if (cls) n.className = cls;
+                for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+                return n;
+            };
+
+            // Bottom bar
+            const nav = el('nav', 'tnv tnv-hide', { role: 'navigation', 'aria-label': 'Touch navigation' });
+            nav.innerHTML = `
+        <a class="tnv__btn" href="/" aria-label="Home"><span class="tnv__icon">🏠</span><span class="tnv__label">Home</span></a>
+        <button class="tnv__btn" type="button" data-sheet="classes" aria-haspopup="dialog" aria-expanded="false">
+          <span class="tnv__icon">🎭</span><span class="tnv__label">Classes</span>
+        </button>
+        <a class="tnv__btn" href="/schedule" aria-label="Schedule"><span class="tnv__icon">🗓️</span><span class="tnv__label">Schedule</span></a>
+        <a class="tnv__btn" href="/pricing" aria-label="Pricing"><span class="tnv__icon">💲</span><span class="tnv__label">Pricing</span></a>
+        <a class="tnv__btn tnv__btn--primary" href="/registration" aria-label="Register"><span class="tnv__icon">📝</span><span class="tnv__label">Register</span></a>
+      `;
+
+            // Sheet (dropdown panel)
+            const sheet = el('div', 'tnv-sheet tnv-hide', { 'aria-hidden': 'true' });
+            sheet.innerHTML = `
+        <div class="tnv-sheet__scrim" data-close></div>
+        <div class="tnv-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="tnv-sheet-title">
+          <div class="tnv-sheet__header">
+            <div class="tnv-sheet__title" id="tnv-sheet-title">Browse Classes</div>
+            <button class="tnv-sheet__close" type="button" data-close aria-label="Close">Close</button>
+          </div>
+          <nav><ul class="tnv-list" id="tnv-class-list"></ul></nav>
+        </div>
+      `;
+
+            const main = document.querySelector('main') || document.body;
+            main.insertAdjacentElement('afterend', sheet);
+            main.insertAdjacentElement('afterend', nav);
+
+            // Pull links from existing dropdown
+            const srcLinks = document.querySelectorAll('.has-dropdown .dropdown a[href]');
+            const list = sheet.querySelector('#tnv-class-list');
+            const addItem = (href, label) => {
+                const li = document.createElement('li'); const a = document.createElement('a');
+                a.href = href; a.textContent = label; li.appendChild(a); list.appendChild(li);
+            };
+
+            if (srcLinks.length) {
+                srcLinks.forEach(a => addItem(a.getAttribute('href'), a.textContent.trim()));
+            } else {
+                [
+                    ['/pom-poms-classes', 'Pom-Poms'], ['/contemporary-dance-classes', 'Contemporary'],
+                    ['/hip-hop-dance-classes', 'Hip-Hop'], ['/musical-theater-classes', 'Musical Theater'],
+                    ['/lyrical-dance-classes', 'Lyrical'], ['/tumbling-classes', 'Tumbling'],
+                    ['/acrobatics-classes', 'Acrobatics'], ['/aerial-classes', 'Aerial'],
+                    ['/competition-teams', 'Competition'], ['/ballet-dance-classes', 'Ballet'],
+                    ['/jazz-dance-classes', 'Jazz'], ['/tap-dance-classes', 'Tap'],
+                ].forEach(([h, l]) => addItem(h, l));
+            }
+
+            // Open/close sheet
+            const classesBtn = nav.querySelector('[data-sheet="classes"]');
+            const openSheet = () => { sheet.classList.add('open'); sheet.setAttribute('aria-hidden', 'false'); classesBtn.setAttribute('aria-expanded', 'true'); };
+            const closeSheet = () => { sheet.classList.remove('open'); sheet.setAttribute('aria-hidden', 'true'); classesBtn.setAttribute('aria-expanded', 'false'); };
+            sheet.addEventListener('click', (e) => { if (e.target.hasAttribute('data-close')) closeSheet(); });
+            classesBtn.addEventListener('click', () => sheet.classList.contains('open') ? closeSheet() : openSheet());
+            sheet.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
+
+            // Switch to sidebar in landscape ≥900px
+            const sideQuery = matchMedia('(orientation: landscape) and (min-width: 900px)');
+            const applyMode = () => {
+                const isSide = sideQuery.matches;
+                nav.classList.toggle('is-side', isSide);
+                document.documentElement.classList.toggle('touch-side', isSide);
+            };
+            applyMode();
+            sideQuery.addEventListener('change', applyMode);
+            window.addEventListener('orientationchange', applyMode);
+
+            // Avoid UI overlap with desktop menu
+            const topMenu = document.getElementById('primary-menu');
+            if (topMenu) {
+                const obs = new MutationObserver(() => { if (sheet.classList.contains('open')) closeSheet(); });
+                obs.observe(topMenu, { attributes: true, attributeFilter: ['class'] });
+            }
+
+            // Reveal + tiny bounce
+            nav.classList.remove('tnv-hide'); sheet.classList.remove('tnv-hide');
+            nav.querySelectorAll('.tnv__btn').forEach(btn => {
+                btn.addEventListener('pointerdown', () => btn.animate([{ transform: 'scale(1)' }, { transform: 'scale(.97)' }], { duration: 90, fill: 'forwards' }), { passive: true });
+                btn.addEventListener('pointerup', () => btn.animate([{ transform: 'scale(.97)' }, { transform: 'scale(1)' }], { duration: 90, fill: 'forwards' }), { passive: true });
+            });
+        })();
+    </script>
+   </body>
 </html>
-
-
-
