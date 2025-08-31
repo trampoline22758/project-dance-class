@@ -331,7 +331,7 @@ p { /* paragraph styles */
     align-items: center; /* vertical center */
     justify-content: center; /* horizontal center */
     text-align: center; /* center text */
-    color: #000; /* all text black */
+    color: #fff; /* all text white for contrast */
     overflow: hidden; /* clip background overflow */
 }
 
@@ -339,13 +339,6 @@ p { /* paragraph styles */
     position: absolute; /* fill container */
     inset: 0; /* top/right/bottom/left = 0 */
     background: url('/photos/herobanner.jpg') center/cover no-repeat; /* image positioning */
-}
-
-.hero::before { /* overlay over background for readability */
-    content: ""; /* pseudo-element */
-    position: absolute; /* cover hero */
-    inset: 0; /* fill area */
-    background: rgba(255,255,255,.35); /* light overlay so black text is readable */
 }
 
 .hero-content { /* content holder above bg */
@@ -359,13 +352,13 @@ p { /* paragraph styles */
     font-size: clamp(1.9rem,4vw,3rem); /* responsive title */
     font-weight: 700; /* bold */
     line-height: 1.2; /* tighter spacing */
-    color: #000; /* black heading */
+    color: inherit; /* inherit white text */
 }
 
 .hero-tagline { /* hero subheading */
     margin-top: .5rem; /* space above */
     font-size: clamp(1rem,1.6vw,1.25rem); /* responsive size */
-    color: #111; /* dark gray tagline */
+    color: rgba(255,255,255,.85); /* light tagline */
 }
 
 .hero-call { /* hero call-to-action button/link */
@@ -387,7 +380,7 @@ p { /* paragraph styles */
 .hero-hours { /* hours line under CTA */
     margin-top: .5rem; /* spacing */
     font-size: .95rem; /* small text */
-    color: #000; /* black */
+    color: rgba(255,255,255,.85); /* light text */
 }
 
     .hero-hours .status { /* open/closed status color */
@@ -882,7 +875,7 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
 /* Hero */
 .hero{border-radius:0 0 24px 24px;overflow:hidden}
 .hero-background{background:
-  linear-gradient(to bottom,rgba(0,0,0,.35),rgba(0,0,0,.35)),
+  linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.55)),
   url("/photos/herobanner.JPG") center/cover no-repeat !important;}
 .hero .hero-content{padding:clamp(40px,12vw,88px) var(--pad) 24px;text-align:center;color:#fff}
 #hero-title{font-size:clamp(26px,7vw,42px);line-height:1.15;text-wrap:balance;text-shadow:0 2px 12px rgba(0,0,0,.35)}
