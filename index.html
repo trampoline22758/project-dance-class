@@ -44,6 +44,20 @@
 
     <!-- Sticky Top Bar / Nav -->
     <div class="topbar" role="navigation" aria-label="Primary">
+        <!-- Mobile Sidebar Trigger -->
+        <div class="hamburger" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <!-- Sidebar Menu (will be filled by JS) -->
+        <nav id="mobile-menu" class="sidebar-menu" role="navigation" aria-label="Mobile Menu">
+            <ul></ul>
+        </nav>
+
+        <!-- Overlay -->
+        <div class="menu-overlay"></div>
         <div class="topbar-inner">
             <a class="brand-mini" href="/" aria-label="Miss Kim's Dance Class Home">Miss Kim’s</a>
             <button class="hamburger" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
@@ -758,27 +772,27 @@
             // Bottom bar
             const nav = el('nav', 'tnv tnv-hide', { role: 'navigation', 'aria-label': 'Touch navigation' });
             nav.innerHTML = `
-            <a class="tnv__btn" href="/" aria-label="Home"><span class="tnv__icon">🏠</span><span class="tnv__label">Home</span></a>
-            <button class="tnv__btn" type="button" data-sheet="classes" aria-haspopup="dialog" aria-expanded="false">
-              <span class="tnv__icon">🎭</span><span class="tnv__label">Classes</span>
-            </button>
-            <a class="tnv__btn" href="/schedule" aria-label="Schedule"><span class="tnv__icon">🗓️</span><span class="tnv__label">Schedule</span></a>
-            <a class="tnv__btn" href="/pricing" aria-label="Pricing"><span class="tnv__icon">💲</span><span class="tnv__label">Pricing</span></a>
-            <a class="tnv__btn tnv__btn--primary" href="/registration" aria-label="Register"><span class="tnv__icon">📝</span><span class="tnv__label">Register</span></a>
-          `;
+                <a class="tnv__btn" href="/" aria-label="Home"><span class="tnv__icon">🏠</span><span class="tnv__label">Home</span></a>
+                <button class="tnv__btn" type="button" data-sheet="classes" aria-haspopup="dialog" aria-expanded="false">
+                  <span class="tnv__icon">🎭</span><span class="tnv__label">Classes</span>
+                </button>
+                <a class="tnv__btn" href="/schedule" aria-label="Schedule"><span class="tnv__icon">🗓️</span><span class="tnv__label">Schedule</span></a>
+                <a class="tnv__btn" href="/pricing" aria-label="Pricing"><span class="tnv__icon">💲</span><span class="tnv__label">Pricing</span></a>
+                <a class="tnv__btn tnv__btn--primary" href="/registration" aria-label="Register"><span class="tnv__icon">📝</span><span class="tnv__label">Register</span></a>
+              `;
 
             // Sheet (dropdown panel)
             const sheet = el('div', 'tnv-sheet tnv-hide', { 'aria-hidden': 'true' });
             sheet.innerHTML = `
-            <div class="tnv-sheet__scrim" data-close></div>
-            <div class="tnv-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="tnv-sheet-title">
-              <div class="tnv-sheet__header">
-                <div class="tnv-sheet__title" id="tnv-sheet-title">Browse Classes</div>
-                <button class="tnv-sheet__close" type="button" data-close aria-label="Close">Close</button>
-              </div>
-              <nav><ul class="tnv-list" id="tnv-class-list"></ul></nav>
-            </div>
-          `;
+                <div class="tnv-sheet__scrim" data-close></div>
+                <div class="tnv-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="tnv-sheet-title">
+                  <div class="tnv-sheet__header">
+                    <div class="tnv-sheet__title" id="tnv-sheet-title">Browse Classes</div>
+                    <button class="tnv-sheet__close" type="button" data-close aria-label="Close">Close</button>
+                  </div>
+                  <nav><ul class="tnv-list" id="tnv-class-list"></ul></nav>
+                </div>
+              `;
 
             const main = document.querySelector('main') || document.body;
             main.insertAdjacentElement('afterend', sheet);
@@ -837,6 +851,78 @@
                 btn.addEventListener('pointerdown', () => btn.animate([{ transform: 'scale(1)' }, { transform: 'scale(.97)' }], { duration: 90, fill: 'forwards' }), { passive: true });
                 btn.addEventListener('pointerup', () => btn.animate([{ transform: 'scale(.97)' }, { transform: 'scale(1)' }], { duration: 90, fill: 'forwards' }), { passive: true });
             });
+        })();
+    </script>
+    <script>
+        (() => {
+            const hamburger = document.querySelector('.hamburger');
+            const sidebar = document.querySelector('.sidebar-menu');
+            const sidebarList = sidebar.querySelector('ul');
+            const overlay = document.querySelector('.menu-overlay');
+            const primaryMenu = document.querySelector('#primary-menu');
+
+            // Clone links from primary-menu into sidebar
+            if (primaryMenu && sidebarList) {
+                primaryMenu.querySelectorAll('a').forEach(a => {
+                    const li = document.createElement('li');
+                    const clone = a.cloneNode(true);
+                    li.appendChild(clone);
+                    sidebarList.appendChild(li);
+                });
+            }
+
+            // Toggle open/close
+            if (hamburger && sidebar && overlay) {
+                hamburger.addEventListener('click', () => {
+                    const open = sidebar.classList.toggle('open');
+                    overlay.classList.toggle('active', open);
+                    hamburger.setAttribute('aria-expanded', open);
+                });
+
+                overlay.addEventListener('click', () => {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', false);
+                });
+
+                // Close sidebar when a link is clicked
+                sidebarList.addEventListener('click', e => {
+                    if (e.target.tagName === 'A') {
+                        sidebar.classList.remove('open');
+                        overlay.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', false);
+                    }
+                });
+                // Sidebar dropdown accordion
+                const sidebarDropdowns = sidebar.querySelectorAll('.has-dropdown');
+                sidebarDropdowns.forEach(parent => {
+                    const toggle = parent.querySelector('.dropdown-toggle');
+                    const submenu = parent.querySelector('.dropdown');
+
+                    if (toggle && submenu) {
+                        // start collapsed
+                        submenu.style.display = 'none';
+
+                        toggle.addEventListener('click', e => {
+                            e.preventDefault();
+                            const isOpen = parent.classList.contains('open');
+
+                            // close all siblings first
+                            sidebarDropdowns.forEach(p => {
+                                p.classList.remove('open');
+                                const sm = p.querySelector('.dropdown');
+                                if (sm) sm.style.display = 'none';
+                            });
+
+                            if (!isOpen) {
+                                parent.classList.add('open');
+                                submenu.style.display = 'block';
+                            }
+                        });
+                    }
+                });
+
+            }
         })();
     </script>
 </body>
