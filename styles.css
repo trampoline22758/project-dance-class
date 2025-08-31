@@ -956,7 +956,7 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
   *{animation:none !important;transition:none !important}
 }
 /* Authoritative dropdown styles (last wins) */
-@media (min-width: 921px) {
+@media (min-width: 720px) {
     .topbar .menu > li > a,
     .topbar .dropdown-toggle {
         color: #111;
@@ -973,8 +973,8 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
             top: 100%;
             margin-top: .4rem;
             min-width: 250px;
-            background: #231c2e;
-            border: 1px solid rgba(255,255,255,.1);
+            background: #fff;
+            border: 1px solid rgba(0,0,0,.1);
             border-radius: .75rem;
             box-shadow: 0 18px 40px rgba(0,0,0,.35);
             padding: .5rem;
@@ -1006,17 +1006,17 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
         }
 
         .topbar .has-dropdown > .dropdown a {
-            color: #fff;
+            color: #111;
             text-decoration: none;
         }
 
             .topbar .has-dropdown > .dropdown a:hover {
-                background: rgba(255,255,255,.08);
+                background: rgba(0,0,0,.05);
             }
 }
 
 /* Mobile: inline list when parent .open (keep light look) */
-@media (max-width: 920px) {
+@media (max-width: 719px) {
     .topbar .has-dropdown > .dropdown {
         position: static;
         margin: 0;
