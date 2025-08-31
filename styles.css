@@ -119,7 +119,7 @@ p { /* paragraph styles */
     letter-spacing: .2px /* subtle tracking */
 }
 
-.nav-toggle { /* mobile menu toggle button */
+.hamburger { /* mobile menu toggle button */
     margin-left: auto; /* push to right */
     display: none; /* hidden on desktop */
     border: 1px solid rgba(0,0,0,.2); /* subtle border on light bg */
@@ -176,26 +176,74 @@ p { /* paragraph styles */
     }
 /* Mobile nav */
 
-@media (max-width:920px) { /* styles for screens <= 920px */
-    .nav-toggle {
+@media (max-width:1024px) { /* styles for screens <= 1024px */
+    .hamburger {
         display: inline-block /* show mobile menu toggle */
     }
 
     .menu {
-        display: none; /* hide menu initially */
+        display: none; /* hide menu on mobile */
         flex-direction: column; /* vertical list */
         align-items: flex-start; /* left align */
         width: 100% /* full width */
     }
 
-        .menu.open {
-            display: flex /* show when toggled */
-        }
-
     .menu-right {
         margin-left: 0 /* reset right push */
     }
 
+    .sidebar-menu {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 260px;
+        height: 100%;
+        background: #fff;
+        box-shadow: 2px 0 12px rgba(0,0,0,.15);
+        padding: 60px 20px 20px;
+        transition: left .3s ease;
+        z-index: 2000;
+        overflow-y: auto;
+    }
+    .sidebar-menu.open { left: 0; }
+    .sidebar-menu a,
+    .sidebar-menu .dropdown-toggle {
+        display: block;
+        width: 100%;
+        padding: 12px 8px;
+        font-weight: 600;
+        color: #222;
+        text-decoration: none;
+        border-radius: 6px;
+    }
+    .sidebar-menu a:hover,
+    .sidebar-menu .dropdown-toggle:hover { background: #f3f3f9; }
+
+    .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .3s ease;
+        z-index: 1500;
+    }
+    .menu-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .sidebar-menu .dropdown {
+        padding-left: 10px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .3s ease;
+    }
+
+}
+
+@media (min-width:1025px) {
+    .hamburger, .sidebar-menu, .menu-overlay { display: none !important; }
 }
 /* ===================== Header ===================== */
 
@@ -852,7 +900,7 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
 .topbar{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.9);
   border-bottom:1px solid #eee;backdrop-filter:saturate(180%) blur(8px);}
 .topbar-inner{padding:12px var(--pad);gap:10px}
-.nav-toggle{padding:12px 14px;min-height:44px;border-radius:10px}
+.hamburger{padding:12px 14px;min-height:44px;border-radius:10px}
 
 /* Mobile menu as bottom sheet */
 .menu{
@@ -927,8 +975,8 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
 .footer-meta{padding:16px 0 24px;color:#555;text-align:center;font-size:.95rem}
 
 /* Desktop enhancements (keeps your existing layout) */
-@media (min-width:720px){
-  .nav-toggle{display:none}
+@media (min-width:1025px){
+  .hamburger,.sidebar-menu,.menu-overlay{display:none}
   .menu{position:static;display:flex;flex-direction:row;align-items:center;gap:10px;padding:0;background:transparent;border:0;box-shadow:none;max-height:none;border-radius:0;overflow:visible}
   .menu a,.menu .dropdown-toggle{background:transparent;border:0;padding:10px 12px}
   .menu a:hover,.menu .dropdown-toggle:hover{background:#f5f3ff}
@@ -1148,122 +1196,4 @@ li {
             .menu a:hover,
             .menu .dropdown-toggle:hover {
                 background: #f5f5f9;
-            }
-
-    /* optional overlay behind sidebar */
-    .menu-overlay {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,.4);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .3s ease;
-        z-index: 1500;
-    }
-
-    .menu.open + .menu-overlay {
-        opacity: 1;
-        pointer-events: auto;
-    }
 }
-/* ================= Sidebar Nav (Mobile + iPad only) ================= */
-@media (max-width: 1024px) {
-    .hamburger {
-        position: fixed;
-        top: 14px;
-        left: 14px;
-        z-index: 2000;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 28px;
-        height: 24px;
-        cursor: pointer;
-    }
-
-        .hamburger div {
-            width: 100%;
-            height: 3px;
-            background-color: #111;
-            border-radius: 2px;
-        }
-
-    .sidebar-menu {
-        position: fixed;
-        top: 0;
-        left: -280px; /* hidden off canvas */
-        width: 260px;
-        height: 100%;
-        background-color: #fff;
-        box-shadow: 2px 0 12px rgba(0,0,0,.15);
-        display: flex;
-        flex-direction: column;
-        padding: 60px 20px 20px;
-        transition: left .3s ease;
-        z-index: 1999;
-    }
-
-        .sidebar-menu.open {
-            left: 0;
-        }
-
-        .sidebar-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-        }
-
-        .sidebar-menu li {
-            margin: 6px 0;
-        }
-
-        .sidebar-menu a {
-            display: block;
-            padding: 12px 8px;
-            text-decoration: none;
-            font-weight: 600;
-            color: #222;
-            border-radius: 6px;
-        }
-
-            .sidebar-menu a:hover {
-                background: #f3f3f9;
-            }
-
-    /* dark overlay */
-    .menu-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,.4);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .3s ease;
-        z-index: 1500;
-    }
-
-        .menu-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-}
-
-/* Desktop keeps normal nav, hide hamburger */
-@media (min-width: 1025px) {
-    .hamburger,
-    .sidebar-menu,
-    .menu-overlay {
-        display: none !important;
-    }
-}
-/* Accordion dropdowns inside sidebar */
-.sidebar-menu .has-dropdown > .dropdown {
-    display: none; /* hidden by default */
-    padding-left: 12px;
-}
-
-.sidebar-menu .has-dropdown.open > .dropdown {
-    display: block; /* show when .open */
-}
-

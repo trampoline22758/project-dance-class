@@ -60,12 +60,50 @@
         <div class="menu-overlay"></div>
         <div class="topbar-inner">
             <a class="brand-mini" href="/" aria-label="Miss Kim's Dance Class Home">Miss Kim’s</a>
-            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">Menu</button>
+            <button class="hamburger" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+
+            <!-- Sidebar Menu (Mobile + iPad only) -->
+            <nav id="mobile-menu" class="sidebar-menu" role="navigation" aria-label="Mobile Menu">
+              <ul>
+                <li><a href="/">Home</a></li>
+
+                <li class="has-dropdown">
+                  <button class="dropdown-toggle" type="button" aria-expanded="false">
+                    Other Dance &amp; Movement <span class="chevron">▾</span>
+                  </button>
+                  <ul class="dropdown">
+                    <li><a href="/pom-poms-classes">Pom-Poms</a></li>
+                    <li><a href="/contemporary-dance-classes">Contemporary Dance</a></li>
+                    <li><a href="/hip-hop-dance-classes">Hip-Hop Dance</a></li>
+                    <li><a href="/musical-theater-classes">Musical Theater</a></li>
+                    <li><a href="/lyrical-dance-classes">Lyrical Dance</a></li>
+                    <li><a href="/tumbling-classes">Tumbling</a></li>
+                    <li><a href="/acrobatics-classes">Acrobatics</a></li>
+                    <li><a href="/aerial-classes">Aerial</a></li>
+                    <li><a href="/competition-teams">Competition</a></li>
+                    <li><a href="/ballet-dance-classes">Ballet</a></li>
+                    <li><a href="/jazz-dance-classes">Jazz</a></li>
+                    <li><a href="/tap-dance-classes">Tap</a></li>
+                  </ul>
+                </li>
+
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="/summer">Summer</a></li>
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/schedule">Schedule</a></li>
+                <li><a class="btn btn--primary" href="/registration">Registration Form</a></li>
+                <li><a class="btn btn--ghost btn--sm" href="tel:+13145420608">Call (314) 542-0608</a></li>
+              </ul>
+            </nav>
+
+            <!-- Overlay -->
+            <div class="menu-overlay"></div>
+
             <ul id="primary-menu" class="menu" role="menubar">
                 <li role="none"><a role="menuitem" href="/">Home</a></li>
                 <li role="none" class="has-dropdown">
                     <button class="dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">Other Dance &amp; Movement <span class="chevron" aria-hidden="true">▾</span></button>
-                    <ul class="dropdown" role="menu" aria-label="Other Dance & Movement">
+                    <ul class="dropdown" role="menu" aria-label="Other Dance &amp; Movement">
                         <li role="none"><a role="menuitem" href="/pom-poms-classes">Pom-Poms</a></li>
                         <li role="none"><a role="menuitem" href="/contemporary-dance-classes">Contemporary Dance</a></li>
                         <li role="none"><a role="menuitem" href="/hip-hop-dance-classes">Hip-Hop Dance</a></li>
@@ -91,7 +129,6 @@
                     <a role="menuitem" class="btn btn--ghost btn--sm" href="tel:+13145420608">Call (314) 542-0608</a>
                 </li>
             </ul>
-            <div class="menu-overlay"></div>
         </div>
     </div>
 
@@ -292,39 +329,11 @@
             const $ = (sel, root = document) => root.querySelector(sel);
             const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-            const navToggle = $(".nav-toggle");
-            const menu = $("#primary-menu");
-
-            // ----- Mobile Sidebar Overlay -----
-            let overlay;
-            if (menu) {
-                overlay = document.createElement("div");
-                overlay.className = "menu-overlay";
-                document.body.appendChild(overlay);
-            }
-
-            // ----- Mobile menu toggle -----
-            if (navToggle && menu) {
-                navToggle.addEventListener("click", () => {
-                    const open = menu.classList.toggle("open");
-                    navToggle.setAttribute("aria-expanded", String(open));
-                    if (overlay) overlay.classList.toggle("active", open);
-                }, { passive: true });
-            }
-
-            if (overlay) {
-                overlay.addEventListener("click", () => {
-                    menu.classList.remove("open");
-                    navToggle?.setAttribute("aria-expanded", "false");
-                    overlay.classList.remove("active");
-                });
-            }
-
             const isDesktop = () => matchMedia("(min-width: 720px)").matches;
 
-            // ----- Dropdowns -----
+            // ----- Dropdowns (desktop menu only) -----
             let ddCounter = 0;
-            const parents = $$(".has-dropdown");
+            const parents = $$(".menu > .has-dropdown");
             parents.forEach(parent => {
                 const btn = $(".dropdown-toggle", parent);
                 const panel = $(".dropdown", parent);
@@ -403,6 +412,59 @@
                 if (e.key === "Tab") document.body.classList.add("user-is-tabbing");
             }, { passive: true });
         })();
+    </script>
+
+    <script>
+    (() => {
+      const hamburger = document.querySelector('.hamburger');
+      const sidebar   = document.querySelector('.sidebar-menu');
+      const overlay   = document.querySelector('.menu-overlay');
+
+      // Toggle sidebar
+      hamburger.addEventListener('click', () => {
+        const open = sidebar.classList.toggle('open');
+        overlay.classList.toggle('active', open);
+        hamburger.setAttribute('aria-expanded', open);
+      });
+
+      // Close when overlay clicked
+      overlay.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+
+      // Accordion dropdowns with slide animation
+      const dropdownToggles = sidebar.querySelectorAll('.dropdown-toggle');
+      dropdownToggles.forEach(btn => {
+        const parent = btn.closest('.has-dropdown');
+        const submenu = parent.querySelector('.dropdown');
+
+        // start collapsed
+        submenu.style.maxHeight = '0';
+
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          const isOpen = parent.classList.contains('open');
+
+          // close all dropdowns
+          sidebar.querySelectorAll('.has-dropdown').forEach(p => {
+            p.classList.remove('open');
+            const sm = p.querySelector('.dropdown');
+            if (sm) sm.style.maxHeight = '0';
+            const toggle = p.querySelector('.dropdown-toggle');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          });
+
+          // open current one
+          if (!isOpen) {
+            parent.classList.add('open');
+            submenu.style.maxHeight = submenu.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
     </script>
 
 
