@@ -98,9 +98,9 @@ p { /* paragraph styles */
     position: sticky; /* stick to top when scrolling */
     top: 0; /* anchor to top */
     z-index: 1100; /* keep above content */
-    background: rgba(43,36,51,.95); /* translucent dark background */
+    background: rgba(255,255,255,.9); /* light background for readability */
     backdrop-filter: saturate(1.1) blur(6px); /* glassy effect (supported browsers) */
-    border-bottom: 1px solid rgba(255,255,255,.08); /* subtle divider */
+    border-bottom: 1px solid #eee; /* subtle divider */
 }
 
 .topbar-inner { /* inner layout of topbar */
@@ -113,7 +113,7 @@ p { /* paragraph styles */
 }
 
 .brand-mini { /* compact brand link in nav */
-    color: #fff; /* white text */
+    color: var(--ink-strong); /* dark text for light header */
     text-decoration: none; /* no underline */
     font-weight: 800; /* heavy weight */
     letter-spacing: .2px /* subtle tracking */
@@ -122,9 +122,9 @@ p { /* paragraph styles */
 .nav-toggle { /* mobile menu toggle button */
     margin-left: auto; /* push to right */
     display: none; /* hidden on desktop */
-    border: 1px solid rgba(255,255,255,.35); /* subtle border */
+    border: 1px solid rgba(0,0,0,.2); /* subtle border on light bg */
     background: transparent; /* transparent background */
-    color: #fff; /* white icon/text */
+    color: var(--ink-strong); /* dark icon/text */
     border-radius: .6rem; /* rounded */
     padding: .45rem .6rem /* hit area */
 }
@@ -140,7 +140,7 @@ p { /* paragraph styles */
 }
 
     .menu a, .menu button.dropdown-toggle { /* menu links and dropdown triggers */
-        color: #fff; /* white text */
+        color: var(--ink-strong); /* dark text */
         text-decoration: none; /* no underline */
         background: transparent; /* transparent buttons */
         border: 0; /* no border */
@@ -151,7 +151,7 @@ p { /* paragraph styles */
     }
 
         .menu a:hover, .menu button:hover { /* hover feedback */
-            box-shadow: 0 0 0 3px rgba(255,255,255,.20) /* focus halo on hover */
+            box-shadow: 0 0 0 3px rgba(0,0,0,.15) /* focus halo on hover */
         }
 
 .menu-right { /* pushes items to the right side */
@@ -296,12 +296,12 @@ p { /* paragraph styles */
 
 .btn--ghost { /* ghost button variant */
     background: transparent; /* no fill */
-    color: #fff; /* white text */
-    border-color: var(--header-border) /* subtle border */
+    color: var(--ink-strong); /* dark text on light surfaces */
+    border-color: rgba(0,0,0,.2) /* subtle border */
 }
 
     .btn--ghost:hover { /* ghost hover */
-        background: rgba(255,255,255,.12) /* light fill */
+        background: rgba(0,0,0,.05) /* light fill */
     }
 
 .btn--sm { /* small button variant */
@@ -936,7 +936,7 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
 /* Desktop enhancements (keeps your existing layout) */
 @media (min-width:720px){
   .nav-toggle{display:none}
-  .menu{position:static;display:flex;flex-direction:row;align-items:center;gap:10px;padding:0;background:transparent;border:0;box-shadow:none;max-height:none;border-radius:0}
+  .menu{position:static;display:flex;flex-direction:row;align-items:center;gap:10px;padding:0;background:transparent;border:0;box-shadow:none;max-height:none;border-radius:0;overflow:visible}
   .menu a,.menu .dropdown-toggle{background:transparent;border:0;padding:10px 12px}
   .menu a:hover,.menu .dropdown-toggle:hover{background:#f5f3ff}
   .menu-right{margin-left:auto}
@@ -997,6 +997,15 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
             height: 10px;
         }
 
+        .topbar .has-dropdown > .dropdown::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -10px;
+            height: 10px;
+        }
+
         .topbar .has-dropdown.open > .dropdown {
             opacity: 1;
             visibility: visible;
@@ -1004,7 +1013,6 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
             pointer-events: auto;
             transition-delay: 0s;
         }
-
         .topbar .has-dropdown > .dropdown a {
             color: #111;
             text-decoration: none;
@@ -1044,4 +1052,3 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
 .topbar .has-dropdown.open .dropdown-toggle .chevron {
     transform: rotate(180deg);
 }
-

@@ -286,7 +286,6 @@
                     navToggle.setAttribute("aria-expanded", String(open));
                 }, { passive: true });
             }
-
             const isDesktop = () => matchMedia("(min-width: 720px)").matches;
 
             // Dropdowns
@@ -299,6 +298,7 @@
                 // give each panel an id and point the button at it
                 if (!panel.id) panel.id = `dd-${++ddCounter}`;
                 btn.setAttribute("aria-controls", panel.id);
+
                 let hideTimer;
 
                 const open = () => {
