@@ -77,6 +77,7 @@
                     <a role="menuitem" class="btn btn--ghost btn--sm" href="tel:+13145420608">Call (314) 542-0608</a>
                 </li>
             </ul>
+            <div class="menu-overlay"></div>
         </div>
     </div>
 
@@ -277,36 +278,53 @@
             const $ = (sel, root = document) => root.querySelector(sel);
             const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-            // Mobile menu toggle
             const navToggle = $(".nav-toggle");
             const menu = $("#primary-menu");
+
+            // ----- Mobile Sidebar Overlay -----
+            let overlay;
+            if (menu) {
+                overlay = document.createElement("div");
+                overlay.className = "menu-overlay";
+                document.body.appendChild(overlay);
+            }
+
+            // ----- Mobile menu toggle -----
             if (navToggle && menu) {
                 navToggle.addEventListener("click", () => {
                     const open = menu.classList.toggle("open");
                     navToggle.setAttribute("aria-expanded", String(open));
+                    if (overlay) overlay.classList.toggle("active", open);
                 }, { passive: true });
             }
+
+            if (overlay) {
+                overlay.addEventListener("click", () => {
+                    menu.classList.remove("open");
+                    navToggle?.setAttribute("aria-expanded", "false");
+                    overlay.classList.remove("active");
+                });
+            }
+
             const isDesktop = () => matchMedia("(min-width: 720px)").matches;
 
-            // Dropdowns
+            // ----- Dropdowns -----
             let ddCounter = 0;
             const parents = $$(".has-dropdown");
             parents.forEach(parent => {
                 const btn = $(".dropdown-toggle", parent);
                 const panel = $(".dropdown", parent);
                 if (!btn || !panel) return;
-                // give each panel an id and point the button at it
+
                 if (!panel.id) panel.id = `dd-${++ddCounter}`;
                 btn.setAttribute("aria-controls", panel.id);
 
                 let hideTimer;
-
                 const open = () => {
                     clearTimeout(hideTimer);
                     parent.classList.add("open");
                     btn.setAttribute("aria-expanded", "true");
                 };
-
                 const close = (immediate = false) => {
                     const doClose = () => {
                         parent.classList.remove("open");
@@ -316,11 +334,11 @@
                     immediate ? doClose() : (hideTimer = setTimeout(doClose, 200));
                 };
 
-                // Hover (desktop)
+                // Hover (desktop only)
                 parent.addEventListener("pointerenter", () => { if (isDesktop()) open(); });
                 parent.addEventListener("pointerleave", () => { if (isDesktop()) close(); });
 
-                // Click (mobile/desktop)
+                // Click (mobile + desktop)
                 btn.addEventListener("click", (e) => {
                     e.preventDefault();
                     const isOpen = parent.classList.contains("open");
@@ -333,7 +351,7 @@
                     isOpen ? close(true) : open();
                 });
 
-                // Keyboard + focus management
+                // Keyboard + focus mgmt
                 parent.addEventListener("keydown", (e) => {
                     if (e.key === "Escape") { close(true); btn.focus(); }
                 });
@@ -342,7 +360,7 @@
                 });
             });
 
-            // Click outside to close (fixed scope)
+            // ----- Click outside closes dropdowns -----
             document.addEventListener("click", (e) => {
                 parents.forEach(parent => {
                     if (!parent.contains(e.target)) {
@@ -352,7 +370,7 @@
                 });
             }, { passive: true });
 
-            // Smooth anchor scrolling (single listener)
+            // ----- Smooth anchor scrolling -----
             document.addEventListener("click", (e) => {
                 const a = e.target.closest('a[href^="#"]');
                 if (!a) return;
@@ -362,16 +380,17 @@
                 target.scrollIntoView({ behavior: "smooth", block: "start" });
             });
 
-            // Footer year
+            // ----- Footer year -----
             const yearEl = document.getElementById("year");
             if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-            // Focus outline helper
+            // ----- Focus outline helper -----
             document.body.addEventListener("keyup", (e) => {
                 if (e.key === "Tab") document.body.classList.add("user-is-tabbing");
             }, { passive: true });
         })();
     </script>
+
 
     <!-- ======================= PERFORMANCE & SEO PACK ======================= -->
     <script>
@@ -677,27 +696,27 @@
             // Bottom bar
             const nav = el('nav', 'tnv tnv-hide', { role: 'navigation', 'aria-label': 'Touch navigation' });
             nav.innerHTML = `
-        <a class="tnv__btn" href="/" aria-label="Home"><span class="tnv__icon">🏠</span><span class="tnv__label">Home</span></a>
-        <button class="tnv__btn" type="button" data-sheet="classes" aria-haspopup="dialog" aria-expanded="false">
-          <span class="tnv__icon">🎭</span><span class="tnv__label">Classes</span>
-        </button>
-        <a class="tnv__btn" href="/schedule" aria-label="Schedule"><span class="tnv__icon">🗓️</span><span class="tnv__label">Schedule</span></a>
-        <a class="tnv__btn" href="/pricing" aria-label="Pricing"><span class="tnv__icon">💲</span><span class="tnv__label">Pricing</span></a>
-        <a class="tnv__btn tnv__btn--primary" href="/registration" aria-label="Register"><span class="tnv__icon">📝</span><span class="tnv__label">Register</span></a>
-      `;
+            <a class="tnv__btn" href="/" aria-label="Home"><span class="tnv__icon">🏠</span><span class="tnv__label">Home</span></a>
+            <button class="tnv__btn" type="button" data-sheet="classes" aria-haspopup="dialog" aria-expanded="false">
+              <span class="tnv__icon">🎭</span><span class="tnv__label">Classes</span>
+            </button>
+            <a class="tnv__btn" href="/schedule" aria-label="Schedule"><span class="tnv__icon">🗓️</span><span class="tnv__label">Schedule</span></a>
+            <a class="tnv__btn" href="/pricing" aria-label="Pricing"><span class="tnv__icon">💲</span><span class="tnv__label">Pricing</span></a>
+            <a class="tnv__btn tnv__btn--primary" href="/registration" aria-label="Register"><span class="tnv__icon">📝</span><span class="tnv__label">Register</span></a>
+          `;
 
             // Sheet (dropdown panel)
             const sheet = el('div', 'tnv-sheet tnv-hide', { 'aria-hidden': 'true' });
             sheet.innerHTML = `
-        <div class="tnv-sheet__scrim" data-close></div>
-        <div class="tnv-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="tnv-sheet-title">
-          <div class="tnv-sheet__header">
-            <div class="tnv-sheet__title" id="tnv-sheet-title">Browse Classes</div>
-            <button class="tnv-sheet__close" type="button" data-close aria-label="Close">Close</button>
-          </div>
-          <nav><ul class="tnv-list" id="tnv-class-list"></ul></nav>
-        </div>
-      `;
+            <div class="tnv-sheet__scrim" data-close></div>
+            <div class="tnv-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="tnv-sheet-title">
+              <div class="tnv-sheet__header">
+                <div class="tnv-sheet__title" id="tnv-sheet-title">Browse Classes</div>
+                <button class="tnv-sheet__close" type="button" data-close aria-label="Close">Close</button>
+              </div>
+              <nav><ul class="tnv-list" id="tnv-class-list"></ul></nav>
+            </div>
+          `;
 
             const main = document.querySelector('main') || document.body;
             main.insertAdjacentElement('afterend', sheet);
@@ -758,5 +777,5 @@
             });
         })();
     </script>
-   </body>
+</body>
 </html>

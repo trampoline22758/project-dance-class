@@ -1045,3 +1045,126 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
 .topbar .has-dropdown.open .dropdown-toggle .chevron {
     transform: rotate(180deg);
 }
+/* Footer font color overide */
+.seo-footer,
+.seo-footer * {
+    color: #000 !important;
+    border-color: #000 !important; /* applies to dotted/solid underlines */
+}
+/*getting rid of all weird bullet points*/
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+li {
+    margin: 0;
+    padding: 0;
+}
+/*fixing the weird spacing on the hours table*/
+.hours th, .hours td {
+    padding: .4rem .6rem; /* cell padding */
+    border-bottom: 1px solid #3b3443; /* row divider */
+    text-align: left /* left align */
+}
+/*making the nav bar thinner*/
+.site-header {
+    height: var(--header-h);
+    padding: 0 var(--pad);
+}
+.site-header .container {
+    height: 100%;
+    padding: 0;
+    gap: 12px;
+}
+.header-section {
+    gap: 4px /* space between items */
+}
+.header-link {
+    font-size: .95rem;
+}
+.header-section strong {
+    font-size: 1rem /* responsive size */
+}
+.header-section span {
+    font-size: .85rem /* responsive size */
+}
+/*making website look better on mobile*/
+@media (max-width: 480px) {
+    .site-header {
+        height: auto;
+        padding: 12px var(--pad);
+        gap: 8px;
+    }
+    .site-header .container {
+        flex-direction: column;
+        gap: 8px;
+        padding: 0;
+    }
+    .header-section {
+        gap: 2px /* space between items */
+    }
+    .header-section strong {
+        font-size: .95rem /* responsive size */
+    }
+    .header-section span {
+        font-size: .8rem /* responsive size */
+    }
+}
+/* Mobile sidebar override */
+@media (max-width: 719px) {
+    .menu {
+        position: fixed;
+        top: 0;
+        left: -260px; /* hide off-screen */
+        width: 260px;
+        height: 100%;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 60px 20px 20px; /* space for toggle + links */
+        box-shadow: 2px 0 12px rgba(0,0,0,.2);
+        transition: left .3s ease;
+        z-index: 2000;
+        overflow-y: auto;
+    }
+
+        .menu.open {
+            left: 0; /* slide in */
+        }
+
+        /* Style menu links inside sidebar */
+        .menu a, .menu .dropdown-toggle {
+            display: block;
+            width: 100%;
+            padding: 12px 8px;
+            font-weight: 600;
+            color: #222;
+            background: transparent;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+            .menu a:hover,
+            .menu .dropdown-toggle:hover {
+                background: #f5f5f9;
+            }
+
+    /* optional overlay behind sidebar */
+    .menu-overlay {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .3s ease;
+        z-index: 1500;
+    }
+
+    .menu.open + .menu-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
