@@ -299,7 +299,6 @@
                 // give each panel an id and point the button at it
                 if (!panel.id) panel.id = `dd-${++ddCounter}`;
                 btn.setAttribute("aria-controls", panel.id);
-
                 let hideTimer;
 
                 const open = () => {
