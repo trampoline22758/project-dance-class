@@ -46,11 +46,11 @@
     <div class="topbar" role="navigation" aria-label="Primary">
         <div class="topbar-inner">
             <a class="brand-mini" href="/" aria-label="Miss Kim's Dance Class Home">Miss Kim’s</a>
-            <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">Menu</button>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">Menu</button>
             <ul id="primary-menu" class="menu" role="menubar">
                 <li role="none"><a role="menuitem" href="/">Home</a></li>
                 <li role="none" class="has-dropdown">
-                    <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Other Dance &amp; Movement</button>
+                    <button class="dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">Other Dance &amp; Movement <span class="chevron" aria-hidden="true">▾</span></button>
                     <ul class="dropdown" role="menu" aria-label="Other Dance & Movement">
                         <li role="none"><a role="menuitem" href="/pom-poms-classes">Pom-Poms</a></li>
                         <li role="none"><a role="menuitem" href="/contemporary-dance-classes">Contemporary Dance</a></li>
@@ -290,15 +290,15 @@
             const isDesktop = () => matchMedia("(min-width: 921px)").matches;
 
             // Dropdowns
+            let ddCounter = 0;
             const parents = $$(".has-dropdown");
             parents.forEach(parent => {
                 const btn = $(".dropdown-toggle", parent);
                 const panel = $(".dropdown", parent);
                 if (!btn || !panel) return;
                 // give each panel an id and point the button at it
-                const uid = (() => { let i = 0; return () => `dd-${++i}`; })();
-                const id = panel.id || (panel.id = uid());
-                btn.setAttribute('aria-controls', id);
+                if (!panel.id) panel.id = `dd-${++ddCounter}`;
+                btn.setAttribute("aria-controls", panel.id);
 
                 let hideTimer;
 
