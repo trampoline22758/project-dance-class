@@ -1015,6 +1015,119 @@
             passive('touchmove', 'body', () => { });
         })();
     </script>
+    <script>
+(() => {
+  const isTouch =
+    window.matchMedia('(pointer: coarse)').matches ||
+    'ontouchstart' in window ||
+    navigator.maxTouchPoints > 0;
+
+  if (!isTouch) return; // desktop/laptop: skip
+
+  document.documentElement.classList.add('is-touch');
+  document.body.classList.add('tnv-pad-bottom');
+
+  const el = (tag, cls, attrs={}) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    for (const [k,v] of Object.entries(attrs)) n.setAttribute(k, v);
+    return n;
+  };
+
+  // Build bottom bar
+  const nav = el('nav', 'tnv tnv-hide', { role: 'navigation', 'aria-label': 'Touch navigation' });
+  nav.innerHTML = `
+    <a class="tnv__btn" href="/" aria-label="Home"><span class="tnv__icon">🏠</span><span class="tnv__label">Home</span></a>
+    <button class="tnv__btn" type="button" data-sheet="classes" aria-haspopup="dialog" aria-expanded="false">
+      <span class="tnv__icon">🎭</span><span class="tnv__label">Classes</span>
+    </button>
+    <a class="tnv__btn" href="/schedule" aria-label="Schedule"><span class="tnv__icon">🗓️</span><span class="tnv__label">Schedule</span></a>
+    <a class="tnv__btn" href="/pricing" aria-label="Pricing"><span class="tnv__icon">💲</span><span class="tnv__label">Pricing</span></a>
+    <a class="tnv__btn tnv__btn--primary" href="/registration" aria-label="Register"><span class="tnv__icon">📝</span><span class="tnv__label">Register</span></a>
+  `;
+
+  // Build sheet (dropdown panel)
+  const sheet = el('div', 'tnv-sheet tnv-hide', { 'aria-hidden': 'true' });
+  sheet.innerHTML = `
+    <div class="tnv-sheet__scrim" data-close></div>
+    <div class="tnv-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="tnv-sheet-title">
+      <div class="tnv-sheet__header">
+        <div class="tnv-sheet__title" id="tnv-sheet-title">Browse Classes</div>
+        <button class="tnv-sheet__close" type="button" data-close aria-label="Close">Close</button>
+      </div>
+      <nav><ul class="tnv-list" id="tnv-class-list"></ul></nav>
+    </div>
+  `;
+
+  // Mount after <main> (fallback to body)
+  const main = document.querySelector('main') || document.body;
+  main.insertAdjacentElement('afterend', sheet);
+  main.insertAdjacentElement('afterend', nav);
+
+  // Clone your existing dropdown links
+  const srcLinks = document.querySelectorAll('.has-dropdown .dropdown a[href]');
+  const list = sheet.querySelector('#tnv-class-list');
+
+  if (srcLinks.length) {
+    srcLinks.forEach(a => {
+      const li = document.createElement('li');
+      const c = document.createElement('a');
+      c.href = a.getAttribute('href');
+      c.textContent = a.textContent.trim();
+      li.appendChild(c); list.appendChild(li);
+    });
+  } else {
+    // Fallback if markup changes
+    [
+      ['/pom-poms-classes','Pom-Poms'], ['/contemporary-dance-classes','Contemporary'],
+      ['/hip-hop-dance-classes','Hip-Hop'], ['/musical-theater-classes','Musical Theater'],
+      ['/lyrical-dance-classes','Lyrical'], ['/tumbling-classes','Tumbling'],
+      ['/acrobatics-classes','Acrobatics'], ['/aerial-classes','Aerial'],
+      ['/competition-teams','Competition'], ['/ballet-dance-classes','Ballet'],
+      ['/jazz-dance-classes','Jazz'], ['/tap-dance-classes','Tap'],
+    ].forEach(([href, label]) => {
+      const li = document.createElement('li'); const c = document.createElement('a');
+      c.href = href; c.textContent = label; li.appendChild(c); list.appendChild(li);
+    });
+  }
+
+  // Open/close sheet
+  const classesBtn = nav.querySelector('[data-sheet="classes"]');
+  const openSheet = () => { sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); classesBtn.setAttribute('aria-expanded','true'); };
+  const closeSheet = () => { sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); classesBtn.setAttribute('aria-expanded','false'); };
+  sheet.addEventListener('click', (e) => { if (e.target.hasAttribute('data-close')) closeSheet(); });
+  classesBtn.addEventListener('click', () => sheet.classList.contains('open') ? closeSheet() : openSheet());
+  sheet.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
+
+  // Switch to sidebar for touch landscape >= 900px
+  const sideQuery = window.matchMedia('(orientation: landscape) and (min-width: 900px)');
+  const applyMode = () => {
+    const isSide = sideQuery.matches;
+    nav.classList.toggle('is-side', isSide);
+    document.documentElement.classList.toggle('touch-side', isSide);
+  };
+  applyMode();
+  sideQuery.addEventListener('change', applyMode);
+  window.addEventListener('orientationchange', applyMode);
+
+  // Close sheet if your top menu opens (avoid UI overlap)
+  const topMenu = document.getElementById('primary-menu');
+  if (topMenu) {
+    const obs = new MutationObserver(() => { if (sheet.classList.contains('open')) closeSheet(); });
+    obs.observe(topMenu, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  // Reveal
+  nav.classList.remove('tnv-hide');
+  sheet.classList.remove('tnv-hide');
+
+  // Tiny bounce on tap
+  nav.querySelectorAll('.tnv__btn').forEach(btn => {
+    btn.addEventListener('pointerdown', () => btn.animate([{transform:'scale(1)'},{transform:'scale(.97)'}],{duration:90,fill:'forwards'}), {passive:true});
+    btn.addEventListener('pointerup', () => btn.animate([{transform:'scale(.97)'},{transform:'scale(1)'}],{duration:90,fill:'forwards'}), {passive:true});
+  });
+})();
+    </script>
 
 </body>
 </html>
