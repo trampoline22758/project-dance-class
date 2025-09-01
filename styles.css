@@ -169,7 +169,6 @@ nav.menu ul {
 nav.menu li {
     padding: 10px 0;
 }
-
 .menu { /* primary menu list */
     list-style: none; /* remove bullets */
     margin: 0; /* reset margin */
@@ -225,6 +224,7 @@ nav.menu li {
     .hamburger, nav.menu { display: none !important; }
 }
 /* ===================== Header ===================== */
+
 
 .header-outer { /* gradient header wrapper */
     background: linear-gradient(120deg,var(--header-bg-start),var(--header-bg-end)); /* header gradient */
