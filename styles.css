@@ -366,7 +366,7 @@ nav.menu { /* mobile slide-out menu */
 .hero-background { /* hero background image layer */
     position: absolute; /* fill container */
     inset: 0; /* top/right/bottom/left = 0 */
-    background: url('/photos/contemporary1.jpg') center/cover no-repeat; /* image positioning */
+    background: url('/photos/contemporary1.JPG') center/cover no-repeat; /* image positioning */
 }
 
 .hero-content { /* content holder above bg */
