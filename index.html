@@ -42,16 +42,54 @@
     <!-- Skip Link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Sticky Top Bar / Nav -->
+    <!-- Hamburger & Sidebar for touch devices -->
+    <button class="hamburger" type="button" aria-expanded="false" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <nav id="mobile-menu" class="sidebar-menu" role="navigation" aria-label="Mobile Menu">
+      <ul>
+        <li><a href="/">Home</a></li>
+
+        <li class="has-dropdown">
+          <button class="dropdown-toggle" type="button" aria-expanded="false">
+            Other Dance &amp; Movement <span class="chevron">▾</span>
+          </button>
+          <ul class="dropdown">
+            <li><a href="/pom-poms-classes">Pom-Poms</a></li>
+            <li><a href="/contemporary-dance-classes">Contemporary Dance</a></li>
+            <li><a href="/hip-hop-dance-classes">Hip-Hop Dance</a></li>
+            <li><a href="/musical-theater-classes">Musical Theater</a></li>
+            <li><a href="/lyrical-dance-classes">Lyrical Dance</a></li>
+            <li><a href="/tumbling-classes">Tumbling</a></li>
+            <li><a href="/acrobatics-classes">Acrobatics</a></li>
+            <li><a href="/aerial-classes">Aerial</a></li>
+            <li><a href="/competition-teams">Competition</a></li>
+            <li><a href="/ballet-dance-classes">Ballet</a></li>
+            <li><a href="/jazz-dance-classes">Jazz</a></li>
+            <li><a href="/tap-dance-classes">Tap</a></li>
+          </ul>
+        </li>
+
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="/summer">Summer</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/schedule">Schedule</a></li>
+        <li><a class="btn btn--primary" href="/registration">Registration Form</a></li>
+        <li><a class="btn btn--ghost btn--sm" href="tel:+13145420608">Call (314) 542-0608</a></li>
+      </ul>
+    </nav>
+    <div class="menu-overlay"></div>
+
+    <!-- Sticky Top Bar / Nav (desktop) -->
     <div class="topbar" role="navigation" aria-label="Primary">
         <div class="topbar-inner">
             <a class="brand-mini" href="/" aria-label="Miss Kim's Dance Class Home">Miss Kim’s</a>
-            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">Menu</button>
+
             <ul id="primary-menu" class="menu" role="menubar">
                 <li role="none"><a role="menuitem" href="/">Home</a></li>
                 <li role="none" class="has-dropdown">
                     <button class="dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">Other Dance &amp; Movement <span class="chevron" aria-hidden="true">▾</span></button>
-                    <ul class="dropdown" role="menu" aria-label="Other Dance & Movement">
+                    <ul class="dropdown" role="menu" aria-label="Other Dance &amp; Movement">
                         <li role="none"><a role="menuitem" href="/pom-poms-classes">Pom-Poms</a></li>
                         <li role="none"><a role="menuitem" href="/contemporary-dance-classes">Contemporary Dance</a></li>
                         <li role="none"><a role="menuitem" href="/hip-hop-dance-classes">Hip-Hop Dance</a></li>
@@ -77,7 +115,6 @@
                     <a role="menuitem" class="btn btn--ghost btn--sm" href="tel:+13145420608">Call (314) 542-0608</a>
                 </li>
             </ul>
-            <div class="menu-overlay"></div>
         </div>
     </div>
 
@@ -278,39 +315,11 @@
             const $ = (sel, root = document) => root.querySelector(sel);
             const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-            const navToggle = $(".nav-toggle");
-            const menu = $("#primary-menu");
-
-            // ----- Mobile Sidebar Overlay -----
-            let overlay;
-            if (menu) {
-                overlay = document.createElement("div");
-                overlay.className = "menu-overlay";
-                document.body.appendChild(overlay);
-            }
-
-            // ----- Mobile menu toggle -----
-            if (navToggle && menu) {
-                navToggle.addEventListener("click", () => {
-                    const open = menu.classList.toggle("open");
-                    navToggle.setAttribute("aria-expanded", String(open));
-                    if (overlay) overlay.classList.toggle("active", open);
-                }, { passive: true });
-            }
-
-            if (overlay) {
-                overlay.addEventListener("click", () => {
-                    menu.classList.remove("open");
-                    navToggle?.setAttribute("aria-expanded", "false");
-                    overlay.classList.remove("active");
-                });
-            }
-
             const isDesktop = () => matchMedia("(min-width: 720px)").matches;
 
-            // ----- Dropdowns -----
+            // ----- Dropdowns (desktop menu only) -----
             let ddCounter = 0;
-            const parents = $$(".has-dropdown");
+            const parents = $$(".menu > .has-dropdown");
             parents.forEach(parent => {
                 const btn = $(".dropdown-toggle", parent);
                 const panel = $(".dropdown", parent);
@@ -389,6 +398,59 @@
                 if (e.key === "Tab") document.body.classList.add("user-is-tabbing");
             }, { passive: true });
         })();
+    </script>
+
+    <script>
+    (() => {
+      const hamburger = document.querySelector('.hamburger');
+      const sidebar   = document.querySelector('.sidebar-menu');
+      const overlay   = document.querySelector('.menu-overlay');
+
+      // Toggle sidebar
+      hamburger.addEventListener('click', () => {
+        const open = sidebar.classList.toggle('open');
+        overlay.classList.toggle('active', open);
+        hamburger.setAttribute('aria-expanded', open);
+      });
+
+      // Close when overlay clicked
+      overlay.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+
+      // Accordion dropdowns with slide animation
+      const dropdownToggles = sidebar.querySelectorAll('.dropdown-toggle');
+      dropdownToggles.forEach(btn => {
+        const parent = btn.closest('.has-dropdown');
+        const submenu = parent.querySelector('.dropdown');
+
+        // start collapsed
+        submenu.style.maxHeight = '0';
+
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          const isOpen = parent.classList.contains('open');
+
+          // close all dropdowns
+          sidebar.querySelectorAll('.has-dropdown').forEach(p => {
+            p.classList.remove('open');
+            const sm = p.querySelector('.dropdown');
+            if (sm) sm.style.maxHeight = '0';
+            const toggle = p.querySelector('.dropdown-toggle');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          });
+
+          // open current one
+          if (!isOpen) {
+            parent.classList.add('open');
+            submenu.style.maxHeight = submenu.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
     </script>
 
 
@@ -673,109 +735,5 @@
         webVitals.getLCP(console.log);
     </script>
 
-    <!-- ======================= TOUCH-ONLY NAV (BOTTOM / SIDEBAR) ======================= -->
-    <script>
-        (() => {
-            const isTouch =
-                matchMedia('(pointer: coarse)').matches ||
-                'ontouchstart' in window ||
-                navigator.maxTouchPoints > 0;
-
-            if (!isTouch) return;
-
-            document.documentElement.classList.add('is-touch');
-            document.body.classList.add('tnv-pad-bottom');
-
-            const el = (tag, cls, attrs = {}) => {
-                const n = document.createElement(tag);
-                if (cls) n.className = cls;
-                for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
-                return n;
-            };
-
-            // Bottom bar
-            const nav = el('nav', 'tnv tnv-hide', { role: 'navigation', 'aria-label': 'Touch navigation' });
-            nav.innerHTML = `
-            <a class="tnv__btn" href="/" aria-label="Home"><span class="tnv__icon">🏠</span><span class="tnv__label">Home</span></a>
-            <button class="tnv__btn" type="button" data-sheet="classes" aria-haspopup="dialog" aria-expanded="false">
-              <span class="tnv__icon">🎭</span><span class="tnv__label">Classes</span>
-            </button>
-            <a class="tnv__btn" href="/schedule" aria-label="Schedule"><span class="tnv__icon">🗓️</span><span class="tnv__label">Schedule</span></a>
-            <a class="tnv__btn" href="/pricing" aria-label="Pricing"><span class="tnv__icon">💲</span><span class="tnv__label">Pricing</span></a>
-            <a class="tnv__btn tnv__btn--primary" href="/registration" aria-label="Register"><span class="tnv__icon">📝</span><span class="tnv__label">Register</span></a>
-          `;
-
-            // Sheet (dropdown panel)
-            const sheet = el('div', 'tnv-sheet tnv-hide', { 'aria-hidden': 'true' });
-            sheet.innerHTML = `
-            <div class="tnv-sheet__scrim" data-close></div>
-            <div class="tnv-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="tnv-sheet-title">
-              <div class="tnv-sheet__header">
-                <div class="tnv-sheet__title" id="tnv-sheet-title">Browse Classes</div>
-                <button class="tnv-sheet__close" type="button" data-close aria-label="Close">Close</button>
-              </div>
-              <nav><ul class="tnv-list" id="tnv-class-list"></ul></nav>
-            </div>
-          `;
-
-            const main = document.querySelector('main') || document.body;
-            main.insertAdjacentElement('afterend', sheet);
-            main.insertAdjacentElement('afterend', nav);
-
-            // Pull links from existing dropdown
-            const srcLinks = document.querySelectorAll('.has-dropdown .dropdown a[href]');
-            const list = sheet.querySelector('#tnv-class-list');
-            const addItem = (href, label) => {
-                const li = document.createElement('li'); const a = document.createElement('a');
-                a.href = href; a.textContent = label; li.appendChild(a); list.appendChild(li);
-            };
-
-            if (srcLinks.length) {
-                srcLinks.forEach(a => addItem(a.getAttribute('href'), a.textContent.trim()));
-            } else {
-                [
-                    ['/pom-poms-classes', 'Pom-Poms'], ['/contemporary-dance-classes', 'Contemporary'],
-                    ['/hip-hop-dance-classes', 'Hip-Hop'], ['/musical-theater-classes', 'Musical Theater'],
-                    ['/lyrical-dance-classes', 'Lyrical'], ['/tumbling-classes', 'Tumbling'],
-                    ['/acrobatics-classes', 'Acrobatics'], ['/aerial-classes', 'Aerial'],
-                    ['/competition-teams', 'Competition'], ['/ballet-dance-classes', 'Ballet'],
-                    ['/jazz-dance-classes', 'Jazz'], ['/tap-dance-classes', 'Tap'],
-                ].forEach(([h, l]) => addItem(h, l));
-            }
-
-            // Open/close sheet
-            const classesBtn = nav.querySelector('[data-sheet="classes"]');
-            const openSheet = () => { sheet.classList.add('open'); sheet.setAttribute('aria-hidden', 'false'); classesBtn.setAttribute('aria-expanded', 'true'); };
-            const closeSheet = () => { sheet.classList.remove('open'); sheet.setAttribute('aria-hidden', 'true'); classesBtn.setAttribute('aria-expanded', 'false'); };
-            sheet.addEventListener('click', (e) => { if (e.target.hasAttribute('data-close')) closeSheet(); });
-            classesBtn.addEventListener('click', () => sheet.classList.contains('open') ? closeSheet() : openSheet());
-            sheet.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
-
-            // Switch to sidebar in landscape ≥900px
-            const sideQuery = matchMedia('(orientation: landscape) and (min-width: 900px)');
-            const applyMode = () => {
-                const isSide = sideQuery.matches;
-                nav.classList.toggle('is-side', isSide);
-                document.documentElement.classList.toggle('touch-side', isSide);
-            };
-            applyMode();
-            sideQuery.addEventListener('change', applyMode);
-            window.addEventListener('orientationchange', applyMode);
-
-            // Avoid UI overlap with desktop menu
-            const topMenu = document.getElementById('primary-menu');
-            if (topMenu) {
-                const obs = new MutationObserver(() => { if (sheet.classList.contains('open')) closeSheet(); });
-                obs.observe(topMenu, { attributes: true, attributeFilter: ['class'] });
-            }
-
-            // Reveal + tiny bounce
-            nav.classList.remove('tnv-hide'); sheet.classList.remove('tnv-hide');
-            nav.querySelectorAll('.tnv__btn').forEach(btn => {
-                btn.addEventListener('pointerdown', () => btn.animate([{ transform: 'scale(1)' }, { transform: 'scale(.97)' }], { duration: 90, fill: 'forwards' }), { passive: true });
-                btn.addEventListener('pointerup', () => btn.animate([{ transform: 'scale(.97)' }, { transform: 'scale(1)' }], { duration: 90, fill: 'forwards' }), { passive: true });
-            });
-        })();
-    </script>
 </body>
 </html>
