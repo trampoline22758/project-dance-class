@@ -42,43 +42,22 @@
     <!-- Skip Link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Hamburger & Sidebar for touch devices -->
-    <button class="hamburger" type="button" aria-expanded="false" aria-label="Menu">
-        <span></span><span></span><span></span>
+    <!-- Mobile Menu Button -->
+    <button class="hamburger" aria-label="Open menu" aria-controls="main-menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
-    <nav id="mobile-menu" class="sidebar-menu" role="navigation" aria-label="Mobile Menu">
+
+    <!-- Mobile Navigation Menu -->
+    <nav id="main-menu" class="menu" role="navigation" aria-label="Volunteering Dates">
+      <h2>Volunteering Dates</h2>
       <ul>
-        <li><a href="/">Home</a></li>
-
-        <li class="has-dropdown">
-          <button class="dropdown-toggle" type="button" aria-expanded="false">
-            Other Dance &amp; Movement <span class="chevron">▾</span>
-          </button>
-          <ul class="dropdown">
-            <li><a href="/pom-poms-classes">Pom-Poms</a></li>
-            <li><a href="/contemporary-dance-classes">Contemporary Dance</a></li>
-            <li><a href="/hip-hop-dance-classes">Hip-Hop Dance</a></li>
-            <li><a href="/musical-theater-classes">Musical Theater</a></li>
-            <li><a href="/lyrical-dance-classes">Lyrical Dance</a></li>
-            <li><a href="/tumbling-classes">Tumbling</a></li>
-            <li><a href="/acrobatics-classes">Acrobatics</a></li>
-            <li><a href="/aerial-classes">Aerial</a></li>
-            <li><a href="/competition-teams">Competition</a></li>
-            <li><a href="/ballet-dance-classes">Ballet</a></li>
-            <li><a href="/jazz-dance-classes">Jazz</a></li>
-            <li><a href="/tap-dance-classes">Tap</a></li>
-          </ul>
-        </li>
-
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="/summer">Summer</a></li>
-        <li><a href="/pricing">Pricing</a></li>
-        <li><a href="/schedule">Schedule</a></li>
-        <li><a class="btn btn--primary" href="/registration">Registration Form</a></li>
-        <li><a class="btn btn--ghost btn--sm" href="tel:+13145420608">Call (314) 542-0608</a></li>
+        <li><time datetime="2024-10-15">October 15, 2024</time> — Tree Planting</li>
+        <li><time datetime="2024-11-20">November 20, 2024</time> — Beach Cleanup</li>
+        <li><time datetime="2024-12-05">December 5, 2024</time> — Food Drive</li>
       </ul>
     </nav>
-    <div class="menu-overlay"></div>
 
     <!-- Sticky Top Bar / Nav (desktop) -->
     <div class="topbar" role="navigation" aria-label="Primary">
@@ -401,57 +380,47 @@
     </script>
 
     <script>
-    (() => {
-      const hamburger = document.querySelector('.hamburger');
-      const sidebar   = document.querySelector('.sidebar-menu');
-      const overlay   = document.querySelector('.menu-overlay');
+  function initMobileMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const menu = document.querySelector('.menu');
 
-      // Toggle sidebar
-      hamburger.addEventListener('click', () => {
-        const open = sidebar.classList.toggle('open');
-        overlay.classList.toggle('active', open);
-        hamburger.setAttribute('aria-expanded', open);
-      });
+    // Detect mobile (screen width OR user agent)
+    const isMobile =
+      window.innerWidth <= 768 ||
+      /Mobi|Android|iPhone|iPod/i.test(navigator.userAgent);
 
-      // Close when overlay clicked
-      overlay.addEventListener('click', () => {
-        sidebar.classList.remove('open');
-        overlay.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', false);
-      });
+    if (!hamburger || !menu) return;
 
-      // Accordion dropdowns with slide animation
-      const dropdownToggles = sidebar.querySelectorAll('.dropdown-toggle');
-      dropdownToggles.forEach(btn => {
-        const parent = btn.closest('.has-dropdown');
-        const submenu = parent.querySelector('.dropdown');
+    if (isMobile) {
+      // Make sure elements are visible
+      hamburger.style.display = "inline-block";
+      menu.style.display = "none";
 
-        // start collapsed
-        submenu.style.maxHeight = '0';
+      // Add toggle behavior once
+      if (!hamburger.dataset.bound) {
+        hamburger.addEventListener("click", () => {
+          const expanded = hamburger.getAttribute("aria-expanded") === "true";
+          hamburger.setAttribute("aria-expanded", String(!expanded));
 
-        btn.addEventListener('click', e => {
-          e.preventDefault();
-          const isOpen = parent.classList.contains('open');
-
-          // close all dropdowns
-          sidebar.querySelectorAll('.has-dropdown').forEach(p => {
-            p.classList.remove('open');
-            const sm = p.querySelector('.dropdown');
-            if (sm) sm.style.maxHeight = '0';
-            const toggle = p.querySelector('.dropdown-toggle');
-            if (toggle) toggle.setAttribute('aria-expanded', 'false');
-          });
-
-          // open current one
-          if (!isOpen) {
-            parent.classList.add('open');
-            submenu.style.maxHeight = submenu.scrollHeight + 'px';
-            btn.setAttribute('aria-expanded', 'true');
+          if (menu.style.display === "none") {
+            menu.style.display = "block";
+          } else {
+            menu.style.display = "none";
           }
         });
-      });
-    })();
-    </script>
+        hamburger.dataset.bound = "true";
+      }
+    } else {
+      // Hide mobile nav completely on desktop
+      hamburger.style.display = "none";
+      menu.style.display = "none";
+    }
+  }
+
+  // Run on load + resize
+  initMobileMenu();
+  window.addEventListener("resize", initMobileMenu);
+</script>
 
 
     <!-- ======================= PERFORMANCE & SEO PACK ======================= -->
