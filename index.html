@@ -381,14 +381,14 @@
                 });
             }, { passive: true });
 
-            // ----- Smooth anchor scrolling -----
+            // ----- Anchor scrolling -----
             document.addEventListener("click", (e) => {
                 const a = e.target.closest('a[href^="#"]');
                 if (!a) return;
                 const target = document.querySelector(a.getAttribute("href"));
                 if (!target) return;
                 e.preventDefault();
-                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                target.scrollIntoView({ block: "start" });
             });
 
             // ----- Footer year -----
@@ -527,7 +527,7 @@
                 });
                 document.addEventListener("DOMContentLoaded", () => document.body.appendChild(btn), { once: true });
                 window.addEventListener("scroll", () => { btn.style.display = scrollY > 300 ? "block" : "none"; }, { passive: true });
-                btn.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+                btn.addEventListener("click", () => scrollTo({ top: 0 }));
             })();
 
             // 6) Add noindex on search result pages
@@ -546,37 +546,7 @@
                 });
             }, { once: true });
 
-            // 8) Animate on scroll + hero entrance
-            const animateOnScroll = (els, opts = {}) => {
-                const io = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const el = entry.target;
-                            el.style.transition = "opacity .6s ease, transform .6s ease";
-                            el.style.opacity = "1"; el.style.transform = "translateY(0)";
-                            io.unobserve(el);
-                        }
-                    });
-                }, { threshold: 0.2, ...opts });
-                els.forEach(el => { el.style.opacity = "0"; el.style.transform = "translateY(20px)"; io.observe(el); });
-            };
-            document.addEventListener("DOMContentLoaded", () => {
-                animateOnScroll(document.querySelectorAll("section, .dance-class, .instructor-card, img"));
-            }, { once: true });
-
-            window.addEventListener("load", () => {
-                document.querySelectorAll(".hero-content h1, .hero-content p, .hero-call").forEach((el, i) => {
-                    el.style.opacity = "0"; el.style.transform = "translateY(40px)";
-                    setTimeout(() => {
-                        el.animate([
-                            { opacity: 0, transform: "translateY(40px)" },
-                            { opacity: 1, transform: "translateY(0)" }
-                        ], { duration: 700, easing: "ease-out", fill: "forwards" });
-                    }, i * 250);
-                });
-            });
-
-            // 9) Content-visibility for heavy sections
+            // 8) Content-visibility for heavy sections
             ['.dance-classes', '.instructors', '.reviews', '.about-teaser', '.seo-footer'].forEach(sel => {
                 document.querySelectorAll(sel).forEach(el => {
                     el.style.containIntrinsicSize = '1px 1200px';
@@ -584,7 +554,7 @@
                 });
             });
 
-            // 10) Structured data: WebPage(dateModified) + Breadcrumbs + Hours
+            // 9) Structured data: WebPage(dateModified) + Breadcrumbs + Hours
             (() => {
                 const wp = document.createElement('script');
                 wp.type = 'application/ld+json';
@@ -638,12 +608,12 @@
                 }
             })();
 
-            // 11) Service worker
+            // 10) Service worker
             if ("serviceWorker" in navigator) {
                 navigator.serviceWorker.register("/sw.js").catch(console.error);
             }
 
-            // 12) Aggressive image loading / preloading (optional)
+            // 11) Aggressive image loading / preloading (optional)
             const head = document.head;
             const preloadSet = new Set();
             const preconnectSet = new Set();
