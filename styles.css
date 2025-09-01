@@ -131,14 +131,14 @@ p { /* paragraph styles */
     cursor: pointer;
 }
 
-.hamburger span {
-    display: block;
-    width: 100%;
-    height: 4px;
-    margin: 4px 0;
-    background: #000;
-    border-radius: 2px;
-}
+    .hamburger span {
+        display: block;
+        width: 100%;
+        height: 4px;
+        margin: 4px 0;
+        background: #000;
+        border-radius: 2px;
+    }
 
 nav.menu { /* mobile slide-out menu */
     position: fixed;
@@ -154,19 +154,20 @@ nav.menu { /* mobile slide-out menu */
     display: none; /* hidden until toggled */
 }
 
-nav.menu h2 {
-    margin-top: 0;
-}
+    nav.menu h2 {
+        margin-top: 0;
+    }
 
-nav.menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0 0;
-}
+    nav.menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0 0;
+    }
 
-nav.menu li {
-    padding: 10px 0;
-}
+    nav.menu li {
+        padding: 10px 0;
+    }
+
 .menu { /* primary menu list */
     list-style: none; /* remove bullets */
     margin: 0; /* reset margin */
@@ -215,11 +216,15 @@ nav.menu li {
 /* Mobile nav */
 
 @media (pointer: coarse) {
-    .topbar { display: none; }
+    .topbar {
+        display: none;
+    }
 }
 
 @media (pointer: fine) {
-    .hamburger, nav.menu { display: none !important; }
+    .hamburger, nav.menu {
+        display: none !important;
+    }
 }
 /* ===================== Header ===================== */
 
@@ -859,91 +864,324 @@ nav.menu li {
     background: url('/images/tap1.JPG') center/cover no-repeat; /* tap image */
 }
 /* ========= Mobile polish pack (append at end) ========= */
-:root{
-  --brand:#5f35b0; --ink:#111; --pad:16px; --radius:16px;
-  --header-h:56px;
+:root {
+    --brand: #5f35b0;
+    --ink: #111;
+    --pad: 16px;
+    --radius: 16px;
+    --header-h: 56px;
 }
-html{scroll-padding-top:var(--header-h); -webkit-text-size-adjust:100%;}
-body{overflow-x:hidden;background:#faf9ff;}
 
-.container{width:min(980px,100%);padding-inline:var(--pad);margin-inline:auto;}
-img{max-width:100%;height:auto;border-radius:12px;display:block}
+html {
+    scroll-padding-top: var(--header-h);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    background: #faf9ff;
+}
+
+.container {
+    width: min(980px,100%);
+    padding-inline: var(--pad);
+    margin-inline: auto;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block
+}
 
 /* Topbar */
-.topbar{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.9);
-  border-bottom:1px solid #eee;backdrop-filter:saturate(180%) blur(8px);}
-.topbar-inner{padding:12px var(--pad);gap:10px}
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,.9);
+    border-bottom: 1px solid #eee;
+    backdrop-filter: saturate(180%) blur(8px);
+}
+
+.topbar-inner {
+    padding: 12px var(--pad);
+    gap: 10px
+}
 
 
 /* Hero */
-.hero{border-radius:0 0 24px 24px;overflow:hidden}
-.hero-background{background:
-  linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.55)),
-  url("/photos/herobanner.JPG") center/cover no-repeat !important;}
-.hero .hero-content{padding:clamp(40px,12vw,88px) var(--pad) 24px;text-align:center;color:#fff}
-#hero-title{font-size:clamp(26px,7vw,42px);line-height:1.15;text-wrap:balance;text-shadow:0 2px 12px rgba(0,0,0,.35)}
-.hero .hero-call{width:100%;max-width:520px;margin:8px auto 0;padding:12px 14px;border:0;border-radius:12px;background:rgba(255,255,255,.12);color:#fff}
+.hero {
+    border-radius: 0 0 24px 24px;
+    overflow: hidden
+}
+
+.hero-background {
+    background: linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.55)), url("/photos/herobanner.JPG") center/cover no-repeat !important;
+}
+
+.hero .hero-content {
+    padding: clamp(40px,12vw,88px) var(--pad) 24px;
+    text-align: center;
+    color: #fff
+}
+
+#hero-title {
+    font-size: clamp(26px,7vw,42px);
+    line-height: 1.15;
+    text-wrap: balance;
+    text-shadow: 0 2px 12px rgba(0,0,0,.35)
+}
+
+.hero .hero-call {
+    width: 100%;
+    max-width: 520px;
+    margin: 8px auto 0;
+    padding: 12px 14px;
+    border: 0;
+    border-radius: 12px;
+    background: rgba(255,255,255,.12);
+    color: #fff
+}
 
 /* Classes */
-.dance-classes{padding:26px 0}
-.dance-class{
-  display:grid;grid-template-columns:1fr;gap:14px;margin:0 0 18px;
-  padding:14px;border-radius:var(--radius);background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.08)
+.dance-classes {
+    padding: 26px 0
 }
-.dance-image{aspect-ratio:16/10;overflow:hidden;border-radius:12px}
-.dance-image img{width:100%;height:100%;object-fit:cover}
-.dance-info h3{font-size:clamp(18px,5vw,22px);text-wrap:balance}
-.dance-info p{margin:0 0 10px;color:#333}
-.btn,.btn--primary,.btn--ghost,.btn-primary,.hero-call{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:44px;padding:10px 14px;border-radius:999px;border:1px solid #ddd;background:#fff;font-weight:700;
+
+.dance-class {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 0 0 18px;
+    padding: 14px;
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08)
 }
-.btn--primary,.btn-primary{background:var(--brand);border-color:var(--brand);color:#fff}
-.btn:hover,.btn--primary:hover,.btn--ghost:hover,.btn-primary:hover,.hero-call:hover{
-  transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,0,0,.08)
+
+.dance-image {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    border-radius: 12px
 }
+
+    .dance-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover
+    }
+
+.dance-info h3 {
+    font-size: clamp(18px,5vw,22px);
+    text-wrap: balance
+}
+
+.dance-info p {
+    margin: 0 0 10px;
+    color: #333
+}
+
+.btn, .btn--primary, .btn--ghost, .btn-primary, .hero-call {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-weight: 700;
+}
+
+.btn--primary, .btn-primary {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: #fff
+}
+
+    .btn:hover, .btn--primary:hover, .btn--ghost:hover, .btn-primary:hover, .hero-call:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(0,0,0,.08)
+    }
 
 /* Instructors */
-.instructors{padding:24px 0}
-.instructor-grid{list-style:none;margin:0;padding:0;display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
-@media (max-width:380px){.instructor-grid{grid-template-columns:1fr}}
-.instructor-card{background:#fff;border:1px solid #eee;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.07);padding:12px;text-align:center}
-.instructor-card img{width:100%;aspect-ratio:7/8;object-fit:cover;border-radius:12px}
+.instructors {
+    padding: 24px 0
+}
+
+.instructor-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(2,minmax(0,1fr))
+}
+
+@media (max-width:380px) {
+    .instructor-grid {
+        grid-template-columns: 1fr
+    }
+}
+
+.instructor-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.07);
+    padding: 12px;
+    text-align: center
+}
+
+    .instructor-card img {
+        width: 100%;
+        aspect-ratio: 7/8;
+        object-fit: cover;
+        border-radius: 12px
+    }
 
 /* Reviews */
-.reviews{padding:28px 0}
-.review-list{display:grid;gap:14px;grid-template-columns:1fr}
-.review{margin:0;background:#fff;border:1px solid #eee;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.07);padding:14px}
-.review blockquote{margin:0 0 8px;font-size:1rem}
-.stars{color:#ffb400}
-.cta-inline{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.reviews {
+    padding: 28px 0
+}
+
+.review-list {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 1fr
+}
+
+.review {
+    margin: 0;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.07);
+    padding: 14px
+}
+
+    .review blockquote {
+        margin: 0 0 8px;
+        font-size: 1rem
+    }
+
+.stars {
+    color: #ffb400
+}
+
+.cta-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px
+}
 
 /* About */
-.about-teaser{padding:28px 0}
-.about-wrap{background:#fff;border:1px solid #eee;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.07);padding:16px}
+.about-teaser {
+    padding: 28px 0
+}
+
+.about-wrap {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.07);
+    padding: 16px
+}
 
 /* Footer */
-.seo-footer{margin-top:28px;background:#fff;border-top:1px solid #eee}
-.footer-grid{display:grid;grid-template-columns:1fr;gap:16px;padding:18px 0}
-.bbb-badge{display:block;margin:10px auto 0;width:min(320px,90%)}
-.footer-meta{padding:16px 0 24px;color:#555;text-align:center;font-size:.95rem}
+.seo-footer {
+    margin-top: 28px;
+    background: #fff;
+    border-top: 1px solid #eee
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px 0
+}
+
+.bbb-badge {
+    display: block;
+    margin: 10px auto 0;
+    width: min(320px,90%)
+}
+
+.footer-meta {
+    padding: 16px 0 24px;
+    color: #555;
+    text-align: center;
+    font-size: .95rem
+}
 
 /* Desktop enhancements (keeps your existing layout) */
-@media (min-width:1025px){
-  .menu{position:static;display:flex;flex-direction:row;align-items:center;gap:10px;padding:0;background:transparent;border:0;box-shadow:none;max-height:none;border-radius:0;overflow:visible}
-  .menu a,.menu .dropdown-toggle{background:transparent;border:0;padding:10px 12px}
-  .menu a:hover,.menu .dropdown-toggle:hover{background:#f5f3ff}
-  .menu-right{margin-left:auto}
-  .has-dropdown{position:relative}
-  .hero .hero-content{padding:86px 20px 64px}
-  .dance-class{grid-template-columns:1fr 1fr;align-items:center}
-  .instructor-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .review-list{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .footer-grid{grid-template-columns:2fr 1fr}
+@media (min-width:1025px) {
+    .menu {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        max-height: none;
+        border-radius: 0;
+        overflow: visible
+    }
+
+        .menu a, .menu .dropdown-toggle {
+            background: transparent;
+            border: 0;
+            padding: 10px 12px
+        }
+
+            .menu a:hover, .menu .dropdown-toggle:hover {
+                background: #f5f3ff
+            }
+
+    .menu-right {
+        margin-left: auto
+    }
+
+    .has-dropdown {
+        position: relative
+    }
+
+    .hero .hero-content {
+        padding: 86px 20px 64px
+    }
+
+    .dance-class {
+        grid-template-columns: 1fr 1fr;
+        align-items: center
+    }
+
+    .instructor-grid {
+        grid-template-columns: repeat(4,minmax(0,1fr))
+    }
+
+    .review-list {
+        grid-template-columns: repeat(3,minmax(0,1fr))
+    }
+
+    .footer-grid {
+        grid-template-columns: 2fr 1fr
+    }
 }
 
 /* Accessibility focus */
-:focus-visible{outline:3px solid #a78bfa;outline-offset:3px;border-radius:8px}
+:focus-visible {
+    outline: 3px solid #a78bfa;
+    outline-offset: 3px;
+    border-radius: 8px
+}
 
 /* Authoritative dropdown styles (last wins) */
 @media (min-width: 720px) {
@@ -977,23 +1215,23 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
             pointer-events: none;
         }
 
-        .topbar .has-dropdown > .dropdown::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: -10px;
-            height: 10px;
-        }
+            .topbar .has-dropdown > .dropdown::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: -10px;
+                height: 10px;
+            }
 
-        .topbar .has-dropdown > .dropdown::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: -10px;
-            height: 10px;
-        }
+            .topbar .has-dropdown > .dropdown::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: -10px;
+                height: 10px;
+            }
 
         .topbar .has-dropdown.open > .dropdown {
             opacity: 1;
@@ -1001,6 +1239,7 @@ img{max-width:100%;height:auto;border-radius:12px;display:block}
             transform: translateY(0);
             pointer-events: auto;
         }
+
         .topbar .has-dropdown > .dropdown a {
             color: #111;
             text-decoration: none;
@@ -1051,6 +1290,7 @@ ul, ol {
     padding: 0;
     margin: 0;
 }
+
 li {
     margin: 0;
     padding: 0;
@@ -1066,20 +1306,25 @@ li {
     height: var(--header-h);
     padding: 0 var(--pad);
 }
-.site-header .container {
-    height: 100%;
-    padding: 0;
-    gap: 12px;
-}
+
+    .site-header .container {
+        height: 100%;
+        padding: 0;
+        gap: 12px;
+    }
+
 .header-section {
     gap: 4px /* space between items */
 }
+
 .header-link {
     font-size: .95rem;
 }
+
 .header-section strong {
     font-size: 1rem /* responsive size */
 }
+
 .header-section span {
     font-size: .85rem /* responsive size */
 }
@@ -1090,20 +1335,24 @@ li {
         padding: 12px var(--pad);
         gap: 8px;
     }
-    .site-header .container {
-        flex-direction: column;
-        gap: 8px;
-        padding: 0;
-    }
+
+        .site-header .container {
+            flex-direction: column;
+            gap: 8px;
+            padding: 0;
+        }
+
     .header-section {
         gap: 2px /* space between items */
     }
-    .header-section strong {
-        font-size: .95rem /* responsive size */
-    }
-    .header-section span {
-        font-size: .8rem /* responsive size */
-    }
+
+        .header-section strong {
+            font-size: .95rem /* responsive size */
+        }
+
+        .header-section span {
+            font-size: .8rem /* responsive size */
+        }
 }
 /* Mobile sidebar override */
 @media (max-width: 719px) {
@@ -1142,5 +1391,155 @@ li {
             .menu .dropdown-toggle:hover {
                 background: #f5f5f9;
             }
+}
+/* ========== LAYOUT & GUTTER FIXES (APPEND THIS) ==========
+   Goal: keep everything centered with consistent side-gutters,
+   prevent elements from touching the absolute left/right edges,
+   and make layouts respond fluidly to viewport size.
+   These rules intentionally override earlier "full-bleed" styles.
+*/
+
+/* Box sizing baseline */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+/* Global safe gutters so nothing touches the viewport edges */
+:root {
+    --site-max-width: 1120px; /* comfortable max content width */
+    --site-gutter: clamp(12px, 3vw, 36px); /* dynamic side padding */
+}
+
+/* Body padding provides base gutter on every page */
+body {
+    padding-inline: var(--site-gutter);
+    margin: 0;
+    overflow-x: hidden; /* prevent accidental horizontal scroll from 100vw elements */
+}
+
+/* Central container used across the site */
+.container {
+    max-width: var(--site-max-width);
+    margin-inline: auto; /* center the container */
+    padding-inline: clamp(12px, 2.2vw, 28px); /* inner container padding */
+}
+
+/* Ensure header / topbar content sits inside the same centered container */
+.topbar-inner,
+.site-header,
+.header-outer,
+.footer-grid,
+.dance-classes,
+.instructors,
+.reviews .container,
+.about-wrap,
+.seo-footer .container,
+.promos .container {
+    max-width: var(--site-max-width);
+    margin-inline: auto;
+    padding-inline: clamp(12px, 2.2vw, 28px);
+    width: 100%;
+}
+
+/* Neutralize previous full-bleed tricks (they cause content to stick to edges) */
+.promos,
+.reviews,
+.about-teaser,
+.seo-footer,
+.reviews,
+.promos,
+.about-teaser,
+.seo-footer {
+    /* remove full-bleed/100vw / margin-inline hacks */
+    margin-inline: 0 !important;
+    width: auto !important;
+    padding-inline: 0 !important;
+    box-sizing: border-box;
+}
+
+/* Keep hero visually full-bleed but constrain the readable content */
+.hero {
+    /* keep background coverage but make content centered inside the site max width */
+    padding-inline: var(--site-gutter);
+}
+
+.hero .hero-content {
+    max-width: var(--site-max-width);
+    margin-inline: auto;
+    padding-inline: clamp(12px, 3vw, 28px);
+}
+
+/* Prevent image and card overflow; unified responsive images */
+img, video, iframe, picture {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Dance class grid improvements (keeps image + text inside gutters) */
+.dance-classes {
+    gap: clamp(1rem, 2.2vw, 2.5rem);
+    padding-inline: 0; /* container already handles padding */
+}
+
+.dance-class {
+    /* ensure each class card respects the container gutters */
+    width: 100%;
+    padding: clamp(.6rem, 1.5vw, 1.25rem);
+    gap: clamp(.75rem, 2vw, 1.5rem);
+}
+
+/* Constrain full-width cards that previously used viewport width */
+.promo-card,
+.review,
+.instructor-card,
+.about-wrap,
+.seo-footer .footer-grid > * {
+    max-width: 100%;
+    margin: 0;
+}
+
+/* Footer: ensure inner grid doesn't exceed container */
+.seo-footer {
+    padding-inline: 0; /* container adds the padding */
+}
+
+.footer-grid {
+    gap: 1rem;
+    padding-inline: 0;
+    width: 100%;
+}
+
+/* Mobile-first: ensure consistent gutters on small screens */
+@media (max-width: 719px) {
+    :root { --site-max-width: 980px; }
+    body { padding-inline: clamp(12px, 4vw, 28px); }
+    .instructor-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Medium and desktop: increase columns but always respect the max-width/gutter */
+@media (min-width: 720px) {
+    :root { --site-max-width: 1120px; }
+    .dance-class { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .instructor-grid { grid-template-columns: repeat(4, 1fr); }
+    .review-list { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Large screens: widen available content but keep readable line-length */
+@media (min-width: 1200px) {
+    :root { --site-max-width: 1280px; }
+    .container { padding-inline: clamp(16px, 2vw, 48px); }
+}
 
 }
+/* Tiny safety: remove any leftover element forced to 100vw which causes horizontal scroll */
+*:where([style*="width:100vw"], [style*="width:100%vw"]) {
+    max-width: 100%;
+}
+
+/* Accessibility: ensure focus rings are inside the new gutters (no clip) */
+:focus {
+    outline-offset: 3px;
+}
+
+/* Helpful debug utility (optional during development) */
+/* .debug-gutter { outline: 1px dashed rgba(0,0,0,.06); padding-inline: var(--site-gutter); } */
