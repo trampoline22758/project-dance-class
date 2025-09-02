@@ -533,9 +533,6 @@ nav.menu { /* mobile slide-out menu */
     align-items: center /* vertically align */
 }
 
-    .dance-class:nth-child(even) .dance-image { /* alternate layout for even rows */
-        order: 2 /* place image second */
-    }
 
 .dance-image img { /* class image styling */
     width: 100%; /* responsive width */
@@ -661,9 +658,10 @@ nav.menu { /* mobile slide-out menu */
     }
 /* ===================== Reviews ===================== */
 
+
 .reviews { /* reviews section with bg image */
-    background: url('/images/reviews-bg.webp') center/cover no-repeat fixed, linear-gradient(#0003,#0003); /* parallax-like bg with overlay */
-    color: #fff; /* white text */
+    background: linear-gradient(#fff,#fff), url('/images/reviews-bg.webp') center/cover no-repeat fixed; /* light bg with image */
+    color: #000; /* black text */
     margin: 0; /* reset margins */
     margin-inline: calc(50% - 50vw); /* full-bleed width */
     width: 100vw /* full viewport width */
@@ -677,7 +675,7 @@ nav.menu { /* mobile slide-out menu */
         text-align: center; /* center title */
         margin-bottom: 1rem; /* space below */
         font-size: clamp(1.5rem,2.2vw,2rem); /* responsive size */
-        color: #fff /* keep white on dark */
+        color: #000 /* black heading */
     }
 
 .reviews-embeds { /* grid for embedded reviews widgets */
@@ -701,7 +699,7 @@ nav.menu { /* mobile slide-out menu */
 }
 
 .review { /* individual review card */
-    background: rgba(0,0,0,.5); /* translucent dark card */
+    background: #fff; /* light card for black text */
     border-radius: 12px; /* rounded corners */
     padding: 1rem; /* inner spacing */
     box-shadow: 0 6px 24px rgba(0,0,0,.12) /* soft shadow */
@@ -1520,6 +1518,7 @@ img, video, iframe, picture {
 @media (min-width: 720px) {
     :root { --site-max-width: 1120px; }
     .dance-class { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dance-class:nth-child(even) .dance-image { order: 2; }
     .instructor-grid { grid-template-columns: repeat(4, 1fr); }
     .review-list { grid-template-columns: repeat(3, 1fr); }
 }
@@ -1530,7 +1529,6 @@ img, video, iframe, picture {
     .container { padding-inline: clamp(16px, 2vw, 48px); }
 }
 
-}
 /* Tiny safety: remove any leftover element forced to 100vw which causes horizontal scroll */
 *:where([style*="width:100vw"], [style*="width:100%vw"]) {
     max-width: 100%;
