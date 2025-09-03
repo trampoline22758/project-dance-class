@@ -929,7 +929,7 @@ img {
 }
 
 .hero-background {
-    background: linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.55)), url("/photos/contemporary1.JPG") center/cover no-repeat !important;
+    background: linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.55)), url("/photos/herobanner.jpg") center/cover no-repeat !important;
 }
 
 .hero .hero-content {
@@ -1555,3 +1555,4 @@ img, video, iframe, picture {
 /* Helpful debug utility (optional during development) */
 
 /* .debug-gutter { outline: 1px dashed rgba(0,0,0,.06); padding-inline: var(--site-gutter); } */
+
