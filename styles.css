@@ -864,15 +864,15 @@ nav.menu { /* mobile slide-out menu */
 }
 
 .hero-background.jazz { /* hero variant for Jazz page */
-    background: url('/photos/jazz1.JPG') center/cover no-repeat; /* jazz image */
+    background: url('/photos/herobanner.jpg') center/cover no-repeat; /* jazz image */
 }
 
 .hero-background.ballet { /* hero variant for Ballet page */
-    background: url('/images/tap6.JPG') center/cover no-repeat; /* ballet image */
+    background: url('/photos/herobanner.jpg') center/cover no-repeat; /* ballet image */
 }
 
 .hero-background.tap { /* hero variant for Tap page */
-    background: url('/images/tap1.JPG') center/cover no-repeat; /* tap image */
+    background: url('/photos/herobanner.jpg') center/cover no-repeat; /* tap image */
 }
 /* ========= Mobile polish pack (append at end) ========= */
 :root {
