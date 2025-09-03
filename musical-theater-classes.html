@@ -147,7 +147,14 @@
 <body>
     <a class="skip-link" href="#main">Skip to main content</a>
 
-    <main id="main">
+    <main id="main" role="main">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol>
+                <li><a href="/">Home</a></li>
+                <li aria-current="page">Musical Theater</li>
+            </ol>
+        </nav>
+
         <!-- Hero -->
         <section class="hero" aria-labelledby="hero-title">
             <div class="hero-background" style="background-image:url('/photos/musicaltheatre.JPG')"></div>
