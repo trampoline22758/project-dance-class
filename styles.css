@@ -379,7 +379,7 @@ nav.menu { /* mobile slide-out menu */
 .hero-background { /* hero background image layer */
     position: absolute; /* fill container */
     inset: 0; /* top/right/bottom/left = 0 */
-    background: url('/photos/contemporary1.JPG') center/cover no-repeat; /* image positioning */
+    background: url('/photos/herobanner.jpg') center/cover no-repeat; /* image positioning */
 }
 
 .hero-content { /* content holder above bg */
@@ -1553,4 +1553,5 @@ img, video, iframe, picture {
 }
 
 /* Helpful debug utility (optional during development) */
+
 /* .debug-gutter { outline: 1px dashed rgba(0,0,0,.06); padding-inline: var(--site-gutter); } */
