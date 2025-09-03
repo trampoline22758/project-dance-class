@@ -97,7 +97,7 @@
                   <li role="none"><a role="menuitem" href="/tap-dance-classes">Tap</a></li>
               </ul>
           </li>
-          <li role="none"><a role="menuitem" href="#reviews">Reviews</a></li>
+          <li role="none"><a role="menuitem" href="/reviews.html">Reviews</a></li>
           <li role="none"><a role="menuitem" href="/summer">Summer</a></li>
           <li role="none"><a role="menuitem" href="/pricing">Pricing</a></li>
           <li role="none"><a role="menuitem" href="/schedule">Schedule</a></li>
@@ -109,6 +109,7 @@
           </li>
       </ul>
     </nav>
+    <div class="menu-overlay" aria-hidden="true"></div>
 
     <!-- Sticky Top Bar / Nav (desktop) -->
     <div class="topbar" role="navigation" aria-label="Primary">
@@ -133,7 +134,7 @@
                         <li role="none"><a role="menuitem" href="/tap-dance-classes">Tap</a></li>
                     </ul>
                 </li>
-                <li role="none"><a role="menuitem" href="#reviews">Reviews</a></li>
+                <li role="none"><a role="menuitem" href="/reviews.html">Reviews</a></li>
                 <li role="none"><a role="menuitem" href="/summer">Summer</a></li>
                 <li role="none"><a role="menuitem" href="/pricing">Pricing</a></li>
                 <li role="none"><a role="menuitem" href="/schedule">Schedule</a></li>
@@ -275,7 +276,7 @@
                     <figure class="review"><blockquote>“Fair pricing, flexible schedule, and a welcoming community. Highly recommend.”</blockquote><figcaption><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span class="reviewer">David</span></figcaption></figure>
                 </div>
                 <p class="cta-inline">
-                    <a class="btn btn--primary" href="/reviews">Read More Reviews</a>
+                    <a class="btn btn--primary" href="/reviews.html">Read More Reviews</a>
                     <a class="btn btn--ghost" href="https://www.google.com/search?sca_esv=5d812c3a7137edf1&amp;rlz=1C1GCEA_enUS1168US1168&amp;sxsrf=AE3TifPF1iAdM6TCJFkR90-FX1HYKv4rIA:1756770997257&amp;si=AMgyJEuzsz2NflaaWzrzdpjxXXRaJ2hfdMsbe_mSWso6src8s9zK2D9jlcLVun5nozonrTe9tOTteMAIcDD9xh6D8ztyo7vfUb957P6rJcSkKEFkNfed_3gdQRxy0PVa1fVHBQRbsQxVmutkDUjXs-1NwAxt2NUqwA%3D%3D&amp;q=Miss+Kim%27s+Dance+Class+Reviews&amp;sa=X&amp;ved=2ahUKEwji7fj54biPAxVKmokEHUjtHDAQ0bkNegQIIhAE&amp;biw=1536&amp;bih=730&amp;dpr=1.25" rel="noopener nofollow" target="_blank">Write a Google Review</a>
                     <a class="btn btn--ghost" href="https://www.facebook.com/misskimsdanceclass/" rel="noopener nofollow" target="_blank">Write a Facebook Review</a>
                 </p>
@@ -432,37 +433,49 @@
   function initMobileMenu() {
     const hamburger = document.querySelector('.hamburger');
     const menu = document.querySelector('.menu');
+    const overlay = document.querySelector('.menu-overlay');
 
     // Detect mobile (screen width OR user agent)
     const isMobile =
       window.innerWidth <= 768 ||
       /Mobi|Android|iPhone|iPod/i.test(navigator.userAgent);
 
-    if (!hamburger || !menu) return;
+    if (!hamburger || !menu || !overlay) return;
 
     if (isMobile) {
       // Make sure elements are visible
       hamburger.style.display = "inline-block";
       menu.style.display = "none";
+      overlay.style.display = "none";
 
       // Add toggle behavior once
       if (!hamburger.dataset.bound) {
+        const closeMenu = () => {
+          menu.style.display = "none";
+          overlay.style.display = "none";
+          hamburger.setAttribute("aria-expanded", "false");
+        };
+
         hamburger.addEventListener("click", () => {
           const expanded = hamburger.getAttribute("aria-expanded") === "true";
           hamburger.setAttribute("aria-expanded", String(!expanded));
 
           if (menu.style.display === "none") {
             menu.style.display = "block";
+            overlay.style.display = "block";
           } else {
-            menu.style.display = "none";
+            closeMenu();
           }
         });
+
+        overlay.addEventListener("click", closeMenu);
         hamburger.dataset.bound = "true";
       }
     } else {
       // Hide mobile nav completely on desktop
       hamburger.style.display = "none";
       menu.style.display = "none";
+      overlay.style.display = "none";
     }
   }
 
