@@ -90,21 +90,7 @@ p { /* paragraph styles */
     .skip-link:focus { /* when focused via keyboard */
         top: 10px /* reveal inside viewport */
     }
-/* ===================== Site Top Line ===================== */
 
-.site-topline {
-    background: var(--brand);
-    color: #fff;
-    text-align: center;
-    font-size: .9rem;
-    padding: .25rem .5rem;
-}
-
-.site-topline a {
-    color: #fff;
-    text-decoration: none;
-    margin-left: .5rem;
-}
 /* ===================== Sticky Top Bar (Primary Nav) ===================== */
 
 .topbar { /* site navigation bar */
@@ -1570,4 +1556,5 @@ img, video, iframe, picture {
 /* Helpful debug utility (optional during development) */
 
 /* .debug-gutter { outline: 1px dashed rgba(0,0,0,.06); padding-inline: var(--site-gutter); } */
+
 
