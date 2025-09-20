@@ -620,7 +620,8 @@ nav.menu { /* mobile slide-out menu */
         width: 100%; /* full width */
         height: auto; /* keep ratio */
         border-radius: 12px; /* rounded image */
-        display: block /* remove inline gap */
+        display: block; /* remove inline gap */
+        background-color: #fff; /* fill transparent areas */
     }
 
 .instructor-name { /* name text */
@@ -1052,7 +1053,8 @@ img {
         width: 100%;
         aspect-ratio: 7/8;
         object-fit: cover;
-        border-radius: 12px
+        border-radius: 12px;
+        background-color: #fff; /* fill transparent areas */
     }
 
 /* Reviews */
