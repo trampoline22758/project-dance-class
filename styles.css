@@ -103,19 +103,22 @@ p { /* paragraph styles */
 }
 
 .topbar-inner { /* inner layout of topbar */
-    max-width: var(--header-maxw); /* match header width */
+    max-width: min(1400px, 100%); /* allow a little extra width before wrapping */
     margin: 0 auto; /* center */
-    padding: .5rem 1rem; /* spacing */
+    padding: .5rem clamp(10px, 1.6vw, 16px); /* responsive side padding */
     display: flex; /* flex layout */
     align-items: center; /* vertically center items */
-    gap: 1rem /* spacing between items */
+    gap: .5rem; /* keep brand and menu close without crowding */
+    flex-wrap: nowrap; /* ensure the header stays in a single row */
 }
 
 .brand-mini { /* compact brand link in nav */
     color: var(--ink-strong); /* dark text for light header */
     text-decoration: none; /* no underline */
     font-weight: 800; /* heavy weight */
-    letter-spacing: .2px /* subtle tracking */
+    letter-spacing: .2px; /* subtle tracking */
+    white-space: nowrap; /* prevent the brand from breaking to two lines */
+    flex-shrink: 0; /* keep the brand from squeezing the menu */
 }
 
 .hamburger { /* mobile menu toggle button */
@@ -188,7 +191,7 @@ nav.menu { /* mobile slide-out menu */
     padding: 0; /* reset padding */
     display: flex; /* horizontal layout */
     flex-wrap: wrap; /* wrap on small widths */
-    gap: .5rem 1rem; /* row/column gaps */
+    gap: .35rem .6rem; /* tighter row/column gaps */
     align-items: center /* vertically center links */
 }
 
@@ -198,7 +201,7 @@ nav.menu { /* mobile slide-out menu */
         background: transparent; /* transparent buttons */
         border: 0; /* no border */
         font: inherit; /* inherit font family/size */
-        padding: .5rem .45rem; /* link padding */
+        padding: .4rem .3rem; /* slightly slimmer link padding */
         border-radius: .5rem; /* rounded hover target */
         line-height: 1.2 /* tidy line height */
     }
@@ -349,6 +352,51 @@ nav.menu { /* mobile slide-out menu */
 .btn--sm { /* small button variant */
     padding: .45rem .8rem; /* smaller padding */
     font-size: .92rem /* smaller text */
+}
+
+.topbar .btn { /* slightly leaner buttons in the sticky nav */
+    padding: .4rem .65rem; /* tighter padding keeps actions on one line */
+    font-size: .9rem; /* compact nav button text */
+    white-space: nowrap; /* avoid button labels wrapping */
+}
+
+.topbar .menu { /* compact nav typography on desktop */
+    font-size: .9rem; /* smaller desktop nav type */
+    flex: 1 1 auto; /* let the menu use remaining header space */
+    flex-wrap: nowrap; /* keep nav items on a single line */
+    gap: .32rem; /* reduce the horizontal gap between items */
+    align-items: center; /* align menu items vertically */
+    min-width: 0; /* allow flexbox to shrink the list when space is tight */
+}
+
+.topbar .menu > li { /* prevent individual nav items from breaking */
+    white-space: nowrap;
+}
+
+.topbar .menu > li > a,
+.topbar .menu > li > button.dropdown-toggle { /* snug padding for desktop nav links */
+    padding: .35rem .45rem;
+}
+
+@media (max-width: 1280px) {
+    .topbar-inner { /* allow a touch more room on medium desktops */
+        padding-inline: clamp(8px, 1.4vw, 14px);
+    }
+
+    .topbar .menu { /* further tighten spacing on medium desktops */
+        font-size: .88rem;
+        gap: .28rem;
+    }
+
+    .topbar .menu > li > a,
+    .topbar .menu > li > button.dropdown-toggle {
+        padding: .32rem .4rem;
+    }
+
+    .topbar .btn {
+        padding: .35rem .55rem;
+        font-size: .88rem;
+    }
 }
 /* small variant for topbar */
 
@@ -1452,6 +1500,12 @@ body {
     margin-inline: auto;
     padding-inline: clamp(12px, 2.2vw, 28px);
     width: 100%;
+}
+
+/* Allow the sticky topbar a little extra breathing room so menu items stay on one line */
+.topbar-inner {
+    max-width: min(1400px, 100%);
+    width: min(1400px, 100%);
 }
 
 /* Neutralize previous full-bleed tricks (they cause content to stick to edges) */
