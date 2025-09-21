@@ -1660,5 +1660,14 @@ img, video, iframe, picture {
     .breadcrumbs strong { /* breadcrumb strong (if any) */
         font-size: .9rem; /* smaller text */
         font-weight: 600; /* semibold */
-        img
+        img .centered-musical
+
+{
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover; /* fills and crops as needed */
+    object-position: center; /* keeps the focus in the middle */
+}
 
