@@ -1668,6 +1668,6 @@ img, video, iframe, picture {
     max-width: 100%;
     height: auto;
     object-fit: cover; /* fills and crops as needed */
-    object-position: center; /* keeps the focus in the middle */
+    object-position: bottom; /* keeps the focus in the bottom */
 }
 
