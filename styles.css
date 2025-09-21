@@ -1661,31 +1661,12 @@ img, video, iframe, picture {
         font-size: .9rem; /* smaller text */
         font-weight: 600; /* semibold */
 }
-/* --- Musical Theater portrait image: natural aspect, centered, bottom focus --- */
+/* ===== Musical Theater portrait image: right-aligned and small ===== */
 #musical-theater .dance-image.is-portrait {
-    aspect-ratio: auto; /* stop forcing landscape box */
-    display: block;
-    text-align: center; /* safety centering */
-    background: #f6f6f9; /* subtle frame so “letterbox” looks intentional */
-    padding: 8px;
-    border-radius: 12px;
-}
-
-#musical-theater .mt-photo {
-    display: block;
-    width: min(520px, 100%); /* don’t let a tall image get too wide */
-    height: auto; /* keep natural portrait ratio */
-    margin: 0 auto; /* center horizontally */
-    object-fit: contain; /* show the whole subject (no awkward crop) */
-    object-position: center bottom; /* keep feet/bottom anchored in view */
-    border-radius: 8px;
-}
-/* --- Musical Theater portrait image: smaller, centered --- */
-#musical-theater .dance-image.is-portrait {
-    aspect-ratio: auto; /* stop forcing landscape box */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* top-align if there's extra vertical space */
+    aspect-ratio: auto; /* stop forcing landscape crop */
+    display: flex; /* enable flexbox for alignment */
+    justify-content: flex-end; /* push photo to the right */
+    align-items: flex-start; /* align to top if taller than neighbor text */
     padding: 8px;
     background: #f6f6f9; /* subtle frame color */
     border-radius: 12px;
@@ -1693,10 +1674,10 @@ img, video, iframe, picture {
 
 #musical-theater .mt-photo {
     display: block;
-    width: min(200px, 50%); /* shrink width: 380px max or 90% of container */
-    height: auto; /* keep natural portrait ratio */
-    margin: 0 auto; /* center horizontally */
-    object-fit: contain; /* show the whole subject */
-    object-position: center bottom; /* bottom focus */
+    width: min(200px, 50%); /* keep photo small and responsive */
+    height: auto; /* preserve natural portrait ratio */
+    object-fit: contain; /* show entire image */
+    object-position: center bottom; /* favor bottom of the photo */
     border-radius: 8px;
+    margin: 0; /* remove auto-centering */
 }
