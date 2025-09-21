@@ -1660,27 +1660,23 @@ img, video, iframe, picture {
     .breadcrumbs strong { /* breadcrumb strong (if any) */
         font-size: .9rem; /* smaller text */
         font-weight: 600; /* semibold */
-        img .centered-musical
-
-{
+}
+/* --- Musical Theater portrait image: natural aspect, centered, bottom focus --- */
+#musical-theater .dance-image.is-portrait {
+    aspect-ratio: auto; /* stop forcing landscape box */
     display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    height: auto;
-    object-fit: cover; /* fills and crops as needed */
-    object-position: center bottom; /* keeps the focus in the bottom */
+    text-align: center; /* safety centering */
+    background: #f6f6f9; /* subtle frame so “letterbox” looks intentional */
+    padding: 8px;
+    border-radius: 12px;
 }
 
-#musical-theater .dance-image {
-    display: flex; /* enable flexbox */
-    justify-content: center; /* center horizontally */
-    align-items: flex-end; /* push content to the bottom */
-    aspect-ratio: auto; /* remove forced 16/10 ratio if present */
-    height: auto; /* allow height to follow image */
-}
-
-#musical-theater .centered-musical {
-    width: 100%;
-    height: auto; /* preserve aspect ratio */
-    object-fit: contain; /* show whole photo */
+#musical-theater .mt-photo {
+    display: block;
+    width: min(520px, 100%); /* don’t let a tall image get too wide */
+    height: auto; /* keep natural portrait ratio */
+    margin: 0 auto; /* center horizontally */
+    object-fit: contain; /* show the whole subject (no awkward crop) */
+    object-position: center bottom; /* keep feet/bottom anchored in view */
+    border-radius: 8px;
 }
