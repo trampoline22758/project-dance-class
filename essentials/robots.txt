@@ -1,4 +1,4 @@
-# robots.txt for https://www.misskimsdanceclass.com/
+# robots.txt for /
 
 User-agent: *
 # ===============================
@@ -21,4 +21,4 @@ Allow: /                            # All regular pages (HTML)
 # ===============================
 # Sitemap (important for SEO)
 # ===============================
-Sitemap: https://www.misskimsdanceclass.com/sitemap.xml
+Sitemap: /sitemap.xml
