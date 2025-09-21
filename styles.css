@@ -185,14 +185,15 @@ nav.menu { /* mobile slide-out menu */
         padding: 10px 0;
     }
 
-.menu { /* primary menu list */
+.menu {
     list-style: none; /* remove bullets */
     margin: 0; /* reset margin */
     padding: 0; /* reset padding */
     display: flex; /* horizontal layout */
     flex-wrap: wrap; /* wrap on small widths */
     gap: .35rem .6rem; /* tighter row/column gaps */
-    align-items: center /* vertically center links */
+    align-items: center; /* vertically center links */
+    justify-content: space-between; /* split left vs. right */
 }
 
     .menu a, .menu button.dropdown-toggle { /* menu links and dropdown triggers */
@@ -211,7 +212,7 @@ nav.menu { /* mobile slide-out menu */
         }
 
 .menu-right { /* pushes items to the right side */
-    margin-left: auto
+
 }
 
 .has-dropdown { /* menu item with dropdown */
@@ -1613,4 +1614,50 @@ img, video, iframe, picture {
 
 /* .debug-gutter { outline: 1px dashed rgba(0,0,0,.06); padding-inline: var(--site-gutter); } */
 
+.menu > li {
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumbs { /* breadcrumb wrapper */
+    font-size: .9rem; /* smaller text */
+    margin: 0 0 1.5rem; /* spacing below */
+    padding: 0; /* reset padding */
+    list-style: none; /* remove bullets */
+    display: flex; /* use flexbox */
+    gap: .4rem; /* space between items */
+    flex-wrap: wrap; /* allow wrapping on small screens */
+}
+    .breadcrumbs li { /* individual breadcrumb item */
+        margin: 0; /* reset margin */
+        padding: 0 /* reset padding */
+    }
+    .breadcrumbs li.current { /* current page crumb */
+        font-weight: 600; /* semibold */
+        margin: 0; /* reset margin */
+        padding: 0; /* reset padding */
+        color: #333 /* dark text */
+    }
+    .breadcrumbs li.current a { /* current page link (if any) */
+        pointer-events: none; /* disable link */
+        cursor: default; /* default cursor */
+        font-weight: 600; /* semibold */
+        margin: 0; /* reset margin */
+        padding: 0; /* reset padding */
+        color: #333 /* dark text */
+    }
+    .breadcrumbs li span { /* separator span (if any) */
+        margin: 0; /* reset margin */
+        padding: 0; /* reset padding */
+        color: #666 /* muted text */
+    }
+    .breadcrumbs p { /* breadcrumb paragraph (if any) */
+        font-size: .9rem; /* smaller text */
+        margin: 0; /* reset margin */
+        padding: 0; /* reset padding */
+        color: #666 /* muted text */
+    }
+    .breadcrumbs strong { /* breadcrumb strong (if any) */
+        font-size: .9rem; /* smaller text */
+        font-weight: 600; /* semibold */
 
