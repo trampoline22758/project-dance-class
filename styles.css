@@ -1662,12 +1662,3 @@ img, video, iframe, picture {
         font-weight: 600; /* semibold */
         img
 
-{
-    max-width: 100%; /* scale down to container width */
-    height: auto; /* maintain aspect ratio */
-    object-fit: contain; /* never crop, always fit */
-    display: block; /* remove inline gaps below images */
-    img
-    background-color: #fff; /* or whatever color your site uses */
-}
-
