@@ -1671,3 +1671,16 @@ img, video, iframe, picture {
     object-position: center bottom; /* keeps the focus in the bottom */
 }
 
+#musical-theater .dance-image {
+    display: flex; /* enable flexbox */
+    justify-content: center; /* center horizontally */
+    align-items: flex-end; /* push content to the bottom */
+    aspect-ratio: auto; /* remove forced 16/10 ratio if present */
+    height: auto; /* allow height to follow image */
+}
+
+#musical-theater .centered-musical {
+    width: 100%;
+    height: auto; /* preserve aspect ratio */
+    object-fit: contain; /* show whole photo */
+}
