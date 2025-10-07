@@ -1,3 +1,15 @@
 User-agent: *
 Allow: /
+
+# Block old pages and query URLs
+Disallow: /*?page_id=
+Disallow: /*?jkit-ajax-request=
+Disallow: /instructors/
+Disallow: /faqs/
+Disallow: /about-us/
+Disallow: /about/
+Disallow: /plan-pricing/
+Disallow: /class-schedules/
+
+# Sitemap
 Sitemap: https://www.misskimsdanceclass.com/sitemap.xml
