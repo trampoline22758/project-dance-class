@@ -5,5 +5,8 @@
   "scripts": {
     "test": "echo \"No tests specified\""
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
 }
