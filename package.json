@@ -5,5 +5,8 @@
   "scripts": {
     "test": "echo \"No tests specified\""
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
 }
