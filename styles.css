@@ -1681,3 +1681,34 @@ img, video, iframe, picture {
     border-radius: 8px;
     margin: 0; /* remove auto-centering */
 }
+.review--featured {
+    border: 2px solid rgba(0,0,0,.08);
+    background: linear-gradient(180deg,#fff,#fafafa);
+}
+
+.review-source {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+
+.stlmag-logo {
+    width: 130px;
+    height: auto;
+    color: #1b1b1b;
+    opacity: .9;
+}
+
+.review--featured figcaption {
+    margin-top: 1.25rem;
+}
+
+.review--featured a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.review--featured a:hover {
+    text-decoration: underline;
+}
